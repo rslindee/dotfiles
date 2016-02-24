@@ -1,5 +1,5 @@
 Font=Hack
-BoldAsFont=yes
+BoldAsFont=no
 Term=xterm-256color
 BoldAsColour=no
 Black=7,54,66
@@ -26,3 +26,5 @@ OpaqueWhenFocused=yes
 FontSmoothing=full
 CursorBlinks=yes
 Scrollbar=none
+FontHeight=10
+BellTaskbar=yes
