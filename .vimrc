@@ -1,10 +1,3 @@
-set autochdir
-set number
-"auto-trim trailing whitespace
-autocmd BufWritePre * :%s/\s\+$//e
-"make arduino extensions show up as cpp
-autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
-
 " Vundle required lines
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -13,6 +6,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+
+" All Vundle included plugins
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -22,7 +17,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 
 call vundle#end()            " required
-filetype plugin indent on    " required
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -37,9 +32,11 @@ filetype indent on
 set autoread
 
 " With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+
+" Automatically set directory to current file
+set autochdir
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -57,9 +54,6 @@ if has("win16") || has("win32")
 else
     set wildignore+=.git\*
 endif
-
-"Always show current position
-set ruler
 
 " Height of the command bar
 set cmdheight=2
@@ -104,6 +98,13 @@ set tm=500
 " Add a bit extra margin to the left
 set foldcolumn=1
 
+" Always show the status line
+set laststatus=2
+
+" Show line numbers
+set number
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,14 +116,16 @@ set bs=2
 colorscheme solarized
 set background=dark
 let g:airline_powerline_fonts = 1
-"let g:airline_theme='solarized'
-
+let g:airline_theme='solarized'
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" Make arduino extensions show up as cpp highlighting
+autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -131,6 +134,7 @@ set ffs=unix,dos,mac
 set nobackup
 set nowb
 set noswapfile
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -149,6 +153,10 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
+" auto-trim trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
+
+
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
@@ -156,6 +164,7 @@ set wrap "Wrap lines
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -188,15 +197,6 @@ au TabLeave * let g:lasttab = tabpagenr()
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
-
-""""""""""""""""""""""""""""""
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -235,6 +235,7 @@ map <leader>p :cp<cr>
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -244,13 +245,15 @@ noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Plugin Configs
-
-"Set Syntastic to passive for everything for now
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Plugin configs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Set Syntastic to passive for everything
 let g:syntastic_mode_map = {
     \ "mode": "passive",
     \ "active_filetypes": [],
     \ "passive_filetypes": [] }
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
@@ -282,11 +285,3 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
