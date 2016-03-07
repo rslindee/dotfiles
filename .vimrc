@@ -22,6 +22,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
 
 call vundle#end()            " required
 
