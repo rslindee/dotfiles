@@ -1,3 +1,10 @@
+" Richard Slindee's .vimrc
+" Heavily inspired from amix/vimrc
+
+" Prerequisites:
+" Tested primarily with Babun, but should work on any Vim install
+" Requires the_silver_searcher be installed for Ag plugin to work
+
 " Vundle required lines
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -127,6 +134,7 @@ set ffs=unix,dos,mac
 " Make arduino extensions show up as cpp highlighting
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -207,7 +215,7 @@ map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 
 " Open Ag and put the cursor in the right position
-map <leader>g :Ag
+map <leader>g :Ag!
 
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
@@ -240,10 +248,13 @@ map <leader>ss :setlocal spell!<cr>
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+
+" Use system clipboard
+set clipboard=unnamed
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
