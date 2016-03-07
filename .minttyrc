@@ -1,4 +1,4 @@
-Font=Hack
+Font=Menlo for Powerline
 BoldAsFont=no
 Term=xterm-256color
 BoldAsColour=no
@@ -28,3 +28,4 @@ CursorBlinks=yes
 Scrollbar=none
 FontHeight=10
 BellTaskbar=yes
+CursorType=block
