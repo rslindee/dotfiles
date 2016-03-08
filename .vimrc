@@ -24,6 +24,8 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'ervandew/supertab'
 
 call vundle#end()            " required
 
@@ -170,10 +172,8 @@ autocmd BufWritePre * :%s/\s\+$//e
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
+" Visual mode pressing * searches for the current selection
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
-vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -266,6 +266,9 @@ let g:syntastic_mode_map = {
     \ "mode": "passive",
     \ "active_filetypes": [],
     \ "passive_filetypes": [] }
+
+" Remap ctrlp so we can cycle modes with same key
+let g:ctrlp_map = '<c-f>'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
