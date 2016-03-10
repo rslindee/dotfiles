@@ -169,13 +169,6 @@ set wrap "Wrap lines
 autocmd BufWritePre * :%s/\s\+$//e
 
 
-""""""""""""""""""""""""""""""
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * searches for the current selection
-vnoremap <silent> * :call VisualSelection('f', '')<CR>
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -197,7 +190,6 @@ map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
@@ -258,6 +250,7 @@ map <leader>pp :setlocal paste!<cr>
 " Use system clipboard
 set clipboard=unnamed
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -267,8 +260,12 @@ let g:syntastic_mode_map = {
     \ "active_filetypes": [],
     \ "passive_filetypes": [] }
 
+" Set Syntastic include directories
+let g:syntastic_c_include_dirs = []
+
 " Remap ctrlp so we can cycle modes with same key
 let g:ctrlp_map = '<c-f>'
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
