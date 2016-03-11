@@ -46,8 +46,6 @@ set autoread
 let mapleader = ","
 let g:mapleader = ","
 
-" Automatically set directory to current file
-set autochdir
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -142,11 +140,12 @@ autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
+" Turn backup off
 set nobackup
 set nowb
 set noswapfile
-
+" For whatever reason, easymotion likes to create undo files
+set noundofile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -154,7 +153,7 @@ set noswapfile
 " Use spaces instead of tabs
 set expandtab
 
-" Be smart when using tabs ;)
+" Be smart when using tabs
 set smarttab
 
 " 1 tab == 4 spaces
