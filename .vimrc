@@ -261,11 +261,16 @@ let g:syntastic_mode_map = {
     \ "passive_filetypes": [] }
 
 " Set Syntastic include directories
-let g:syntastic_c_include_dirs = []
+let g:syntastic_c_include_dirs = ['/c/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.6/include']
+
+" Recommended Syntastic config
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Remap ctrlp so we can cycle modes with same key
 let g:ctrlp_map = '<c-f>'
-
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
