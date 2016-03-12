@@ -24,7 +24,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'ervandew/supertab'
 
 call vundle#end()            " required
@@ -122,6 +121,7 @@ syntax on
 set t_Co=256
 set bs=2
 
+" Themes
 colorscheme solarized
 set background=dark
 let g:airline_powerline_fonts = 1
@@ -144,8 +144,7 @@ autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 set nobackup
 set nowb
 set noswapfile
-" For whatever reason, easymotion likes to create undo files
-set noundofile
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -171,6 +170,12 @@ autocmd BufWritePre * :%s/\s\+$//e
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Temporarily(?) disable arrow keys to form better habit of hjkl usage
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
@@ -270,6 +275,12 @@ let g:syntastic_check_on_wq = 0
 
 " Remap ctrlp so we can cycle modes with same key
 let g:ctrlp_map = '<c-f>'
+" ctrlp to stay in the first working directory it was invoked within, unless
+" :cd command is issued to an outside dir
+let g:ctrlp_working_path_mode = 'a'
+
+" gitgutter behaves slowly when checking changes on context switch
+let g:gitgutter_eager = 0
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
