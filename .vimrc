@@ -15,16 +15,15 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " All Vundle included plugins
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'sickill/vim-monokai'
 
 call vundle#end()            " required
 
@@ -122,10 +121,8 @@ set t_Co=256
 set bs=2
 
 " Themes
-colorscheme solarized
-set background=dark
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+colorscheme monokai
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -281,6 +278,18 @@ let g:ctrlp_working_path_mode = 'a'
 
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
+
+" neocomplete
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Tab completion
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
