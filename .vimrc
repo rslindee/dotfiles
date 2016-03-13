@@ -23,7 +23,8 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Shougo/neocomplete.vim'
-Plugin 'sickill/vim-monokai'
+Plugin 'tomasr/molokai'
+Plugin 'vim-airline/vim-airline-themes'
 
 call vundle#end()            " required
 
@@ -122,7 +123,8 @@ set bs=2
 
 " Themes
 let g:airline_powerline_fonts = 1
-colorscheme monokai
+colorscheme molokai
+let g:airline_theme = 'molokai'
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
