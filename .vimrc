@@ -23,7 +23,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'Shougo/neocomplete.vim'
+Plugin 'ervandew/supertab'
 Plugin 'tomasr/molokai'
 Plugin 'ludovicchabant/vim-gutentags'
 
@@ -288,22 +288,8 @@ let g:ctrlp_working_path_mode = 'a'
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
 
-" neocomplete
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-" Disable autocomplete popups in favor of inducing manually
-let g:neocomplete#disable_auto_complete = 1
-" Tab completion
-inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : neocomplete#start_manual_complete()
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+" Enable omni support for SuperTab completion
+let g:SuperTabDefaultCompletionType = "context"
 
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_project_root = ['.notags']
