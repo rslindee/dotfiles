@@ -25,6 +25,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tomasr/molokai'
 Plugin 'vim-airline/vim-airline-themes'
+"Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()            " required
 
@@ -282,8 +283,6 @@ let g:ctrlp_working_path_mode = 'a'
 let g:gitgutter_eager = 0
 
 " neocomplete
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
@@ -292,6 +291,8 @@ let g:neocomplete#sources#syntax#min_keyword_length = 3
 let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " Tab completion
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Omni completion for c
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
