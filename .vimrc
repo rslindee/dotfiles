@@ -16,6 +16,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " All Vundle included plugins
 Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'scrooloose/nerdtree'
 Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -24,8 +25,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tomasr/molokai'
-Plugin 'vim-airline/vim-airline-themes'
-"Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'ludovicchabant/vim-gutentags'
 
 call vundle#end()            " required
 
@@ -113,6 +113,9 @@ set laststatus=2
 " Show line numbers
 set number
 
+" Disable scratch window preview in omni
+set completeopt-=preview
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -144,6 +147,9 @@ autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 set nobackup
 set nowb
 set noswapfile
+
+" For whatever reason I still see undo files getting created...
+set noundofile
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -288,11 +294,19 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" Disable autocomplete popups in favor of inducing manually
+let g:neocomplete#disable_auto_complete = 1
 " Tab completion
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" Omni completion for c
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+inoremap <expr><Tab>  pumvisible() ? "\<C-n>" : neocomplete#start_manual_complete()
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+let g:gutentags_define_advanced_commands = 1
+let g:gutentags_project_root = ['.notags']
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
