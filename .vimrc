@@ -135,6 +135,7 @@ set ffs=unix,dos,mac
 
 " Make arduino extensions show up as cpp highlighting
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
+autocmd BufNew,BufRead SConstruct set filetype=python
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
