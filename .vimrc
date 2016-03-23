@@ -111,6 +111,9 @@ set number
 " Disable scratch window preview in omni
 set completeopt-=preview
 
+" Mouse setup
+set mouse=a
+set ttymouse=xterm2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
