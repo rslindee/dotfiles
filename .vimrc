@@ -21,7 +21,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'tomasr/molokai'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'junegunn/gv.vim'
 
 call plug#end()
@@ -125,6 +124,20 @@ set bs=2
 
 " Themes
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
 colorscheme molokai
 let g:airline_theme = 'molokai'
 
