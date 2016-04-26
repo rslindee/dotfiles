@@ -35,7 +35,6 @@ zstyle ':prezto:load' pmodule \
   'git' \
   'pacman' \
   'tmux' \
-  'syntax-highlighting' \
   'prompt'
 
 #
