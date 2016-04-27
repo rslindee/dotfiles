@@ -2,13 +2,19 @@
 " Heavily inspired from amix/vimrc
 
 " Prerequisites:
-" Tested primarily with Babun, but should work on any Vim install
-" Requires the_silver_searcher be installed for Ag plugin to work
+" Ruby for vim-plug
+" the_silver_searcher for ag
 
 set nocompatible
+
+" auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 " vim-plug plugin manager:
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-"    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
 
 Plug 'vim-airline/vim-airline'
@@ -38,9 +44,13 @@ filetype indent on
 " Set to auto read when a file is changed from the outside
 set autoread
 
-" With a map leader it's possible to do extra key combinations
-let mapleader = ","
-let g:mapleader = ","
+" Map leader to space
+nnoremap <Space> <nop>
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+
+" Unmap Ctrl-A
+nmap <c-a> <nop>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
