@@ -12,4 +12,6 @@ fi
 # Throw out ALL PATH settings (useful for for a "clean" Cygwin)
 #PATH=/usr/local/bin:/usr/local/sbin:/usr/bin
 set ignoreeof on           # Typing EOF (CTRL+D) will not exit interactive sessions
+export VISUAL=vim
+export EDITOR="$VISUAL"
 # Customize to your needs...
