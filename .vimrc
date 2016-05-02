@@ -283,7 +283,8 @@ map <leader>pp :setlocal paste!<cr>
 " Use system clipboard
 set clipboard=unnamed
 
-
+" Call make
+nnoremap <leader>a :make<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
