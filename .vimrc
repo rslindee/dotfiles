@@ -26,7 +26,7 @@ Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
-Plug 'tomasr/molokai'
+Plug 'chriskempson/base16-vim'
 Plug 'junegunn/gv.vim'
 
 call plug#end()
@@ -133,6 +133,9 @@ set t_Co=256
 set bs=2
 
 " Themes
+set background=dark
+let base16colorspace=256  " Access colors present in 256 colorspace
+colorscheme base16-monokai
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_mode_map = {
@@ -148,8 +151,7 @@ let g:airline_mode_map = {
       \ 'S'  : 'S',
       \ '' : 'S',
       \ }
-colorscheme molokai
-let g:airline_theme = 'molokai'
+let g:airline_theme = 'base16_monokai'
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
