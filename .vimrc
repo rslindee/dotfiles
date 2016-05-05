@@ -28,6 +28,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/gv.vim'
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -124,6 +125,11 @@ set completeopt-=preview
 set mouse=a
 set ttymouse=xterm2
 
+" Line/Column highlighting
+set cursorline
+set cursorcolumn
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,9 +139,9 @@ set t_Co=256
 set bs=2
 
 " Themes
-set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-monokai
+set background=dark
+colorscheme base16-eighties
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_mode_map = {
@@ -151,7 +157,7 @@ let g:airline_mode_map = {
       \ 'S'  : 'S',
       \ '' : 'S',
       \ }
-let g:airline_theme = 'base16_monokai'
+let g:airline_theme = 'base16_eighties'
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -161,8 +167,8 @@ set ffs=unix,dos,mac
 
 " Make arduino extensions show up as cpp highlighting
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
-" Make Sconstruct files show up as python
-autocmd BufNew,BufRead SConstruct set filetype=python
+" Make Scons files show up as python
+autocmd BufNew,BufRead SConstruct,Sconscript set filetype=python
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
