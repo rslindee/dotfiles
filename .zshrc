@@ -17,9 +17,5 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-monokai.dark.sh"
 # Typing EOF (CTRL+D) will not exit interactive sessions
 setopt ignoreeof
 
-# Set editors to Vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
-# Start tmux
-if [ "$TMUX" = "" ]; then tmux; fi
