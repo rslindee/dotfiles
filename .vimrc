@@ -28,7 +28,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ervandew/supertab'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/gv.vim'
-Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -115,8 +114,8 @@ set foldcolumn=1
 " Always show the status line
 set laststatus=2
 
-" Show line numbers
-set number
+" Show relative line numbers
+set relativenumber
 
 " Disable scratch window preview in omni
 set completeopt-=preview
