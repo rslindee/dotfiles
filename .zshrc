@@ -22,8 +22,10 @@ esac
 BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-# Typing EOF (CTRL+D) will not exit interactive sessions
+# Typing EOF (Ctrl+d) will not exit interactive sessions
 setopt ignoreeof
+# Disable Software Flow Control keys (Ctrl+s / Ctrl+q)
+stty -ixon
 
 # Set editors to Vim
 export VISUAL=vim
