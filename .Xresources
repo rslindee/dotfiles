@@ -26,6 +26,7 @@ URxvt.perl-ext-common: default,clipboard
 
 *.foreground:   base05
 *.background:   base00
+*.borderColor:  base00
 *.cursorColor:  base05
 
 *.color0:       base00
