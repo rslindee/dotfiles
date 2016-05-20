@@ -1,0 +1,65 @@
+# zplug sourcing and plugins
+source ~/.zplug/init.zsh
+
+zplug "plugins/git", from:oh-my-zsh, if:"(( $+commands[git] ))", nice:10
+zplug "plugins/vi-mode", from:oh-my-zsh
+#zplug "plugins/gitfast", from:oh-my-zsh, nice:10
+zplug "plugins/history", from:oh-my-zsh
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-syntax-highlighting", nice:10
+zplug "zsh-users/zsh-history-substring-search", nice:10
+
+zplug "lib/theme-and-appearance", from:oh-my-zsh
+zplug "themes/wezm", from:oh-my-zsh
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
+
+# OS-specific settings
+case "$(uname -s)" in
+    Linux)
+        ;;
+
+    CYGWIN*|MINGW32*|MSYS*)
+        # Throw out most PATH settings (useful for for a "clean" Cygwin)
+        PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts
+        ;;
+esac
+
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+# Typing EOF (Ctrl+d) will not exit interactive sessions
+setopt ignoreeof
+# Disable Software Flow Control keys (Ctrl+s / Ctrl+q)
+stty -ixon
+
+# glob for dotfiles
+setopt glob_dots
+
+# Set editors to Vim
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
+## Colorize the ls output ##
+alias ls='ls --color=auto'
+
+## Use a long listing format ##
+alias ll='ls -la'
+
+## Show hidden files ##
+alias l.='ls -d .* --color=auto'
+
+# History substring plugin keybinds
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-dow
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+# Start tmux
+#if [ "$TMUX" = "" ]; then
+#    echo "Starting tmux..."
+#    tmux
+#fi

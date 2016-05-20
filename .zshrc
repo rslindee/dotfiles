@@ -24,15 +24,19 @@ BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 
 # Typing EOF (Ctrl+d) will not exit interactive sessions
 setopt ignoreeof
+
 # Disable Software Flow Control keys (Ctrl+s / Ctrl+q)
 stty -ixon
+
+# glob for dotfiles
+setopt glob_dots
 
 # Set editors to Vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
 # Start tmux
-if [ "$TMUX" = "" ]; then
-    echo "Starting tmux..."
-    tmux
-fi
+#if [ "$TMUX" = "" ]; then
+#    echo "Starting tmux..."
+#    tmux
+#fi
