@@ -236,11 +236,6 @@ map <leader>l <C-W>l
 " tmux-like tabs
 map <leader>c :tabnew<cr>
 
-" Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
-
 " Map splits to be like tmux
 map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
@@ -259,21 +254,9 @@ map <leader>g :Ag!
 " When you press <leader>r you can search and replace the selected text
 vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with Ag, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+" Cope shortcuts
 map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+map <leader>N :cp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -290,7 +273,7 @@ map <leader>ss :setlocal spell!<cr>
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+map <leader>p :setlocal paste!<cr>
 
 " Use system clipboard
 set clipboard=unnamed
