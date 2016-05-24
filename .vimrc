@@ -1,9 +1,9 @@
 " Richard Slindee's .vimrc
-" Heavily inspired from amix/vimrc
 
 " Prerequisites:
 " Ruby for vim-plug
 " the_silver_searcher for ag
+" base16 for shell for theme
 
 set nocompatible
 
@@ -48,9 +48,6 @@ set autoread
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
-
-" Unmap Ctrl-A
-nmap <c-a> <nop>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -142,7 +139,6 @@ let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
 colorscheme base16-eighties
 let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#enabled = 1
 let g:airline_mode_map = {
       \ '__' : '-',
       \ 'n'  : 'N',
@@ -156,6 +152,18 @@ let g:airline_mode_map = {
       \ 'S'  : 'S',
       \ '' : 'S',
       \ }
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#tab_nr_type = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+nmap <leader>1 <Plug>AirlineSelectTab1
+nmap <leader>2 <Plug>AirlineSelectTab2
+nmap <leader>3 <Plug>AirlineSelectTab3
+nmap <leader>4 <Plug>AirlineSelectTab4
+nmap <leader>5 <Plug>AirlineSelectTab5
+nmap <leader>6 <Plug>AirlineSelectTab6
+nmap <leader>7 <Plug>AirlineSelectTab7
+nmap <leader>8 <Plug>AirlineSelectTab8
+nmap <leader>9 <Plug>AirlineSelectTab9
 let g:airline_theme = 'base16_eighties'
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -216,29 +224,26 @@ noremap <Right> <NOP>
 map j gj
 map k gk
 
-" Disable highlight when <leader><cr> is pressed
-map <silent> <leader><cr> :noh<cr>
+" Clear highlight when <leader><esc> is pressed
+map <silent> <leader><esc> :noh<cr>
 
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" tmux-like way to move between windows
+map <leader>j <C-W>j
+map <leader>k <C-W>k
+map <leader>h <C-W>h
+map <leader>l <C-W>l
 
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
+" tmux-like tabs
+map <leader>c :tabnew<cr>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-" Opens a new tab with the current buffer's path
-" Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+" Map splits to be like tmux
+map <leader>" :sp<cr>
+map <leader>% :vsp<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -290,8 +295,10 @@ map <leader>pp :setlocal paste!<cr>
 " Use system clipboard
 set clipboard=unnamed
 
-" Call make
-nnoremap <leader>a :make<cr>
+" Call make with <leader><cr>
+nnoremap <leader><cr> :make<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -316,14 +323,20 @@ let g:ctrlp_map = '<c-f>'
 " :cd command is issued to an outside dir
 let g:ctrlp_working_path_mode = 'a'
 
-" gitgutter behaves slowly when checking changes on context switch
-let g:gitgutter_eager = 0
-
 " Enable omni support for SuperTab completion
 let g:SuperTabDefaultCompletionType = "context"
 
 let g:gutentags_define_advanced_commands = 1
 let g:gutentags_project_root = ['.notags']
+
+" Gitgutter
+" gitgutter behaves slowly when checking changes on context switch
+let g:gitgutter_eager = 0
+" Clear all default mappings
+let g:gitgutter_map_keys = 0
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+nmap <leader>u <Plug>GitGutterUndoHunk
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
