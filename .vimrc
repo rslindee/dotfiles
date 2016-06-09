@@ -17,33 +17,27 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'scrooloose/nerdtree'
-Plug 'rking/ag.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+" TODO: replace with vimcompletesme?
+Plug 'ervandew/supertab'
+Plug 'junegunn/gv.vim'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'ervandew/supertab'
-Plug 'chriskempson/base16-vim'
-Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
-set history=500
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-" Set to auto read when a file is changed from the outside
-set autoread
-
 " Map leader to space
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
@@ -56,9 +50,6 @@ let g:mapleader = "\<Space>"
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
-" Turn on the WiLd menu
-set wildmenu
-
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 
@@ -69,7 +60,6 @@ set cmdheight=2
 set hid
 
 " Configure backspace so it acts as it should act
-set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " Ignore case when searching
@@ -80,9 +70,6 @@ set smartcase
 
 " Highlight search results
 set hlsearch
-
-" Makes search act like search in modern browsers
-set incsearch
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -108,9 +95,6 @@ set tm=500
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-" Always show the status line
-set laststatus=2
-
 " Show relative line numbers
 set relativenumber
 
@@ -129,9 +113,6 @@ set cursorcolumn
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enable syntax highlighting
-syntax on
-set t_Co=256
 set bs=2
 
 " Themes
@@ -166,9 +147,6 @@ nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
 let g:airline_theme = 'base16_eighties'
 
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
@@ -196,9 +174,6 @@ set noundofile
 " Use spaces instead of tabs
 set expandtab
 
-" Be smart when using tabs
-set smarttab
-
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
@@ -223,9 +198,6 @@ noremap <Right> <NOP>
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
-
-" Clear highlight when <leader><esc> is pressed
-map <silent> <leader><esc> :noh<cr>
 
 " tmux-like way to move between windows
 map <leader>j <C-W>j
@@ -291,9 +263,6 @@ let g:syntastic_mode_map = {
     \ "active_filetypes": [],
     \ "passive_filetypes": [] }
 
-" Set Syntastic include directories
-let g:syntastic_c_include_dirs = ['/c/ti/ccsv6/tools/compiler/ti-cgt-arm_5.2.6/include']
-
 " Recommended Syntastic config
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -308,9 +277,6 @@ let g:ctrlp_working_path_mode = 'a'
 
 " Enable omni support for SuperTab completion
 let g:SuperTabDefaultCompletionType = "context"
-
-let g:gutentags_define_advanced_commands = 1
-let g:gutentags_project_root = ['.notags']
 
 " Gitgutter
 " gitgutter behaves slowly when checking changes on context switch
