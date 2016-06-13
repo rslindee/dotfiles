@@ -1,5 +1,5 @@
-Transparency=medium
-OpaqueWhenFocused=yes
+Transparency=off
+OpaqueWhenFocused=no
 Font=DejaVu Sans Mono for Powerline
 Scrollbar=none
 BoldAsColour=no
