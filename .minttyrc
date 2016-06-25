@@ -1,13 +1,13 @@
-Transparency=medium
-OpaqueWhenFocused=yes
+Transparency=off
+OpaqueWhenFocused=no
 Font=DejaVu Sans Mono for Powerline
 Scrollbar=none
 BoldAsColour=no
 BoldAsFont=no
 CursorType=block
-FontHeight=10
+FontHeight=8
 RightClickAction=paste
-FontSmoothing=full
+FontSmoothing=default
 Term=xterm-256color
 BellType=0
 CtrlShiftShortcuts=yes
