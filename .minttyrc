@@ -11,4 +11,3 @@ FontSmoothing=default
 Term=xterm-256color
 BellType=0
 CtrlShiftShortcuts=yes
-FontWeight=400
