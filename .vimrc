@@ -22,6 +22,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 " TODO: replace with vimcompletesme?
 Plug 'ervandew/supertab'
+" TODO: replace with ack.vim, tried to on 7/7, but didn't work well with Ag
 Plug 'junegunn/gv.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -291,11 +292,6 @@ nmap <leader>u <Plug>GitGutterUndoHunk
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! CmdLine(str)
-    exe "menu Foo.Bar :" . a:str
-    emenu Foo.Bar
-    unmenu Foo
-endfunction
 
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
