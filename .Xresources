@@ -10,4 +10,4 @@ URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: false
 URxvt.perl-ext-common: default,clipboard
 
-URxvt*font: xft:DejaVu Sans Mono for Powerline-11
+URxvt*font: xft:DejaVu Sans Mono for Powerline-10
