@@ -1,5 +1,3 @@
-" Richard Slindee's .vimrc
-
 " Prerequisites:
 " Ruby for vim-plug
 " the_silver_searcher for ag
@@ -17,12 +15,11 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
+Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" TODO: replace with vimcompletesme?
-Plug 'ervandew/supertab'
-" TODO: replace with ack.vim, tried to on 7/7, but didn't work well with Ag
+" TODO: replace with ack.vim, tried to on 7/7/16, but didn't work well with Ag
 Plug 'junegunn/gv.vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
@@ -154,7 +151,7 @@ set ffs=unix,dos,mac
 " Make arduino extensions show up as cpp highlighting
 autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 " Make Scons files show up as python
-autocmd BufNew,BufRead SConstruct,Sconscript set filetype=python
+autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -206,37 +203,16 @@ map <leader>k <C-W>k
 map <leader>h <C-W>h
 map <leader>l <C-W>l
 
-" tmux-like tabs
+" tmux-like tab creation
 map <leader>c :tabnew<cr>
 
 " Map splits to be like tmux
 map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ag after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
-
-" Open Ag and put the cursor in the right position
-map <leader>g :Ag!
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
 " Cope shortcuts
 map <leader>n :cn<cr>
 map <leader>N :cp<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -245,14 +221,17 @@ map <leader>ss :setlocal spell!<cr>
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Toggle paste mode on and off
+" Toggle paste mode
 map <leader>p :setlocal paste!<cr>
 
 " Use system clipboard
 set clipboard=unnamed
 
-" Call make with <leader><cr>
+" Call make
 nnoremap <leader><cr> :make<cr>
+
+" Toggle spellcheck
+map <leader>s :setlocal spell!<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -276,9 +255,6 @@ let g:ctrlp_map = '<c-f>'
 " :cd command is issued to an outside dir
 let g:ctrlp_working_path_mode = 'a'
 
-" Enable omni support for SuperTab completion
-let g:SuperTabDefaultCompletionType = "context"
-
 " Gitgutter
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
@@ -288,29 +264,6 @@ nmap ]h <Plug>GitGutterNextHunk
 nmap [h <Plug>GitGutterPrevHunk
 nmap <leader>u <Plug>GitGutterUndoHunk
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Helper functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
-
-    let l:pattern = escape(@", '\\/.*$^~[]')
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
-
-    if a:direction == 'b'
-        execute "normal ?" . l:pattern . "^M"
-    elseif a:direction == 'gv'
-        call CmdLine("Ag \"" . l:pattern . "\" " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    elseif a:direction == 'f'
-        execute "normal /" . l:pattern . "^M"
-    endif
-
-    let @/ = l:pattern
-    let @" = l:saved_reg
-endfunction
+" Open Ag and put the cursor in the right position
+map <leader>g :Ag!
 
