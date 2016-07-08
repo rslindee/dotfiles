@@ -233,6 +233,9 @@ nnoremap <leader><cr> :make<cr>
 " Toggle spellcheck
 map <leader>s :setlocal spell!<cr>
 
+" Highlight and replace current word cursor is on
+nnoremap <leader>r :s/<C-r><C-w>//gc<Left><Left><Left>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
