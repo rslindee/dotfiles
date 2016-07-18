@@ -105,7 +105,6 @@ set ttymouse=xterm2
 
 " Line/Column highlighting
 set cursorline
-set cursorcolumn
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
