@@ -264,12 +264,15 @@ let g:ctrlp_working_path_mode = 'a'
 let g:gitgutter_eager = 0
 " Clear all default mappings
 let g:gitgutter_map_keys = 0
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-nmap <leader>u <Plug>GitGutterUndoHunk
+nmap <leader>gn <Plug>GitGutterNextHunk
+nmap <leader>gN <Plug>GitGutterPrevHunk
+nmap <leader>gu <Plug>GitGutterUndoHunk
 
 " Open Ag and put the cursor in the right position
 map <leader>f :Ag!
+
+" Run Ag search for current word cursor is on
+map <leader>F :Ag!<c-r><c-w><cr>
 
 " Open fugitive Git status
 map <leader>gs :Gstatus<cr>
