@@ -259,11 +259,11 @@ let g:ctrlp_map = '<c-f>'
 " :cd command is issued to an outside dir
 let g:ctrlp_working_path_mode = 'a'
 
-" Gitgutter
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
-" Clear all default mappings
+" Clear all default gitgutter mappings
 let g:gitgutter_map_keys = 0
+" Map useful gitgutter commands
 nmap <leader>gn <Plug>GitGutterNextHunk
 nmap <leader>gN <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
@@ -280,3 +280,5 @@ map <leader>gs :Gstatus<cr>
 " Open fugitive Git blame
 map <leader>gb :Gblame<cr>
 
+" Open NERDTree
+map <leader>d :NERDTreeToggle<cr>
