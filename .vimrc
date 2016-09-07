@@ -201,8 +201,8 @@ map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
 
 " Cope shortcuts
-map <leader>n :cn<cr>
-map <leader>N :cp<cr>
+map <c-n> :cn<cr>
+map <c-p> :cp<cr>
 
 " Move between airline tabs
 nmap <leader>1 <Plug>AirlineSelectTab1

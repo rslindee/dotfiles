@@ -10,4 +10,4 @@ RightClickAction=paste
 FontSmoothing=default
 Term=xterm-256color
 BellType=0
-CtrlShiftShortcuts=yes
+CtrlShiftShortcuts=no
