@@ -200,6 +200,10 @@ map <leader>c :tabnew<cr>
 map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
 
+" Cope shortcuts
+map <c-n> :cn<cr>
+map <c-p> :cp<cr>
+
 " Move between airline tabs
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -276,6 +280,9 @@ map <leader>gs :Gstatus<cr>
 
 " Open fugitive Git blame
 map <leader>gb :Gblame<cr>
+
+" Load fugitive git history of file in quickfix list
+map <leader>gb :Glog<cr>
 
 " Open NERDTree
 map <leader>d :NERDTreeToggle<cr>
