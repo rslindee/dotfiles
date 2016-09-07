@@ -281,8 +281,8 @@ map <leader>gs :Gstatus<cr>
 " Open fugitive Git blame
 map <leader>gb :Gblame<cr>
 
-" Load fugitive git history of file in quickfix list
-map <leader>gb :Glog<cr>
+" Load fugitive git history of file quickfix list and open in new tab
+map <leader>gl :Glog<cr><cr>
 
 " Open NERDTree
-map <leader>d :NERDTreeToggle<cr>
+map <leader>n :NERDTreeToggle<cr>
