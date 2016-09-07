@@ -235,7 +235,7 @@ nnoremap <leader><cr> :make<cr>
 map <leader>s :setlocal spell!<cr>
 
 " Highlight and replace current word cursor is on
-nnoremap <leader>r :s/<C-r><C-w>//gc<Left><Left><Left>
+nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -270,19 +270,23 @@ nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ga <Plug>GitGutterStageHunk
 
 " Open Ag and put the cursor in the right position
-map <leader>f :Ag!
+nmap <leader>f :Ag!
 
 " Run Ag search for current word cursor is on
-map <leader>F :Ag!<c-r><c-w><cr>
+nmap <leader>F :Ag!<c-r><c-w><cr>
 
 " Open fugitive Git status
-map <leader>gs :Gstatus<cr>
+nmap <leader>gs :Gstatus<cr>
 
 " Open fugitive Git blame
-map <leader>gb :Gblame<cr>
+nmap <leader>gb :Gblame<cr>
 
 " Load fugitive git history of file quickfix list and open in new tab
-map <leader>gl :Glog<cr><cr>
+nmap <leader>gl :Glog<cr><cr>
+
+" Load fugitive git diff of current file (need to add revision desired for
+" diff, if any)
+nmap <leader>gd :Gdiff<space>
 
 " Open NERDTree
-map <leader>n :NERDTreeToggle<cr>
+nmap <leader>n :NERDTreeToggle<cr>
