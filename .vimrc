@@ -200,10 +200,6 @@ map <leader>c :tabnew<cr>
 map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
 
-" Cope shortcuts
-map <c-n> :cn<cr>
-map <c-p> :cp<cr>
-
 " Move between airline tabs
 nmap <leader>1 <Plug>AirlineSelectTab1
 nmap <leader>2 <Plug>AirlineSelectTab2
@@ -261,12 +257,13 @@ let g:ctrlp_working_path_mode = 'a'
 
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
-" Clear all default gitgutter mappings
+" Clear all default gitgutter mappings (default conflicts with <leader>h, etc)
 let g:gitgutter_map_keys = 0
 " Map useful gitgutter commands
-nmap <leader>gn <Plug>GitGutterNextHunk
-nmap <leader>gN <Plug>GitGutterPrevHunk
+nmap ]g <Plug>GitGutterNextHunk
+nmap [g <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
+nmap <leader>ga <Plug>GitGutterStageHunk
 
 " Open Ag and put the cursor in the right position
 map <leader>f :Ag!
