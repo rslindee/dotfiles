@@ -201,8 +201,8 @@ map <leader>" :sp<cr>
 map <leader>% :vsp<cr>
 
 " Cope shortcuts
-map <c-n> :cn<cr>
-map <c-p> :cp<cr>
+map <silent><c-n> :cn<cr>
+map <silent><c-p> :cp<cr>
 
 " Move between airline tabs
 nmap <leader>1 <Plug>AirlineSelectTab1
@@ -287,6 +287,9 @@ nmap <leader>gl :Glog<cr><cr>
 " Load fugitive git diff of current file (need to add revision desired for
 " diff, if any)
 nmap <leader>gd :Gdiff<space>
+
+" Open fugitive and load all commits touching current file into quickfix
+nmap <leader>gc :Glog<space>--<space>%<cr><cr>
 
 " Open NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
