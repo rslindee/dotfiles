@@ -1,6 +1,5 @@
 " Prerequisites:
 " Ruby for vim-plug
-" the_silver_searcher for ag
 " base16 for shell for theme
 
 set nocompatible
@@ -19,11 +18,11 @@ Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" TODO: replace with ack.vim, tried to on 7/7/16, but didn't work well with Ag
 Plug 'junegunn/gv.vim'
-Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'mhinz/vim-grepper'
 Plug 'scrooloose/syntastic'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-unimpaired'
@@ -269,11 +268,12 @@ nmap [g <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ga <Plug>GitGutterStageHunk
 
-" Open Ag and put the cursor in the right position
-nmap <leader>f :Ag!
+" Map vim-grepper to take in motion
+nmap <leader>f <plug>(GrepperOperator)
+xmap <leader>f <plug>(GrepperOperator)
 
-" Run Ag search for current word cursor is on
-nmap <leader>F :Ag!<c-r><c-w><cr>
+" Map vim-grepper to simply start
+nmap <leader>F :Grepper<cr>
 
 " Open fugitive Git status
 nmap <leader>gs :Gstatus<cr>
