@@ -19,9 +19,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
-Plug 'junegunn/seoul256.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
+Plug 'nanotech/jellybeans.vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-eunuch'
@@ -110,16 +110,11 @@ set cursorline
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set bs=2
+set t_Co=256
 
 " Themes
-let g:seoul256_background = 236
 set background=dark
-colo seoul256
-"let g:airline_powerline_fonts = 1
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#tab_nr_type = 1
-"let g:airline#extensions#tabline#buffer_idx_mode = 1
-"let g:airline_theme = 'base16_eighties'
+colo jellybeans
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -217,7 +212,7 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
-            \ 'colorscheme': 'seoul256',
+            \ 'colorscheme': 'jellybeans',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
             \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'filetype' ] ]
