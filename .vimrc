@@ -20,6 +20,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/seoul256.vim'
+Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -376,5 +377,8 @@ nmap <leader>gd :Gdiff<space>
 " Open fugitive and load all commits touching current file into quickfix
 nmap <leader>gc :Glog<space>--<space>%<cr><cr>
 
-" Open NERDTree
+" Toggle NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
+
+" Toggle Tagbar
+nmap <leader>t :TagbarToggle<cr>
