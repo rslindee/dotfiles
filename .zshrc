@@ -18,10 +18,6 @@ case "$(uname -s)" in
         ;;
 esac
 
-# Base16 Shell
-BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # Typing EOF (Ctrl+d) will not exit interactive sessions
 setopt ignoreeof
 

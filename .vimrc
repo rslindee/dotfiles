@@ -6,9 +6,9 @@ set nocompatible
 
 " auto-install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
 " vim-plug plugin manager:
@@ -16,9 +16,10 @@ call plug#begin()
 
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
-Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'mhinz/vim-grepper'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -26,8 +27,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 call plug#end()
 
@@ -112,27 +111,14 @@ set cursorline
 set bs=2
 
 " Themes
-let base16colorspace=256  " Access colors present in 256 colorspace
+let g:seoul256_background = 236
 set background=dark
-colorscheme base16-eighties
-let g:airline_powerline_fonts = 1
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_nr_type = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline_theme = 'base16_eighties'
+colo seoul256
+"let g:airline_powerline_fonts = 1
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#tab_nr_type = 1
+"let g:airline#extensions#tabline#buffer_idx_mode = 1
+"let g:airline_theme = 'base16_eighties'
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -203,17 +189,6 @@ map <leader>% :vsp<cr>
 map <silent><c-n> :cn<cr>
 map <silent><c-p> :cp<cr>
 
-" Move between airline tabs
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -240,11 +215,121 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:lightline = {
+            \ 'colorscheme': 'seoul256',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+            \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'filetype' ] ]
+            \ },
+            \ 'component_function': {
+            \   'fugitive': 'LightLineFugitive',
+            \   'filename': 'LightLineFilename',
+            \   'filetype': 'LightLineFiletype',
+            \   'mode': 'LightLineMode',
+            \   'ctrlpmark': 'CtrlPMark',
+            \ },
+            \ 'component_expand': {
+            \   'syntastic': 'SyntasticStatuslineFlag',
+            \ },
+            \ 'component_type': {
+            \   'syntastic': 'error',
+            \ },
+            \ 'subseparator': { 'left': '|', 'right': '|' }
+            \ }
+let g:lightline.mode_map = {
+            \ 'n' : 'N',
+            \ 'i' : 'I',
+            \ 'R' : 'R',
+            \ 'v' : 'V',
+            \ 'V' : 'V',
+            \ "\<C-v>": 'V',
+            \ 'c' : 'C',
+            \ 's' : 'S',
+            \ 'S' : 'S',
+            \ "\<C-s>": 'S',
+            \ 't': 'T',
+            \ }
+function! LightLineModified()
+    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+    return &ft !~? 'help' && &readonly ? 'RO' : ''
+endfunction
+
+function! LightLineFilename()
+    let fname = expand('%:t')
+    return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
+                \ fname == '__Tagbar__' ? g:lightline.fname :
+                \ fname =~ '__Gundo\|NERD_tree' ? '' :
+                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != fname ? fname : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+    try
+        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+            let mark = ''  " edit here for cool mark
+            let branch = fugitive#head()
+            return branch !=# '' ? mark.branch : ''
+        endif
+    catch
+    endtry
+    return ''
+endfunction
+
+function! LightLineFiletype()
+    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineMode()
+    let fname = expand('%:t')
+    return fname == '__Tagbar__' ? 'Tagbar' :
+                \ fname == 'ControlP' ? 'CtrlP' :
+                \ fname =~ 'NERD_tree' ? 'NERDTree' :
+                \ winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+function! CtrlPMark()
+    if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
+        call lightline#link('iR'[g:lightline.ctrlp_regex])
+        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
+                    \ , g:lightline.ctrlp_next], 0)
+    else
+        return ''
+    endif
+endfunction
+
+let g:ctrlp_status_func = {
+            \ 'main': 'CtrlPStatusFunc_1',
+            \ 'prog': 'CtrlPStatusFunc_2',
+            \ }
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+    let g:lightline.ctrlp_regex = a:regex
+    let g:lightline.ctrlp_prev = a:prev
+    let g:lightline.ctrlp_item = a:item
+    let g:lightline.ctrlp_next = a:next
+    return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+    return lightline#statusline(0)
+endfunction
+
+let g:tagbar_status_func = 'TagbarStatusFunc'
+
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+    let g:lightline.fname = a:fname
+    return lightline#statusline(0)
+endfunction
+
 " Set Syntastic to passive for everything
 let g:syntastic_mode_map = {
-    \ "mode": "passive",
-    \ "active_filetypes": [],
-    \ "passive_filetypes": [] }
+            \ "mode": "passive",
+            \ "active_filetypes": [],
+            \ "passive_filetypes": [] }
 
 " Recommended Syntastic config
 let g:syntastic_always_populate_loc_list = 1
