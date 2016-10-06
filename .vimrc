@@ -12,6 +12,7 @@ call plug#begin()
 
 Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
+Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
@@ -358,6 +359,9 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" Set max tag file size to ~100mb for autotag
+let g:autotagmaxTagsFileSize = 100000000
 
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
