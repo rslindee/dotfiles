@@ -132,6 +132,9 @@ set noswapfile
 " For whatever reason I still see undo files getting created...
 set noundofile
 
+" Reload vimrc manually
+nnoremap <leader>vr :source $MYVIMRC<CR>
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -219,18 +222,28 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Ignore the buffer searching feature of CtrlP
+let g:ctrlp_types = ['fil', 'mru']
+let g:ctrlp_extensions = ['tag', 'quickfix']
+" Remap ctrlp so we can cycle modes with same key
+let g:ctrlp_map = '<c-f>'
+" Make Ctrlp to stay in the first working directory it was invoked within, unless
+" :cd command is issued to an outside dir
+let g:ctrlp_working_path_mode = 'a'
+
+" Lightline Config
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'fugitive', 'filename' ] ],
             \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'filetype' ] ]
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
             \   'filename': 'LightLineFilename',
             \   'filetype': 'LightLineFiletype',
+            \   'ctrlp': 'LightlineCtrlP',
             \   'mode': 'LightLineMode',
-            \   'ctrlpmark': 'CtrlPMark',
             \ },
             \ 'component_expand': {
             \   'syntastic': 'SyntasticStatuslineFlag',
@@ -253,6 +266,19 @@ let g:lightline.mode_map = {
             \ "\<C-s>": 'S',
             \ 't': 'T',
             \ }
+
+function! LightlineCtrlP()
+  if expand('%:t') =~ 'ControlP'
+    if exists('g:lightline.ctrlp_status')
+      return g:lightline.ctrlp_status
+    else
+      return ''
+    endif
+  else
+    return ''
+  endif
+endfunction
+
 function! LightLineModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -265,7 +291,7 @@ function! LightLineFilename()
     let fname = expand('%:t')
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
                 \ fname == '__Tagbar__' ? g:lightline.fname :
-                \ fname =~ '__Gundo\|NERD_tree' ? '' :
+                \ fname =~ 'NERD_tree' ? '' :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
                 \ ('' != fname ? fname : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
@@ -273,7 +299,7 @@ endfunction
 
 function! LightLineFugitive()
     try
-        if expand('%:t') !~? 'Tagbar\|Gundo\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+        if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
             let mark = ''  " edit here for cool mark
             let branch = fugitive#head()
             return branch !=# '' ? mark.branch : ''
@@ -295,30 +321,22 @@ function! LightLineMode()
                 \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
-function! CtrlPMark()
-    if expand('%:t') =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item')
-        call lightline#link('iR'[g:lightline.ctrlp_regex])
-        return lightline#concatenate([g:lightline.ctrlp_prev, g:lightline.ctrlp_item
-                    \ , g:lightline.ctrlp_next], 0)
-    else
-        return ''
-    endif
-endfunction
-
 let g:ctrlp_status_func = {
-            \ 'main': 'CtrlPStatusFunc_1',
-            \ 'prog': 'CtrlPStatusFunc_2',
+            \ 'main': 'CtrlPStatusMain',
+            \ 'prog': 'CtrlPStatusProgress',
             \ }
 
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+function! CtrlPStatusMain(focus, byfname, regex, prev, item, next, marked)
     let g:lightline.ctrlp_regex = a:regex
     let g:lightline.ctrlp_prev = a:prev
     let g:lightline.ctrlp_item = a:item
     let g:lightline.ctrlp_next = a:next
+    silent! unlet g:lightline.ctrlp_status
     return lightline#statusline(0)
 endfunction
 
-function! CtrlPStatusFunc_2(str)
+function! CtrlPStatusProgress(status)
+    let g:lightline.ctrlp_status = a:status
     return lightline#statusline(0)
 endfunction
 
@@ -340,12 +358,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 "let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" Remap ctrlp so we can cycle modes with same key
-let g:ctrlp_map = '<c-f>'
-" ctrlp to stay in the first working directory it was invoked within, unless
-" :cd command is issued to an outside dir
-let g:ctrlp_working_path_mode = 'a'
 
 " gitgutter behaves slowly when checking changes on context switch
 let g:gitgutter_eager = 0
