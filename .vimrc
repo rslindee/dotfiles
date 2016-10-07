@@ -236,7 +236,7 @@ let g:ctrlp_working_path_mode = 'a'
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'fugitive', 'filename' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'fugitive' ] ],
             \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'filetype' ] ]
             \ },
             \ 'component_function': {
@@ -289,7 +289,7 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineFilename()
-    let fname = expand('%:t')
+    let fname = expand('%')
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
                 \ fname == '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
@@ -300,7 +300,7 @@ endfunction
 
 function! LightLineFugitive()
     try
-        if expand('%:t') !~? 'Tagbar\|NERD' && &ft !~? 'vimfiler' && exists('*fugitive#head')
+        if expand('%:t') !~? 'Tagbar\|NERD' && exists('*fugitive#head')
             let mark = ''  " edit here for cool mark
             let branch = fugitive#head()
             return branch !=# '' ? mark.branch : ''
