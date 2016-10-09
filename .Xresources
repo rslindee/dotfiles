@@ -12,8 +12,9 @@ URxvt.perl-ext-common: default,clipboard
 
 URxvt*font: xft:DejaVu Sans Mono for Powerline-10
 
+URxvt*foreground: #CCCCCC
 URxvt*background: #161616
-URxvt.cursorColor: #FDA53C
+URxvt.cursorColor: #CCCCCC
 
 !black
 *color0: #222222
