@@ -252,7 +252,7 @@ let g:lightline = {
             \ 'component_type': {
             \   'syntastic': 'error',
             \ },
-            \ 'subseparator': { 'left': '|', 'right': '|' }
+            \ 'subseparator': { 'left': '│', 'right': '│' }
             \ }
 let g:lightline.mode_map = {
             \ 'n' : 'N',
@@ -293,7 +293,7 @@ function! LightLineFilename()
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
                 \ fname == '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
-                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
                 \ ('' != fname ? fname : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
@@ -301,7 +301,7 @@ endfunction
 function! LightLineFugitive()
     try
         if expand('%:t') !~? 'Tagbar\|NERD' && exists('*fugitive#head')
-            let mark = ''  " edit here for cool mark
+            let mark = '├'  " edit here for cool mark
             let branch = fugitive#head()
             return branch !=# '' ? mark.branch : ''
         endif
