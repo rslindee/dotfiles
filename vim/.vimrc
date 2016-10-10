@@ -24,6 +24,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 
 call plug#end()
