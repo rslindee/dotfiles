@@ -31,6 +31,9 @@ setopt glob_dots
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+LS_COLORS="ow=01;37;100:di=01;37;100"
+export LS_COLORS
+
 # Start tmux
 #if [ "$TMUX" = "" ]; then
 #    echo "Starting tmux..."
