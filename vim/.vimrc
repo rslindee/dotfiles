@@ -10,7 +10,6 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
-Plug 'ajh17/VimCompletesMe'
 Plug 'airblade/vim-gitgutter'
 Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
