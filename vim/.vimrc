@@ -223,8 +223,9 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CtrlP Config
 " Ignore the buffer searching feature of CtrlP
-let g:ctrlp_types = ['fil', 'mru']
+let g:ctrlp_types = ['fil', 'mru', 'buf']
 let g:ctrlp_extensions = ['tag', 'quickfix']
 " Remap ctrlp so we can cycle modes with same key
 let g:ctrlp_map = '<c-f>'
@@ -233,6 +234,7 @@ let g:ctrlp_map = '<c-f>'
 let g:ctrlp_working_path_mode = 'a'
 
 " Lightline Config
+" Lightline arrangement
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
