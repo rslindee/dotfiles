@@ -25,14 +25,15 @@
 	co = checkout
 	cl = clone
 	ci = commit
-	st = status -sb
+	st = status
 	br = branch
-	unstage = reset HEAD --
+	un = reset HEAD --
 	dc = diff --cached
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
     su = submodule update --init --recursive
     fc = clean -ffxd
     fe = fetch -p
+    re = reset --hard HEAD
 [mergetool "bc3"]
     cmd = \"c:/program files (x86)/beyond compare 4/BComp.com\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\" /lefttitle=\"$LOCAL\" /righttitle=\"$REMOTE\" /centertitle=\"$BASE\" /outputtitle=\"$MERGED\" /leftreadonly /rightreadonly /centerreadonly
 [diff]
