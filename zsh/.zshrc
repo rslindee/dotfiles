@@ -34,6 +34,19 @@ export EDITOR="$VISUAL"
 LS_COLORS="ow=37;100:di=37;100"
 export LS_COLORS
 
+# Clever binding of fg to Ctrl-Z
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    BUFFER="fg"
+    zle accept-line
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
 # Start tmux
 #if [ "$TMUX" = "" ]; then
 #    echo "Starting tmux..."
