@@ -213,6 +213,8 @@ map <leader>s :setlocal spell!<cr>
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 
+" Call ctags
+nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
@@ -369,12 +371,11 @@ nmap [g <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ga <Plug>GitGutterStageHunk
 
-" Map vim-grepper to take in motion
-nmap <leader>f <plug>(GrepperOperator)
-xmap <leader>f <plug>(GrepperOperator)
+" Map vim-grepper search current word with Ag
+nmap <leader>f :GrepperAg <c-r><c-w><cr>
 
 " Map vim-grepper to simply start
-nmap <leader>F :Grepper<cr>
+nmap <leader>h :Grepper<cr>
 
 " Open fugitive Git status
 nmap <leader>gs :Gstatus<cr>
