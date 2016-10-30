@@ -168,11 +168,8 @@ noremap <Right> <NOP>
 map j gj
 map k gk
 
-" tmux-like way to move between windows
-map <leader>j <C-W>j
-map <leader>k <C-W>k
-map <leader>h <C-W>h
-map <leader>l <C-W>l
+" Use tab to cycle between window panes
+nnoremap <tab> <c-w>w
 
 " tmux-like tab creation
 map <leader>c :tabnew<cr>
