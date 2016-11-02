@@ -393,6 +393,9 @@ nmap <leader>gd :Gdiff<space>
 " Open fugitive and load all commits touching current file into quickfix
 nmap <leader>gc :Glog<space>--<space>%<cr><cr>
 
+" Fugitive git push
+nmap <leader>gp :Gpush<cr>
+
 " Toggle NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
 
