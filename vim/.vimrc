@@ -89,8 +89,8 @@ set tm=500
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-" Show relative line numbers
-set relativenumber
+" Show absolute line numbers
+set number
 
 " Disable scratch window preview in omni
 set completeopt-=preview
