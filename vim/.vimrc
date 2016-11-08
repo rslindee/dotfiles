@@ -19,6 +19,7 @@ Plug 'majutsushi/tagbar'
 Plug 'nanotech/jellybeans.vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -100,6 +101,10 @@ set ttymouse=xterm2
 
 " Line/Column highlighting
 set cursorline
+
+" Split windows to right and below
+set splitbelow
+set splitright
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
