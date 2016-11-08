@@ -16,7 +16,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-grepper'
 Plug 'nanotech/jellybeans.vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -30,7 +29,6 @@ Plug 'tpope/vim-unimpaired'
 
 call plug#end()
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -38,7 +36,6 @@ call plug#end()
 nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -104,7 +101,6 @@ set ttymouse=xterm2
 " Line/Column highlighting
 set cursorline
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,7 +119,6 @@ autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 " Make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -137,7 +132,6 @@ set noundofile
 
 " Reload vimrc manually
 nnoremap <leader>vr :source $MYVIMRC<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -155,7 +149,6 @@ set wrap "Wrap lines
 
 " auto-trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -193,7 +186,6 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -217,6 +209,26 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
+" Grep word under cursor
+nnoremap <leader>f :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
+" Simply open up search prompt
+nnoremap <leader>h :Ag<SPACE>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
@@ -372,12 +384,6 @@ nmap ]g <Plug>GitGutterNextHunk
 nmap [g <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ga <Plug>GitGutterStageHunk
-
-" Map vim-grepper search current word with Ag
-nmap <leader>f :GrepperAg <c-r><c-w><cr>
-
-" Map vim-grepper to simply start
-nmap <leader>h :Grepper<cr>
 
 " Open fugitive Git status
 nmap <leader>gs :Gstatus<cr>
