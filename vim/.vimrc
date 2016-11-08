@@ -103,10 +103,6 @@ set ttymouse=xterm2
 " Line/Column highlighting
 set cursorline
 
-" Split windows to right and below
-set splitbelow
-set splitright
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
