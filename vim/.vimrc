@@ -16,6 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper'
 Plug 'nanotech/jellybeans.vim'
 Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
@@ -215,26 +216,6 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 
-" The Silver Searcher
-if executable('ag')
-  " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
-endif
-
-command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
-
-" Grep word under cursor
-nnoremap <leader>f :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-
-" Simply open up search prompt
-nnoremap <leader>h :Ag<SPACE>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -247,6 +228,13 @@ let g:ctrlp_map = '<c-f>'
 " Make Ctrlp to stay in the first working directory it was invoked within, unless
 " :cd command is issued to an outside dir
 let g:ctrlp_working_path_mode = 'a'
+" Use ag to index files
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " Lightline Config
 " Lightline arrangement
@@ -389,6 +377,12 @@ nmap ]g <Plug>GitGutterNextHunk
 nmap [g <Plug>GitGutterPrevHunk
 nmap <leader>gu <Plug>GitGutterUndoHunk
 nmap <leader>ga <Plug>GitGutterStageHunk
+
+" Map vim-grepper search current word with Ag
+nmap <leader>f :GrepperAg <c-r><c-w><cr>
+
+" Map vim-grepper to simply start
+nmap <leader>h :Grepper<cr>
 
 " Open fugitive Git status
 nmap <leader>gs :Gstatus<cr>
