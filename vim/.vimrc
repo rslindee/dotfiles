@@ -195,7 +195,7 @@ noremap <leader>0 :tablast<cr>
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Toggle paste mode
-map <leader>p :setlocal paste!<cr>
+map <leader>P :setlocal paste!<cr>
 
 " Use system clipboard
 set clipboard=unnamed
@@ -204,7 +204,7 @@ set clipboard=unnamed
 nnoremap <leader><cr> :make<cr>
 
 " Toggle spellcheck
-map <leader>s :setlocal spell!<cr>
+map <leader>S :setlocal spell!<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
@@ -371,8 +371,8 @@ let g:gitgutter_map_keys = 0
 " Map useful gitgutter commands
 nmap ]g <Plug>GitGutterNextHunk
 nmap [g <Plug>GitGutterPrevHunk
-nmap <leader>gu <Plug>GitGutterUndoHunk
-nmap <leader>ga <Plug>GitGutterStageHunk
+nmap <leader>u <Plug>GitGutterUndoHunk
+nmap <leader>a <Plug>GitGutterStageHunk
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
@@ -381,23 +381,26 @@ nmap <leader>f :GrepperAg <c-r><c-w><cr>
 nmap <leader>h :Grepper<cr>
 
 " Open fugitive Git status
-nmap <leader>gs :Gstatus<cr>
+nmap <leader>s :Gstatus<cr>
 
 " Open fugitive Git blame
-nmap <leader>gb :Gblame<cr>
+nmap <leader>b :Gblame<cr>
 
 " Load fugitive git history of file quickfix list and open in new tab
-nmap <leader>gl :Glog<cr><cr>
+nmap <leader>l :Glog<cr><cr>
 
 " Load fugitive git diff of current file (need to add revision desired for
 " diff, if any)
-nmap <leader>gd :Gdiff<space>
+nmap <leader>d :Gdiff<space>
 
 " Open fugitive and load all commits touching current file into quickfix
-nmap <leader>gc :Glog<space>--<space>%<cr><cr>
+nmap <leader>gh :Glog<space>--<space>%<cr><cr>
 
 " Fugitive git push
 nmap <leader>gp :Gpush<cr>
+
+" Fugitive git commit
+nmap <leader>gc :Gcommit<space>-v<cr>
 
 " Toggle NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
