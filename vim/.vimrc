@@ -212,6 +212,13 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 
+" TODO: Get these working
+" Use ag for vimgrep if available
+"if executable('ag')
+"  set grepprg=ag\ --nogroup\ --nocolor
+"endif
+
+"nmap <leader>T :vimgrep /TODO\|FIXME/j **/*.*<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -219,8 +226,8 @@ nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 " Ignore the buffer searching feature of CtrlP
 let g:ctrlp_types = ['fil', 'mru', 'buf']
 let g:ctrlp_extensions = ['tag', 'quickfix']
-" Remap ctrlp so we can cycle modes with same key
-let g:ctrlp_map = '<c-f>'
+" Remap ctrlp invocation away from <c-p>
+let g:ctrlp_map = '<c-a>'
 " Make Ctrlp to stay in the first working directory it was invoked within, unless
 " :cd command is issued to an outside dir
 let g:ctrlp_working_path_mode = 'a'
