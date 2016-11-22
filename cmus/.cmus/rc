@@ -1,0 +1,3 @@
+colorscheme night
+
+bind -f common ^A add /mnt/hit1/FLAC/
