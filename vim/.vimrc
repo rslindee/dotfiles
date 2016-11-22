@@ -233,7 +233,7 @@ let g:ctrlp_map = '<c-a>'
 let g:ctrlp_working_path_mode = 'a'
 " Use ag to index files
 if executable('ag')
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    " Use ag in CtrlP for listing files. fast and respects .gitignore
     let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
     " ag is fast enough that CtrlP doesn't need to cache
     let g:ctrlp_use_caching = 0
@@ -249,6 +249,7 @@ let g:lightline = {
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
+            \   'workingdir': 'LightLineWorkingDir',
             \   'filename': 'LightLineFilename',
             \   'filetype': 'LightLineFiletype',
             \   'ctrlp': 'LightlineCtrlP',
@@ -296,13 +297,18 @@ function! LightLineReadonly()
     return &ft !~? 'help' && &readonly ? 'RO' : ''
 endfunction
 
+function! LightLineWorkingDir()
+    let fname = fnamemodify(getcwd(), ':t') . '/'
+    return fname
+endfunction
+
 function! LightLineFilename()
-    let fname = expand('%')
+    let fname = expand('%:t')
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-                \ fname == '__Tagbar__' ? g:lightline.fname :
+                \ expand('%:r') == '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
-                \ ('' != fname ? fname : '[No Name]') .
+                \ ('' != fname ? LightLineWorkingDir() . expand('%') : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
