@@ -13,6 +13,7 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'fidian/hexmode'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
 Plug 'majutsushi/tagbar'
@@ -435,3 +436,6 @@ nmap <leader>n :NERDTreeToggle<cr>
 
 " Toggle Tagbar
 nmap <leader>t :TagbarToggle<cr>
+
+" Toggle Hexmode
+nmap <leader>H :Hexmode<cr>
