@@ -245,15 +245,19 @@ let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'fugitive' ] ],
-            \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'filetype' ] ]
+            \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
+            \ },
+            \ 'inactive': {
+            \   'left': [ [ 'filename' ] ],
+            \   'right': [ [ 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
             \ },
             \ 'component_function': {
             \   'fugitive': 'LightLineFugitive',
             \   'workingdir': 'LightLineWorkingDir',
             \   'filename': 'LightLineFilename',
-            \   'filetype': 'LightLineFiletype',
             \   'ctrlp': 'LightlineCtrlP',
             \   'mode': 'LightLineMode',
+            \   'modificationtime': 'LightLineModificationTime',
             \ },
             \ 'component_expand': {
             \   'syntastic': 'SyntasticStatuslineFlag',
@@ -289,6 +293,15 @@ function! LightlineCtrlP()
     endif
 endfunction
 
+function! LightLineModificationTime()
+    let fname = expand('%:t')
+    "return &ft =~ 'help' ? '' : &
+    return fname =~ 'NERD_tree' ? '' :
+            \ fname =~ '__Tagbar__' ? '' :
+            \ fname =~ 'ControlP' ? '' :
+            \ fname != '' ? strftime('%m-%d-%y │ %H:%M',getftime(expand('%'))) : ''
+endfunction
+
 function! LightLineModified()
     return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
 endfunction
@@ -298,14 +311,14 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineWorkingDir()
-    let fname = fnamemodify(getcwd(), ':t') . '/'
-    return fname
+    let workingdir = fnamemodify(getcwd(), ':t') . '/'
+    return workingdir
 endfunction
 
 function! LightLineFilename()
     let fname = expand('%:t')
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-                \ expand('%:r') == '__Tagbar__' ? g:lightline.fname :
+                \ expand('%') =~ '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
                 \ ('' != fname ? LightLineWorkingDir() . expand('%') : '[No Name]') .
@@ -314,18 +327,14 @@ endfunction
 
 function! LightLineFugitive()
     try
-        if expand('%:t') !~? 'Tagbar\|NERD' && exists('*fugitive#head')
-            let mark = '├'  " edit here for cool mark
+        if expand('%:t') !~? '__Tagbar__\|NERD_tree' && exists('*fugitive#head')
+            let mark = '├'  " edit here for cool branch mark
             let branch = fugitive#head()
             return branch !=# '' ? mark.branch : ''
         endif
     catch
     endtry
     return ''
-endfunction
-
-function! LightLineFiletype()
-    return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
 
 function! LightLineMode()
