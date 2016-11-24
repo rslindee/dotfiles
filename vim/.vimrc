@@ -245,7 +245,7 @@ endif
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'fugitive' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'workingdir', 'fugitive' ] ],
             \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
             \ },
             \ 'inactive': {
@@ -300,7 +300,7 @@ function! LightLineModificationTime()
     return fname =~ 'NERD_tree' ? '' :
             \ fname =~ '__Tagbar__' ? '' :
             \ fname =~ 'ControlP' ? '' :
-            \ fname != '' ? strftime('%m-%d-%y │ %H:%M',getftime(expand('%'))) : ''
+            \ fname != '' ? strftime('%m.%d.%y│%H:%M',getftime(expand('%'))) : ''
 endfunction
 
 function! LightLineModified()
@@ -312,7 +312,7 @@ function! LightLineReadonly()
 endfunction
 
 function! LightLineWorkingDir()
-    let workingdir = fnamemodify(getcwd(), ':t') . '/'
+    let workingdir = fnamemodify(getcwd(), ':t')
     return workingdir
 endfunction
 
@@ -322,7 +322,7 @@ function! LightLineFilename()
                 \ expand('%') =~ '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
-                \ ('' != fname ? LightLineWorkingDir() . expand('%') : '[No Name]') .
+                \ ('' != fname ? fname : '[No Name]') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
