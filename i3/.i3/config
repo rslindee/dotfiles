@@ -9,7 +9,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -36,7 +36,8 @@ bindsym $mod+Return exec i3-sensible-terminal -e tmux
 bindsym $mod+i exec chromium
 
 # kill focused window
-bindsym $mod+Shift+q kill
+# bindsym $mod+Shift+q kill
+bindsym $mod+Shift+q fullscreen toggle
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -46,25 +47,25 @@ bindsym $mod+d exec dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+% split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym $mod+" split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+b fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -140,4 +141,5 @@ bar {
         status_command i3status
 }
 
+# Autostart
 exec --no-startup-id i3-sensible-terminal -e tmux

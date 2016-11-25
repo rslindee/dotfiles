@@ -1,5 +1,4 @@
 !Remaps Super_L (search key) to Ctrl
-!Remaps left Ctrl to mod4 (aka windows key)
 !Remaps Alt_R to AltGR
 !Maps AltGr+Number to F-key
 clear control
@@ -18,5 +17,5 @@ keycode 20 = minus underscore F11 underscore
 keycode 21 = equal plus F12 plus
 keycode 108 = Mode_switch
 keycode 133 = Super_L
-add control = Control_R Super_L
-add mod4 = Hyper_L Super_R Control_L
+add control = Control_L Control_R Super_L
+add mod4 = Hyper_L Super_R
