@@ -298,9 +298,9 @@ function! LightLineModificationTime()
     let fname = expand('%:t')
     "return &ft =~ 'help' ? '' : &
     return fname =~ 'NERD_tree' ? '' :
-            \ fname =~ '__Tagbar__' ? '' :
-            \ fname =~ 'ControlP' ? '' :
-            \ fname != '' ? strftime('%m.%d.%y│%H:%M',getftime(expand('%'))) : ''
+                \ fname =~ '__Tagbar__' ? '' :
+                \ fname =~ 'ControlP' ? '' :
+                \ fname != '' ? strftime('%m.%d.%y %H:%M',getftime(expand('%'))) : ''
 endfunction
 
 function! LightLineModified()
@@ -342,7 +342,7 @@ function! LightLineMode()
     let fname = expand('%:t')
     return fname == '__Tagbar__' ? 'Tagbar' :
                 \ fname == 'ControlP' ? 'CtrlP' :
-                \ fname =~ 'NERD_tree' ? 'NERDTree' :
+                \ fname =~ 'NERD_tree' ? 'NERD' :
                 \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
@@ -409,11 +409,18 @@ nmap <leader>f :GrepperAg <c-r><c-w><cr>
 " Map vim-grepper to simply start
 nmap <leader>h :Grepper<cr>
 
-" Open fugitive Git status
-nmap <leader>s :Gstatus<cr>
-
 " Open fugitive Git blame
 nmap <leader>b :Gblame<cr>
+
+" fugitive git status toggle function
+function! ToggleGStatus()
+    if buflisted(bufname('.git/index'))
+        bd .git/index
+    else
+        Gstatus
+    endif
+endfunction
+nmap <leader>s :call ToggleGStatus()<cr>
 
 " Load fugitive git history of file quickfix list and open in new tab
 nmap <leader>l :Glog<cr><cr>
