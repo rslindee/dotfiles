@@ -47,8 +47,3 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# Start tmux
-#if [ "$TMUX" = "" ]; then
-#    echo "Starting tmux..."
-#    tmux
-#fi
