@@ -4,7 +4,7 @@
 
 set $mod Mod4
 
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 8
 
 # Colors
 client.focused #007fbf #007fbf #ffffff
