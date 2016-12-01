@@ -29,6 +29,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
+Plug 'Valloric/ListToggle'
 
 call plug#end()
 
@@ -423,11 +424,11 @@ endfunction
 nmap <leader>s :call ToggleGStatus()<cr>
 
 " Load fugitive git history of file quickfix list and open in new tab
-nmap <leader>l :Glog<cr><cr>
+nmap <leader>gl :Glog<cr><cr>
 
 " Load fugitive git diff of current file (need to add revision desired for
 " diff, if any)
-nmap <leader>d :Gdiff<space>
+nmap <leader>d :Gvdiff<space>
 
 " Open fugitive and load all commits touching current file into quickfix
 nmap <leader>gh :Glog<space>--<space>%<cr><cr>
@@ -438,6 +439,9 @@ nmap <leader>gp :Gpush<cr>
 " Fugitive git commit
 nmap <leader>gc :Gcommit<space>-v<cr>
 
+" Fugitive git write (essentially a write and add)
+nmap <leader>gw :Gwrite<cr>
+
 " Toggle NERDTree
 nmap <leader>n :NERDTreeToggle<cr>
 
@@ -446,3 +450,9 @@ nmap <leader>t :TagbarToggle<cr>
 
 " Toggle Hexmode
 nmap <leader>H :Hexmode<cr>
+
+" Toggle location list
+let g:lt_location_list_toggle_map = '<leader>l'
+
+" Toggle quickfix list
+let g:lt_quickfix_list_toggle_map = '<leader>q'
