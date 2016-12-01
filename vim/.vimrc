@@ -19,7 +19,6 @@ Plug 'junegunn/gv.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'nanotech/jellybeans.vim'
-Plug 'scrooloose/syntastic'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -247,7 +246,7 @@ let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'workingdir', 'fugitive' ] ],
-            \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
+            \   'right': [ [ 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
             \ },
             \ 'inactive': {
             \   'left': [ [ 'filename' ] ],
@@ -260,12 +259,6 @@ let g:lightline = {
             \   'ctrlp': 'LightlineCtrlP',
             \   'mode': 'LightLineMode',
             \   'modificationtime': 'LightLineModificationTime',
-            \ },
-            \ 'component_expand': {
-            \   'syntastic': 'SyntasticStatuslineFlag',
-            \ },
-            \ 'component_type': {
-            \   'syntastic': 'error',
             \ },
             \ 'subseparator': { 'left': '│', 'right': '│' }
             \ }
@@ -296,12 +289,8 @@ function! LightlineCtrlP()
 endfunction
 
 function! LightLineModificationTime()
-    let fname = expand('%:t')
-    "return &ft =~ 'help' ? '' : &
-    return fname =~ 'NERD_tree' ? '' :
-                \ fname =~ '__Tagbar__' ? '' :
-                \ fname =~ 'ControlP' ? '' :
-                \ fname != '' ? strftime('%m.%d.%y %H:%M',getftime(expand('%'))) : ''
+    let ftime = getftime(expand('%'))
+    return ftime != -1 ? strftime('%m.%d.%y %H:%M', ftime) : ''
 endfunction
 
 function! LightLineModified()
@@ -373,18 +362,6 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
     return lightline#statusline(0)
 endfunction
 
-" Set Syntastic to passive for everything
-let g:syntastic_mode_map = {
-            \ "mode": "passive",
-            \ "active_filetypes": [],
-            \ "passive_filetypes": [] }
-
-" Recommended Syntastic config
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " Set max tag file size to ~100mb for autotag
 let g:autotagmaxTagsFileSize = 100000000
 
@@ -439,7 +416,7 @@ nmap <leader>gp :Gpush<cr>
 " Fugitive git commit
 nmap <leader>gc :Gcommit<space>-v<cr>
 
-" Fugitive git write (essentially a write and add)
+" Fugitive write (essentially a write and git add)
 nmap <leader>gw :Gwrite<cr>
 
 " Toggle NERDTree
