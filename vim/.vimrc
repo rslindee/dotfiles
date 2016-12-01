@@ -403,9 +403,8 @@ nmap <leader>s :call ToggleGStatus()<cr>
 " Load fugitive git history of file quickfix list and open in new tab
 nmap <leader>gl :Glog<cr><cr>
 
-" Load fugitive git diff of current file (need to add revision desired for
-" diff, if any)
-nmap <leader>d :Gvdiff<space>
+" Load fugitive git diff of current file
+nmap <leader>d :Gvdiff<cr>
 
 " Open fugitive and load all commits touching current file into quickfix
 nmap <leader>gh :Glog<space>--<space>%<cr><cr>
