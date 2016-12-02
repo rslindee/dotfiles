@@ -1,6 +1,6 @@
 set nocompatible
 
-" auto-install vim-plug if not installed
+" auto-clone and install vim-plug if not installed
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -213,13 +213,6 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 
-" TODO: Get these working
-" Use ag for vimgrep if available
-"if executable('ag')
-"  set grepprg=ag\ --nogroup\ --nocolor
-"endif
-
-"nmap <leader>T :vimgrep /TODO\|FIXME/j **/*.*<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -432,3 +425,6 @@ let g:lt_location_list_toggle_map = '<leader>l'
 
 " Toggle quickfix list
 let g:lt_quickfix_list_toggle_map = '<leader>q'
+
+" Search for all todo/fixme and put into quickfix list
+ map <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
