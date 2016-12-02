@@ -283,7 +283,7 @@ endfunction
 
 function! LightLineModificationTime()
     let ftime = getftime(expand('%'))
-    return ftime != -1 ? strftime('%m.%d.%y %H:%M', ftime) : ''
+    return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
 endfunction
 
 function! LightLineModified()
