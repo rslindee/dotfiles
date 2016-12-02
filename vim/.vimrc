@@ -367,6 +367,7 @@ let g:gitgutter_map_keys = 0
 " Make grepper prompt smaller
 let g:grepper = {
             \ 'simple_prompt': 1,
+            \ 'highlight': 1,
             \ }
 
 " Map useful gitgutter commands
