@@ -302,10 +302,11 @@ endfunction
 function! LightLineFilename()
     let fname = expand('%:t')
     return fname == 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-                \ expand('%') =~ '__Tagbar__' ? g:lightline.fname :
+                \ fname =~ '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NERD_tree' ? '' :
+                \ exists('w:quickfix_title') ? w:quickfix_title :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
-                \ ('' != fname ? fname : '[No Name]') .
+                \ ('' != fname ? fname : '') .
                 \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
 endfunction
 
