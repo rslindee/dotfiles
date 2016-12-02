@@ -10,7 +10,6 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
-Plug 'airblade/vim-gitgutter'
 Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
@@ -18,6 +17,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
@@ -359,22 +359,18 @@ endfunction
 " Set max tag file size to ~100mb for autotag
 let g:autotagmaxTagsFileSize = 100000000
 
-" gitgutter behaves slowly when checking changes on context switch
-let g:gitgutter_eager = 0
-" Clear all default gitgutter mappings (default conflicts with <leader>h, etc)
-let g:gitgutter_map_keys = 0
-
 " Make grepper prompt smaller
 let g:grepper = {
             \ 'simple_prompt': 1,
             \ 'highlight': 1,
             \ }
 
-" Map useful gitgutter commands
-nmap ]g <Plug>GitGutterNextHunk
-nmap [g <Plug>GitGutterPrevHunk
-nmap <leader>u <Plug>GitGutterUndoHunk
-nmap <leader>a <Plug>GitGutterStageHunk
+" Map signify to jump to hunks
+nmap ]g <plug>(signify-next-hunk)
+nmap [g <plug>(signify-prev-hunk)
+
+" Signify enabled VCS
+let g:signify_vcs_list = [ 'git' ]
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
