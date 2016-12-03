@@ -1,5 +1,5 @@
-[user]
-    name = Richard Slindee
+[include]
+    path = ~/.gitconfig_private
 [push]
 	default = current
 [core]
