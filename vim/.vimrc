@@ -372,6 +372,9 @@ nmap [g <plug>(signify-prev-hunk)
 " Signify enabled VCS
 let g:signify_vcs_list = [ 'git' ]
 
+" Turn off cursorline in tagbar (prevents lag)
+autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
 
@@ -425,4 +428,4 @@ let g:lt_location_list_toggle_map = '<leader>l'
 let g:lt_quickfix_list_toggle_map = '<leader>q'
 
 " Search for all todo/fixme and put into quickfix list
- map <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
+map <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
