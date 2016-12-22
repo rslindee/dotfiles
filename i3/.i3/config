@@ -59,8 +59,11 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# set workspace aliases
+set $ws1 "1:main"
+
 # switch to workspace
-bindsym $mod+1 workspace 1
+bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
@@ -72,7 +75,7 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
@@ -122,10 +125,13 @@ bar {
 }
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal -e tmux
+bindsym $mod+Return exec i3-sensible-terminal
 
 # start chromium
 bindsym $mod+i exec chromium
 
 # Autostart
-exec i3-sensible-terminal -e tmux
+# Start terminal with tmux
+exec --no-startup-id i3-msg 'workspace $ws1; exec i3-sensible-terminal -e tmux'
+exec --no-startup-id i3-msg 'workspace $ws1; exec chromium'
+
