@@ -26,6 +26,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
@@ -197,17 +198,11 @@ noremap <leader>0 :tablast<cr>
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
-" Toggle paste mode
-map <leader>P :setlocal paste!<cr>
-
 " Use system clipboard
 set clipboard=unnamed
 
 " Call make
 nnoremap <leader><cr> :make<cr>
-
-" Toggle spellcheck
-map <leader>S :setlocal spell!<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
