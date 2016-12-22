@@ -19,6 +19,8 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim'
+"TODO: Get this to replace ListToggle
+"Plug 'romainl/vim-qf'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
