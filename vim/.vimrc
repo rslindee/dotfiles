@@ -381,7 +381,7 @@ autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
 
 " Map vim-grepper to simply start
-nmap <leader>h :Grepper<cr>
+nmap <leader>a :Grepper<cr>
 
 " Open fugitive Git blame
 nmap <leader>b :Gblame<cr>
@@ -396,6 +396,7 @@ function! ToggleGStatus()
 endfunction
 nmap <leader>s :call ToggleGStatus()<cr>
 
+" TODO: Replace with GV instead?
 " Load fugitive git history of file quickfix list and open in new tab
 nmap <leader>gl :Glog<cr><cr>
 
