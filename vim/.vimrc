@@ -19,8 +19,7 @@ Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim'
-"TODO: Get this to replace ListToggle
-"Plug 'romainl/vim-qf'
+Plug 'romainl/vim-qf'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -31,7 +30,6 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
-Plug 'Valloric/ListToggle'
 
 call plug#end()
 
@@ -419,11 +417,11 @@ nmap <leader>t :TagbarToggle<cr>
 " Toggle Hexmode
 nmap <leader>H :Hexmode<cr>
 
-" Toggle location list
-let g:lt_location_list_toggle_map = '<leader>l'
+" Toggle location list vim-qf
+nmap <leader>l <Plug>QfLtoggle
 
-" Toggle quickfix list
-let g:lt_quickfix_list_toggle_map = '<leader>q'
+" Toggle quickfix list vim-qf
+nmap <leader>q <Plug>QfCtoggle
 
 " Search for all todo/fixme and put into quickfix list
 map <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
