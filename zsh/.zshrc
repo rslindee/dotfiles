@@ -21,11 +21,17 @@ zplug load
 # Allow substitution
 setopt PROMPT_SUBST
 
+ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
+ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{cyan}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+ZSH_THEME_PROMPT_VIMODE_PREFIX="%F{red}!%f"
+
 # vi-mode handling
-ZSH_THEME_PROMPT_VIMODE="%#"
+ZSH_THEME_PROMPT_VIMODE="»"
 function zle-keymap-select() {
     case $KEYMAP in
-        viins|main) ZSH_THEME_PROMPT_VIMODE="%#" ;;
+        viins|main) ZSH_THEME_PROMPT_VIMODE="»" ;;
         vicmd)  ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
     esac
     zle reset-prompt
@@ -52,25 +58,8 @@ function git_prompt_info() {
     print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
-function prompt_precmd() {
-    PROMPT='%F{white}%~ $(git_prompt_info)%f ${ZSH_THEME_PROMPT_VIMODE}'
-}
-
-function prompt_setup() {
-    ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
-    ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{cyan}"
-    ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
-    ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
-    ZSH_THEME_PROMPT_VIMODE_PREFIX="%F{red}!%f"
-
-    autoload -Uz add-zsh-hook
-
-    add-zsh-hook precmd prompt_precmd
-    prompt_opts=(cr subst percent)
-}
-
-prompt_setup "$@"
-
+PROMPT='%F{blue}%~%f ${ZSH_THEME_PROMPT_VIMODE} '
+RPROMPT='$(git_prompt_info)'
 
 # OS-specific settings
 case "$(uname -s)" in
