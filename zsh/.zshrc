@@ -15,11 +15,14 @@ zplug "zsh-users/zsh-history-substring-search"
 
 zplug load
 
-## Prompt theme
+
+# Prompt theme
+
+# Allow substitution
 setopt PROMPT_SUBST
 
+# vi-mode handling
 ZSH_THEME_PROMPT_VIMODE="%#"
-
 function zle-keymap-select() {
     case $KEYMAP in
         viins|main) ZSH_THEME_PROMPT_VIMODE="%#" ;;
@@ -27,9 +30,9 @@ function zle-keymap-select() {
     esac
     zle reset-prompt
 }
-
 zle -N zle-keymap-select
 
+# Check if repo is dirty
 function parse_git_dirty() {
     local STATUS=''
     local FLAGS
@@ -46,7 +49,7 @@ function git_prompt_info() {
     git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
         ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX} "
+    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
 function prompt_precmd() {
