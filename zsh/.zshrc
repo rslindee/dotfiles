@@ -18,49 +18,55 @@ zplug load
 ## Prompt theme
 setopt PROMPT_SUBST
 
-local ret_status="%(?:%{$fg[green]%}➜ :%{$fg[red]%}➜ %s)"
+ZSH_THEME_PROMPT_VIMODE="%#"
 
-# Outputs the name of the current branch
-# Usage example: git pull origin $(git_current_branch)
-# Using '--quiet' with 'symbolic-ref' will not cause a fatal error (128) if
-# it's not a symbolic ref, but in a Git repo.
-function git_current_branch() {
-  local ref
-  ref=$(command git symbolic-ref --quiet HEAD 2> /dev/null)
-  local ret=$?
-  if [[ $ret != 0 ]]; then
-    [[ $ret == 128 ]] && return  # no git repo.
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return
-  fi
-  echo ${ref#refs/heads/}
+function zle-keymap-select() {
+    case $KEYMAP in
+        viins|main) ZSH_THEME_PROMPT_VIMODE="%#" ;;
+        vicmd)  ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
+    esac
+    zle reset-prompt
 }
 
+zle -N zle-keymap-select
+
+function parse_git_dirty() {
+    local STATUS=''
+    local FLAGS
+    FLAGS=('--porcelain')
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+    if [[ -n ${STATUS} ]]; then
+        print ${ZSH_THEME_GIT_PROMPT_DIRTY}
+    fi
+}
+
+# shortens the pwd for use in prompt
 function git_prompt_info() {
-    ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(git_current_branch)$ZSH_THEME_GIT_PROMPT_SUFFIX$(parse_git_dirty)"
+    local ref
+    git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+        ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX} "
 }
 
-function get_pwd(){
-  git_root=$PWD
-  while [[ $git_root != / && ! -e $git_root/.git ]]; do
-    git_root=$git_root:h
-  done
-  if [[ $git_root = / ]]; then
-    unset git_root
-    prompt_short_dir=%~
-  else
-    parent=${git_root%\/*}
-    prompt_short_dir=${PWD#$parent/}
-  fi
-  echo $prompt_short_dir
+function prompt_precmd() {
+    PROMPT='%F{white}%~ $(git_prompt_info)%f ${ZSH_THEME_PROMPT_VIMODE}'
 }
 
-PROMPT='$ret_status %{$fg[white]%}$(get_pwd) $(git_prompt_info)%{$reset_color%}%{$reset_color%} '
+function prompt_setup() {
+    ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
+    ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{cyan}"
+    ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
+    ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+    ZSH_THEME_PROMPT_VIMODE_PREFIX="%F{red}!%f"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[cyan]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$fg[green]%}✓%{$reset_color%}"
+    autoload -Uz add-zsh-hook
+
+    add-zsh-hook precmd prompt_precmd
+    prompt_opts=(cr subst percent)
+}
+
+prompt_setup "$@"
 
 
 # OS-specific settings
@@ -219,13 +225,13 @@ export LS_COLORS
 
 # Clever binding of fg to Ctrl-z
 fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
+if [[ $#BUFFER -eq 0 ]]; then
     BUFFER="fg"
     zle accept-line
-  else
+else
     zle push-input
     zle clear-screen
-  fi
+fi
 }
 zle -N fancy-ctrl-z
 
