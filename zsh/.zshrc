@@ -238,6 +238,9 @@ zle -N fancy-ctrl-z
 
 # Key bindings
 
+# Set shift-tab to backwards completion
+bindkey "${terminfo[kcbt]}" reverse-menu-complete
+
 # Set <c-z> to fancy-ctrl-z function
 bindkey '^Z' fancy-ctrl-z
 
