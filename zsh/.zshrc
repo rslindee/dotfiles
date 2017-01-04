@@ -91,9 +91,6 @@ setopt LONG_LIST_JOBS
 # Typing EOF (Ctrl-d) will not exit interactive sessions
 setopt ignoreeof
 
-# zplug needs monitor (for jobs) to be set manually, bug?
-setopt monitor
-
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
 stty -ixon
 
