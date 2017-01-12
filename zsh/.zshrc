@@ -32,7 +32,7 @@ ZSH_THEME_PROMPT_VIMODE="»"
 function zle-keymap-select() {
     case $KEYMAP in
         viins|main) ZSH_THEME_PROMPT_VIMODE="»" ;;
-        vicmd)  ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
+        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
     esac
     zle reset-prompt
 }
@@ -55,11 +55,11 @@ function git_prompt_info() {
     git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
         ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
-PROMPT='%F{blue}%~%f ${ZSH_THEME_PROMPT_VIMODE} '
-RPROMPT='$(git_prompt_info)'
+PROMPT='%F{blue}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
+RPROMPT='[%W %*]'
 
 # OS-specific settings
 case "$(uname -s)" in
