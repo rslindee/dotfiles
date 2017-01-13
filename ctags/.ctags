@@ -3,3 +3,4 @@
 --exclude=.git
 --exclude=debug/*
 --exclude=release/*
+--languages=c

@@ -3,14 +3,14 @@ URxvt.externalBorder: 0
 URxvt.lineSpace: 0
 URxvt.scrollBar: false
 URxvt.borderLess: false
-!URxvt.borderColor: #2d2d2d
 
 URxvt.url-launcher: /usr/bin/chromium
 URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: false
 URxvt.perl-ext-common: default,clipboard
 
-URxvt*font: xft:DejaVu Sans Mono for Powerline-8
+!http://font.gohu.org
+URxvt*font: xft:gohufont:size=11:antialias=false
 
 URxvt*foreground: #CCCCCC
 URxvt*background: #161616
