@@ -10,7 +10,7 @@ URxvt.iso14755: false
 URxvt.perl-ext-common: default,clipboard
 
 !http://font.gohu.org
-URxvt*font: xft:gohufont:size=11:antialias=false
+URxvt*font: xft:gohufont:pixelsize=14:antialias=false
 
 URxvt*foreground: #CCCCCC
 URxvt*background: #161616
