@@ -208,6 +208,9 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 
+" Fix indentation in entire file
+nmap <leader>i gg=G``
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -424,4 +427,4 @@ nmap <leader>l <Plug>QfLtoggle
 nmap <leader>q <Plug>QfCtoggle
 
 " Search for all todo/fixme and put into quickfix list
-map <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
+nmap <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
