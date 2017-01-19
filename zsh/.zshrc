@@ -25,18 +25,6 @@ ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
 ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{cyan}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
-ZSH_THEME_PROMPT_VIMODE_PREFIX="%F{red}!%f"
-
-# vi-mode handling
-ZSH_THEME_PROMPT_VIMODE="»"
-function zle-keymap-select() {
-    case $KEYMAP in
-        viins|main) ZSH_THEME_PROMPT_VIMODE="»" ;;
-        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
-    esac
-    zle reset-prompt
-}
-zle -N zle-keymap-select
 
 # Check if repo is dirty
 function parse_git_dirty() {
@@ -58,10 +46,25 @@ function git_prompt_info() {
     print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
-PROMPT='%F{blue}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
-RPROMPT='[%W %*]'
+precmd () {
+    PROMPT='%F{blue}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
+    RPROMPT='[%W %*]'
+}
+
+# vi-mode handling
+function zle-line-init zle-keymap-select() {
+    case $KEYMAP in
+        viins|main) ZSH_THEME_PROMPT_VIMODE="»" ;;
+        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
+    esac
+    zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+
 
 # OS-specific settings
+
 case "$(uname -s)" in
     Linux)
         ;;
