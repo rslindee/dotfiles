@@ -30,6 +30,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
+Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
