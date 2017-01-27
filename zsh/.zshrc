@@ -104,6 +104,11 @@ setopt glob_dots
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+# Enable vi mode
+bindkey -v
+
+# Reduce delay when entering vi mode
+export KEYTIMEOUT=1
 
 # History settings
 
