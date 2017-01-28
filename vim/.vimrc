@@ -15,7 +15,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree'
 Plug 'will133/vim-dirdiff'
 Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
@@ -24,6 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 " Editing
@@ -117,6 +117,16 @@ set ttymouse=xterm2
 " Line highlighting
 set cursorline
 
+" netrw settings
+" Directory tree view
+let g:netrw_liststyle = 3
+" Hide netrw banner
+let g:netrw_banner = 0
+" Open files in last window
+let g:netrw_browse_split = 4
+" Make netrw split smaller
+let g:netrw_winsize = 25
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -205,6 +215,9 @@ noremap <leader>0 :tablast<cr>
 " Map <c-j>/<c-k> to jump between diffs/hunks
 map <c-j> ]c
 map <c-k> [c
+
+" Toggle netrw pane
+nmap <leader>n :Lexplore<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -327,7 +340,7 @@ function! LightLineFilename()
     let fname = expand('%')
     return fname =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
                 \ fname =~ '__Tagbar__' ? g:lightline.fname :
-                \ fname =~ 'NERD_tree' ? '' :
+                \ fname =~ 'NetrwTreeListing' ? '' :
                 \ exists('w:quickfix_title') ? w:quickfix_title :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
                 \ ('' != fname ? fname : '') .
@@ -336,7 +349,7 @@ endfunction
 
 function! LightLineFugitive()
     try
-        if expand('%:t') !~? '__Tagbar__\|NERD_tree' && exists('*fugitive#head')
+        if expand('%:t') !~? '__Tagbar__\|NetrwTreeListing' && exists('*fugitive#head')
             let mark = '├'  " edit here for cool branch mark
             let branch = fugitive#head()
             return branch !=# '' ? mark.branch : ''
@@ -350,7 +363,7 @@ function! LightLineMode()
     let fname = expand('%:t')
     return fname == '__Tagbar__' ? 'Tagbar' :
                 \ fname == 'ControlP' ? 'CtrlP' :
-                \ fname =~ 'NERD_tree' ? 'NERD' :
+                \ fname =~ 'NetrwTreeListing' ? 'Netrw' :
                 \ winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
 
@@ -461,9 +474,6 @@ nmap <leader>gc :Gcommit<space>-v<cr>
 
 " Fugitive write (essentially a write and git add)
 nmap <leader>gw :Gwrite<cr>
-
-" Toggle NERDTree
-nmap <leader>n :NERDTreeToggle<cr>
 
 " Toggle Tagbar
 nmap <leader>t :TagbarToggle<cr>
