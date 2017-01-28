@@ -201,7 +201,7 @@ noremap <leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 set clipboard=unnamed
 
 " Call make
-nnoremap <leader><cr> :make<cr>
+nnoremap <leader><cr> :silent make<cr>:redraw!<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
