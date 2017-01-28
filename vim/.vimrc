@@ -21,10 +21,9 @@ Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
 " Version Control
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-" TODO: Try later
-"Plug 'gregsexton/gitv'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 " Editing
@@ -45,6 +44,7 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
 
 call plug#end()
 
