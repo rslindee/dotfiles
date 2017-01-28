@@ -100,6 +100,9 @@ stty -ixon
 # glob for dotfiles
 setopt glob_dots
 
+# Extended globbing
+setopt extended_glob
+
 # Set editors to Vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
