@@ -10,14 +10,15 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
+Plug 'airblade/vim-gitgutter'
 Plug 'craigemery/vim-autotag'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
+Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
-Plug 'mhinz/vim-signify'
 Plug 'nanotech/jellybeans.vim'
 Plug 'romainl/vim-qf'
 Plug 'scrooloose/nerdtree'
@@ -364,12 +365,11 @@ let g:grepper = {
             \ 'highlight': 1,
             \ }
 
-" Map signify to jump to hunks
-nmap ]g <plug>(signify-next-hunk)
-nmap [g <plug>(signify-prev-hunk)
+" gitgutter behaves slowly when checking changes on context switch
+let g:gitgutter_eager = 0
 
-" Signify enabled VCS
-let g:signify_vcs_list = [ 'git' ]
+" vim-signature highlight marks based on gitgutter status
+let g:SignatureMarkTextHLDynamic = 1
 
 " Turn off cursorline in tagbar (prevents lag)
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
