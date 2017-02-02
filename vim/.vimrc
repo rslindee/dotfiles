@@ -16,6 +16,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
@@ -370,6 +371,12 @@ let g:gitgutter_eager = 0
 
 " vim-signature highlight marks based on gitgutter status
 let g:SignatureMarkTextHLDynamic = 1
+
+" Enable vim-sneak label mode for easymotion-like behavior
+let g:sneak#label = 1
+
+" Use vimrc case settings (e.g. smartcase) for vim-sneak
+g:sneak#use_ic_scs = 0
 
 " Turn off cursorline in tagbar (prevents lag)
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
