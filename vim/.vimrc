@@ -376,7 +376,7 @@ let g:SignatureMarkTextHLDynamic = 1
 let g:sneak#label = 1
 
 " Use vimrc case settings (e.g. smartcase) for vim-sneak
-g:sneak#use_ic_scs = 0
+let g:sneak#use_ic_scs = 1
 
 " Turn off cursorline in tagbar (prevents lag)
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
