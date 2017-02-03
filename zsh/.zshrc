@@ -79,9 +79,12 @@ esac
 
 # Give ls colors and sort directories at top
 alias ls='ls --group-directories-first --color=auto'
+
 # All files, human-readable sizes
 alias l='ls -lAh'
 
+# Change directory to root of current git repo
+alias git-root='cd "$(git rev-parse --show-toplevel)"'
 
 # General options
 
