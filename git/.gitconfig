@@ -25,7 +25,7 @@
 	br = branch
 	cp = cherry-pick
 	co = checkout
-	cl = clone
+	cl = clone --recursive
 	ci = commit
 	dc = diff --cached
     fc = clean -ffxd
