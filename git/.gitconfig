@@ -31,7 +31,7 @@
     fc = clean -ffxd
     fe = fetch -p
 	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset' --abbrev-commit --date=relative --all
-    pl = pull
+    pl = !git pull && git submodule update --init --recursive
     ps = push
     re = reset --hard HEAD
 	st = status
