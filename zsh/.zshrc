@@ -258,3 +258,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Set <c-f> and <c-b> to quickly jump forward and back words
 bindkey '^F' forward-word
 bindkey '^B' backward-word
+
+# Fix overly-vi behavior of deleting characters after vi-mode is called
+# this fixes the "can't backspace further than where I exited vi-mode at" issue
+bindkey "^W" backward-kill-word
+bindkey "^H" backward-delete-char
+bindkey "^U" kill-line
