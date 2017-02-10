@@ -255,3 +255,6 @@ bindkey '^K' history-substring-search-up
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# Set <c-f> and <c-b> to quickly jump forward and back words
+bindkey '^F' forward-word
+bindkey '^B' backward-word
