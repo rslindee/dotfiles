@@ -102,7 +102,7 @@ set completeopt-=preview
 set mouse=a
 set ttymouse=xterm2
 
-" Line/Column highlighting
+" Line highlighting
 set cursorline
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -157,12 +157,6 @@ autocmd BufWritePre * :%s/\s\+$//e
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Temporarily(?) disable arrow keys to form better habit of hjkl usage
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
