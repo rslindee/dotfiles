@@ -128,7 +128,7 @@ bar {
 bindsym $mod+Return exec urxvt256c
 
 # start chromium
-bindsym $mod+i exec chromium
+bindsym $mod+i exec chromium-browser
 
 # Autostart
 # Start terminal with tmux
