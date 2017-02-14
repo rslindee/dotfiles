@@ -84,7 +84,7 @@ alias ls='ls --group-directories-first --color=auto'
 alias l='ls -lAh'
 
 # Change directory to root of current git repo
-alias git-root='cd "$(git rev-parse --show-toplevel)"'
+alias gitroot='cd "$(git rev-parse --show-toplevel)"'
 
 # General options
 
@@ -264,3 +264,4 @@ bindkey '^B' backward-word
 bindkey "^W" backward-kill-word
 bindkey "^H" backward-delete-char
 bindkey "^U" kill-line
+bindkey "^?" backward-delete-char
