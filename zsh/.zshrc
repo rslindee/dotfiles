@@ -200,7 +200,7 @@ zstyle ':completion:*' squeeze-slashes true
 
 # enable caching
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path "~/.zcompcache"
+zstyle ':completion::complete:*' cache-path '~/.zcompcache'
 
 # ignore useless commands and functions
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|prompt_*)'
