@@ -1,11 +1,11 @@
 Transparency=off
 OpaqueWhenFocused=no
-Font=DejaVu Sans Mono for Powerline
+Font=Terminus
 Scrollbar=none
 BoldAsColour=yes
 BoldAsFont=no
 CursorType=block
-FontHeight=8
+FontHeight=11
 RightClickAction=paste
 FontSmoothing=none
 Term=xterm-256color
@@ -32,3 +32,4 @@ BoldCyan=66,113,123
 White=221,221,221
 BoldWhite=204,204,204
 
+FontWeight=400
