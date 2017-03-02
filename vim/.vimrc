@@ -18,6 +18,7 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'will133/vim-dirdiff'
 Plug 'romainl/vim-qf'
+Plug 'Yggdroot/indentLine'
 " Version Control
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
@@ -380,6 +381,12 @@ let g:sneak#use_ic_scs = 1
 
 " Turn off cursorline in tagbar (prevents lag)
 autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+
+" Turn off indentLine by default
+let g:indentLine_enabled = 0
+
+" Toggle indentLine plugin
+nmap <leader>I :IndentLinesToggle<cr>
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
