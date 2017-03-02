@@ -184,6 +184,10 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
+" Map <c-j>/<c-k> to jump between diffs/hunks
+map <c-j> ]c
+map <c-k> [c
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,11 +392,10 @@ function! ToggleGStatus()
 endfunction
 nmap <leader>s :call ToggleGStatus()<cr>
 
-" TODO: Replace with GV instead?
-" Load fugitive git history of file quickfix list and open in new tab
-nmap <leader>gl :Glog<cr><cr>
+" Load git history of file into location list
+nmap <leader>gl :GV?<cr>
 
-" Load fugitive git diff of current file
+" Load fugitive git diff of current file against HEAD
 nmap <leader>d :Gvdiff<cr>
 
 " Open fugitive and load all commits touching current file into quickfix
