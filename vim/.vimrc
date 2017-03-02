@@ -16,6 +16,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'fidian/hexmode'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
 Plug 'majutsushi/tagbar'
@@ -398,8 +400,8 @@ nmap <leader>gl :GV?<cr>
 " Load fugitive git diff of current file against HEAD
 nmap <leader>d :Gvdiff<cr>
 
-" Open fugitive and load all commits touching current file into quickfix
-nmap <leader>gh :Glog<space>--<space>%<cr><cr>
+" Open git browser with all commits touching current file in new tab
+nmap <leader>gh :GV!<cr>
 
 " Fugitive git push
 nmap <leader>gp :Gpush<cr>
@@ -427,3 +429,12 @@ nmap <leader>q <Plug>QfCtoggle
 
 " Search for all todo/fixme and put into quickfix list
 nmap <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Toggle rainbow parentheses
+nmap <leader>R :RainbowParentheses!!<cr>
