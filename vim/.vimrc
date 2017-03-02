@@ -10,31 +10,37 @@ endif
 " vim-plug plugin manager:
 call plug#begin()
 
-Plug 'airblade/vim-gitgutter'
-Plug 'craigemery/vim-autotag'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'fidian/hexmode'
+" Viewing
 Plug 'itchyny/lightline.vim'
-Plug 'junegunn/gv.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'kshenoy/vim-signature'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
-Plug 'mhinz/vim-grepper'
-Plug 'nanotech/jellybeans.vim'
-Plug 'romainl/vim-qf'
 Plug 'scrooloose/nerdtree'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
+Plug 'will133/vim-dirdiff'
+Plug 'romainl/vim-qf'
+" Version Control
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+" Themes
+Plug 'nanotech/jellybeans.vim'
+" Editing
+Plug 'junegunn/vim-easy-align'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-scriptease'
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+" Searching
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'justinmk/vim-sneak'
+Plug 'mhinz/vim-grepper'
+" Other
+Plug 'craigemery/vim-autotag'
+Plug 'fidian/hexmode'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
-Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
