@@ -53,6 +53,12 @@ nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
+" Swap ; and :
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
