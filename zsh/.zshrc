@@ -265,3 +265,6 @@ bindkey "^W" backward-kill-word
 bindkey "^H" backward-delete-char
 bindkey "^U" kill-line
 bindkey "^?" backward-delete-char
+
+# Set <c-d> to forward delete
+bindkey "^D" delete-char
