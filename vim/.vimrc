@@ -146,6 +146,12 @@ set noundofile
 " Reload vimrc manually
 nnoremap <leader>vr :source $MYVIMRC<CR>
 
+" Automatially reload file file if shell command is run inside vim
+set autoread
+
+" Reload current buffer only if there are no edits
+nnoremap <leader>e :edit<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
