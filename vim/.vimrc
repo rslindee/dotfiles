@@ -215,6 +215,9 @@ nmap <leader>C :silent !ctags<cr>:redraw!<cr>
 " Fix indentation in entire file
 nmap <leader>i gg=G``
 
+" Set <c-d> to forward-delete in insert mode
+inoremap <c-d> <del>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
