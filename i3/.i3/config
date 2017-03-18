@@ -4,7 +4,7 @@
 
 set $mod Mod4
 
-font pango:Gohu Gohufont 8
+font pango:xos4 Terminus 10
 
 
 # Colors

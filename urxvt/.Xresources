@@ -9,8 +9,7 @@ URxvt.keysym.Shift-Control-V: perl:clipboard:paste
 URxvt.iso14755: false
 URxvt.perl-ext-common: default,clipboard
 
-!http://font.gohu.org
-URxvt*font: xft:Gohu GohuFont:pixelsize=14:antialias=false
+URxvt*font: xft:xos4 Terminus:size=10
 
 URxvt*foreground: #CCCCCC
 URxvt*background: #161616
