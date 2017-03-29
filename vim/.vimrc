@@ -224,6 +224,10 @@ nmap <leader>i gg=G``
 " Set <c-d> to forward-delete in insert mode
 inoremap <c-d> <del>
 
+" Go up/down command history
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
