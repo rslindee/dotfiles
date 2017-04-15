@@ -23,6 +23,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
+" TODO: Try later
+"Plug 'gregsexton/gitv'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 " Editing
@@ -42,6 +44,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 
@@ -231,6 +234,12 @@ cnoremap <c-k> <up>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vimwiki config
+
+let g:vimwiki_ext2syntax = {'.md': 'markdown',
+            \'.mkd': 'markdown'}
+let g:vimwiki_list = [{'path': '~/wiki/', 'ext': '.md'}]
+
 " CtrlP Config
 " Ignore the buffer searching feature of CtrlP
 let g:ctrlp_types = ['fil', 'mru', 'buf']

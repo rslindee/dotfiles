@@ -1,5 +1,0 @@
-First off, the default linux synaptics driver doesn't work very well, as it doesnt have any of the tuning/advanced features for the chromebook-specific touchpads. The xf86-input-cmt driver is a port of the chromebook driver to generic linux. The issue now is the Aur-maintained repo of this is broken.
-
-One of the dependencies for this driver is libgestures. Evidently, some recent update to libs is causing this to fail to build (I assume it is libjsoncpp or math.h related). So, you have to get the libgestures-bin fro m the AUR and built the xf86-input-cmt driver from the git repo manually.
-
-Finally, to get the cmt driver to load (check .local/share/xorg/Xorg.0.log), I needed to create a symlink of libjsoncpp.so.1 to libjsoncpp.so.1.7.7 in /usr/lib, as evidently it was dependent on an earlier version.
