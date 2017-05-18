@@ -20,7 +20,6 @@ Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
 " Version Control
 Plug 'airblade/vim-gitgutter'
-Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
@@ -435,8 +434,11 @@ autocmd FileType tagbar setlocal nocursorline nocursorcolumn
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
 
-" Toggle indentLine plugin
+" Toggle indentLine plugin (aka show indent markings)
 nmap <leader>I :IndentLinesToggle<cr>
+
+" Make ALE only lint on save
+let g:ale_lint_on_text_changed = 'never'
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
@@ -465,6 +467,9 @@ nmap <leader>d :Gvdiff<cr>
 
 " Open git browser with all commits touching current file in new tab
 nmap <leader>gh :GV!<cr>
+
+" Open git browser
+nmap <leader>G :GV<cr>
 
 " Fugitive git push
 nmap <leader>gp :Gpush<cr>
