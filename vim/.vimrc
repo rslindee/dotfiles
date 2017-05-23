@@ -22,7 +22,6 @@ Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-vinegar'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 " Editing
@@ -37,11 +36,14 @@ Plug 'mhinz/vim-grepper'
 " Other
 Plug 'craigemery/vim-autotag'
 Plug 'fidian/hexmode'
+Plug 'justinmk/vim-gtfo'
+Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-vinegar'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 
@@ -412,6 +414,12 @@ let g:sneak#label = 1
 
 " Use vimrc case settings (e.g. smartcase) for vim-sneak
 let g:sneak#use_ic_scs = 1
+
+" Dirvish sidetab
+let g:loaded_netrwPlugin = 1
+command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
+nnoremap - :VleftDirvish<CR>
+nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
 
 " replace 'f' with 1-char Sneak
 nmap f <Plug>Sneak_f
