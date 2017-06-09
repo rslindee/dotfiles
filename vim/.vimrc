@@ -247,6 +247,9 @@ inoremap <c-d> <del>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
+" Map Y to yank until end of line
+nmap Y y$
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
