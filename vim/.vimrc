@@ -31,6 +31,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Searching
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'haya14busa/incsearch.vim'
+Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 " Other
@@ -511,3 +513,10 @@ nmap ga <Plug>(EasyAlign)
 
 " Toggle rainbow parentheses
 nmap <leader>R :RainbowParentheses!!<cr>
+
+" Improved incsearch mappings
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+map z/ <Plug>(incsearch-fuzzy-/)
+map zg/ <Plug>(incsearch-fuzzy-stay)
