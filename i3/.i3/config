@@ -118,13 +118,13 @@ bar {
 }
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false"
 
 # start chromium
 bindsym $mod+i exec chromium
 
 # Autostart
 # Start terminal with tmux
-exec --no-startup-id i3-msg 'workspace $ws1; exec i3-sensible-terminal -e tmux'
+exec --no-startup-id i3-msg 'workspace $ws1; exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false" -e tmux'
 exec --no-startup-id i3-msg 'workspace $ws1; exec chromium'
 

@@ -133,12 +133,14 @@ let g:netrw_winsize = 25
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set bs=2
-set t_Co=256
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+set termguicolors
 
 " Themes
 set background=dark
-colo jellybeans
+colorscheme jellybeans
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -178,9 +180,15 @@ set expandtab
 set shiftwidth=4
 set tabstop=4
 
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
+" Backspace over automatically inserted indentation
+set bs=2
+
+" Auto indent
+set ai
+" Smart indent
+set si
+" Wrap lines
+set wrap
 
 " auto-trim trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e

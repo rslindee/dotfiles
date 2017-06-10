@@ -22,7 +22,7 @@ zplug load
 setopt PROMPT_SUBST
 
 ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
-ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{cyan}"
+ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{magenta}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
 
@@ -47,7 +47,7 @@ function git_prompt_info() {
 }
 
 precmd () {
-    PROMPT='%F{blue}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
+    PROMPT='%F{cyan}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
     RPROMPT='[%W %*]'
 }
 
@@ -200,7 +200,6 @@ zstyle ':completion:*' squeeze-slashes true
 
 # enable caching
 zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path '~/.zcompcache'
 
 # ignore useless commands and functions
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec)|prompt_*)'
@@ -221,10 +220,6 @@ zstyle ':completion:*:history-words' menu yes
 # ignore multiple entries.
 zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
 zstyle ':completion:*:rm:*' file-patterns '*:all-files'
-
-# Override colors for directories to something more readable
-LS_COLORS="ow=37;100:di=37;100"
-export LS_COLORS
 
 # Clever binding of fg to Ctrl-z
 fancy-ctrl-z () {
