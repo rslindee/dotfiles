@@ -40,6 +40,7 @@ Plug 'craigemery/vim-autotag'
 Plug 'fidian/hexmode'
 Plug 'justinmk/vim-gtfo'
 Plug 'justinmk/vim-dirvish'
+" TODO: Plug 'kana/vim-fakeclip'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-scriptease'
@@ -235,6 +236,10 @@ nmap <leader>n :Lexplore<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use system clipboard
 set clipboard=unnamed
+
+" Bindings for xclip copy and paste
+vmap <leader>y :!xclip -f -sel clip<CR>
+map <leader>p :r!xclip -o -sel clip<CR>
 
 " Call make
 nnoremap <leader><cr> :silent make<cr>:redraw!<cr>
