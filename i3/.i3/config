@@ -126,5 +126,5 @@ bindsym $mod+i exec qutebrowser --backend webengine
 # Autostart
 # Start terminal with tmux
 exec --no-startup-id i3-msg 'workspace $ws1; exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false" -e tmux'
-exec --no-startup-id i3-msg 'workspace $ws1; exec qutebrowser --backend webengine'
+# exec --no-startup-id i3-msg 'workspace $ws1; exec qutebrowser --backend webengine'
 
