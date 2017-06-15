@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive'
 " Themes
 Plug 'nanotech/jellybeans.vim'
 " Editing
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -41,6 +42,7 @@ Plug 'fidian/hexmode'
 Plug 'justinmk/vim-gtfo'
 Plug 'justinmk/vim-dirvish'
 " TODO: Plug 'kana/vim-fakeclip'
+Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-scriptease'
@@ -228,9 +230,6 @@ noremap <leader>0 :tablast<cr>
 map <c-j> ]c
 map <c-k> [c
 
-" Toggle netrw pane
-nmap <leader>n :Lexplore<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,9 +239,6 @@ set clipboard=unnamed
 " Bindings for xclip copy and paste
 vmap <leader>y :!xclip -f -sel clip<CR>
 map <leader>p :r!xclip -o -sel clip<CR>
-
-" Call make
-nnoremap <leader><cr> :silent make<cr>:redraw!<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
