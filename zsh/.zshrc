@@ -12,6 +12,7 @@ zplug "zsh-users/zsh-completions"
 # zsh-syntax highlighting MUST go before substring-search
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "HeroCC/LS_COLORS"
 
 zplug load
 
