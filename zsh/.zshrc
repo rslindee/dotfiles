@@ -9,10 +9,10 @@ source ~/.zplug/init.zsh
 # Let zplug update itself
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-completions"
+zplug "HeroCC/LS_COLORS"
 # zsh-syntax highlighting MUST go before substring-search
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
-zplug "HeroCC/LS_COLORS"
 
 zplug load
 
@@ -86,6 +86,16 @@ alias l='ls -lAh'
 
 # Change directory to root of current git repo
 alias gitroot='cd "$(git rev-parse --show-toplevel)"'
+
+alias update='pacaur -Syu && zplug update'
+
+# Show directory sizes
+alias dirsize='du -h --max-depth=1'
+
+# Show public ip address
+alias myip='curl icanhazip.com'
+
+alias diskspace='du -S | sort -n -r |less'
 
 # General options
 
