@@ -97,6 +97,8 @@ alias myip='curl icanhazip.com'
 
 alias diskspace='du -S | sort -n -r |less'
 
+alias q='exit'
+
 # General options
 
 # Treat single word simple commands without redirection as candidates for resumption of an existing job.
