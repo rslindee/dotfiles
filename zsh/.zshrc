@@ -23,7 +23,7 @@ zplug load
 setopt PROMPT_SUBST
 
 ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
-ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{magenta}"
+ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{197}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
 
@@ -48,7 +48,7 @@ function git_prompt_info() {
 }
 
 precmd () {
-    PROMPT='%F{cyan}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
+    PROMPT='%F{30}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
     RPROMPT='[%W %*]'
 }
 
