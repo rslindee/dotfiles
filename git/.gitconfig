@@ -1,47 +1,48 @@
 [include]
     path = ~/.gitconfig_private
 [push]
-	default = current
+    default = current
 [core]
-	trustctime = false
-	editor = vim
-	filemode = false
-	autocrlf = input
+    trustctime = false
+    editor = vim
+    filemode = false
+    autocrlf = input
     excludesfile = ~/.gitignore_global
 [color]
-	ui = true
+    ui = true
 [credential]
-	helper = cache --timeout=3600
+    helper = cache --timeout=3600
 [merge]
-	tool = vimdiff
+    tool = vimdiff
     conflictstyle = diff3
 [mergetool]
-	keeptemporaries = false
-	keepbackup = false
-	prompt = false
-	trustexitcode = true
+    keeptemporaries = false
+    keepbackup = false
+    prompt = false
+    trustexitcode = true
 [alias]
-	last = log -1 --stat
-	br = branch
-	cp = cherry-pick
-	co = checkout
-	cl = clone --recursive
-	ci = commit
-	dc = diff --cached
+    last = log -1 --stat
+    br = branch
+    cp = cherry-pick
+    co = checkout
+    cl = clone --recursive
+    ci = commit
+    dc = diff --cached
+    dr = push origin --delete
     fc = clean -ffxd
     fe = fetch -p
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
     pl = !git pull && git submodule update --init --recursive
     ps = push
     re = reset --hard HEAD
-	st = status
+    st = status
     su = submodule update --init --recursive
-	un = reset HEAD --
+    un = reset HEAD --
 [mergetool "bc3"]
     cmd = \"c:/program files (x86)/beyond compare 4/BComp.com\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\" /lefttitle=\"$LOCAL\" /righttitle=\"$REMOTE\" /centertitle=\"$BASE\" /outputtitle=\"$MERGED\" /leftreadonly /rightreadonly /centerreadonly
 [diff]
-	tool = vimdiff
+    tool = vimdiff
 [difftool "bc3"]
     cmd = \"c:/program files (x86)/beyond compare 4/BComp.com\" \"$(cygpath -w \"$LOCAL\")\" \"$(cygpath -w \"$REMOTE\")\" /lefttitle=\"$(cygpath -w \"$LOCAL\")\" /righttitle=\"$(cygpath -w \"$REMOTE\")\" /leftreadonly /rightreadonly
 [init]
-	templatedir = ~/.git_template
+    templatedir = ~/.git_template
