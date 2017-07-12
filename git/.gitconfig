@@ -26,8 +26,9 @@
     cp = cherry-pick
     co = checkout
     cl = clone --recursive
-    ci = commit
+    cm = commit
     dc = diff --cached
+    df = diff
     dr = push origin --delete
     fc = clean -ffxd
     fe = fetch -p
