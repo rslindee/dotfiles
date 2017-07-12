@@ -23,9 +23,10 @@ zplug load
 setopt PROMPT_SUBST
 
 ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
-ZSH_THEME_GIT_PROMPT_REPO_PREFIX="%F{197}"
+ZSH_THEME_GIT_PROMPT_REPO="%F{197}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
+ZSH_THEME_DIRECTORY="%F{30}%~%f"
 
 # Check if repo is dirty
 function parse_git_dirty() {
@@ -44,19 +45,19 @@ function git_prompt_info() {
     git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
         ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    print "${ZSH_THEME_GIT_PROMPT_REPO_PREFIX}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+    print " ${ZSH_THEME_GIT_PROMPT_REPO}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
 precmd () {
-    PROMPT='%F{30}%~%f $(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE} '
+    PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
     RPROMPT='[%W %*]'
 }
 
 # vi-mode handling
 function zle-line-init zle-keymap-select() {
     case $KEYMAP in
-        viins|main) ZSH_THEME_PROMPT_VIMODE="»" ;;
-        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f" ;;
+        viins|main) ZSH_THEME_PROMPT_VIMODE=" » " ;;
+        vicmd) ZSH_THEME_PROMPT_VIMODE=" %F{red}!%f " ;;
     esac
     zle reset-prompt
 }
@@ -85,7 +86,7 @@ alias ls='ls --group-directories-first --color=auto'
 alias l='ls -lAh'
 
 # Change directory to root of current git repo
-alias gitroot='cd "$(git rev-parse --show-toplevel)"'
+alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
 alias update='pacaur -Syu && zplug update'
 
@@ -98,6 +99,10 @@ alias myip='curl icanhazip.com'
 alias diskspace='du -S | sort -n -r |less'
 
 alias q='exit'
+
+alias reb='sudo reboot'
+
+alias shu='sudo shutdown now'
 
 # General options
 
