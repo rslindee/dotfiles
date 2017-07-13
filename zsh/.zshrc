@@ -88,7 +88,7 @@ alias l='ls -lAh'
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
-alias update='pacaur -Syu && zplug update'
+alias upd='pacaur -Syu && zplug update'
 
 # Show directory sizes
 alias dirsize='du -h --max-depth=1'
