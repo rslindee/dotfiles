@@ -31,9 +31,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Searching
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
+Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 " Other
@@ -267,29 +267,12 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
             \'.mkd': 'markdown'}
 let g:vimwiki_list = [{'path': '~/wiki/', 'ext': '.md'}]
 
-" CtrlP Config
-" Ignore the buffer searching feature of CtrlP
-let g:ctrlp_types = ['fil', 'mru', 'buf']
-let g:ctrlp_extensions = ['tag', 'quickfix']
-" Remap ctrlp invocation away from <c-p>
-let g:ctrlp_map = '<c-a>'
-" Make Ctrlp to stay in the first working directory it was invoked within, unless
-" :cd command is issued to an outside dir
-let g:ctrlp_working_path_mode = 'a'
-" Use ag to index files
-if executable('ag')
-    " Use ag in CtrlP for listing files. fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
-
 " Lightline Config
 " Lightline arrangement
 let g:lightline = {
             \ 'colorscheme': 'jellybeans',
             \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'ctrlp', 'filename' ], [ 'workingdir', 'fugitive' ] ],
+            \   'left': [ [ 'mode', 'paste' ], [ 'filename' ], [ 'workingdir', 'fugitive' ] ],
             \   'right': [ [ 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
             \ },
             \ 'inactive': {
@@ -300,7 +283,6 @@ let g:lightline = {
             \   'fugitive': 'LightLineFugitive',
             \   'workingdir': 'LightLineWorkingDir',
             \   'filename': 'LightLineFilename',
-            \   'ctrlp': 'LightlineCtrlP',
             \   'mode': 'LightLineMode',
             \   'modificationtime': 'LightLineModificationTime',
             \ },
@@ -319,18 +301,6 @@ let g:lightline.mode_map = {
             \ "\<C-s>": 'S',
             \ 't': 'T',
             \ }
-
-function! LightlineCtrlP()
-    if expand('%:t') =~ 'ControlP'
-        if exists('g:lightline.ctrlp_status')
-            return g:lightline.ctrlp_status
-        else
-            return ''
-        endif
-    else
-        return ''
-    endif
-endfunction
 
 function! LightLineModificationTime()
     let ftime = getftime(expand('%'))
@@ -352,8 +322,7 @@ endfunction
 
 function! LightLineFilename()
     let fname = expand('%')
-    return fname =~ 'ControlP' && has_key(g:lightline, 'ctrlp_item') ? g:lightline.ctrlp_item :
-                \ fname =~ '__Tagbar__' ? g:lightline.fname :
+    return fname =~ '__Tagbar__' ? g:lightline.fname :
                 \ fname =~ 'NetrwTreeListing' ? '' :
                 \ exists('w:quickfix_title') ? w:quickfix_title :
                 \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
@@ -376,28 +345,8 @@ endfunction
 function! LightLineMode()
     let fname = expand('%:t')
     return fname == '__Tagbar__' ? 'Tagbar' :
-                \ fname == 'ControlP' ? 'CtrlP' :
                 \ fname =~ 'NetrwTreeListing' ? 'Netrw' :
                 \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-let g:ctrlp_status_func = {
-            \ 'main': 'CtrlPStatusMain',
-            \ 'prog': 'CtrlPStatusProgress',
-            \ }
-
-function! CtrlPStatusMain(focus, byfname, regex, prev, item, next, marked)
-    let g:lightline.ctrlp_regex = a:regex
-    let g:lightline.ctrlp_prev = a:prev
-    let g:lightline.ctrlp_item = a:item
-    let g:lightline.ctrlp_next = a:next
-    silent! unlet g:lightline.ctrlp_status
-    return lightline#statusline(0)
-endfunction
-
-function! CtrlPStatusProgress(status)
-    let g:lightline.ctrlp_status = a:status
-    return lightline#statusline(0)
 endfunction
 
 let g:tagbar_status_func = 'TagbarStatusFunc'
@@ -531,3 +480,6 @@ map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-fuzzy-/)
 map zg/ <Plug>(incsearch-fuzzy-stay)
+
+" FZF Mapings
+nmap <c-a> :Files<cr>
