@@ -13,9 +13,9 @@ zplug "HeroCC/LS_COLORS"
 # zsh-syntax highlighting MUST go before substring-search
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
+zplug "ytet5uy4/fzf-widgets"
 
 zplug load
-
 
 # Prompt theme
 
@@ -251,6 +251,7 @@ fi
 }
 zle -N fancy-ctrl-z
 
+FZF_WIDGET_TMUX=1
 
 # Key bindings
 
@@ -274,10 +275,21 @@ bindkey '^B' backward-word
 
 # Fix overly-vi behavior of deleting characters after vi-mode is called
 # this fixes the "can't backspace further than where I exited vi-mode at" issue
-bindkey "^W" backward-kill-word
-bindkey "^H" backward-delete-char
-bindkey "^U" kill-line
-bindkey "^?" backward-delete-char
+bindkey '^W' backward-kill-word
+bindkey '^H' backward-delete-char
+bindkey '^U' kill-line
+bindkey '^?' backward-delete-char
 
 # Set <c-d> to forward delete
-bindkey "^D" delete-char
+bindkey '^D' delete-char
+
+# fzf keybinds
+bindkey '^T' fzf-insert-directory
+bindkey '^A' fzf-insert-files
+bindkey '^P' fzf-kill-processes
+bindkey '^R' fzf-insert-history
+bindkey -r '^G'
+bindkey '^Ga' fzf-git-add-files
+bindkey '^Gb' fzf-git-checkout-branch
+bindkey '^Gd' fzf-git-delete-branches
+
