@@ -124,9 +124,10 @@ setopt glob_dots
 # Extended globbing
 setopt extended_glob
 
-# Set editors to Vim
+# Set editors, manpage viewer to Vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
+export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
 # Enable vi mode
 bindkey -v
