@@ -11,6 +11,7 @@ endif
 call plug#begin()
 
 " Viewing
+Plug 'chrisbra/vim-diff-enhanced'
 Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -481,5 +482,6 @@ map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-fuzzy-/)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 
-" FZF Mapings
-nmap <c-a> :Files<cr>
+" Set fzf path if not installed via package manager
+set rtp+=~/.fzf
+nmap <c-a> :FZF<cr>
