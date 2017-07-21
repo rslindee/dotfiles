@@ -254,8 +254,7 @@ zle -N fancy-ctrl-z
 
 # FZF setup
 export FZF_DEFAULT_OPTS="--multi"
-ZF_WIDGET_TMUX=1
-
+FZF_WIDGET_TMUX=1
 
 # Key bindings
 
