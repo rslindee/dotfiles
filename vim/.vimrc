@@ -148,8 +148,6 @@ colorscheme jellybeans
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Make arduino extensions show up as cpp highlighting
-autocmd BufNewFile,BufReadPost *.ino,*.pde set filetype=cpp
 " Make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
 
