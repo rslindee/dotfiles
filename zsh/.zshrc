@@ -280,7 +280,7 @@ bindkey '^B' backward-word
 # this fixes the "can't backspace further than where I exited vi-mode at" issue
 bindkey '^W' backward-kill-word
 bindkey '^H' backward-delete-char
-bindkey '^U' kill-line
+bindkey '^U' kill-whole-line
 bindkey '^?' backward-delete-char
 
 # Set <c-d> to forward delete
