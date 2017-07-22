@@ -1,21 +1,21 @@
 !Remaps Super_L (search key) to Ctrl
 !Remaps Alt_R to AltGR
-!Remaps Control_L to mod4 (windows key)
+!Remaps Control_L and Control_R to mod4 (windows key)
 !Maps AltGr+Number to F-key
 clear control
 clear mod4
-keycode 10 = 1 exclam F1 exclam
-keycode 11 = 2 at F2 at
-keycode 12 = 3 numbersign F3 numbersign
-keycode 13 = 4 dollar F4 dollar
-keycode 14 = 5 percent F5 percent
-keycode 15 = 6 asciicircum F6 asciicircum
-keycode 16 = 7 ampersand F7 ampersand
-keycode 17 = 8 asterisk F8 asterisk
-keycode 18 = 9 parenleft F9 parenleft
-keycode 19 = 0 parenright F10 parenright
-keycode 20 = minus underscore F11 underscore
-keycode 21 = equal plus F12 plus
+keycode 10 = 1 exclam F1 F1
+keycode 11 = 2 at F2 F2
+keycode 12 = 3 numbersign F3 F3
+keycode 13 = 4 dollar F4 F4
+keycode 14 = 5 percent F5 F5
+keycode 15 = 6 asciicircum F6 F6
+keycode 16 = 7 ampersand F7 F7
+keycode 17 = 8 asterisk F8 F8
+keycode 18 = 9 parenleft F9 F9
+keycode 19 = 0 parenright F10 F10
+keycode 20 = minus underscore F11 F11
+keycode 21 = equal plus F12 F12
 keycode 108 = Mode_switch
-add control = Control_R Super_L
-add mod4 = Control_L
+add control = Super_L
+add mod4 = Control_L Control_R
