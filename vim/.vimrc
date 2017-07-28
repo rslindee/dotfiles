@@ -124,16 +124,6 @@ set ttymouse=xterm2
 " Line highlighting
 set cursorline
 
-" netrw settings
-" Directory tree view
-let g:netrw_liststyle = 3
-" Hide netrw banner
-let g:netrw_banner = 0
-" Open files in last window
-let g:netrw_browse_split = 4
-" Make netrw split smaller
-let g:netrw_winsize = 25
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -402,11 +392,11 @@ nmap <leader>I :IndentLinesToggle<cr>
 
 " Make ALE only lint on save
 let g:ale_lint_on_text_changed = 'never'
-" Jump to ale errors TODO: Figure how to remap [e from unimpaired
-nmap <c-j> <Plug>(ale_prev_wrap)
-nmap <c-k> <Plug>(ale_next_wrap)
-nmap ]E <Plug>(ale_last)
-nmap [E <Plug>(ale_first)
+" Jump to ale errors
+nmap [w <Plug>(ale_prev_wrap)
+nmap ]w <Plug>(ale_next_wrap)
+nmap ]W <Plug>(ale_last)
+nmap [W <Plug>(ale_first)
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
