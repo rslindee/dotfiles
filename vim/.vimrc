@@ -17,6 +17,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
+Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
 " Version Control
@@ -364,9 +365,6 @@ let g:grepper = {
             \ 'highlight': 1,
             \ }
 
-" gitgutter behaves slowly when checking changes on context switch
-let g:gitgutter_eager = 0
-
 " vim-signature highlight marks based on gitgutter status
 let g:SignatureMarkTextHLDynamic = 1
 
@@ -483,3 +481,8 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 " Set fzf path if not installed via package manager
 set rtp+=~/.fzf
 nmap <c-a> :FZF<cr>
+
+" Diffchar maps
+nmap <leader>D <Plug>ToggleDiffCharAllLines
+nmap [d <Plug>JumpDiffCharPrevStart
+nmap ]d <Plug>JumpDiffCharNextStart
