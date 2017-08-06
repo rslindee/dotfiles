@@ -240,6 +240,10 @@ zstyle ':completion:*:history-words' menu yes
 zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
 zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 
+# zsh-highlighting color tweaks
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=magenta'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=magenta'
+
 # Clever binding of fg to Ctrl-z
 fancy-ctrl-z () {
 if [[ $#BUFFER -eq 0 ]]; then
