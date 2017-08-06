@@ -17,6 +17,7 @@ Plug 'kshenoy/vim-signature'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
+Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
 " Version Control
@@ -123,16 +124,6 @@ set ttymouse=xterm2
 " Line highlighting
 set cursorline
 
-" netrw settings
-" Directory tree view
-let g:netrw_liststyle = 3
-" Hide netrw banner
-let g:netrw_banner = 0
-" Open files in last window
-let g:netrw_browse_split = 4
-" Make netrw split smaller
-let g:netrw_winsize = 25
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -223,10 +214,6 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
-
-" Map <c-j>/<c-k> to jump between diffs/hunks
-map <c-j> ]c
-map <c-k> [c
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -364,9 +351,6 @@ let g:grepper = {
             \ 'highlight': 1,
             \ }
 
-" gitgutter behaves slowly when checking changes on context switch
-let g:gitgutter_eager = 0
-
 " vim-signature highlight marks based on gitgutter status
 let g:SignatureMarkTextHLDynamic = 1
 
@@ -408,6 +392,11 @@ nmap <leader>I :IndentLinesToggle<cr>
 
 " Make ALE only lint on save
 let g:ale_lint_on_text_changed = 'never'
+" Jump to ale errors
+nmap [w <Plug>(ale_prev_wrap)
+nmap ]w <Plug>(ale_next_wrap)
+nmap ]W <Plug>(ale_last)
+nmap [W <Plug>(ale_first)
 
 " Map vim-grepper search current word with Ag
 nmap <leader>f :GrepperAg <c-r><c-w><cr>
@@ -483,3 +472,8 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 " Set fzf path if not installed via package manager
 set rtp+=~/.fzf
 nmap <c-a> :FZF<cr>
+
+" Diffchar maps
+nmap <leader>D <Plug>ToggleDiffCharAllLines
+nmap [d <Plug>JumpDiffCharPrevStart
+nmap ]d <Plug>JumpDiffCharNextStart
