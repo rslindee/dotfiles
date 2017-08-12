@@ -477,3 +477,6 @@ nmap <c-a> :FZF<cr>
 nmap <leader>D <Plug>ToggleDiffCharAllLines
 nmap [d <Plug>JumpDiffCharPrevStart
 nmap ]d <Plug>JumpDiffCharNextStart
+
+" Use dispatch to do an async make
+nmap <leader><cr> :Make<cr>
