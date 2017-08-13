@@ -393,7 +393,7 @@ nmap <leader>I :IndentLinesToggle<cr>
 " Make ALE only lint on save
 let g:ale_lint_on_text_changed = 'never'
 " Jump to ale errors
-nmap [w <Plug>(ale_prev_wrap)
+nmap [w <Plug>(ale_previous_wrap)
 nmap ]w <Plug>(ale_next_wrap)
 nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
