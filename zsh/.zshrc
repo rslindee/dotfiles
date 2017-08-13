@@ -76,7 +76,6 @@ case "$(uname -s)" in
         ;;
 esac
 
-
 # Aliases
 
 # Give ls colors and sort directories at top
@@ -103,6 +102,10 @@ alias q='exit'
 alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
+
+# Attaches cgdb to running PID of executable.
+# Note: Needs to be in current directory of said executable to work.
+alias cgdb-attach='cgdb_attach(){cgdb attach $(pidof $1) -ex cont};cgdb_attach'
 
 # General options
 
