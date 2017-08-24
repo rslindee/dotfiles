@@ -54,7 +54,8 @@ precmd () {
 }
 
 # vi-mode handling
-function zle-line-init zle-keymap-select() {
+function zle-line-init zle-keymap-select()
+{
     case $KEYMAP in
         viins|main) ZSH_THEME_PROMPT_VIMODE=" » " ;;
         vicmd) ZSH_THEME_PROMPT_VIMODE=" %F{red}!%f " ;;
@@ -105,7 +106,16 @@ alias shu='sudo shutdown now'
 
 # Attaches cgdb to running PID of executable.
 # Note: Needs to be in current directory of said executable to work.
-alias cgdb-attach='cgdb_attach(){cgdb attach $(pidof $1) -ex cont};cgdb_attach'
+cgdb-attach()
+{
+    cgdb attach $(pidof $1) -ex cont;
+}
+
+mkcd()
+{
+    mkdir -p $1;
+    cd $1;
+}
 
 # General options
 
