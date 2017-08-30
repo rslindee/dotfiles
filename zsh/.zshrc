@@ -17,6 +17,12 @@ zplug "ytet5uy4/fzf-widgets"
 
 zplug load
 
+# Get OS version
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$NAME
+fi
+
 # Prompt theme
 
 # Allow substitution
@@ -88,7 +94,12 @@ alias l='ls -lAh'
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
-alias upd='pacaur -Syu && zplug update'
+# Update packages and zplug
+if [ $OS = "Fedora" ]; then
+    alias upd='sudo dnf update && zplug update'
+elif [ $OS = "Arch" ]; then
+    alias upd='pacaur -Syu && zplug update'
+fi
 
 # Show directory sizes
 alias dirsize='du -h --max-depth=1'
