@@ -26,7 +26,7 @@ fi
 # Prompt theme
 
 # Allow substitution
-setopt PROMPT_SUBST
+setopt prompt_subst
 
 ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
 ZSH_THEME_GIT_PROMPT_REPO="%F{197}"
@@ -130,23 +130,8 @@ mkcd()
 
 # General options
 
-# Treat single word simple commands without redirection as candidates for resumption of an existing job.
-setopt AUTO_RESUME
-
-# List jobs in the long format by default.
-setopt LONG_LIST_JOBS
-
-# Typing EOF (Ctrl-d) will not exit interactive sessions
-setopt ignoreeof
-
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
 stty -ixon
-
-# glob for dotfiles
-setopt glob_dots
-
-# Extended globbing
-setopt extended_glob
 
 # Set editors, manpage viewer to Vim
 export VISUAL=vim
@@ -159,8 +144,6 @@ bindkey -v
 # Reduce delay when entering vi mode
 export KEYTIMEOUT=1
 
-# History settings
-
 # History file location
 HISTFILE=~/.zsh_history
 
@@ -168,56 +151,60 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Treat single word simple commands without redirection as candidates for resumption of an existing job.
+setopt auto_resume
+# List jobs in the long format by default.
+setopt long_list_jobs
+# Typing EOF (Ctrl-d) will not exit interactive sessions
+setopt ignoreeof
+# glob for dotfiles
+setopt glob_dots
+# treat #, ~, and ^ as part of patterns for filename generation
+setopt extended_glob
+
 # Perform textual history expansion, csh-style, treating the character ‘!’ specially.
-setopt BANG_HIST
+setopt bang_hist
 
 # This options works like APPEND_HISTORY except that new history lines are added to the ${HISTFILE} incrementally
 # (as soon as they are entered), rather than waiting until the shell exits.
-setopt INC_APPEND_HISTORY
+setopt inc_append_history
 
 # Shares history across all sessions rather than waiting for a new shell invocation to read the history file.
-setopt SHARE_HISTORY
+setopt share_history
 
 # Do not enter command lines into the history list if they are duplicates of the previous event.
-setopt HIST_IGNORE_DUPS
+setopt hist_ignore_dups
 
 # If a new command line being added to the history list duplicates an older one,
 # the older command is removed from the list (even if it is not the previous event).
-setopt HIST_IGNORE_ALL_DUPS
+setopt hist_ignore_all_dups
 
 # Remove command lines from the history list when the first character on the line is a space,
 # or when one of the expanded aliases contains a leading space.
-setopt HIST_IGNORE_SPACE
+setopt hist_ignore_space
 
 # When writing out the history file, older commands that duplicate newer ones are omitted.
-setopt HIST_SAVE_NO_DUPS
+setopt hist_save_no_dups
 
 # Whenever the user enters a line with history expansion, don’t execute the line directly;
 # instead, perform history expansion and reload the line into the editing buffer.
-setopt HIST_VERIFY
-
+setopt hist_verify
 
 # Completion settings
-
 # If a completion is performed with the cursor within a word, and a full completion is inserted,
 # the cursor is moved to the end of the word
-setopt ALWAYS_TO_END
-
+setopt always_to_end
 # Automatically use menu completion after the second consecutive request for completion
-setopt AUTO_MENU
-
+setopt auto_menu
 # Automatically list choices on an ambiguous completion.
-setopt AUTO_LIST
-
+setopt auto_list
 # Perform a path search even on command names with slashes in them.
-setopt PATH_DIRS
-
+setopt path_dirs
 # Make globbing (filename generation) sensitive to case.
-unsetopt CASE_GLOB
-
+unsetopt case_glob
 # On an ambiguous completion, instead of listing possibilities or beeping, insert the first match immediately.
 # Then when completion is requested again, remove the first match and insert the second match, etc.
-unsetopt MENU_COMPLETE
+unsetopt menu_complete
 
 # group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select
