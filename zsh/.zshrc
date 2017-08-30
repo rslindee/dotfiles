@@ -291,6 +291,10 @@ bindkey -M vicmd 'j' history-substring-search-down
 bindkey '^F' forward-word
 bindkey '^B' backward-word
 
+# Jump to beginning/end of line
+bindkey '^E' end-of-line
+bindkey "^A" beginning-of-line
+
 # Fix overly-vi behavior of deleting characters after vi-mode is called
 # this fixes the "can't backspace further than where I exited vi-mode at" issue
 bindkey '^W' backward-kill-word
@@ -303,7 +307,7 @@ bindkey '^D' delete-char
 
 # fzf keybinds
 bindkey '^T' fzf-insert-directory
-bindkey '^A' fzf-insert-files
+bindkey '^I' fzf-insert-files
 bindkey '^P' fzf-kill-processes
 bindkey '^R' fzf-insert-history
 bindkey -r '^G'
