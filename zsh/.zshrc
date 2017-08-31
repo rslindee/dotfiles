@@ -271,8 +271,6 @@ zle -N fancy-ctrl-z
 export FZF_DEFAULT_OPTS="--multi"
 FZF_WIDGET_TMUX=1
 
-eval $(thefuck --alias fk)
-
 # Key bindings
 
 # Set shift-tab to backwards completion
