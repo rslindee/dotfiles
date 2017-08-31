@@ -472,7 +472,7 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 
 " Set fzf path if not installed via package manager
 set rtp+=~/.fzf
-nmap <c-i> :FZF<cr>
+nmap <leader>o :FZF<cr>
 
 " Diffchar maps
 nmap <leader>D <Plug>ToggleDiffCharAllLines
