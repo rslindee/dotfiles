@@ -307,7 +307,7 @@ bindkey '^D' delete-char
 
 # fzf keybinds
 bindkey '^T' fzf-insert-directory
-bindkey '^I' fzf-insert-files
+bindkey '^O' fzf-insert-files
 bindkey '^P' fzf-kill-processes
 bindkey '^R' fzf-insert-history
 bindkey -r '^G'
