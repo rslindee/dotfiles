@@ -97,7 +97,7 @@ alias gitr='cd "$(git rev-parse --show-toplevel)"'
 # Update packages and zplug
 if [ $OS = "Fedora" ]; then
     alias upd='sudo dnf update && zplug update'
-elif [ $OS = "Arch" ]; then
+elif [ $OS = "Arch Linux" ]; then
     alias upd='pacaur -Syu && zplug update'
 fi
 
