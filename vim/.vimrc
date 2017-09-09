@@ -481,3 +481,9 @@ nmap ]d <Plug>JumpDiffCharNextStart
 
 " Use dispatch to do an async make
 nmap <leader><cr> :Make<cr>
+
+" LaTeX (rubber) macro for compiling
+nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
+
+" View PDF macro; '%:r' is current file's root (base) name.
+nnoremap <leader>X :!apvlv %:r.pdf &<CR><CR>
