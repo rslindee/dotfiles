@@ -10,10 +10,10 @@ source ~/.zplug/init.zsh
 zplug "zplug/zplug"
 zplug "zsh-users/zsh-completions"
 zplug "HeroCC/LS_COLORS"
+zplug "ytet5uy4/fzf-widgets"
 # zsh-syntax highlighting MUST go before substring-search
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-history-substring-search"
-zplug "ytet5uy4/fzf-widgets"
 
 zplug load
 
