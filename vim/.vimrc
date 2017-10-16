@@ -470,8 +470,6 @@ map g/ <Plug>(incsearch-stay)
 map z/ <Plug>(incsearch-fuzzy-/)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 
-" Set fzf path if not installed via package manager
-set rtp+=~/.fzf
 nmap <leader>o :FZF<cr>
 
 " Diffchar maps
