@@ -33,6 +33,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 " Searching
+" TODO: This was supposedly introduced in patch 1238 - look into
+" removing/replacing this plugin with is.vim
 Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'junegunn/fzf.vim'
