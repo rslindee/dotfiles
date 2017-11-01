@@ -115,6 +115,9 @@ alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
 
+# Show weather for 90034
+alias wttr='curl wttr.in/90034'
+
 # Attaches cgdb to running PID of executable.
 # Note: Needs to be in current directory of said executable to work.
 cgdb-attach()
