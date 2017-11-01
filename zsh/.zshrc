@@ -1,21 +1,24 @@
-# zplug
-# Auto-install zplug if it doesn't exist
-if [[ ! -d ~/.zplug ]];then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+# zgen
+if [[ ! -d ~/.zgen ]];then
+    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
 fi
 
-source ~/.zplug/init.zsh
+source ~/.zgen/zgen.zsh
 
-# Let zplug update itself
-zplug "zplug/zplug"
-zplug "zsh-users/zsh-completions"
-zplug "HeroCC/LS_COLORS"
-zplug "ytet5uy4/fzf-widgets"
-# zsh-syntax highlighting MUST go before substring-search
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "zsh-users/zsh-history-substring-search"
+# if the init scipt doesn't exist
+if ! zgen saved; then
 
-zplug load
+    zgen load "zsh-users/zsh-completions"
+    zgen load "HeroCC/LS_COLORS"
+    zgen load "ytet5uy4/fzf-widgets"
+    # zsh-syntax highlighting MUST go before substring-search
+    zgen load "zsh-users/zsh-syntax-highlighting"
+    zgen load "zsh-users/zsh-history-substring-search"
+
+    # generate the init script from plugins above
+    zgen save
+fi
+
 
 # Get OS version
 if [ -f /etc/os-release ]; then
@@ -94,11 +97,11 @@ alias l='ls -lAh'
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
-# Update packages and zplug
+# Update packages and zgen
 if [ $OS = "Fedora" ]; then
-    alias upd='sudo dnf update && zplug update'
+    alias upd='sudo dnf update && zgen update && zgen selfupdate'
 elif [ $OS = "Arch Linux" ]; then
-    alias upd='pacaur -Syu && zplug update'
+    alias upd='pacaur -Syu && zgen update && zgen selfupdate'
 fi
 
 # Show directory sizes
