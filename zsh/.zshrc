@@ -189,9 +189,6 @@ setopt hist_ignore_space
 # When writing out the history file, older commands that duplicate newer ones are omitted.
 setopt hist_save_no_dups
 
-# Whenever the user enters a line with history expansion, don’t execute the line directly;
-# instead, perform history expansion and reload the line into the editing buffer.
-setopt hist_verify
 
 # Completion settings
 # If a completion is performed with the cursor within a word, and a full completion is inserted,
