@@ -1,6 +1,6 @@
 # zgen
 if [[ ! -d ~/.zgen ]];then
-    git clone https://github.com/tarjoilija/zgen.git "${HOME}/.zgen"
+    git clone https://github.com/rslindee/zgen.git "${HOME}/.zgen"
 fi
 
 source ~/.zgen/zgen.zsh
