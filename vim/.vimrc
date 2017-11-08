@@ -28,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'nanotech/jellybeans.vim'
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'Chiel92/vim-autoformat'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -233,9 +234,6 @@ nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 
 " Call ctags
 nmap <leader>C :silent !ctags<cr>:redraw!<cr>
-
-" Fix indentation in entire file
-nmap <leader>i gg=G``
 
 " Set <c-d> to forward-delete in insert mode
 inoremap <c-d> <del>
@@ -486,4 +484,8 @@ nmap <leader><cr> :Make<cr>
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 
 " View PDF macro; '%:r' is current file's root (base) name.
-nnoremap <leader>X :!apvlv %:r.pdf &<CR><CR>
+nnoremap <leader>X :!apvlv %:r.pdf &<cr><cr>
+
+" Run vim-autoformat on entire file (falls back to vim's default
+" tabbing/spacing if filetype is unsupported by any formatprogram)
+nmap <leader>i :Autoformat<cr>
