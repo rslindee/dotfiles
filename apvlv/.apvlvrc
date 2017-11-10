@@ -1,0 +1,2 @@
+" set if auto scroll doc from 1st page when goto the last page
+set autoscrolldoc=no
