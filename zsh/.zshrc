@@ -5,7 +5,7 @@ fi
 
 source ~/.zgen/zgen.zsh
 
-# if the init scipt doesn't exist
+# if the init script doesn't exist
 if ! zgen saved; then
 
     zgen load "zsh-users/zsh-completions"
@@ -99,9 +99,9 @@ alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
 # Update packages and zgen
 if [ $OS = "Fedora" ]; then
-    alias upd='sudo dnf update && zgen update && zgen selfupdate'
+    alias upd='sudo dnf update && zgen update'
 elif [ $OS = "Arch Linux" ]; then
-    alias upd='pacaur -Syu && zgen update && zgen selfupdate'
+    alias upd='pacaur -Syu && zgen update'
 fi
 
 # Show directory sizes
