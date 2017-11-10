@@ -53,6 +53,7 @@ Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
+Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 
@@ -144,6 +145,9 @@ set ffs=unix,dos,mac
 
 " Make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
+
+" Enable special doxygen highlighting
+let g:load_doxygen_syntax=1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -352,8 +356,10 @@ let g:grepper = {
             \ 'highlight': 1,
             \ }
 
+" TODO: Disabled this for now, as it was causing errors on startup when marks
+" were left. See https://github.com/kshenoy/vim-signature/issues/141
 " vim-signature highlight marks based on gitgutter status
-let g:SignatureMarkTextHLDynamic = 1
+"let g:SignatureMarkTextHLDynamic = 1
 
 " Enable vim-sneak label mode for easymotion-like behavior
 let g:sneak#label = 1
