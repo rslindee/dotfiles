@@ -146,6 +146,9 @@ set ffs=unix,dos,mac
 " Make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
 
+" Make clang config files show up as yaml
+autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml
+
 " Enable special doxygen highlighting
 let g:load_doxygen_syntax=1
 
