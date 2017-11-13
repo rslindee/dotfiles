@@ -1,0 +1,7 @@
+---
+Checks: 'clang-analyzer-*, bugprone-*, google-runtime-int, llvm-header-guard, misc-*, performance-*, readability-*'
+WarningsAsErrors: ''
+AnalyzeTemporaryDtors: false
+FormatStyle: file
+...
+
