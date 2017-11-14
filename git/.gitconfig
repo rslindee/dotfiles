@@ -39,11 +39,5 @@
     st = status
     su = submodule update --init --recursive
     un = reset HEAD --
-[mergetool "bc3"]
-    cmd = \"c:/program files (x86)/beyond compare 4/BComp.com\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\" /lefttitle=\"$LOCAL\" /righttitle=\"$REMOTE\" /centertitle=\"$BASE\" /outputtitle=\"$MERGED\" /leftreadonly /rightreadonly /centerreadonly
 [diff]
     tool = vimdiff
-[difftool "bc3"]
-    cmd = \"c:/program files (x86)/beyond compare 4/BComp.com\" \"$(cygpath -w \"$LOCAL\")\" \"$(cygpath -w \"$REMOTE\")\" /lefttitle=\"$(cygpath -w \"$LOCAL\")\" /righttitle=\"$(cygpath -w \"$REMOTE\")\" /leftreadonly /rightreadonly
-[init]
-    templatedir = ~/.git_template
