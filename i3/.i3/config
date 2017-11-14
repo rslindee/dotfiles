@@ -125,7 +125,11 @@ bar
 bindsym $mod+Return exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false"
 
 # start browser
-bindsym $mod+i exec qutebrowser --backend webengine
+# bindsym $mod+i exec qutebrowser --backend webengine
+bindsym $mod+i exec chromium-browser
+
+# lock i3
+bindsym $mod+x exec i3lock
 
 # Autostart
 # Start terminal with tmux
