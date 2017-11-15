@@ -4,7 +4,7 @@
 
 set $mod Mod4
 
-font pango:xos4 Terminus 10
+font pango:Terminus 10
 
 
 # Colors
@@ -122,7 +122,7 @@ bar
 }
 
 # start a terminal
-bindsym $mod+Return exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false"
+bindsym $mod+Return exec st -f "Terminus:size=10:antialias=false:autohint=false"
 
 # start browser
 # bindsym $mod+i exec qutebrowser --backend webengine
@@ -136,6 +136,6 @@ bindsym $mod+m exec amixer set Master toggle
 
 # Autostart
 # Start terminal with tmux
-exec --no-startup-id i3-msg 'workspace $ws1; exec st -f "xos4 Terminus:size=10:antialias=false:autohint=false" -e tmux'
+exec --no-startup-id i3-msg 'workspace $ws1; exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
 # exec --no-startup-id i3-msg 'workspace $ws1; exec qutebrowser --backend webengine'
 exec --no-startup-id xautolock -time 10 -locker 'i3lock --dpms'
