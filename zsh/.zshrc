@@ -121,6 +121,11 @@ alias shu='sudo shutdown now'
 # Show weather for 90034
 alias wttr='curl wttr.in/90034'
 
+# Use vim as manpager
+viman () {
+    vim -c "Man $1 $2" -c 'silent only'
+}
+
 # Attaches cgdb to running PID of executable.
 # Note: Needs to be in current directory of said executable to work.
 cgdb-attach()
