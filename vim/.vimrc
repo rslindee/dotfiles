@@ -54,6 +54,7 @@ Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vim-utils/vim-man'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 

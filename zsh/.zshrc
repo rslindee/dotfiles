@@ -139,10 +139,9 @@ mkcd()
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
 stty -ixon
 
-# Set editors, manpage viewer to Vim
+# Set editors to vim
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
 # Enable vi mode
 bindkey -v
