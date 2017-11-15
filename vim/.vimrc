@@ -233,7 +233,7 @@ noremap <leader>0 :tablast<cr>
 set clipboard=unnamed
 
 " Copy last yank to xclip
-map <silent><leader>y :call system("xclip -i -sel clip", getreg("\""))<cr>
+map <leader>y :call system("xclip -i -sel clip", getreg("\""))<cr>
 " Paste from xclip on next line
 map <leader>p :r!xclip -o -sel clip<cr>
 
