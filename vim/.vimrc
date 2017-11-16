@@ -128,6 +128,7 @@ set ttymouse=xterm2
 
 " Line highlighting
 set cursorline
+set cursorcolumn
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
