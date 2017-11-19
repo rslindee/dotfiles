@@ -489,7 +489,7 @@ nmap [d <Plug>JumpDiffCharPrevStart
 nmap ]d <Plug>JumpDiffCharNextStart
 
 " Use dispatch to do an async make
-nmap <leader><cr> :Make<cr>
+nmap <leader><leader> :Make<cr>
 
 " LaTeX (rubber) macro for compiling
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
