@@ -1,9 +1,7 @@
-!Remaps Super_L (search key) to Ctrl
-!Remaps Alt_R to AltGR
-!Remaps Control_L and Control_R to mod4 (windows key)
-!Maps AltGr+Number to F-key
-clear control
+clear mod1
 clear mod4
+clear control
+!Maps mode_switch+Number to F-key
 keycode 10 = 1 exclam F1 F1
 keycode 11 = 2 at F2 F2
 keycode 12 = 3 numbersign F3 F3
@@ -16,6 +14,44 @@ keycode 18 = 9 parenleft F9 F9
 keycode 19 = 0 parenright F10 F10
 keycode 20 = minus underscore F11 F11
 keycode 21 = equal plus F12 F12
+
+!My custom mode_switch keymap
+keycode 22 = BackSpace BackSpace Delete
+
+keycode 24 = q Q exclam
+keycode 25 = w W at
+keycode 26 = e E numbersign
+keycode 27 = r R dollar
+keycode 28 = t T percent
+keycode 29 = y Y asciicircum
+keycode 30 = u U ampersand
+keycode 31 = i I asterisk
+keycode 32 = o O parenleft
+keycode 33 = p P parenright
+keycode 34 = bracketleft braceleft underscore
+
+keycode 38 = a A bracketleft
+keycode 39 = s S bracketright
+keycode 40 = d D braceleft
+keycode 41 = f F braceright
+keycode 42 = g G bar
+keycode 43 = h H Left
+keycode 44 = j J Down
+keycode 45 = k K Up
+keycode 46 = l L Right
+keycode 47 = semicolon colon minus
+keycode 48 = apostrophe quotedbl plus
+
+keycode 54 = c C equal
+keycode 57 = n N asciitilde
+keycode 58 = m M grave
+
+!Remaps Alts to mode_switch
+keycode 64 = Mode_switch
 keycode 108 = Mode_switch
+!Remaps Super_L (search key) to Ctrl
 add control = Super_L
-add mod4 = Control_L Control_R
+!Remaps Ctrls to mod1 (Alt keys)
+keycode 37 = Alt_L Meta_L
+keycode 105 = Alt_R Meta_R
+add mod1 = Alt_L Alt_R Meta_L Meta_R
