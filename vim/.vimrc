@@ -500,3 +500,6 @@ nnoremap <leader>X :!apvlv %:r.pdf &<cr><cr>
 " Run vim-autoformat on entire file (falls back to vim's default
 " tabbing/spacing if filetype is unsupported by any formatprogram)
 nmap <leader>i :Autoformat<cr>
+
+" vim plug update
+nmap <leader>P :PlugUpdate<cr>
