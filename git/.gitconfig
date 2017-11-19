@@ -7,7 +7,6 @@
     editor = vim
     filemode = false
     autocrlf = input
-    excludesfile = ~/.gitignore_global
 [color]
     ui = true
 [credential]
