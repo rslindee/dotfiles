@@ -404,6 +404,8 @@ nmap <leader>I :IndentLinesToggle<cr>
 
 " Make ALE only lint on save
 let g:ale_lint_on_text_changed = 'never'
+" Disable ALE running automatically
+let g:ale_lint_on_text_changed = 0
 " Jump to ale errors
 nmap [w <Plug>(ale_previous_wrap)
 nmap ]w <Plug>(ale_next_wrap)
