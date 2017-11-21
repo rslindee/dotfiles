@@ -14,6 +14,7 @@ call plug#begin()
 Plug 'chrisbra/vim-diff-enhanced'
 Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
+Plug 'jceb/vim-hier'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
@@ -377,6 +378,12 @@ let g:loaded_netrwPlugin = 1
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
 nnoremap - :VleftDirvish<CR>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
+
+" Disable vim-hier by default
+let g:hier_enabled = 0
+
+" TODO: Fork vim-hier and add toggle
+"nmap <leader>Q :HierToggle
 
 " replace 'f' with 1-char Sneak
 nmap f <Plug>Sneak_f
