@@ -493,6 +493,8 @@ map z/ <Plug>(incsearch-fuzzy-/)
 map zg/ <Plug>(incsearch-fuzzy-stay)
 
 nmap <leader>o :FZF<cr>
+" Use Ag for FZF (which respects .gitignore)
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Diffchar maps
 nmap <leader>D <Plug>ToggleDiffCharAllLines
