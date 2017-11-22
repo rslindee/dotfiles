@@ -502,7 +502,7 @@ nmap [d <Plug>JumpDiffCharPrevStart
 nmap ]d <Plug>JumpDiffCharNextStart
 
 " Use dispatch to do an async make with number of cores jobs
-nmap <leader><leader> :Make -j$(nproc)<cr>
+nmap <leader><leader> :Make all tags -j$(nproc)<cr>
 
 " Use dispatch to do an async make clean
 nmap <leader><cr> :Make clean<cr>
