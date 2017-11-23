@@ -2,15 +2,19 @@
 # Documentation:
 #   qute://help/configuring.html
 #   qute://help/settings.html
-import os
 
 # Uncomment this to still load settings configured via autoconfig.yml
 # config.load_autoconfig()
 config.bind('<Ctrl-m>', 'open -t http://www.gmail.com')
+config.bind('J', 'tab-prev')
+config.bind('K', 'tab-next')
 config.bind('u', 'scroll-page 0 -0.5')
 config.bind('d', 'scroll-page 0 0.5')
 config.bind('x', 'tab-close')
 config.bind('X', 'undo')
+config.bind('m', 'hint links spawn mpv {hint-url}')
+config.bind('t', 'set-cmd-text -s :open -t')
+config.bind('M', 'spawn mpv {url}')
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}' }
 c.url.default_page = ('about:blank')
 c.editor.command = ['st', '-f', 'Terminus:size=10:antialias=false:autohint=false', '-e', 'vim', '{}']
