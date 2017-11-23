@@ -71,8 +71,6 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
@@ -118,6 +116,8 @@ bindsym $mod+Return exec st -f "Terminus:size=10:antialias=false:autohint=false"
 
 # start browser
 bindsym $mod+i exec chromium-browser
+bindsym $mod+p exec chromium
+bindsym $mod+b exec qutebrowser
 
 # lock i3
 bindsym $mod+x exec i3lock --dpms
