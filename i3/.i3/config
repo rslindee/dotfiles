@@ -2,7 +2,7 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
-set $mod Mod1+Ctrl
+set $mod Mod4
 
 font pango:Terminus 10
 
