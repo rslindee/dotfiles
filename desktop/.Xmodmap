@@ -1,5 +1,14 @@
-clear mod1
+clear lock
+clear mod2
+clear mod3
 clear mod4
+clear mod5
+
+!Left Super key
+keycode 133 = Mode_switch
+
+add mod4 = Super_R
+add mod5 = Mode_switch
 
 !My custom mode_switch keymap
 keycode 22 = BackSpace BackSpace Delete
@@ -31,8 +40,3 @@ keycode 48 = apostrophe quotedbl plus
 keycode 54 = c C equal
 keycode 57 = n N asciitilde
 keycode 58 = m M grave
-
-!Remaps Super_L and Super_R (mod4/windows key) to mode_switch
-keycode 133 = Mode_switch
-keycode 134 = Mode_switch
-add mod1 = Alt_L Alt_R Meta_L Meta_R
