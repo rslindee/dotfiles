@@ -1,6 +1,26 @@
+clear lock
 clear mod1
+clear mod2
+clear mod3
 clear mod4
+clear mod5
 clear control
+
+!Search key
+keycode 133 = Control_L
+!Left Ctrl
+keycode 37 = Alt_L
+!Right Ctrl
+keycode 105 = Alt_R
+!Left Alt
+keycode 64 = Mode_switch
+!Right Alt
+keycode 108 = Mode_switch
+
+add control = Control_L
+add mod1 = Alt_L Alt_R Meta_L
+add mod5 = Mode_switch
+
 !Maps mode_switch+Number to F-key
 keycode 10 = 1 exclam F1 F1
 keycode 11 = 2 at F2 F2
@@ -45,13 +65,3 @@ keycode 48 = apostrophe quotedbl plus
 keycode 54 = c C equal
 keycode 57 = n N asciitilde
 keycode 58 = m M grave
-
-!Remaps Alts to mode_switch
-keycode 64 = Mode_switch
-keycode 108 = Mode_switch
-!Remaps Super_L (search key) to Ctrl
-add control = Super_L
-!Remaps Ctrls to mod1 (Alt keys)
-keycode 37 = Alt_L Meta_L
-keycode 105 = Alt_R Meta_R
-add mod1 = Alt_L Alt_R Meta_L Meta_R
