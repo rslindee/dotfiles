@@ -15,10 +15,21 @@ config.bind('X', 'undo')
 config.bind('m', 'hint links spawn mpv {hint-url}')
 config.bind('t', 'set-cmd-text -s :open -t')
 config.bind('M', 'spawn mpv {url}')
-c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}' }
+config.bind('cr', 'config-source')
+
+c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
+        'yt': 'http://www.youtube.com/results?search_query={}',
+        'gm': 'https://www.google.com/maps?q={}',
+        'a': 'http://www.amazon.com/s/?field-keywords={}',
+        'aw': 'https://wiki.archlinux.org/?search={}',
+        'w': 'http://en.wikipedia.org/w/index.php?title=Special:Search&search={}'}
 c.url.default_page = ('about:blank')
+
 c.editor.command = ['st', '-f', 'Terminus:size=10:antialias=false:autohint=false', '-e', 'vim', '{}']
 c.auto_save.session = True
+
+c.downloads.location.directory = ('~/Downloads')
+c.downloads.location.prompt = False
 
 c.hints.next_regexes.append(r'\B›\B')
 c.hints.prev_regexes.append(r'\B‹\B')
