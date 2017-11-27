@@ -115,8 +115,6 @@ bar
 bindsym $mod+Return exec st -f "Terminus:size=10:antialias=false:autohint=false"
 
 # start browser
-bindsym $mod+i exec chromium-browser
-bindsym $mod+p exec chromium
 bindsym $mod+b exec qutebrowser
 
 # lock i3
