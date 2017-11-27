@@ -74,18 +74,6 @@ function zle-line-init zle-keymap-select()
 zle -N zle-line-init
 zle -N zle-keymap-select
 
-
-# OS-specific settings
-
-case "$(uname -s)" in
-    Linux)
-        ;;
-    CYGWIN*|MINGW32*|MSYS*)
-        # Throw out most PATH settings (useful for for a "clean" Cygwin)
-        PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/cygdrive/c/Python27:/cygdrive/c/Python27/Scripts
-        ;;
-esac
-
 # Aliases
 
 # Give ls colors and sort directories at top
@@ -97,12 +85,25 @@ alias l='ls -lAh'
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
-# Update packages and zgen
+# Update packages, zgen plugins, personal wiki, and dotfiles
+upd()
+{
 if [ $OS = "Fedora" ]; then
-    alias upd='sudo dnf update && zgen update'
+    echo "Updating Fedora packages..."
+    sudo dnf update
 elif [ $OS = "Arch Linux" ]; then
-    alias upd='pacaur -Syu && zgen update'
+    echo "Updating Arch and AUR packages..."
+    pacaur -Syu
 fi
+    echo "Updating zgen plugins..."
+    zgen update
+    echo "Updating dotfiles..."
+    git -C ~/dotfiles pull
+    echo "Updating private dotfiles..."
+    git -C ~/dotfiles-private pull
+    echo "Updating personal wiki..."
+    git -C ~/wiki pull
+}
 
 # Show directory sizes
 alias dirsize='du -h --max-depth=1'
