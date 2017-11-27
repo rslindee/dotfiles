@@ -14,12 +14,17 @@ config.bind('x', 'tab-close')
 config.bind('X', 'undo')
 config.bind('m', 'hint links spawn mpv {hint-url}')
 config.bind('t', 'set-cmd-text -s :open -t')
+config.bind('O', 'set-cmd-text :open {url:pretty}')
 config.bind('M', 'spawn mpv {url}')
 config.bind('cr', 'config-source')
+config.bind('<Ctrl-k>', 'command-history-prev', mode='command')
+config.bind('<Ctrl-j>', 'command-history-next', mode='command')
+config.bind('cr', 'config-source')
+config.bind('gi', 'hint inputs')
 
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
-        'yt': 'http://www.youtube.com/results?search_query={}',
-        'gm': 'https://www.google.com/maps?q={}',
+        'y': 'http://www.youtube.com/results?search_query={}',
+        'm': 'https://www.google.com/maps?q={}',
         'a': 'http://www.amazon.com/s/?field-keywords={}',
         'aw': 'https://wiki.archlinux.org/?search={}',
         'w': 'http://en.wikipedia.org/w/index.php?title=Special:Search&search={}'}
@@ -33,4 +38,7 @@ c.downloads.location.prompt = False
 
 c.hints.next_regexes.append(r'\B›\B')
 c.hints.prev_regexes.append(r'\B‹\B')
-
+c.hints.chars = ('asdfghjklqwertyuiopzxcvbnm')
+c.content.geolocation = True
+c.tabs.background = True
+c.messages.timeout = 5000
