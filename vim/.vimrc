@@ -255,6 +255,10 @@ cnoremap <c-k> <up>
 " Map Y to yank until end of line
 nmap Y y$
 
+" Yank/delete entire C-style functions
+map <leader><c-d> Vf{%d
+map <leader><c-y> Vf{%y
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
