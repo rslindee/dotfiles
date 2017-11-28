@@ -42,10 +42,10 @@ bindsym $mod+v split toggle
 bindsym $mod+f fullscreen toggle
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym $mod+Shift+t floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym $mod+t focus mode_toggle
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -122,6 +122,9 @@ bindsym $mod+x exec i3lock --dpms
 
 # toggle alsa mute
 bindsym $mod+m exec amixer set Master toggle
+
+# toggle pause cmus
+bindsym $mod+c exec cmus-remote -u
 
 # Autostart
 exec --no-startup-id xcape -e 'Control_L=Escape'
