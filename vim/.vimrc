@@ -20,6 +20,7 @@ Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
 Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
+" TODO: Try sjl/splice.vim
 " Version Control
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
