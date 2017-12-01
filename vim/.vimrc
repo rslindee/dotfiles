@@ -18,7 +18,6 @@ Plug 'jceb/vim-hier'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
-Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'Yggdroot/indentLine'
 " Version Control
@@ -30,6 +29,7 @@ Plug 'nanotech/jellybeans.vim'
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
+Plug 'joereynolds/vim-minisnip'
 Plug 'junegunn/vim-easy-align'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -499,11 +499,6 @@ map zg/ <Plug>(incsearch-fuzzy-stay)
 nmap <leader>o :FZF<cr>
 " Use Ag for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
-
-" Diffchar maps
-nmap <leader>D <Plug>ToggleDiffCharAllLines
-nmap [d <Plug>JumpDiffCharPrevStart
-nmap ]d <Plug>JumpDiffCharNextStart
 
 " Use dispatch to do an async make with number of cores jobs
 nmap <leader><leader> :Make all tags -j$(nproc)<cr>
