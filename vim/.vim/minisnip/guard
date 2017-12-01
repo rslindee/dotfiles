@@ -1,6 +1,4 @@
-#ifndef {{+INCLUDE_GUARD+}}
-#define {{+~\~1+}}
+#ifndef {{+~toupper(expand('%:t:r'))+}}_H
+#define {{+~\~1+}}_H
 
-{{++}}
-
-#endif
+#endif // {{+~\~2+}}_H
