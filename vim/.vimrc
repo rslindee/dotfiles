@@ -32,17 +32,17 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'joereynolds/vim-minisnip'
 Plug 'junegunn/vim-easy-align'
+Plug 'lfilho/cosco.vim'
+Plug 'machakann/vim-sandwich'
+Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-surround'
 " Searching
-" TODO: This was supposedly introduced in patch 1238 - look into
-" removing/replacing this plugin with is.vim
-Plug 'haya14busa/incsearch.vim'
-Plug 'haya14busa/incsearch-fuzzy.vim'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
+Plug 'osyo-manga/vim-anzu'
+Plug 'osyo-manga/vim-over'
 " Other
 Plug 'craigemery/vim-autotag'
 Plug 'fidian/hexmode'
@@ -236,9 +236,9 @@ noremap <leader>0 :tablast<cr>
 set clipboard=unnamed
 
 " Copy last yank to xclip
-map <leader>y :call system("xclip -i -sel clip", getreg("\""))<cr>
+map <leader>yy :call system("xclip -i -sel clip", getreg("\""))<cr>
 " Paste from xclip on next line
-map <leader>p :r!xclip -o -sel clip<cr>
+map <leader>yp :r!xclip -o -sel clip<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
@@ -257,8 +257,8 @@ cnoremap <c-k> <up>
 nmap Y y$
 
 " Yank/delete entire C-style functions
-map <leader><c-d> Vf{%d
-map <leader><c-y> Vf{%y
+map <leader>yf Vf{%d
+map <leader>df Vf{%y
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
@@ -390,23 +390,15 @@ let g:hier_enabled = 0
 " TODO: Fork vim-hier and add toggle
 "nmap <leader>Q :HierToggle
 
-" replace 'f' with 1-char Sneak
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-" replace 't' with 1-char Sneak
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
-
-" Turn off cursorline in tagbar (prevents lag)
-autocmd FileType tagbar setlocal nocursorline nocursorcolumn
+" 2-character Sneak
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+" visual-mode
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+" operator-pending-mode
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
 
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
@@ -443,19 +435,19 @@ function! ToggleGStatus()
         Gstatus
     endif
 endfunction
-nmap <leader>s :call ToggleGStatus()<cr>
+nmap <leader>gs :call ToggleGStatus()<cr>
 
 " Load git history of file into location list
 nmap <leader>gl :GV?<cr>
 
 " Load fugitive git diff of current file against HEAD
-nmap <leader>d :Gvdiff<cr>
+nmap <leader>gd :Gvdiff<cr>
 
 " Open git browser with all commits touching current file in new tab
 nmap <leader>gh :GV!<cr>
 
 " Open git browser
-nmap <leader>G :GV<cr>
+nmap <leader>gb :GV<cr>
 
 " Fugitive git push
 nmap <leader>gp :Gpush<cr>
@@ -490,25 +482,24 @@ nmap ga <Plug>(EasyAlign)
 " Toggle rainbow parentheses
 nmap <leader>R :RainbowParentheses!!<cr>
 
-" Improved incsearch mappings
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-map z/ <Plug>(incsearch-fuzzy-/)
-map zg/ <Plug>(incsearch-fuzzy-stay)
+" Use anzu to echo search information
+nmap n <Plug>(anzu-n-with-echo)
+nmap N <Plug>(anzu-N-with-echo)
+nmap * <Plug>(anzu-star-with-echo)
+nmap # <Plug>(anzu-sharp-with-echo)
 
 nmap <leader>o :FZF<cr>
 " Use Ag for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Use dispatch to do an async make with number of cores jobs
-nmap <leader><leader> :Make all tags -j$(nproc)<cr>
+nmap <leader>mm :Make all tags -j$(nproc)<cr>
 
 " Use dispatch to do an async make clean
-nmap <leader><cr> :Make clean<cr>
+nmap <leader>mc :Make clean<cr>
 
 " Use dispatch to do an async make clang-tidy
-nmap <leader>L :Make clang-tidy<cr>
+nmap <leader>mt :Make clang-tidy<cr>
 
 " LaTeX (rubber) macro for compiling
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
@@ -520,5 +511,18 @@ nnoremap <leader>X :!apvlv %:r.pdf &<cr><cr>
 " tabbing/spacing if filetype is unsupported by any formatprogram)
 nmap <leader>i :Autoformat<cr>
 
-" vim plug update
-nmap <leader>P :PlugUpdate<cr>
+" vim plug binds
+nmap <leader>pu :PlugUpdate<cr>
+nmap <leader>pi :PlugInstall<cr>
+nmap <leader>pc :PlugClean<cr>
+
+" Cosco config (intelligent comma/semicolon insertion)
+let g:cosco_ignore_comment_lines = 1
+autocmd FileType c,cpp nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)
+
+" Remap minisnip trigger
+let g:minisnip_trigger = '<C-s>'
+
+" Per recommendation from vim-sandwich
+nmap s <Nop>
+xmap s <Nop>
