@@ -12,6 +12,9 @@ call plug#begin()
 
 " Viewing
 Plug 'chrisbra/vim-diff-enhanced'
+" TODO: If no good, try https://github.com/whiteinge/dotfiles/blob/master/bin/diffconflicts instead
+Plug 'christoomey/vim-conflicted'
+Plug 'idanarye/vim-merginal'
 Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'jceb/vim-hier'
