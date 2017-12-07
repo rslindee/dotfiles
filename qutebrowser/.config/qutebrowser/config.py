@@ -43,3 +43,4 @@ c.content.geolocation = True
 c.tabs.background = True
 c.messages.timeout = 5000
 c.input.insert_mode.auto_load = True
+c.scrolling.bar = True
