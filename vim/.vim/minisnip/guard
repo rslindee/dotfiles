@@ -1,0 +1,4 @@
+#ifndef {{+~toupper(expand('%:t:r'))+}}_H
+#define {{+~\~1+}}_H
+
+#endif // {{+~\~2+}}_H
