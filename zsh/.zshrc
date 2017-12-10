@@ -122,6 +122,10 @@ alias shu='sudo shutdown now'
 # Show weather for 90034
 alias wttr='curl wttr.in/90034'
 
+# Show available space of /mnt
+alias dfG='df -h /mnt/GREEN1000'
+alias dfA='df -h /mnt/*'
+
 # Use vim as manpager
 viman () {
     vim -c "Man $1 $2" -c 'silent only'
