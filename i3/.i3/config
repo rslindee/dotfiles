@@ -112,7 +112,7 @@ bar
 }
 
 # start a terminal
-bindsym $mod+Return exec st -f "Terminus:size=10:antialias=false:autohint=false"
+bindsym $mod+Return exec "st -f 'Terminus:size=10:antialias=false:autohint=false'"
 
 # start browser
 bindsym $mod+b exec qutebrowser
@@ -121,10 +121,13 @@ bindsym $mod+b exec qutebrowser
 bindsym $mod+x exec i3lock --dpms
 
 # toggle alsa mute
-bindsym $mod+m exec amixer set Master toggle
+bindsym $mod+m exec "amixer set Master toggle"
 
 # toggle pause cmus
 bindsym $mod+c exec cmus-remote -u
+
+# Call torrent_add script
+bindsym $mod+a exec "~/scripts/add_torrents.sh ~/Downloads richpi"
 
 # Autostart
 exec --no-startup-id xcape -e 'Control_L=Escape'
