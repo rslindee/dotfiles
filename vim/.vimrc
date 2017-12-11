@@ -43,8 +43,8 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 " Searching
+Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 Plug 'osyo-manga/vim-anzu'
 Plug 'osyo-manga/vim-over'
@@ -377,12 +377,6 @@ let g:grepper = {
 " vim-signature highlight marks based on gitgutter status
 "let g:SignatureMarkTextHLDynamic = 1
 
-" Enable vim-sneak label mode for easymotion-like behavior
-let g:sneak#label = 1
-
-" Use vimrc case settings (e.g. smartcase) for vim-sneak
-let g:sneak#use_ic_scs = 1
-
 " Dirvish sidetab
 let g:loaded_netrwPlugin = 1
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
@@ -394,16 +388,6 @@ let g:hier_enabled = 0
 
 " TODO: Fork vim-hier and add toggle
 "nmap <leader>Q :HierToggle
-
-" 2-character Sneak
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-" visual-mode
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-" operator-pending-mode
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
 
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
@@ -539,3 +523,8 @@ inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
 inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
 inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
 set shortmess+=c   " Shut off completion messages
+
+" Set smartcase for easymotion searches
+let g:EasyMotion_smartcase = 1
+" remap f to easymotion search
+nmap f <plug>(easymotion-s)
