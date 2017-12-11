@@ -17,7 +17,7 @@ Plug 'christoomey/vim-conflicted'
 Plug 'idanarye/vim-merginal'
 Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'jceb/vim-hier'
+Plug 'rslindee/vim-hier'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
@@ -387,8 +387,8 @@ nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfi
 " Disable vim-hier by default
 let g:hier_enabled = 0
 
-" TODO: Fork vim-hier and add toggle
-"nmap <leader>Q :HierToggle
+" Toggle vim-hier for quickfix warning/error highlighting
+nmap <leader>Q :HierToggle<cr>
 
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
