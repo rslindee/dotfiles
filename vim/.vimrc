@@ -498,7 +498,7 @@ nmap <leader>o :FZF<cr>
 let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Use dispatch to do an async make with number of cores jobs
-nmap <leader>mm :Make all tags -j$(nproc)<cr>
+nmap <leader>mm :Make -j4<cr>
 
 " Use dispatch to do an async make clean
 nmap <leader>mc :Make clean<cr>
