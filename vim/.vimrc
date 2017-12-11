@@ -17,7 +17,7 @@ Plug 'christoomey/vim-conflicted'
 Plug 'idanarye/vim-merginal'
 Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
-Plug 'jceb/vim-hier'
+Plug 'rslindee/vim-hier'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
@@ -26,6 +26,7 @@ Plug 'Yggdroot/indentLine'
 " TODO: Try sjl/splice.vim
 " Version Control
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 " Themes
@@ -43,8 +44,8 @@ Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
 " Searching
+Plug 'easymotion/vim-easymotion'
 Plug 'junegunn/fzf.vim'
-Plug 'justinmk/vim-sneak'
 Plug 'mhinz/vim-grepper'
 Plug 'osyo-manga/vim-anzu'
 Plug 'osyo-manga/vim-over'
@@ -377,12 +378,6 @@ let g:grepper = {
 " vim-signature highlight marks based on gitgutter status
 "let g:SignatureMarkTextHLDynamic = 1
 
-" Enable vim-sneak label mode for easymotion-like behavior
-let g:sneak#label = 1
-
-" Use vimrc case settings (e.g. smartcase) for vim-sneak
-let g:sneak#use_ic_scs = 1
-
 " Dirvish sidetab
 let g:loaded_netrwPlugin = 1
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
@@ -392,18 +387,8 @@ nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfi
 " Disable vim-hier by default
 let g:hier_enabled = 0
 
-" TODO: Fork vim-hier and add toggle
-"nmap <leader>Q :HierToggle
-
-" 2-character Sneak
-nmap f <Plug>Sneak_s
-nmap F <Plug>Sneak_S
-" visual-mode
-xmap f <Plug>Sneak_s
-xmap F <Plug>Sneak_S
-" operator-pending-mode
-omap f <Plug>Sneak_s
-omap F <Plug>Sneak_S
+" Toggle vim-hier for quickfix warning/error highlighting
+nmap <leader>Q :HierToggle<cr>
 
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
@@ -495,7 +480,7 @@ nmap # <Plug>(anzu-sharp-with-echo)
 
 nmap <leader>o :FZF<cr>
 " Use Ag for FZF (which respects .gitignore)
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
 " Use dispatch to do an async make with number of cores jobs
 nmap <leader>mm :Make -j4<cr>
@@ -539,3 +524,12 @@ inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
 inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
 inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
 set shortmess+=c   " Shut off completion messages
+
+" Set smartcase for easymotion searches
+let g:EasyMotion_smartcase = 1
+" remap f to easymotion search (note easymotion still uses <leader><leader>)
+nmap f <plug>(easymotion-s)
+
+" Map gitv
+nnoremap <leader>gv :Gitv<cr>
+nnoremap <leader>gV :Gitv!<cr>
