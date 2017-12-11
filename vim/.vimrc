@@ -26,6 +26,7 @@ Plug 'Yggdroot/indentLine'
 " TODO: Try sjl/splice.vim
 " Version Control
 Plug 'airblade/vim-gitgutter'
+Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 " Themes
@@ -528,3 +529,7 @@ set shortmess+=c   " Shut off completion messages
 let g:EasyMotion_smartcase = 1
 " remap f to easymotion search (note easymotion still uses <leader><leader>)
 nmap f <plug>(easymotion-s)
+
+" Map gitv
+nnoremap <leader>gv :Gitv<cr>
+nnoremap <leader>gV :Gitv!<cr>
