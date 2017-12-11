@@ -480,7 +480,7 @@ nmap # <Plug>(anzu-sharp-with-echo)
 
 nmap <leader>o :FZF<cr>
 " Use Ag for FZF (which respects .gitignore)
-let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 
 " Use dispatch to do an async make with number of cores jobs
 nmap <leader>mm :Make all tags -j$(nproc)<cr>
