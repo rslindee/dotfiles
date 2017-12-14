@@ -531,8 +531,6 @@ xmap s <Nop>
 
 " Set smartcase for easymotion searches
 let g:EasyMotion_smartcase = 1
-" remap f to easymotion search (note easymotion still uses <leader><leader>)
-nmap f <plug>(easymotion-s)
 
 " Map gitv
 nnoremap <leader>gv :Gitv<cr>
