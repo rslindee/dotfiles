@@ -37,9 +37,11 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'joereynolds/vim-minisnip'
 Plug 'junegunn/vim-easy-align'
 Plug 'lfilho/cosco.vim'
-Plug 'lifepillar/vim-mucomplete'
+" TODO: Re-add and ensure performance is ok
+"Plug 'lifepillar/vim-mucomplete'
 Plug 'machakann/vim-sandwich'
-Plug 'Rip-Rip/clang_complete'
+" TODO: Re-add and ensure performance is ok
+"Plug 'Rip-Rip/clang_complete'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-repeat'
@@ -517,13 +519,14 @@ let g:minisnip_trigger = '<C-s>'
 nmap s <Nop>
 xmap s <Nop>
 
+" TODO: Re-add and ensure performance is ok
 " mucomplete-required settings
-set completeopt+=menuone
-set completeopt+=noinsert
-inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
-set shortmess+=c   " Shut off completion messages
+"set completeopt+=menuone
+"set completeopt+=noinsert
+"inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
+"inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
+"inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
+"set shortmess+=c   " Shut off completion messages
 
 " Set smartcase for easymotion searches
 let g:EasyMotion_smartcase = 1
