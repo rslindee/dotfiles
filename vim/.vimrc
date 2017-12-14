@@ -412,7 +412,7 @@ nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
 " Map vim-grepper search current word with Ag
-nmap <leader>f :GrepperAg <c-r><c-w><cr>
+nmap <leader>s :GrepperAg <c-r><c-w><cr>
 
 " Map vim-grepper to simply start
 nmap <leader>a :Grepper<cr>
@@ -538,3 +538,6 @@ nnoremap <leader>gV :Gitv!<cr>
 
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>w'
+
+" Use easymotion to find single char
+nmap <leader>f <plug>(easymotion-s)
