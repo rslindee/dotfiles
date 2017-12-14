@@ -22,6 +22,7 @@ Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'majutsushi/tagbar'
 Plug 'will133/vim-dirdiff'
 Plug 'romainl/vim-qf'
+Plug 'simeji/winresizer'
 Plug 'Yggdroot/indentLine'
 " TODO: Try sjl/splice.vim
 " Version Control
@@ -536,3 +537,6 @@ nmap f <plug>(easymotion-s)
 " Map gitv
 nnoremap <leader>gv :Gitv<cr>
 nnoremap <leader>gV :Gitv!<cr>
+
+" Enter resizer mode
+let g:winresizer_start_key = '<leader>w'
