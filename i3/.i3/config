@@ -133,6 +133,8 @@ bindsym $mod+a exec "~/scripts/add_torrents.sh ~/Downloads richpi"
 exec --no-startup-id xcape -e 'Control_L=Escape'
 # Start st terminal with tmux
 exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
+# Start xbindkeys
+exec --no-startup-id xbindkeys
 # Enable xautolock process
 # exec --no-startup-id xautolock -time 10 -locker 'i3lock --dpms'
 exec_always --no-startup-id xautolock -time 5 -locker i3lock
