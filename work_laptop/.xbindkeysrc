@@ -2,9 +2,9 @@
     XF86MonBrightnessUp
 "xbacklight -dec 10"
     XF86MonBrightnessDown
-"/usr/bin/pulseaudio-ctl mute"
+"amixer set Master toggle"
     XF86AudioMute
-"/usr/bin/pulseaudio-ctl down"
+"amixer set Master 5%-"
     XF86AudioLowerVolume
-"/usr/bin/pulseaudio-ctl up"
+"amixer set Master 5%+"
     XF86AudioRaiseVolume
