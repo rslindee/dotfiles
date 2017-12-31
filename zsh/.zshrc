@@ -93,7 +93,7 @@ if [ $OS = "Fedora" ]; then
     sudo dnf update
 elif [ $OS = "Arch Linux" ]; then
     echo "Updating Arch and AUR packages..."
-    pacaur -Syu
+    trizen -Syu
 fi
     echo "Updating zgen plugins..."
     zgen update
