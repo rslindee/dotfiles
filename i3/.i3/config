@@ -74,7 +74,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize"
@@ -137,4 +137,4 @@ exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohi
 exec --no-startup-id xbindkeys
 # Enable xautolock process
 # exec --no-startup-id xautolock -time 10 -locker 'i3lock --dpms'
-exec_always --no-startup-id xautolock -time 5 -locker i3lock
+exec_always --no-startup-id xautolock -time 5 -locker 'i3lock --dpms'
