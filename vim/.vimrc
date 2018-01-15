@@ -66,7 +66,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-utils/vim-man'
-Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
 
 call plug#end()
@@ -269,14 +268,14 @@ nmap Y y$
 map <leader>yf Vf{%d
 map <leader>df Vf{%y
 
+" Open index in personal wiki
+nmap <leader>ww :tabe ~/wiki/index.md<cr>
+" Use pandoc to create pdf of markdown file and dump in /tmp
+nmap <leader>wc :silent !pandoc -o /tmp/%:t:r\.pdf %<cr>:redraw!<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vimwiki config
-
-let g:vimwiki_ext2syntax = {'.md': 'markdown',
-            \'.mkd': 'markdown'}
-let g:vimwiki_list = [{'path': '~/wiki/', 'ext': '.md'}]
 
 " Lightline Config
 " Lightline arrangement
@@ -537,7 +536,7 @@ nnoremap <leader>gv :Gitv<cr>
 nnoremap <leader>gV :Gitv!<cr>
 
 " Enter resizer mode
-let g:winresizer_start_key = '<leader>w'
+let g:winresizer_start_key = '<leader>W'
 
 " Use easymotion to find single char
 nmap <leader>f <plug>(easymotion-s)
