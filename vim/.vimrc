@@ -27,7 +27,6 @@ Plug 'Yggdroot/indentLine'
 " TODO: Try sjl/splice.vim
 " Version Control
 Plug 'airblade/vim-gitgutter'
-Plug 'gregsexton/gitv'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 " Themes
@@ -37,7 +36,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'joereynolds/vim-minisnip'
 Plug 'junegunn/vim-easy-align'
-Plug 'lfilho/cosco.vim'
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
 Plug 'machakann/vim-sandwich'
@@ -508,10 +506,6 @@ nmap <leader>pu :PlugUpdate<cr>
 nmap <leader>pi :PlugInstall<cr>
 nmap <leader>pc :PlugClean<cr>
 
-" Cosco config (intelligent comma/semicolon insertion)
-let g:cosco_ignore_comment_lines = 1
-autocmd FileType c,cpp nmap <silent> <leader>; <Plug>(cosco-commaOrSemiColon)
-
 " Remap minisnip trigger
 let g:minisnip_trigger = '<C-s>'
 
@@ -530,10 +524,6 @@ xmap s <Nop>
 
 " Set smartcase for easymotion searches
 let g:EasyMotion_smartcase = 1
-
-" Map gitv
-nnoremap <leader>gv :Gitv<cr>
-nnoremap <leader>gV :Gitv!<cr>
 
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>W'
