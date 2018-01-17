@@ -127,7 +127,7 @@ bindsym $mod+m exec "amixer set Master toggle"
 bindsym $mod+c exec cmus-remote -u
 
 # Call torrent_add script
-bindsym $mod+a exec "~/scripts/add_torrents.sh ~/Downloads richpi"
+bindsym $mod+a exec "mv ~/Downloads/*.torrent /mnt/3tera/torrent/watch"
 
 # Autostart
 exec --no-startup-id xcape -e 'Control_L=Escape'
