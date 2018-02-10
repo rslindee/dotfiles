@@ -85,6 +85,9 @@ alias l='ls -lAh'
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 
+# Load newsboat with youtube subs
+alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
+
 # Update packages, zgen plugins, personal wiki, and dotfiles
 upd()
 {
