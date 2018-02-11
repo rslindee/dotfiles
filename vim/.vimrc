@@ -242,9 +242,9 @@ noremap <leader>0 :tablast<cr>
 set clipboard=unnamed
 
 " Copy last yank to xclip
-map <leader>Y :call system("xclip -i -sel clip", getreg("\""))<cr>
+map <leader>yy :call system("xclip -i -sel clip", getreg("\""))<cr>
 " Paste from xclip on next line
-map <leader>P :r!xclip -o -sel clip<cr>
+map <leader>pp :r!xclip -o -sel clip<cr>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
