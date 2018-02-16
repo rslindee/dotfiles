@@ -128,6 +128,9 @@ alias wttr='curl wttr.in/90034'
 # Show available space of /mnt
 alias dfA='df -h /mnt/*'
 
+# Delete all merged branches in git
+alias git-clean='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+
 # Use vim as manpager
 viman () {
     vim -c "Man $1 $2" -c 'silent only'
