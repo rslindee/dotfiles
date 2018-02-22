@@ -38,6 +38,6 @@
     sq = rebase -i master
     st = status
     su = submodule update --init --recursive
-    un = reset HEAD --
+    un = reset HEAD~
 [diff]
     tool = vimdiff
