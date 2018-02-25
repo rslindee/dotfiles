@@ -291,7 +291,7 @@ FZF_WIDGET_TMUX=1
 # Key bindings
 
 # Set shift-tab to backwards completion
-bindkey "${terminfo[kcbt]}" reverse-menu-complete
+bindkey "^[[Z" reverse-menu-complete
 
 # Set <c-z> to fancy-ctrl-z function
 bindkey '^Z' fancy-ctrl-z
