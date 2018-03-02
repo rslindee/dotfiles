@@ -15,6 +15,7 @@ if ! zgen saved; then
     zgen load "zsh-users/zsh-syntax-highlighting"
     zgen load "zsh-users/zsh-history-substring-search"
     zgen load "zdharma/zsh-diff-so-fancy"
+    zgen load "paulirish/git-open"
 
     # generate the init script from plugins above
     zgen save
