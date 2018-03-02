@@ -14,6 +14,7 @@ if ! zgen saved; then
     # zsh-syntax highlighting MUST go before substring-search
     zgen load "zsh-users/zsh-syntax-highlighting"
     zgen load "zsh-users/zsh-history-substring-search"
+    zgen load "zdharma/zsh-diff-so-fancy"
 
     # generate the init script from plugins above
     zgen save
