@@ -21,6 +21,7 @@ config.bind('<Ctrl-k>', 'command-history-prev', mode='command')
 config.bind('<Ctrl-j>', 'command-history-next', mode='command')
 config.bind('cr', 'config-source')
 config.bind('gi', 'hint inputs')
+config.bind('D', 'download-open ;; download-remove')
 
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
         'y': 'http://www.youtube.com/results?search_query={}',
@@ -44,3 +45,6 @@ c.tabs.background = True
 c.messages.timeout = 5000
 c.input.insert_mode.auto_load = True
 c.scrolling.bar = True
+
+# requires `sudo /usr/share/qutebrowser/scripts/dictcli.py install en-US` be run first
+c.spellcheck.languages = ['en-US']
