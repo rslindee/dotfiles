@@ -495,7 +495,7 @@ nmap <leader>mt :Make clang-tidy<cr>
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 
 " View PDF macro; '%:r' is current file's root (base) name.
-nnoremap <leader>X :!apvlv %:r.pdf &<cr><cr>
+nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 
 " Run vim-autoformat on entire file (falls back to vim's default
 " tabbing/spacing if filetype is unsupported by any formatprogram)
