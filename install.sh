@@ -53,7 +53,6 @@ STOW_LIST="cgdb \
     ssh \
     tmux \
     vim \
-    xbindkeys \
     zsh"
 
 STOW_LIST_PRIVATE="newsboat"
