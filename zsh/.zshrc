@@ -93,13 +93,13 @@ alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcac
 # Update packages, zgen plugins, personal wiki, and dotfiles
 upd()
 {
-if [ "$OS" = "Fedora" ]; then
-    echo "Updating Fedora packages..."
-    sudo dnf update
-elif [ "$OS" = "Arch Linux" ]; then
-    echo "Updating Arch and AUR packages..."
-    trizen -Syu
-fi
+    if [ "$OS" = "Fedora" ]; then
+        echo "Updating Fedora packages..."
+        sudo dnf update
+    elif [ "$OS" = "Arch Linux" ]; then
+        echo "Updating Arch and AUR packages..."
+        trizen -Syu
+    fi
     echo "Updating zgen plugins..."
     zgen update
     echo "Updating dotfiles..."
