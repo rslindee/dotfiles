@@ -295,20 +295,24 @@ FZF_WIDGET_TMUX=1
 # Set shift-tab to backwards completion
 bindkey "^[[Z" reverse-menu-complete
 
-# Set <c-z> to fancy-ctrl-z function
+# Set fancy-ctrl-z function
 bindkey '^Z' fancy-ctrl-z
 
-# Set <c-j> and <c-k> to zsh-history-substring-search up/down
-bindkey '^J' history-substring-search-down
-bindkey '^K' history-substring-search-up
+# Set zsh-history-substring-search up/down
+bindkey '^N' history-substring-search-down
+bindkey '^P' history-substring-search-up
 
-# Set j/k for zsh-history-substring-search up/down in vi mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+# Set zsh-history-substring-search up/down in vi mode
+bindkey -M vicmd 'n' history-substring-search-up
+bindkey -M vicmd 'p' history-substring-search-down
 
-# Set <c-f> and <c-b> to quickly jump forward and back words
+# Set jump forward and back words
 bindkey '^F' forward-word
 bindkey '^B' backward-word
+
+# Delete all before/end end of cursor
+bindkey '^U' backward-kill-line
+bindkey '^K' kill-line
 
 # Jump to beginning/end of line
 bindkey '^E' end-of-line
@@ -318,19 +322,23 @@ bindkey "^A" beginning-of-line
 # this fixes the "can't backspace further than where I exited vi-mode at" issue
 bindkey '^W' backward-kill-word
 bindkey '^H' backward-delete-char
-bindkey '^U' kill-whole-line
 bindkey '^?' backward-delete-char
 
-# Set <c-d> to forward delete
+# Set history search to be similar to bash
+bindkey '^R' history-incremental-search-backward
+bindkey '^S' history-incremental-search-forward
+
+# Set forward delete
 bindkey '^D' delete-char
 
+# TODO: fzf-insert-directory and fzf-insert-files is kinda slow after exit for some reason
 # fzf keybinds
-bindkey '^T' fzf-insert-directory
-bindkey '^O' fzf-insert-files
-bindkey '^P' fzf-kill-processes
-bindkey '^R' fzf-insert-history
-bindkey -r '^G'
-bindkey '^Ga' fzf-git-add-files
-bindkey '^Gb' fzf-git-checkout-branch
-bindkey '^Gd' fzf-git-delete-branches
+bindkey -r '^O'
+bindkey '^Ot' fzf-insert-directory
+bindkey '^Oo' fzf-insert-files
+bindkey '^Op' fzf-kill-processes
+bindkey '^Or' fzf-insert-history
+bindkey '^Oa' fzf-git-add-files
+bindkey '^Ob' fzf-git-checkout-branch
+bindkey '^Od' fzf-git-delete-branches
 
