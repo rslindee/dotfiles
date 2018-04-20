@@ -130,7 +130,7 @@ alias wttr='curl wttr.in/90034'
 # Show available space of /mnt
 alias dfA='df -h /mnt/*'
 
-# Delete all locally merged branches in git
+# Delete all locally merged branches in git (NOTE: includes current branch!)
 alias git-clean='git branch --merged | grep -Ev "(^\*|master|develop)" | xargs git branch -d'
 
 # Use vim as manpager
