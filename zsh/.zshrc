@@ -148,6 +148,10 @@ mkcd()
     cd $1;
 }
 
+pdb()
+{
+    python -m pdb $1;
+}
 # General options
 
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
