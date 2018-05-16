@@ -137,6 +137,9 @@ set ttymouse=xterm2
 set cursorline
 set cursorcolumn
 
+" Show 10 lines below/above cursor at all times
+set scrolloff=10
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
