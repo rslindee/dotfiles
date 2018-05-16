@@ -501,6 +501,9 @@ nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 " tabbing/spacing if filetype is unsupported by any formatprogram)
 nmap <leader>i :Autoformat<cr>
 
+let g:formatdef_autopep8 = "'autopep8 --max-line-length 100 - --range '.a:firstline.' '.a:lastline"
+let g:formatters_python = ['autopep8']
+
 " vim plug binds
 nmap <leader>pu :PlugUpdate<cr>
 nmap <leader>pi :PlugInstall<cr>
