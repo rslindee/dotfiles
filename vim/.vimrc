@@ -24,7 +24,6 @@ Plug 'will133/vim-dirdiff'
 Plug 'romainl/vim-qf'
 Plug 'simeji/winresizer'
 Plug 'Yggdroot/indentLine'
-" TODO: Try sjl/splice.vim
 " Version Control
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
@@ -396,11 +395,12 @@ let g:indentLine_enabled = 0
 " Toggle indentLine plugin (aka show indent markings)
 nmap <leader>I :IndentLinesToggle<cr>
 
-" Disable ALE running automatically
+" Disable ALE on start
+let g:ale_enabled = 0
 let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_save = 0
+
+" Toggle on/off ALE Linter
+nmap <leader>L <Plug>(ale_toggle)
 
 " Jump to ale errors
 nmap [w <Plug>(ale_previous_wrap)
