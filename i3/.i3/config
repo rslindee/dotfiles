@@ -36,7 +36,7 @@ bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
 # toggle window split orientation
-bindsym $mod+v split toggle
+bindsym $mod+w split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -73,6 +73,10 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
+# reloads i3 config
+bindsym $mod+Shift+c reload
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
@@ -125,6 +129,9 @@ bindsym $mod+m exec "amixer set Master toggle"
 
 # toggle pause cmus
 bindsym $mod+c exec cmus-remote -u
+
+# toggle pause mpv
+bindsym $mod+v exec "echo 'cycle pause' | socat - /tmp/mpv-socket"
 
 # Call torrent_add script
 bindsym $mod+a exec "mv ~/Downloads/*.torrent /mnt/3tera/torrent/watch"

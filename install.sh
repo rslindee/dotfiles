@@ -1,6 +1,6 @@
 #!/bin/bash
-# Fail right away
-set -e
+# Fail right away and prevent use of undefined vars
+set -eu
 
 # TODO: Confirm how/if these need to be installed on new system
 # xdg-utils xorg-xmodmap
@@ -21,6 +21,7 @@ ALL_PACKAGES="atool \
     qutebrowser \
     ranger \
     renameutils \
+    socat \
     stow \
     sxiv \
     tmux \
