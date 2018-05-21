@@ -121,8 +121,8 @@ bindsym $mod+Return exec "st -f 'Terminus:size=10:antialias=false:autohint=false
 # start browser
 bindsym $mod+b exec qutebrowser
 
-# lock i3
-bindsym $mod+x exec i3lock --dpms
+# lock i3 and turn off monitor(s)
+bindsym $mod+x exec "i3lock --color=600000 && sleep .1 && xset dpms force off"
 
 # toggle alsa mute
 bindsym $mod+m exec "amixer set Master toggle"
@@ -144,4 +144,4 @@ exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohi
 exec --no-startup-id xbindkeys
 # Enable xautolock process
 # exec --no-startup-id xautolock -time 10 -locker 'i3lock --dpms'
-exec_always --no-startup-id xautolock -time 5 -locker 'i3lock --dpms'
+exec_always --no-startup-id xautolock -time 10 -locker 'i3lock --color=600000 && sleep .1 && xset dpms force off'
