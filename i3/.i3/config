@@ -136,6 +136,12 @@ bindsym $mod+v exec "echo 'cycle pause' | socat - /tmp/mpv-socket"
 # Call torrent_add script
 bindsym $mod+a exec "mv ~/Downloads/*.torrent /mnt/3tera/torrent/watch"
 
+# Take screenshot of entire desktop with imagemagick
+bindsym --release $mod+Shift+s exec --no-startup-id import -window  root ~/$(date "+%Y-%m-%d-%H:%M:%S")-screenshot.png
+
+# Take screenshot of selection/window with imagemagick
+bindsym --release $mod+s exec --no-startup-id import ~/$(date "+%Y-%m-%d-%H:%M:%S")-screenshot.png
+
 # Autostart
 exec --no-startup-id xcape -e 'Control_L=Escape'
 # Start st terminal with tmux

@@ -31,12 +31,15 @@ ALL_PACKAGES="atool \
     zsh"
 
 PACKAGES_FEDORA="st \
+    ImageMagick \
     terminus-fonts-console"
 
 FEDORA_COPR_REPOS="fszymanski/newsboat \
     flatcap/neomutt"
 
-PACKAGES_ARCH="terminus-font"
+PACKAGES_ARCH="terminus-font \
+    imagemagick"
+
 PACKAGES_AUR="st"
 
 STOW_LIST="cgdb \
