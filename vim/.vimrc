@@ -50,8 +50,8 @@ Plug 'mhinz/vim-grepper'
 Plug 'osyo-manga/vim-anzu'
 Plug 'osyo-manga/vim-over'
 " Other
-Plug 'craigemery/vim-autotag'
 Plug 'fidian/hexmode'
+Plug 'jsfaint/gen_tags.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-dispatch'
@@ -273,6 +273,10 @@ nmap <leader>ww :tabe ~/wiki/index.md<cr>
 " Use pandoc to create pdf of markdown file and dump in /tmp
 nmap <leader>wc :silent !pandoc -o /tmp/%:t:r\.pdf %<cr>:redraw!<cr>
 
+" All cscope results go to quickfix and not wonky number-driven list
+set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
+" TODO: Create better leader combos for all cscope-find commands
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -365,9 +369,6 @@ function! TagbarStatusFunc(current, sort, fname, ...) abort
     let g:lightline.fname = a:fname
     return lightline#statusline(0)
 endfunction
-
-" Set max tag file size to ~100mb for autotag
-let g:autotagmaxTagsFileSize = 100000000
 
 " Make grepper prompt smaller
 let g:grepper = {
@@ -536,3 +537,13 @@ let g:winresizer_start_key = '<leader>W'
 
 " Use easymotion to find single char
 nmap <leader>f <plug>(easymotion-s)
+
+" Set gen_tags blacklist locations
+let g:gen_tags#blacklist = ['$HOME']
+" Store tags in .git/tags_dir if project has repo, otherwise store
+" ~/.cache/tags_dir
+let g:gen_tags#use_cache_dir = 0
+" Prune tags from tagfile before incremental update
+let g:gen_tags#ctags_prune = 1
+let g:gen_tags#ctags_opts = '--exclude=.git'
+" TODO Remove default Ctrl-\ binds and replace with my own
