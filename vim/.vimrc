@@ -275,7 +275,20 @@ nmap <leader>wc :silent !pandoc -o /tmp/%:t:r\.pdf %<cr>:redraw!<cr>
 
 " All cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
-" TODO: Create better leader combos for all cscope-find commands
+
+" cscope queries
+" Search for all callers of the function name under the cursor
+nmap ,c :cs find c <C-R>=expand('<cword>')<CR><CR>
+" Search all the functions called by funtion name under the cursor
+nmap ,g :cs find d <C-R>=expand('<cword>')<CR><CR>
+" Search for global definition of the word under the cursor
+nmap ,d :cs find g <C-R>=expand('<cword>')<CR><CR>
+" Search for all files matching filename under the cursor
+nmap ,f :cs find f <C-R>=expand('<cfile>')<CR><CR>
+" Search for all files including filename under the cursor
+nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
+" Search for all symbol occurances of word under the cursor
+nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
@@ -540,10 +553,17 @@ nmap <leader>f <plug>(easymotion-s)
 
 " Set gen_tags blacklist locations
 let g:gen_tags#blacklist = ['$HOME']
-" Store tags in .git/tags_dir if project has repo, otherwise store
+" Store tags in .git/tags_dir if project has repo, otherwise store in
 " ~/.cache/tags_dir
 let g:gen_tags#use_cache_dir = 0
 " Prune tags from tagfile before incremental update
 let g:gen_tags#ctags_prune = 1
 let g:gen_tags#ctags_opts = '--exclude=.git'
-" TODO Remove default Ctrl-\ binds and replace with my own
+" TODO This feature currently gets stuck with status message
+"let g:gen_tags#statusline = 0
+" Remove default Ctrl-\ cscope binds and replace with my own
+let g:gen_tags#gtags_default_map = 0
+
+" Generate CTAGS and GTAGS via gen_tags.vim
+nmap ,tg :GenGTAGS<CR>
+nmap ,tc :GenCtags<CR>
