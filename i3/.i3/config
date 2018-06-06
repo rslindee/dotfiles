@@ -13,8 +13,6 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+q kill
 
-# start i3-dmenu-desktop (a program launcher)
-bindsym $mod+o exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+h focus left
@@ -106,13 +104,14 @@ set $purple #b16286
 set $aqua #689d68
 set $gray #a89984
 set $darkgray #1d2021
+set $black #000000
 
 #start of bar section
 bar {
     status_command i3status
     colors {
         # bar background color
-        background $bg
+        background $black
         # text color used for blocks that do not have a color specified.
         statusline $fg
         # workspaces section
@@ -133,6 +132,8 @@ client.unfocused        $bg $bg $fg $purple $bg
 client.urgent           $red $red $white $red $red
 #end of window title bars & borders section
 
+# start i3-dmenu-desktop (a program launcher)
+bindsym $mod+o exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -fn 'Terminus:size=10'"
 
 # start a terminal
 bindsym $mod+Return exec "st -f 'Terminus:size=10:antialias=false:autohint=false'"
