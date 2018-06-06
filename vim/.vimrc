@@ -15,7 +15,6 @@ Plug 'chrisbra/vim-diff-enhanced'
 " TODO: If no good, try https://github.com/whiteinge/dotfiles/blob/master/bin/diffconflicts instead
 Plug 'christoomey/vim-conflicted'
 Plug 'idanarye/vim-merginal'
-Plug 'itchyny/lightline.vim'
 Plug 'kshenoy/vim-signature'
 Plug 'rslindee/vim-hier'
 Plug 'junegunn/rainbow_parentheses.vim'
@@ -164,6 +163,72 @@ autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml
 " Enable special doxygen highlighting
 let g:load_doxygen_syntax=1
 
+" Statusline config and helper functions
+function! GitBranch()
+    return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+endfunction
+
+function! StatuslineGit()
+    let l:branchname = GitBranch()
+    return strlen(l:branchname) > 0?'┃ ├'.l:branchname:''
+endfunction
+
+function! StatuslineModificationTime()
+    let ftime = getftime(expand('%'))
+    return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
+endfunction
+
+function! StatuslineWorkingDir()
+    let workingdir = fnamemodify(getcwd(), ':t')
+    return workingdir
+endfunction
+
+" Clear statusline
+set statusline=
+" Filename
+set statusline+=\ %f
+" Modified or modifiable flag
+set statusline+=%m\ "
+" Current vim working directory
+set statusline+=┃\ %{StatuslineWorkingDir()}\ "
+" Git repo information
+set statusline+=%{StatuslineGit()}
+" Start right justify
+set statusline+=%=
+" File modification date/time
+set statusline+=%{StatuslineModificationTime()}\ "
+" Line and col
+set statusline+=┃\ %l,%c\ "
+" Percent location in file
+set statusline+=┃\ %p%%\ "
+
+" Tabline config and helper functions
+function! MyTabLabel(n)
+    let buflist = tabpagebuflist(a:n)
+    let winnr = tabpagewinnr(a:n)
+    let string = fnamemodify(bufname(buflist[winnr - 1]), ':t')
+    return empty(string) ? '[unnamed]' : string
+endfunction
+
+function! MyTabLine()
+    let s = ''
+    for i in range(tabpagenr('$'))
+        " select the highlighting
+        if i + 1 == tabpagenr()
+            let s .= '%#TabLineSel#'
+        else
+            let s .= '%#TabLine#'
+        endif
+        " display tabnumber (for use with <count>gt, etc)
+        let s .= ' '. (i+1)
+        " the label is made by MyTabLabel()
+        let s .= ':%{MyTabLabel(' . (i + 1) . ')} '
+    endfor
+    return s
+endfunction
+
+set tabline=%!MyTabLine()
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -293,96 +358,6 @@ nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Lightline Config
-" Lightline arrangement
-let g:lightline = {
-            \ 'colorscheme': 'jellybeans',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ], [ 'filename' ], [ 'workingdir', 'fugitive' ] ],
-            \   'right': [ [ 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
-            \ },
-            \ 'inactive': {
-            \   'left': [ [ 'filename' ] ],
-            \   'right': [ [ 'lineinfo' ], ['percent'], [ 'modificationtime' ] ]
-            \ },
-            \ 'component_function': {
-            \   'fugitive': 'LightLineFugitive',
-            \   'workingdir': 'LightLineWorkingDir',
-            \   'filename': 'LightLineFilename',
-            \   'mode': 'LightLineMode',
-            \   'modificationtime': 'LightLineModificationTime',
-            \ },
-            \ 'subseparator': { 'left': '│', 'right': '│' }
-            \ }
-let g:lightline.mode_map = {
-            \ 'n' : 'N',
-            \ 'i' : 'I',
-            \ 'R' : 'R',
-            \ 'v' : 'V',
-            \ 'V' : 'V',
-            \ "\<C-v>": 'V',
-            \ 'c' : 'C',
-            \ 's' : 'S',
-            \ 'S' : 'S',
-            \ "\<C-s>": 'S',
-            \ 't': 'T',
-            \ }
-
-function! LightLineModificationTime()
-    let ftime = getftime(expand('%'))
-    return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
-endfunction
-
-function! LightLineModified()
-    return &ft =~ 'help' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! LightLineReadonly()
-    return &ft !~? 'help' && &readonly ? 'RO' : ''
-endfunction
-
-function! LightLineWorkingDir()
-    let workingdir = fnamemodify(getcwd(), ':t')
-    return workingdir
-endfunction
-
-function! LightLineFilename()
-    let fname = expand('%')
-    return fname =~ '__Tagbar__' ? g:lightline.fname :
-                \ fname =~ 'NetrwTreeListing' ? '' :
-                \ exists('w:quickfix_title') ? w:quickfix_title :
-                \ ('' != LightLineReadonly() ? LightLineReadonly() . ' │ ' : '') .
-                \ ('' != fname ? fname : '') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineFugitive()
-    try
-        if expand('%:t') !~? '__Tagbar__\|NetrwTreeListing' && exists('*fugitive#head')
-            let mark = '├'  " edit here for cool branch mark
-            let branch = fugitive#head()
-            return branch !=# '' ? mark.branch : ''
-        endif
-    catch
-    endtry
-    return ''
-endfunction
-
-function! LightLineMode()
-    let fname = expand('%:t')
-    return fname == '__Tagbar__' ? 'Tagbar' :
-                \ fname =~ 'NetrwTreeListing' ? 'Netrw' :
-                \ winwidth(0) > 60 ? lightline#mode() : ''
-endfunction
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-    let g:lightline.fname = a:fname
-    return lightline#statusline(0)
-endfunction
-
 " Make grepper prompt smaller
 let g:grepper = {
             \ 'simple_prompt': 1,
