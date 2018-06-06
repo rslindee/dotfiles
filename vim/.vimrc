@@ -28,7 +28,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 Plug 'tpope/vim-fugitive'
 " Themes
-Plug 'nanotech/jellybeans.vim'
+Plug 'morhetz/gruvbox'
 " Editing
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Chiel92/vim-autoformat'
@@ -149,7 +149,7 @@ set termguicolors
 
 " Themes
 set background=dark
-colorscheme jellybeans
+colorscheme gruvbox
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -195,12 +195,12 @@ set statusline+=┃\ %{StatuslineWorkingDir()}\ "
 set statusline+=%{StatuslineGit()}
 " Start right justify
 set statusline+=%=
-" File modification date/time
-set statusline+=%{StatuslineModificationTime()}\ "
 " Line and col
-set statusline+=┃\ %l,%c\ "
+set statusline+=%l,%c\ "
 " Percent location in file
-set statusline+=┃\ %p%%\ "
+set statusline+=┃\ %P\ "
+" File modification date/time
+set statusline+=┃\ %{StatuslineModificationTime()}\ "
 
 " Tabline config and helper functions
 function! MyTabLabel(n)
@@ -498,7 +498,6 @@ let g:formatters_python = ['autopep8']
 
 " vim plug binds
 nmap <leader>pu :PlugUpdate<cr>
-nmap <leader>pi :PlugInstall<cr>
 nmap <leader>pc :PlugClean<cr>
 
 " Remap minisnip trigger
