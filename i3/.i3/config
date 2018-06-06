@@ -95,11 +95,6 @@ bindsym $mod+r mode "resize"
 
 font pango:Terminus 10
 
-# Colors
-client.focused #007fbf #007fbf #ffffff
-client.unfocused #666666 #666666 #ffffff
-client.urgent #aa0000 #990000 #ffffff
-
 # set primary gruvbox colorscheme colors
 set $bg #282828
 set $red #cc241d
