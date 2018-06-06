@@ -193,8 +193,8 @@ set statusline+=%m\ "
 set statusline+=┃\ %{StatuslineWorkingDir()}\ "
 " Git repo information
 set statusline+=%{StatuslineGit()}
-" Start right justify
-set statusline+=%=
+" Start right justify and truncation point
+set statusline+=%=%<
 " Line and col
 set statusline+=%l,%c\ "
 " Percent location in file
@@ -534,7 +534,7 @@ let g:gen_tags#use_cache_dir = 0
 let g:gen_tags#ctags_prune = 1
 let g:gen_tags#ctags_opts = '--exclude=.git'
 " TODO This feature currently gets stuck with status message
-"let g:gen_tags#statusline = 0
+let g:gen_tags#statusline = 1
 " Remove default Ctrl-\ cscope binds and replace with my own
 let g:gen_tags#gtags_default_map = 0
 
