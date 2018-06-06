@@ -97,6 +97,7 @@ font pango:Terminus 10
 
 # set primary gruvbox colorscheme colors
 set $bg #282828
+set $fg #ebdbb2
 set $red #cc241d
 set $green #98971a
 set $yellow #d79921
@@ -113,12 +114,12 @@ bar {
         # bar background color
         background $bg
         # text color used for blocks that do not have a color specified.
-        statusline $yellow
+        statusline $fg
         # workspaces section
         #                    border  backgr. text
-        focused_workspace    $aqua $aqua $darkgray
-        inactive_workspace   $darkgray $darkgray $yellow
-        active_workspace     $darkgray $darkgray $yellow
+        focused_workspace    $fg $fg $bg
+        inactive_workspace   $fg $bg $fg
+        active_workspace     $fg $bg $fg
         urgent_workspace     $red $red $bg
     }
 }
@@ -126,9 +127,9 @@ bar {
 
 #start of window title bars & borders section
 # class                 border|backgr|text|indicator|child_border
-client.focused          $aqua $aqua $darkgray $purple $darkgray
-client.focused_inactive $darkgray $darkgray $yellow $purple $darkgray
-client.unfocused        $darkgray $darkgray $yellow $purple $darkgray
+client.focused          $fg $fg $bg $purple $fg
+client.focused_inactive $bg $bg $fg $purple $bg
+client.unfocused        $bg $bg $fg $purple $bg
 client.urgent           $red $red $white $red $red
 #end of window title bars & borders section
 
