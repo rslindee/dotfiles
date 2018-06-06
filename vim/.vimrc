@@ -219,7 +219,7 @@ function! MyTabLine()
         else
             let s .= '%#TabLine#'
         endif
-        " display tabnumber (for use with <count>gt, etc)
+        " display tabnumber
         let s .= ' '. (i+1)
         " the label is made by MyTabLabel()
         let s .= ':%{MyTabLabel(' . (i + 1) . ')} '
@@ -406,8 +406,8 @@ nmap <leader>s :GrepperAg <c-r><c-w><cr>
 " Map vim-grepper to simply start
 nmap <leader>a :Grepper<cr>
 
-" Open fugitive Git blame
-nmap <leader>b :Gblame<cr>
+" Toggle fugitive Git blame
+nmap <leader>gb :Gblame<cr>
 
 " fugitive git status toggle function
 function! ToggleGStatus()
@@ -429,7 +429,7 @@ nmap <leader>gd :Gvdiff<cr>
 nmap <leader>gh :GV!<cr>
 
 " Open git browser
-nmap <leader>gb :GV<cr>
+nmap <leader>gv :GV<cr>
 
 " Fugitive git push
 nmap <leader>gp :Gpush<cr>
@@ -501,7 +501,7 @@ nmap <leader>pu :PlugUpdate<cr>
 nmap <leader>pc :PlugClean<cr>
 
 " Remap minisnip trigger
-let g:minisnip_trigger = '<C-s>'
+let g:minisnip_trigger = 'S'
 
 " Per recommendation from vim-sandwich
 nmap s <Nop>
@@ -533,9 +533,7 @@ let g:gen_tags#use_cache_dir = 0
 " Prune tags from tagfile before incremental update
 let g:gen_tags#ctags_prune = 1
 let g:gen_tags#ctags_opts = '--exclude=.git'
-" TODO This feature currently gets stuck with status message
-let g:gen_tags#statusline = 1
-" Remove default Ctrl-\ cscope binds and replace with my own
+" Remove default Ctrl-\ cscope binds (I prefer to use my own)
 let g:gen_tags#gtags_default_map = 0
 
 " Generate CTAGS and GTAGS via gen_tags.vim
