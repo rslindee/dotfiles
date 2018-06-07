@@ -52,7 +52,7 @@ Plug 'osyo-manga/vim-over'
 Plug 'fidian/hexmode'
 " TODO: This is extremely slow and saves tags when working on remote mount,
 " what gives? It seems to run ctags and open them up automatically
-" Plug 'jsfaint/gen_tags.vim'
+"Plug 'jsfaint/gen_tags.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-dispatch'
@@ -524,17 +524,19 @@ let g:winresizer_start_key = '<leader>W'
 " Use easymotion to find single char
 nmap <leader>f <plug>(easymotion-s)
 
+" TODO: Figure out why gen_tags is so slow for network mounts
 " Set gen_tags blacklist locations
-let g:gen_tags#blacklist = ['$HOME']
+" let g:gen_tags#blacklist = ['$HOME']
 " Store tags in .git/tags_dir if project has repo, otherwise store in
 " ~/.cache/tags_dir
-let g:gen_tags#use_cache_dir = 0
+"let g:gen_tags#use_cache_dir = 0
 " Prune tags from tagfile before incremental update
-let g:gen_tags#ctags_prune = 1
-let g:gen_tags#ctags_opts = '--exclude=.git'
+"let g:gen_tags#ctags_prune = 0
+"let g:gen_tags#ctags_opts = '--exclude=.git'
 " Remove default Ctrl-\ cscope binds (I prefer to use my own)
-let g:gen_tags#gtags_default_map = 0
+"let g:gen_tags#gtags_default_map = 0
 
-" Generate CTAGS and GTAGS via gen_tags.vim
-nmap ,tg :GenGTAGS<CR>
-nmap ,tc :GenCtags<CR>
+" Generate CTAGS and GTAGS via dispatch
+nmap ,tc :Dispatch! ctags<CR>
+" TODO Figure out how to also plug in loading the cscope datatbase
+nmap ,tg :Dispatch! gtags<CR>
