@@ -93,17 +93,23 @@ bindsym $mod+r mode "resize"
 
 font pango:Terminus 10
 
-# set primary gruvbox colorscheme colors
+# gruvbox colorscheme
 set $bg #282828
 set $fg #ebdbb2
-set $red #cc241d
-set $green #98971a
-set $yellow #d79921
-set $blue #458588
-set $purple #b16286
-set $aqua #689d68
+set $darkred #cc241d
+set $red #fb4934
+set $darkgreen #98971a
+set $green #b9bb26
+set $darkyellow #d79921
+set $yellow #fabd2f
+set $darkblue #458588
+set $blue #83a598
+set $darkpurple #b16286
+set $purple #d3869b
+set $darkaqua #689d68
+set $aqua #8ec07c
 set $gray #a89984
-set $darkgray #1d2021
+set $darkgray #928374
 set $black #000000
 
 #start of bar section
@@ -114,6 +120,8 @@ bar {
         background $black
         # text color used for blocks that do not have a color specified.
         statusline $fg
+
+        separator $fg
         # workspaces section
         #                    border  backgr. text
         focused_workspace    $fg $fg $bg
