@@ -50,7 +50,9 @@ Plug 'osyo-manga/vim-anzu'
 Plug 'osyo-manga/vim-over'
 " Other
 Plug 'fidian/hexmode'
-Plug 'jsfaint/gen_tags.vim'
+" TODO: This is extremely slow and saves tags when working on remote mount,
+" what gives? It seems to run ctags and open them up automatically
+" Plug 'jsfaint/gen_tags.vim'
 Plug 'justinmk/vim-gtfo'
 Plug 'justinmk/vim-dirvish'
 Plug 'tpope/vim-dispatch'
