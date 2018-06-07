@@ -99,7 +99,7 @@ set $fg #ebdbb2
 set $darkred #cc241d
 set $red #fb4934
 set $darkgreen #98971a
-set $green #b9bb26
+set $green #b8bb26
 set $darkyellow #d79921
 set $yellow #fabd2f
 set $darkblue #458588
