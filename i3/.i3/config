@@ -133,7 +133,7 @@ client.urgent           $red $red $white $red $red
 #end of window title bars & borders section
 
 # start i3-dmenu-desktop (a program launcher)
-bindsym $mod+o exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -fn 'Terminus:size=10'"
+bindsym $mod+o exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -fn 'Terminus:size=10'"
 
 # start a terminal
 bindsym $mod+Return exec "st -f 'Terminus:size=10:antialias=false:autohint=false'"
