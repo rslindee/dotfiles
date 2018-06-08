@@ -1,8 +1,9 @@
 set nocompatible
 
 " auto-clone and install minpac if not installed
-if empty(glob('~/.vim/pack/minpac/opt/minpac.vim'))
+if empty(glob('~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim'))
     silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+    source $VIMRC
 endif
 
 
@@ -32,7 +33,8 @@ call minpac#add('morhetz/gruvbox')
 " Editing
 call minpac#add('AndrewRadev/splitjoin.vim')
 call minpac#add('Chiel92/vim-autoformat')
-call minpac#add('joereynolds/vim-minisnip')
+" TODO find out why the trigger isn't working
+"call minpac#add('joereynolds/vim-minisnip')
 call minpac#add('junegunn/vim-easy-align')
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
@@ -498,8 +500,9 @@ let g:formatters_python = ['autopep8']
 nmap <leader>pu :call minpac#update()<cr>
 nmap <leader>pc :call minpac#clean()<cr>
 
+" TODO why is this suddenly inserting the character??
 " Remap minisnip trigger
-let g:minisnip_trigger = 'S'
+"let g:minisnip_trigger = '<c-s>'
 
 " Per recommendation from vim-sandwich
 nmap s <Nop>
