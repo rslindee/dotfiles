@@ -133,6 +133,9 @@ alias dfA='df -h /mnt/*'
 # Quick open with xdg-open
 alias o='xdg-open'
 
+# Clear cmus library and update with ~/music
+alias cmus-upd='cmus-remote --clear --library ~/music'
+
 # Use vim as manpager
 viman () {
     vim -c "Man $1 $2" -c 'silent only'
