@@ -51,6 +51,7 @@ call minpac#add('mhinz/vim-grepper')
 call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('osyo-manga/vim-over')
 " Other
+" TODO: try https://github.com/skywind3000/asyncrun.vim
 call minpac#add('fidian/hexmode')
 " TODO: This is extremely slow and saves tags when working on remote mount,
 " what gives? It seems to run ctags and open them up automatically
