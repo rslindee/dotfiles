@@ -1,5 +1,11 @@
 set nocompatible
 
+" auto-clone and install minpac if not installed
+if empty(glob('~/.vim/pack/minpac/opt/minpac.vim'))
+    silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+endif
+
+
 packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
