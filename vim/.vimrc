@@ -1,72 +1,65 @@
 set nocompatible
 
-" auto-clone and install vim-plug if not installed
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
-
-" vim-plug plugin manager:
-call plug#begin()
+packadd minpac
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Viewing
-Plug 'chrisbra/vim-diff-enhanced'
+call minpac#add('chrisbra/vim-diff-enhanced')
 " TODO: If no good, try https://github.com/whiteinge/dotfiles/blob/master/bin/diffconflicts instead
-Plug 'christoomey/vim-conflicted'
-Plug 'idanarye/vim-merginal'
-Plug 'kshenoy/vim-signature'
-Plug 'rslindee/vim-hier'
-Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'majutsushi/tagbar'
-Plug 'will133/vim-dirdiff'
-Plug 'romainl/vim-qf'
-Plug 'simeji/winresizer'
-Plug 'Yggdroot/indentLine'
+call minpac#add('christoomey/vim-conflicted')
+call minpac#add('idanarye/vim-merginal')
+call minpac#add('kshenoy/vim-signature')
+call minpac#add('rslindee/vim-hier')
+call minpac#add('junegunn/rainbow_parentheses.vim')
+call minpac#add('majutsushi/tagbar')
+call minpac#add('will133/vim-dirdiff')
+call minpac#add('romainl/vim-qf')
+call minpac#add('simeji/winresizer')
+call minpac#add('Yggdroot/indentLine')
 " Version Control
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/gv.vim'
-Plug 'tpope/vim-fugitive'
+call minpac#add('airblade/vim-gitgutter')
+call minpac#add('junegunn/gv.vim')
+call minpac#add('tpope/vim-fugitive')
 " Themes
-Plug 'morhetz/gruvbox'
+call minpac#add('morhetz/gruvbox')
 " Editing
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Chiel92/vim-autoformat'
-Plug 'joereynolds/vim-minisnip'
-Plug 'junegunn/vim-easy-align'
+call minpac#add('AndrewRadev/splitjoin.vim')
+call minpac#add('Chiel92/vim-autoformat')
+call minpac#add('joereynolds/vim-minisnip')
+call minpac#add('junegunn/vim-easy-align')
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
-Plug 'machakann/vim-sandwich'
+call minpac#add('machakann/vim-sandwich')
 " TODO: Re-add and ensure performance is ok
 "Plug 'Rip-Rip/clang_complete'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-repeat'
+call minpac#add('tommcdo/vim-exchange')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-repeat')
 " Searching
-Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-grepper'
-Plug 'osyo-manga/vim-anzu'
-Plug 'osyo-manga/vim-over'
+call minpac#add('easymotion/vim-easymotion')
+call minpac#add('junegunn/fzf.vim')
+call minpac#add('mhinz/vim-grepper')
+call minpac#add('osyo-manga/vim-anzu')
+call minpac#add('osyo-manga/vim-over')
 " Other
-Plug 'fidian/hexmode'
+call minpac#add('fidian/hexmode')
 " TODO: This is extremely slow and saves tags when working on remote mount,
 " what gives? It seems to run ctags and open them up automatically
 "Plug 'jsfaint/gen_tags.vim'
-Plug 'justinmk/vim-gtfo'
-Plug 'justinmk/vim-dirvish'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-scriptease'
-Plug 'tpope/vim-tbone'
-Plug 'tpope/vim-unimpaired'
-Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/DoxygenToolkit.vim'
-Plug 'vim-utils/vim-man'
-Plug 'w0rp/ale'
-
-call plug#end()
+call minpac#add('justinmk/vim-gtfo')
+call minpac#add('justinmk/vim-dirvish')
+call minpac#add('tpope/vim-dispatch')
+call minpac#add('tpope/vim-eunuch')
+call minpac#add('tpope/vim-sensible')
+call minpac#add('tpope/vim-scriptease')
+call minpac#add('tpope/vim-tbone')
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('tpope/vim-vinegar')
+call minpac#add('vim-scripts/DoxygenToolkit.vim')
+call minpac#add('vim-utils/vim-man')
+call minpac#add('w0rp/ale')
+packloadall
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -495,9 +488,9 @@ nmap <leader>i :Autoformat<cr>
 let g:formatdef_autopep8 = "'autopep8 --max-line-length 100 - --range '.a:firstline.' '.a:lastline"
 let g:formatters_python = ['autopep8']
 
-" vim plug binds
-nmap <leader>pu :PlugUpdate<cr>
-nmap <leader>pc :PlugClean<cr>
+" minpac binds
+nmap <leader>pu :call minpac#update()<cr>
+nmap <leader>pc :call minpac#clean()<cr>
 
 " Remap minisnip trigger
 let g:minisnip_trigger = 'S'
@@ -537,6 +530,6 @@ nmap <leader>f <plug>(easymotion-s)
 "let g:gen_tags#gtags_default_map = 0
 
 " Generate CTAGS and GTAGS via dispatch
-nmap ,tc :Dispatch! ctags<CR>
+nmap ,tc :Dispatch! ctags<cr>
 " TODO Figure out how to also plug in loading the cscope datatbase
-nmap ,tg :Dispatch! gtags<CR>
+nmap ,tg :Dispatch! gtags<cr>
