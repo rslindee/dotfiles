@@ -358,7 +358,6 @@ nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Make grepper prompt smaller
 let g:grepper = {
             \ 'simple_prompt': 1,
             \ 'highlight': 1,
@@ -400,11 +399,11 @@ nmap ]w <Plug>(ale_next_wrap)
 nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
-" Map vim-grepper search current word with Ag
-nmap <leader>s :GrepperAg <c-r><c-w><cr>
+" Map vim-grepper search current word with rg
+nmap <leader>s :GrepperRg <c-r><c-w><cr>
 
-" Map vim-grepper to simply start
-nmap <leader>a :Grepper<cr>
+" Map vim-grepper to simply start with rg
+nmap <leader>a :Grepper -tool rg<cr>
 
 " Toggle fugitive Git blame
 nmap <leader>gb :Gblame<cr>
@@ -471,8 +470,8 @@ nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
 nmap <leader>o :FZF<cr>
-" Use Ag for FZF (which respects .gitignore)
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+" Use for FZF (which respects .gitignore)
+let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 
 " Use dispatch to do an async make with number of cores jobs
 nmap <leader>mm :Make -j4<cr>
