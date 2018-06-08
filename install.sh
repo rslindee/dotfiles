@@ -21,6 +21,7 @@ ALL_PACKAGES="atool \
     qutebrowser \
     ranger \
     renameutils \
+    ripgrep \
     socat \
     stow \
     sxiv \
@@ -32,13 +33,15 @@ ALL_PACKAGES="atool \
 
 PACKAGES_FEDORA="st \
     ImageMagick \
+    fd-find \
     terminus-fonts-console"
 
 FEDORA_COPR_REPOS="fszymanski/newsboat \
     flatcap/neomutt"
 
 PACKAGES_ARCH="terminus-font \
-    imagemagick"
+    imagemagick \
+    fd"
 
 PACKAGES_AUR="st"
 
