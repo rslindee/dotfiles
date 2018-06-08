@@ -130,6 +130,9 @@ alias wttr='curl wttr.in/90034'
 # Show available space of /mnt
 alias dfA='df -h /mnt/*'
 
+# Quick open with xdg-open
+alias o='xdg-open'
+
 # Use vim as manpager
 viman () {
     vim -c "Man $1 $2" -c 'silent only'
@@ -289,6 +292,8 @@ zle -N fancy-ctrl-z
 
 # FZF setup
 export FZF_DEFAULT_OPTS="--multi"
+# TODO write my own fzf searches using fd
+#export FZF_DEFAULT_COMMAND='fd --color=never'
 FZF_WIDGET_TMUX=1
 
 # Key bindings
