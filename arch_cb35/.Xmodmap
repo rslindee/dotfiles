@@ -9,17 +9,15 @@ clear control
 !Search key
 keycode 133 = Control_L
 !Left Ctrl
-keycode 37 = Alt_L
+keycode 37 = Super_L
 !Right Ctrl
-keycode 105 = Alt_R
-!Left Alt
-keycode 64 = Mode_switch
+keycode 105 = Super_R
 !Right Alt
-keycode 108 = Super_R
+keycode 108 = Mode_switch
 
 add control = Control_L
 add mod1 = Alt_L Alt_R Meta_L
-add mod4 = Super_R
+add mod4 = Super_L Super_R
 add mod5 = Mode_switch
 
 !Maps mode_switch+Number to F-key
@@ -38,31 +36,3 @@ keycode 21 = equal plus F12 F12
 
 !My custom mode_switch keymap
 keycode 22 = BackSpace BackSpace Delete
-
-keycode 24 = q Q exclam
-keycode 25 = w W at
-keycode 26 = e E numbersign
-keycode 27 = r R dollar
-keycode 28 = t T percent
-keycode 29 = y Y asciicircum
-keycode 30 = u U ampersand
-keycode 31 = i I asterisk
-keycode 32 = o O parenleft
-keycode 33 = p P parenright
-keycode 34 = bracketleft braceleft underscore
-
-keycode 38 = a A bracketleft
-keycode 39 = s S bracketright
-keycode 40 = d D braceleft
-keycode 41 = f F braceright
-keycode 42 = g G bar
-keycode 43 = h H Left
-keycode 44 = j J Down
-keycode 45 = k K Up
-keycode 46 = l L Right
-keycode 47 = semicolon colon minus
-keycode 48 = apostrophe quotedbl plus
-
-keycode 54 = c C equal
-keycode 57 = n N asciitilde
-keycode 58 = m M grave
