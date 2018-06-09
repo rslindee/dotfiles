@@ -3,7 +3,7 @@ set nocompatible
 " auto-clone and install minpac if not installed
 if empty(glob('~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim'))
     silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-    source $VIMRC
+    autocmd VimEnter * call minpac#update() | source $MYVIMRC
 endif
 
 
