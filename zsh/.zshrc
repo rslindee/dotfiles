@@ -101,13 +101,14 @@ upd()
         trizen -Syu
     fi
     echo "Updating zgen plugins..."
-    zgen update
+    zgen update &
     echo "Updating dotfiles..."
-    git -C ~/dotfiles pull
+    git -C ~/dotfiles pull &
     echo "Updating private dotfiles..."
-    git -C ~/dotfiles-private pull
+    git -C ~/dotfiles-private pull &
     echo "Updating personal wiki..."
-    git -C ~/wiki pull
+    git -C ~/wiki pull &
+    wait
 }
 
 # Show directory sizes
