@@ -165,15 +165,16 @@ bindsym $mod+v exec "echo 'cycle pause' | socat - /tmp/mpv-socket"
 bindsym $mod+a exec "mv ~/Downloads/*.torrent /mnt/3tera/torrent/watch"
 
 # Take screenshot of entire desktop with imagemagick
-bindsym --release $mod+Shift+s exec --no-startup-id import -window  root ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
+bindsym --release $mod+Shift+s exec --no-startup-id import -window root ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 
 # Take screenshot of selection/window with imagemagick
 bindsym --release $mod+s exec --no-startup-id import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 
 # Autostart
+# xcape map tapping left control to escape
 exec --no-startup-id xcape -e 'Control_L=Escape'
-# Start devmon for automounting disks
-exec --no-startup-id devmon
+# Start udisks autmount script
+exec --no-startup-id ~/scripts/udisks_automount.sh
 # Start st terminal with tmux
 exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
 # Start xbindkeys

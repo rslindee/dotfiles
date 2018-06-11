@@ -15,7 +15,6 @@ ALL_PACKAGES="atool \
     mpd \
     mpv \
     ncmpcpp \
-    neomutt \
     newsboat \
     python \
     qutebrowser \
@@ -26,6 +25,7 @@ ALL_PACKAGES="atool \
     stow \
     sxiv \
     tmux \
+    udisks2 \
     vim \
     xclip \
     zathura \
@@ -41,6 +41,7 @@ FEDORA_COPR_REPOS="fszymanski/newsboat \
 
 PACKAGES_ARCH="terminus-font \
     imagemagick \
+    neomutt \
     fd"
 
 PACKAGES_AUR="st"
