@@ -233,18 +233,17 @@ set tabline=%!MyTabLine()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Turn backup off
-set nobackup
-set nowb
-set noswapfile
-
-" For whatever reason I still see undo files getting created...
-set noundofile
+" Set undo/backup/swap files to directory in home
+set undofile
+set undodir=~/.vim/.undo//
+set backup
+set backupdir=~/.vim/.backup//
+set directory=~/.vim/.swp//
 
 " Reload vimrc manually
 nnoremap <leader>vr :source $MYVIMRC<CR>
 
-" Automatially reload file file if shell command is run inside vim
+" Automatially reload file if shell command is run inside vim
 set autoread
 
 " Reload current buffer only if there are no edits
