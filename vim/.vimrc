@@ -53,9 +53,6 @@ call minpac#add('osyo-manga/vim-over')
 " Other
 " TODO: try https://github.com/skywind3000/asyncrun.vim
 call minpac#add('fidian/hexmode')
-" TODO: This is extremely slow and saves tags when working on remote mount,
-" what gives? It seems to run ctags and open them up automatically
-"Plug 'jsfaint/gen_tags.vim'
 call minpac#add('justinmk/vim-gtfo')
 call minpac#add('justinmk/vim-dirvish')
 call minpac#add('tpope/vim-dispatch')
@@ -525,18 +522,6 @@ let g:winresizer_start_key = '<leader>W'
 
 " Use easymotion to find single char
 nmap <leader>f <plug>(easymotion-s)
-
-" TODO: Figure out why gen_tags is so slow for network mounts
-" Set gen_tags blacklist locations
-" let g:gen_tags#blacklist = ['$HOME']
-" Store tags in .git/tags_dir if project has repo, otherwise store in
-" ~/.cache/tags_dir
-"let g:gen_tags#use_cache_dir = 0
-" Prune tags from tagfile before incremental update
-"let g:gen_tags#ctags_prune = 0
-"let g:gen_tags#ctags_opts = '--exclude=.git'
-" Remove default Ctrl-\ cscope binds (I prefer to use my own)
-"let g:gen_tags#gtags_default_map = 0
 
 " Generate CTAGS and GTAGS via dispatch
 nmap ,tc :Dispatch! ctags<cr>
