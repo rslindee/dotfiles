@@ -55,7 +55,7 @@ call minpac#add('osyo-manga/vim-over')
 call minpac#add('fidian/hexmode')
 call minpac#add('justinmk/vim-gtfo')
 call minpac#add('justinmk/vim-dirvish')
-call minpac#add('tpope/vim-dispatch')
+call minpac#add('skywind3000/asyncrun.vim')
 call minpac#add('tpope/vim-eunuch')
 call minpac#add('tpope/vim-obsession')
 call minpac#add('tpope/vim-sensible')
@@ -314,9 +314,6 @@ map <leader>pp :r!xclip -o -sel clip<cr>
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
 
-" Call ctags
-nmap <leader>C :silent !ctags<cr>:redraw!<cr>
-
 " Set <c-d> to forward-delete in insert mode
 inoremap <c-d> <del>
 
@@ -443,6 +440,9 @@ nmap <leader>t :TagbarToggle<cr>
 " Toggle Hexmode
 nmap <leader>H :Hexmode<cr>
 
+" Disable wrapping in quickfix
+let g:qf_nowrap = 0
+
 " Toggle location list vim-qf
 nmap <leader>l <Plug>QfLtoggle
 
@@ -450,7 +450,7 @@ nmap <leader>l <Plug>QfLtoggle
 nmap <leader>q <Plug>QfCtoggle
 
 " Search for all todo/fixme and put into quickfix list
-nmap <leader>T :GrepperAg '(TODO\|FIXME)'<cr>
+nmap <leader>T :GrepperRg '(TODO\|FIXME)'<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -471,14 +471,14 @@ nmap <leader>o :FZF<cr>
 " Use for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 
-" Use dispatch to do an async make with number of cores jobs
-nmap <leader>mm :Make -j4<cr>
+" Async make with 4 jobs
+nmap <leader>mm :AsyncRun make -j4<cr>
 
-" Use dispatch to do an async make clean
-nmap <leader>mc :Make clean<cr>
+" Async make clean
+nmap <leader>mc :AsyncRun make clean<cr>
 
-" Use dispatch to do an async make clang-tidy
-nmap <leader>mt :Make clang-tidy<cr>
+" Async make clang-tidy
+nmap <leader>mt :AsyncRun make clang-tidy<cr>
 
 " LaTeX (rubber) macro for compiling
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
@@ -523,7 +523,10 @@ let g:winresizer_start_key = '<leader>W'
 " Use easymotion to find single char
 nmap <leader>f <plug>(easymotion-s)
 
-" Generate CTAGS and GTAGS via dispatch
-nmap ,tc :Dispatch! ctags<cr>
+" Generate ctags and gtags
+nmap ,tc :Asyncrun ctags<cr>
 " TODO Figure out how to also plug in loading the cscope datatbase
-nmap ,tg :Dispatch! gtags<cr>
+nmap ,tg :Asyncrun gtags<cr>
+
+" Make ayncrun to work with vim-fugitive
+command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
