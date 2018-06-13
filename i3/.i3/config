@@ -75,14 +75,14 @@ bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 mode "resize"
 {
     bindsym h resize shrink width 5 px or 5 ppt
-    bindsym j resize grow height 5 px or 5 ppt
-    bindsym k resize shrink height 5 px or 5 ppt
-    bindsym l resize grow width 5 px or 5 ppt
+        bindsym j resize grow height 5 px or 5 ppt
+        bindsym k resize shrink height 5 px or 5 ppt
+        bindsym l resize grow width 5 px or 5 ppt
 
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-    bindsym Control+bracketleft mode "default"
-    bindsym q mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym Control+bracketleft mode "default"
+        bindsym q mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -115,20 +115,17 @@ set $black #000000
 #start of bar section
 bar {
     status_command i3status
-    colors {
-        # bar background color
-        background $black
-        # text color used for blocks that do not have a color specified.
-        statusline $fg
-
-        separator $fg
-        # workspaces section
-        #                    border  backgr. text
-        focused_workspace    $fg $fg $bg
-        inactive_workspace   $fg $bg $fg
-        active_workspace     $fg $bg $fg
-        urgent_workspace     $red $red $bg
-    }
+        colors {
+# bar background color
+            background $black
+                statusline $fg
+                separator $fg
+# workspaces section (border backgr. text)
+                focused_workspace    $fg $fg $bg
+                inactive_workspace   $fg $bg $fg
+                active_workspace     $fg $bg $fg
+                urgent_workspace     $red $red $bg
+        }
 }
 #end of bar section
 
@@ -172,11 +169,14 @@ bindsym --release $mod+Shift+s exec --no-startup-id import -window root ~/screen
 # Take screenshot of selection/window with imagemagick
 bindsym --release $mod+s exec --no-startup-id import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 
+# TODO toggle xrandr config
+#bindsym $mod+d exec "xrandr --output Screen 0 --auto"
+
 # Autostart
 # xcape map tapping left control to escape
 exec --no-startup-id xcape -e 'Control_L=Escape'
-# Start udisks autmount script
-exec --no-startup-id ~/scripts/udisks_automount.sh
+# Start devmon
+exec --no-startup-id devmon
 # Start st terminal with tmux
 exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
 # Start xbindkeys
