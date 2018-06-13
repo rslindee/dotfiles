@@ -146,7 +146,7 @@ bindsym $mod+Return exec "st -f 'Terminus:size=10:antialias=false:autohint=false
 # start browser
 bindsym $mod+i exec qutebrowser
 # TODO fix this lame hack to run chromium on both arch and fedora
-bindsym $mod+Shift+i exec chromium; exec chromium-browser
+bindsym $mod+Shift+i exec "chromium || chromium-browser"
 
 # lock i3 and turn off monitor(s)
 bindsym $mod+x exec "i3lock --color=600000 && sleep .1 && xset dpms force off"
