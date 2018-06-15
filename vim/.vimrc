@@ -521,9 +521,9 @@ let g:winresizer_start_key = '<leader>W'
 nmap <leader>f <plug>(easymotion-s)
 
 " Generate ctags and gtags
-nmap ,tc :Asyncrun ctags<cr>
+nmap ,tc :AsyncRun ctags<cr>
 " TODO Figure out how to also plug in loading the cscope datatbase
-nmap ,tg :Asyncrun gtags<cr>
+nmap ,tg :AsyncRun gtags<cr>
 
 " Make ayncrun to work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
