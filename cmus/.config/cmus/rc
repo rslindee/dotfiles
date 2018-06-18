@@ -1,2 +1,8 @@
 colorscheme gruvbox
+# Only play album when selected from library view
+set aaa_mode=album
 
+bind -f common ^N player-next
+bind -f common ^P player-prev
+bind -f common ^D win-half-page-down
+bind -f common ^U win-half-page-up
