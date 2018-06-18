@@ -22,6 +22,8 @@ config.bind('<Ctrl-j>', 'command-history-next', mode='command')
 config.bind('cr', 'config-source')
 config.bind('gi', 'hint inputs')
 config.bind('D', 'download-open ;; download-remove')
+config.bind('<Ctrl-Space>', 'spawn --userscript qute-pass --dmenu-invocation dmenu')
+config.bind('<Space>', 'spawn --userscript qute-pass --dmenu-invocation dmenu --password-only')
 
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
         'y': 'http://www.youtube.com/results?search_query={}',
