@@ -16,6 +16,7 @@ ALL_PACKAGES="atool \
     mpv \
     ncmpcpp \
     newsboat \
+    pass \
     python \
     qutebrowser \
     ranger \
@@ -34,15 +35,16 @@ ALL_PACKAGES="atool \
 PACKAGES_FEDORA="st \
     ImageMagick \
     fd-find \
+    passmenu \
+    python3 \
     python3-tldextract \
     terminus-fonts-console \
-    udevil"
+    unifont-fonts"
 
 # TODO Fedora RPMSphere
 # udevil
 
-FEDORA_COPR_REPOS="fszymanski/newsboat \
-    flatcap/neomutt"
+FEDORA_COPR_REPOS="flatcap/neomutt"
 
 PACKAGES_ARCH="terminus-font \
     imagemagick \
@@ -60,9 +62,9 @@ STOW_LIST="cgdb \
     git \
     i3 \
     mimeapps \
-    mpd \
     mutt \
     ncmpcpp \
+    pass \
     qutebrowser \
     ranger \
     ssh \
