@@ -34,7 +34,11 @@ ALL_PACKAGES="atool \
 PACKAGES_FEDORA="st \
     ImageMagick \
     fd-find \
-    terminus-fonts-console"
+    terminus-fonts-console \
+    udevil"
+
+# TODO Fedora RPMSphere
+# udevil
 
 FEDORA_COPR_REPOS="fszymanski/newsboat \
     flatcap/neomutt"
@@ -42,7 +46,8 @@ FEDORA_COPR_REPOS="fszymanski/newsboat \
 PACKAGES_ARCH="terminus-font \
     imagemagick \
     neomutt \
-    fd"
+    fd \
+    udevil"
 
 PACKAGES_AUR="st"
 
