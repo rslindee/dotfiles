@@ -34,6 +34,7 @@ ALL_PACKAGES="atool \
 PACKAGES_FEDORA="st \
     ImageMagick \
     fd-find \
+    python3-tldextract \
     terminus-fonts-console \
     udevil"
 
@@ -47,6 +48,7 @@ PACKAGES_ARCH="terminus-font \
     imagemagick \
     neomutt \
     fd \
+    python-tldextract \
     udevil"
 
 PACKAGES_AUR="st"
