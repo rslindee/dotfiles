@@ -13,8 +13,6 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Viewing
 call minpac#add('chrisbra/vim-diff-enhanced')
-" TODO: If no good, try https://github.com/whiteinge/dotfiles/blob/master/bin/diffconflicts instead
-call minpac#add('christoomey/vim-conflicted')
 call minpac#add('idanarye/vim-merginal')
 call minpac#add('kshenoy/vim-signature')
 call minpac#add('rslindee/vim-hier')
@@ -50,7 +48,6 @@ call minpac#add('mhinz/vim-grepper')
 call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('osyo-manga/vim-over')
 " Other
-" TODO: try https://github.com/skywind3000/asyncrun.vim
 call minpac#add('fidian/hexmode')
 call minpac#add('justinmk/vim-gtfo')
 call minpac#add('justinmk/vim-dirvish')
@@ -362,7 +359,6 @@ let g:grepper = {
 "let g:SignatureMarkTextHLDynamic = 1
 
 " Dirvish sidetab
-let g:loaded_netrwPlugin = 1
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
 nnoremap - :VleftDirvish<CR>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
@@ -498,9 +494,8 @@ nmap <leader>pc :call minpac#clean()<cr>
 " Remap minisnip trigger
 let g:minisnip_trigger = '<c-s>'
 
-" Per recommendation from vim-sandwich
-nmap s <Nop>
-xmap s <Nop>
+" Use vim-surround mappings with sandwich
+runtime macros/sandwich/keymap/surround.vim
 
 " TODO: Re-add and ensure performance is ok
 " mucomplete-required settings
