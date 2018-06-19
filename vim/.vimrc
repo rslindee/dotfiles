@@ -42,8 +42,8 @@ call minpac#add('tommcdo/vim-exchange')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
 " Searching
-call minpac#add('easymotion/vim-easymotion')
 call minpac#add('junegunn/fzf.vim')
+call minpac#add('justinmk/vim-sneak')
 call minpac#add('mhinz/vim-grepper')
 call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('osyo-manga/vim-over')
@@ -495,6 +495,7 @@ nmap <leader>pc :call minpac#clean()<cr>
 let g:minisnip_trigger = '<c-s>'
 
 " Use vim-surround mappings with sandwich
+let g:sandwich_no_default_key_mappings = 1
 runtime macros/sandwich/keymap/surround.vim
 
 " TODO: Re-add and ensure performance is ok
@@ -506,14 +507,8 @@ runtime macros/sandwich/keymap/surround.vim
 "inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
 "set shortmess+=c   " Shut off completion messages
 
-" Set smartcase for easymotion searches
-let g:EasyMotion_smartcase = 1
-
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>W'
-
-" Use easymotion to find single char
-nmap <leader>f <plug>(easymotion-s)
 
 " Generate ctags and gtags
 nmap ,tc :AsyncRun ctags<cr>
@@ -522,3 +517,9 @@ nmap ,tg :AsyncRun gtags<cr>
 
 " Make ayncrun to work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
+
+" Enable vim-sneak label mode for easymotion-like behavior
+let g:sneak#label = 1
+
+" Use vimrc case settings (e.g. smartcase) for vim-sneak
+let g:sneak#use_ic_scs = 1
