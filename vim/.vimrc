@@ -35,8 +35,7 @@ call minpac#add('joereynolds/vim-minisnip')
 call minpac#add('junegunn/vim-easy-align')
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
-" TODO: Fix conflicts of s between sandwich and sneak
-"call minpac#add('machakann/vim-sandwich')
+call minpac#add('machakann/vim-sandwich')
 " TODO: Re-add and ensure performance is ok
 "Plug 'Rip-Rip/clang_complete'
 call minpac#add('tommcdo/vim-exchange')
@@ -496,8 +495,9 @@ nmap <leader>pc :call minpac#clean()<cr>
 let g:minisnip_trigger = '<c-s>'
 
 " Use vim-surround mappings with sandwich
-let g:sandwich_no_default_key_mappings = 1
-"runtime macros/sandwich/keymap/surround.vim
+" TODO: This is a little non-ideal, we should be able to use runtime,
+" but this appears a little tricky with minpac
+source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
 
 " TODO: Re-add and ensure performance is ok
 " mucomplete-required settings
