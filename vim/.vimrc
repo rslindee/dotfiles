@@ -303,10 +303,16 @@ noremap <leader>0 :tablast<cr>
 " Use system clipboard
 set clipboard=unnamed
 
-" Copy last yank to xclip
-map <leader>yy :call system("xclip -i -sel clip", getreg("\""))<cr>
-" Paste from xclip on next line
-map <leader>pp :r!xclip -o -sel clip<cr>
+" pipe contents of paste buffer to xclip
+nnoremap <leader>yy :call system('xclip', @0)<CR>
+
+" add contents of xclip to x register
+" paste contents of x register inline
+function! XclipO()
+    let @x=system('xclip -o')
+    normal! "xp
+endfunction
+nnoremap <leader>pp :call XclipO()<CR>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
