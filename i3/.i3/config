@@ -175,15 +175,5 @@ bindsym $mod+p exec passmenu -i -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -f
 # TODO toggle xrandr config
 #bindsym $mod+d exec "xrandr --output Screen 0 --auto"
 
-# Autostart
-# xcape map tapping left control to escape
-exec --no-startup-id xcape -e 'Control_L=Escape'
-# Start devmon
-exec --no-startup-id devmon
 # Start st terminal with tmux
 exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
-# Start xbindkeys
-exec --no-startup-id xbindkeys
-# Enable xautolock process
-exec_always --no-startup-id xautolock -time 10 -locker 'i3lock --color=600000 && sleep .1 && xset dpms force off'
-

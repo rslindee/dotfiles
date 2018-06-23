@@ -23,6 +23,9 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+# source xprofile from home dir
+[ -f $HOME/.xprofile ] && . $HOME/.xprofile
+
 # start some nice programs
 
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
@@ -32,6 +35,4 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
     unset f
 fi
 
-mpd
-google-musicmanager
 exec i3
