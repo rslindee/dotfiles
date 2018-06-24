@@ -532,3 +532,6 @@ let g:sneak#label = 1
 
 " Use vimrc case settings (e.g. smartcase) for vim-sneak
 let g:sneak#use_ic_scs = 1
+
+" Use xdg-open to open browser for devdocs.io
+let g:devdocs_open_command = "xdg-open"
