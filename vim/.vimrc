@@ -45,7 +45,6 @@ call minpac#add('tpope/vim-repeat')
 " Searching
 call minpac#add('junegunn/fzf.vim')
 call minpac#add('justinmk/vim-sneak')
-call minpac#add('mhinz/vim-grepper')
 call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('osyo-manga/vim-over')
 " Other
@@ -334,7 +333,7 @@ map <leader>df Vf{%y
 " Open index in personal wiki
 nmap <leader>ww :tabe ~/wiki/index.md<cr>
 " Use pandoc to create pdf of markdown file and dump in /tmp
-nmap <leader>wc :silent !pandoc -o /tmp/%:t:r\.pdf %<cr>:redraw!<cr>
+nmap <leader>wc :AsyncRun pandoc --output $(VIM_FILENOEXT).pdf %:p<cr>
 
 " All cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
@@ -353,14 +352,13 @@ nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
 " Search for all symbol occurances of word under the cursor
 nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 
+" Set ripgrep as grep program
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:grepper = {
-            \ 'simple_prompt': 1,
-            \ 'highlight': 1,
-            \ }
-
 " TODO: Disabled this for now, as it was causing errors on startup when marks
 " were left. See https://github.com/kshenoy/vim-signature/issues/141
 " vim-signature highlight marks based on gitgutter status
@@ -396,11 +394,8 @@ nmap ]w <Plug>(ale_next_wrap)
 nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
-" Map vim-grepper search current word with rg
-nmap <leader>s :GrepperRg <c-r><c-w><cr>
-
-" Map vim-grepper to simply start with rg
-nmap <leader>a :Grepper -tool rg<cr>
+nmap <leader>a :AsyncRun -program=grep<space>
+nmap <leader>s :AsyncRun -program=grep <c-r><c-w><cr>
 
 " Toggle fugitive Git blame
 nmap <leader>gb :Gblame<cr>
@@ -452,7 +447,7 @@ nmap <leader>l <Plug>QfLtoggle
 nmap <leader>q <Plug>QfCtoggle
 
 " Search for all todo/fixme and put into quickfix list
-nmap <leader>T :GrepperRg '(TODO\|FIXME)'<cr>
+nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
