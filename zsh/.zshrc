@@ -125,8 +125,11 @@ alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
 
-# Show weather for 90034
-alias wttr='curl wttr.in/90034'
+# Show weather
+wttr()
+{
+    curl "wttr.in/$1";
+}
 
 # Show available space of /mnt
 alias dfA='df -h /mnt/*'
@@ -138,7 +141,8 @@ alias o='xdg-open'
 alias cmus-upd='cmus-remote --clear --library ~/music'
 
 # Use vim as manpager
-viman () {
+viman ()
+{
     vim -c "Man $1 $2" -c 'silent only'
 }
 
