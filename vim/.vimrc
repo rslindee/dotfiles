@@ -12,42 +12,68 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Viewing
+" Use git diffing algos for improved diffs
 call minpac#add('chrisbra/vim-diff-enhanced')
-call minpac#add('idanarye/vim-merginal')
+" Show and navigate marks
 call minpac#add('kshenoy/vim-signature')
+" Highlight errors
 call minpac#add('rslindee/vim-hier')
+" Apply colors to different parentheses levels
 call minpac#add('junegunn/rainbow_parentheses.vim')
+" View tag information for current file
 call minpac#add('majutsushi/tagbar')
+" Diff entire folders
 call minpac#add('will133/vim-dirdiff')
+" Improved quickfix/loclist  behavior
 call minpac#add('romainl/vim-qf')
+" Use quickfix for include-search and definition-search
 call minpac#add('romainl/vim-qlist')
+" Window pane resize mode
 call minpac#add('simeji/winresizer')
+" View line indents
 call minpac#add('Yggdroot/indentLine')
+
 " Version Control
+" View git information in gutter
 call minpac#add('airblade/vim-gitgutter')
+" View, edit, merge branches
+call minpac#add('idanarye/vim-merginal')
+" View git commit history
 call minpac#add('junegunn/gv.vim')
+" Run git commands, view status
 call minpac#add('tpope/vim-fugitive')
+
 " Themes
 call minpac#add('morhetz/gruvbox')
+
 " Editing
+" Enhanced splitting and joining lines
 call minpac#add('AndrewRadev/splitjoin.vim')
+" Uses external formatting tools
 call minpac#add('Chiel92/vim-autoformat')
+" Snippet tool
 call minpac#add('joereynolds/vim-minisnip')
+" Align blocks of text
 call minpac#add('junegunn/vim-easy-align')
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
 call minpac#add('machakann/vim-sandwich')
 " TODO: Re-add and ensure performance is ok
 "Plug 'Rip-Rip/clang_complete'
+" Swap text using motions
 call minpac#add('tommcdo/vim-exchange')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
+
 " Searching
 call minpac#add('junegunn/fzf.vim')
+" Extra motion for two characters
 call minpac#add('justinmk/vim-sneak')
 call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('osyo-manga/vim-over')
+
 " Other
+" View/edit hex data
 call minpac#add('fidian/hexmode')
 call minpac#add('justinmk/vim-gtfo')
 call minpac#add('justinmk/vim-dirvish')
