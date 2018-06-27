@@ -331,13 +331,19 @@ set clipboard=unnamed
 " pipe contents of paste buffer to xclip
 nnoremap <leader>yy :call system('xclip', @0)<CR>
 
-" add contents of xclip to x register
-" paste contents of x register inline
-function! XclipO()
-    let @x=system('xclip -o')
+" add contents of xclip to x register and paste
+function! Xclip_paste()
+    let @x=system('xclip -o -sel clip')
     normal! "xp
 endfunction
-nnoremap <leader>pp :call XclipO()<CR>
+
+function! Xclip_paste_before()
+    let @x=system('xclip -o -sel clip')
+    normal! "xP
+endfunction
+
+nnoremap <leader>pp :call Xclip_paste()<CR>
+nnoremap <leader>pP :call Xclip_paste_before()<CR>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
