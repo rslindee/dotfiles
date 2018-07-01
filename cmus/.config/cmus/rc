@@ -1,4 +1,4 @@
-colorscheme jellybeans
+colorscheme night
 # Only play album when selected from library view
 set aaa_mode=album
 
