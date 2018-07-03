@@ -16,8 +16,6 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('chrisbra/vim-diff-enhanced')
 " Show and navigate marks
 call minpac#add('kshenoy/vim-signature')
-" Highlight errors
-call minpac#add('rslindee/vim-hier')
 " Apply colors to different parentheses levels
 call minpac#add('junegunn/rainbow_parentheses.vim')
 " View tag information for current file
@@ -86,9 +84,9 @@ call minpac#add('tpope/vim-scriptease')
 call minpac#add('tpope/vim-tbone')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-vinegar')
-call minpac#add('vim-scripts/DoxygenToolkit.vim')
 call minpac#add('vim-utils/vim-man')
-call minpac#add('w0rp/ale')
+" TODO: ALE causing vim segfaults with sshfs files?!
+"call minpac#add('w0rp/ale')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
