@@ -327,7 +327,7 @@ noremap <leader>0 :tablast<cr>
 set clipboard=unnamed
 
 " pipe contents of paste buffer to xclip
-nnoremap <leader>yy :call system('xclip', @0)<CR>
+nnoremap <leader>yy :call system("xclip -i -sel clip", getreg("\""))<cr>
 
 " add contents of xclip to x register and paste
 function! Xclip_paste()
