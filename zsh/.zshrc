@@ -146,6 +146,8 @@ viman ()
     vim -c "Man $1 $2" -c 'silent only'
 }
 
+alias rang='ranger'
+
 # Attaches cgdb to running PID of executable.
 # Note: Needs to be in current directory of said executable to work.
 cgdb-attach()
