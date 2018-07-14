@@ -43,6 +43,9 @@ c.downloads.location.prompt = False
 
 c.hints.next_regexes.append(r'\B›\B')
 c.hints.prev_regexes.append(r'\B‹\B')
+c.hints.prev_regexes.append(r'\B«\B')
+c.hints.next_regexes.append(r'\B»\B')
+
 c.hints.chars = ('asdfghjklqwertyuiopzxcvbnm')
 c.content.geolocation = True
 c.tabs.background = True
