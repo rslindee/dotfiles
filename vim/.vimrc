@@ -28,6 +28,8 @@ call minpac#add('romainl/vim-qf')
 call minpac#add('romainl/vim-qlist')
 " Window pane resize mode
 call minpac#add('simeji/winresizer')
+" Enhanced merge conflicts
+call minpac#add('whiteinge/diffconflicts')
 " View line indents
 call minpac#add('Yggdroot/indentLine')
 
