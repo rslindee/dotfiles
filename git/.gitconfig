@@ -12,11 +12,11 @@
 [credential]
     helper = cache --timeout=3600
 [merge]
-    tool = vimdiff
+	tool = diffconflicts
     conflictstyle = diff3
 [mergetool]
     keeptemporaries = false
-    keepbackup = false
+	keepBackup = false
     prompt = false
     trustexitcode = true
 [alias]
@@ -44,3 +44,6 @@
     up = !git commit -am "Update" && git push
 [diff]
     tool = vimdiff
+[mergetool "diffconflicts"]
+	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	trustExitCode = true
