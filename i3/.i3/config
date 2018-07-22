@@ -158,10 +158,10 @@ bindsym $mod+m exec amixer set Master toggle
 bindsym $mod+c exec cmus-remote -u
 
 # toggle pause mpv
-bindsym $mod+v exec "echo 'cycle pause' | socat - /tmp/mpv-socket"
+bindsym $mod+v exec echo 'cycle pause' | socat - /tmp/mpv-socket
 
 # Call torrent_add script
-bindsym $mod+a exec "mv ~/Downloads/*.torrent /mnt/3tera/torrent/watch"
+bindsym $mod+a exec mv ~/Downloads/*.torrent ~/torrents
 
 # Take screenshot of entire desktop with imagemagick
 bindsym --release $mod+Shift+s exec --no-startup-id import -window root ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
@@ -180,3 +180,6 @@ exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohi
 
 # call xkill
 bindsym --release $mod+Shift+x exec xkill
+
+# call mons to cycle through modes
+bindsym $mod+Shift+m exec mons -n
