@@ -62,32 +62,50 @@ call minpac#add('machakann/vim-sandwich')
 "Plug 'Rip-Rip/clang_complete'
 " Swap text using motions
 call minpac#add('tommcdo/vim-exchange')
+" Comment out lines via motion
 call minpac#add('tpope/vim-commentary')
+" Repeat support for various plugins
 call minpac#add('tpope/vim-repeat')
 
 " Searching
+" Hooks for fzf
 call minpac#add('junegunn/fzf.vim')
 " Extra motion for two characters
 call minpac#add('justinmk/vim-sneak')
+" Adds extra info when searching
 call minpac#add('osyo-manga/vim-anzu')
+" Highlighting and enhancements for substitute command
 call minpac#add('osyo-manga/vim-over')
 
 " Other
 " View/edit hex data
 call minpac#add('fidian/hexmode')
+" Opens term or file manager of current file
 call minpac#add('justinmk/vim-gtfo')
+" Directory browser
 call minpac#add('justinmk/vim-dirvish')
+" Open dev docs site for current word
 call minpac#add('romainl/vim-devdocs')
+" Call commands async
 call minpac#add('skywind3000/asyncrun.vim')
+" Unix commands
 call minpac#add('tpope/vim-eunuch')
+" Session support
 call minpac#add('tpope/vim-obsession')
+" Basic settings everyone can agree on
 call minpac#add('tpope/vim-sensible')
+" Vimscript debugger
 call minpac#add('tpope/vim-scriptease')
+" Enhanced tmux support/commands
 call minpac#add('tpope/vim-tbone')
+" Extra keymaps
 call minpac#add('tpope/vim-unimpaired')
+" Enhanced netrw
 call minpac#add('tpope/vim-vinegar')
+" Vim manpager
 call minpac#add('vim-utils/vim-man')
 " TODO: ALE causing vim segfaults with sshfs files?!
+" Async linter
 "call minpac#add('w0rp/ale')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -562,3 +580,6 @@ let g:sneak#use_ic_scs = 1
 
 " Use xdg-open to open browser for devdocs.io
 let g:devdocs_open_command = "xdg-open"
+
+" Start enhanced substitution
+nmap <leader>S :OverCommandLine %s/<cr>
