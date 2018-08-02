@@ -340,6 +340,9 @@ noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
 
+" I never need the behavior of ' jumping, so use it for ` jumping
+nnoremap ' `
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -405,6 +408,9 @@ nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 " Set ripgrep as grep program
 set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m
+
+" Quick-execute macro q
+nnoremap Q @q
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
