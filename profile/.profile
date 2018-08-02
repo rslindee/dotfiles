@@ -1,8 +1,8 @@
 # Autostart
-# Start xbindkeys
-xbindkeys &
-# xcape map tapping left control to escape
-xcape -e 'Control_L=Escape' &
+# Start xbindkeys (daemon mode)
+xbindkeys
+# xcape map tapping left control to escape (daemon mode)
+xcape -e 'Control_L=Escape'
 # Start devmon
 devmon &
 # Enable xautolock process
