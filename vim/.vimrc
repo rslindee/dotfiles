@@ -50,6 +50,8 @@ call minpac#add('morhetz/gruvbox')
 " Enhanced splitting and joining lines
 call minpac#add('AndrewRadev/splitjoin.vim')
 " Uses external formatting tools
+" TODO: Figure out alternative tool or fix for issue with this clearing out
+" last mark when run
 call minpac#add('Chiel92/vim-autoformat')
 " Snippet tool
 call minpac#add('joereynolds/vim-minisnip')
@@ -174,9 +176,11 @@ set completeopt-=preview
 set mouse=a
 set ttymouse=xterm2
 
+" TODO: these both kinda kill screen performance (at least on my mac)
+" these may be vim bugs, follow up later
 " Line highlighting
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 
 " Show 10 lines below/above cursor at all times
 set scrolloff=10
@@ -450,6 +454,7 @@ nmap ]w <Plug>(ale_next_wrap)
 nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
+nmap <leader>A :AsyncStop<cr>
 nmap <leader>a :AsyncRun -program=grep<space>
 nmap <leader>s :AsyncRun -program=grep <c-r><c-w><cr>
 
@@ -539,6 +544,11 @@ nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 " View PDF macro; '%:r' is current file's root (base) name.
 nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 
+" TODO - It would probably be a good idea to instead write a simple function
+" which checks the current file extension, then calls an appropriate formatter
+" based on the extension, as Autoformat appears to wreck recently set marks
+" try looking into setting equalprg a la https://github.com/fsouza/vimfiles/blob/master/ftdetect/clang-format.vim
+"
 " Run vim-autoformat on entire file (falls back to vim's default
 " tabbing/spacing if filetype is unsupported by any formatprogram)
 nmap <leader>i :Autoformat<cr>
@@ -589,3 +599,6 @@ let g:devdocs_open_command = "xdg-open"
 
 " Start enhanced substitution
 nmap <leader>S :OverCommandLine %s/<cr>
+
+" Add fzf path for mac and brew-installed fzf
+set rtp+=/usr/local/opt/fzf
