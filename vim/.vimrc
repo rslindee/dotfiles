@@ -538,6 +538,9 @@ nmap <leader>mc :AsyncRun make clean<cr>
 " Async make clang-tidy
 nmap <leader>mt :AsyncRun make clang-tidy<cr>
 
+" Async make with 4 jobs and flash when done
+nmap <leader>mf :AsyncRun make -j4 && make flash<cr>
+
 " LaTeX (rubber) macro for compiling
 nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 
