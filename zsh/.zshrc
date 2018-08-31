@@ -9,7 +9,6 @@ source ~/.zgen/zgen.zsh
 if ! zgen saved; then
 
     zgen load "zsh-users/zsh-completions"
-    zgen load "HeroCC/LS_COLORS"
     zgen load "ytet5uy4/fzf-widgets"
     # zsh-syntax highlighting MUST go before substring-search
     zgen load "zsh-users/zsh-syntax-highlighting"
@@ -77,9 +76,6 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # Aliases
-
-# Give ls colors and sort directories at top
-alias ls='ls --group-directories-first --color=auto'
 
 # All files, human-readable sizes
 alias l='ls -lAh'
