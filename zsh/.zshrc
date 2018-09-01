@@ -14,7 +14,6 @@ if ! zgen saved; then
     zgen load "zsh-users/zsh-syntax-highlighting"
     zgen load "zsh-users/zsh-history-substring-search"
     zgen load "zdharma/zsh-diff-so-fancy"
-    zgen load "paulirish/git-open"
 
     # generate the init script from plugins above
     zgen save
@@ -37,17 +36,6 @@ ZSH_THEME_GIT_PROMPT_REPO="%F{197}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
 ZSH_THEME_DIRECTORY="%F{30}%~%f"
-
-# Check if repo is dirty
-function parse_git_dirty() {
-    local STATUS=''
-    local FLAGS
-    FLAGS=('--porcelain')
-    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
-    if [[ -n ${STATUS} ]]; then
-        print ${ZSH_THEME_GIT_PROMPT_DIRTY}
-    fi
-}
 
 # shortens the pwd for use in prompt
 function git_prompt_info() {
