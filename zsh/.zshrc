@@ -78,7 +78,7 @@ zle -N zle-keymap-select
 # Aliases
 
 # All files, human-readable sizes
-alias l='ls -lAh'
+alias l='ls -lAh --color=auto'
 
 # Change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
