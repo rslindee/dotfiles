@@ -1,14 +1,14 @@
-
 [Default Applications]
+application/pdf=org.pwmt.zathura.desktop
+image/gif=sxiv.desktop
 image/jpeg=sxiv.desktop
-text/html=qutebrowser.desktop
+image/png=sxiv.desktop
+x-scheme-handler/about=qutebrowser.desktop
 x-scheme-handler/http=qutebrowser.desktop
 x-scheme-handler/https=qutebrowser.desktop
-x-scheme-handler/about=qutebrowser.desktop
 x-scheme-handler/unknown=qutebrowser.desktop
-application/pdf=org.pwmt.zathura.desktop
+text/html=qutebrowser.desktop
 text/plain=vim.desktop
-image/png=sxiv.desktop
 video/ogg=mpv.desktop
 video/quicktime=mpv.desktop
 video/webm=mpv.desktop
