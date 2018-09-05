@@ -347,6 +347,12 @@ noremap <leader>0 :tablast<cr>
 " I never need the behavior of ' jumping, so use it for ` jumping
 nnoremap ' `
 
+" Moving between panes
+noremap <c-h> <c-w>h
+noremap <c-j> <c-w>j
+noremap <c-k> <c-w>k
+noremap <c-l> <c-w>l
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -416,6 +422,9 @@ set grepformat=%f:%l:%c:%m
 " Quick-execute macro q
 nnoremap Q @q
 
+" Redraw and disable highlighting
+nmap <leader>l :redraw!<cr>:noh<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -428,12 +437,6 @@ nnoremap Q @q
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
 nnoremap - :VleftDirvish<CR>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-
-" Disable vim-hier by default
-let g:hier_enabled = 0
-
-" Toggle vim-hier for quickfix warning/error highlighting
-nmap <leader>Q :HierToggle<cr>
 
 " Turn off indentLine by default
 let g:indentLine_enabled = 0
@@ -502,7 +505,7 @@ nmap <leader>H :Hexmode<cr>
 let g:qf_nowrap = 0
 
 " Toggle location list vim-qf
-nmap <leader>l <Plug>QfLtoggle
+nmap <leader>Q <Plug>QfLtoggle
 
 " Toggle quickfix list vim-qf
 nmap <leader>q <Plug>QfCtoggle
