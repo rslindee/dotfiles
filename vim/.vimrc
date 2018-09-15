@@ -416,7 +416,7 @@ nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
 nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 
 " Set ripgrep as grep program
-set grepprg=rg\ --vimgrep
+set grepprg=rg\ --vimgrep\ --smart-case
 set grepformat=%f:%l:%c:%m
 
 " Quick-execute macro q
