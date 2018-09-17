@@ -174,11 +174,9 @@ set completeopt-=preview
 set mouse=a
 set ttymouse=xterm2
 
-" TODO: these both kinda kill screen performance (at least on my mac)
-" these may be vim bugs, follow up later
-" Line highlighting
-" set cursorline
-" set cursorcolumn
+" Cursor line/column highlighting
+set cursorline
+set cursorcolumn
 
 " Show 10 lines below/above cursor at all times
 set scrolloff=10
