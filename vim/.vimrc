@@ -12,8 +12,6 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Viewing
-" Use git diffing algos for improved diffs
-call minpac#add('chrisbra/vim-diff-enhanced')
 " Show and navigate marks
 call minpac#add('kshenoy/vim-signature')
 " Apply colors to different parentheses levels
@@ -424,6 +422,9 @@ nnoremap Q @q
 
 " Redraw and disable highlighting
 nmap <leader>l :redraw!<cr>:noh<cr>
+
+" Use patience diff algorithm
+set diffopt=internal,algorithm:patience,indent-heuristic
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
