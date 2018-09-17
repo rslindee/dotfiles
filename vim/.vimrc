@@ -176,7 +176,8 @@ set ttymouse=xterm2
 
 " Cursor line/column highlighting
 set cursorline
-set cursorcolumn
+" TODO: This is still real slow (hold down h/l and let go to exhibit)
+" set cursorcolumn
 
 " Show 10 lines below/above cursor at all times
 set scrolloff=10
