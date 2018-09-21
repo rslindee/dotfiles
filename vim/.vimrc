@@ -22,7 +22,7 @@ call minpac#add('majutsushi/tagbar')
 call minpac#add('will133/vim-dirdiff')
 " Improved quickfix/loclist  behavior
 call minpac#add('romainl/vim-qf')
-" Use quickfix for include-search and definition-search
+" Use quickfix for include-search and definition-search with tags
 call minpac#add('romainl/vim-qlist')
 " Window pane resize mode
 call minpac#add('simeji/winresizer')
@@ -47,10 +47,6 @@ call minpac#add('morhetz/gruvbox')
 " Editing
 " Enhanced splitting and joining lines
 call minpac#add('AndrewRadev/splitjoin.vim')
-" Uses external formatting tools
-" TODO: Figure out alternative tool or fix for issue with this clearing out
-" last mark when run
-call minpac#add('Chiel92/vim-autoformat')
 " Snippet tool
 call minpac#add('joereynolds/vim-minisnip')
 " Align blocks of text
@@ -308,8 +304,30 @@ set si
 " Wrap lines
 set wrap
 
-" auto-trim trailing whitespace on save
-autocmd BufWritePre * :%s/\s\+$//e
+" Set external format tools based on filetype
+autocmd FileType python setlocal formatprg=autopep8\ -
+autocmd FileType c,cpp setlocal formatprg=clang-format
+
+" Runs formatprg on entire buffer
+function! AutoformatCurrentFile()
+    if &filetype ==# 'c' || &filetype ==# 'cpp' || &filetype ==# 'python'
+        " Use 'i' mark to hold place of cursor
+        delmark i
+        normal mi
+        normal gggqG
+        normal `i
+        " For whatever reason, we can't use delmark a second time, so just
+        " toggle it instead
+        normal mi
+    else
+        normal gg=G``
+        retab
+        RemoveTrailingSpaces
+    endif
+
+endfunction
+
+nnoremap <leader>i :call AutoformatCurrentFile()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -370,8 +388,11 @@ function! Xclip_paste_before()
     normal! "xP
 endfunction
 
-nnoremap <leader>pp :call Xclip_paste()<CR>
-nnoremap <leader>pP :call Xclip_paste_before()<CR>
+nnoremap <leader>pp :call Xclip_paste()<cr>
+nnoremap <leader>pP :call Xclip_paste_before()<cr>
+
+" Replace current inner word with yank reg 0
+nnoremap <leader>pw ciw<c-r>0<esc>
 
 " Highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
@@ -549,18 +570,6 @@ nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 
 " View PDF macro; '%:r' is current file's root (base) name.
 nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
-
-" TODO - It would probably be a good idea to instead write a simple function
-" which checks the current file extension, then calls an appropriate formatter
-" based on the extension, as Autoformat appears to wreck recently set marks
-" try looking into setting equalprg a la https://github.com/fsouza/vimfiles/blob/master/ftdetect/clang-format.vim
-"
-" Run vim-autoformat on entire file (falls back to vim's default
-" tabbing/spacing if filetype is unsupported by any formatprogram)
-nmap <leader>i :Autoformat<cr>
-
-let g:formatdef_autopep8 = "'autopep8 --max-line-length 100 - --range '.a:firstline.' '.a:lastline"
-let g:formatters_python = ['autopep8']
 
 " minpac binds
 nmap <leader>pu :call minpac#update()<cr>
