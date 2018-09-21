@@ -30,19 +30,16 @@ call minpac#add('simeji/winresizer')
 call minpac#add('whiteinge/diffconflicts')
 " View line indents
 call minpac#add('Yggdroot/indentLine')
+" Gruvbox theme
+call minpac#add('morhetz/gruvbox')
 
 " Version Control
 " View git information in gutter
 call minpac#add('airblade/vim-gitgutter')
-" View, edit, merge branches
-call minpac#add('idanarye/vim-merginal')
 " View git commit history
 call minpac#add('junegunn/gv.vim')
 " Run git commands, view status
 call minpac#add('tpope/vim-fugitive')
-
-" Themes
-call minpac#add('morhetz/gruvbox')
 
 " Editing
 " Enhanced splitting and joining lines
@@ -449,10 +446,8 @@ set diffopt=internal,algorithm:patience,indent-heuristic
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TODO: Disabled this for now, as it was causing errors on startup when marks
-" were left. See https://github.com/kshenoy/vim-signature/issues/141
-" vim-signature highlight marks based on gitgutter status
-"let g:SignatureMarkTextHLDynamic = 1
+" vim-signature highlight colors marks based on gitgutter status
+let g:SignatureMarkTextHLDynamic = 1
 
 " Dirvish sidetab
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
@@ -550,7 +545,7 @@ nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
 nmap <leader>o :FZF<cr>
-" Use for FZF (which respects .gitignore)
+" Use fd for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 
 " Async make with 4 jobs
@@ -600,7 +595,7 @@ nmap ,tc :AsyncRun ctags<cr>
 " TODO Figure out how to also plug in loading the cscope datatbase
 nmap ,tg :AsyncRun gtags<cr>
 
-" Make ayncrun to work with vim-fugitive
+" Make asyncrun work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
 " Enable vim-sneak label mode for easymotion-like behavior
