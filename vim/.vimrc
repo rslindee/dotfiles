@@ -336,10 +336,6 @@ map k gk
 " tmux-like tab creation
 map <leader>c :tabnew<cr>
 
-" Map splits to be like tmux
-map <leader>" :sp<cr>
-map <leader>% :vsp<cr>
-
 " Cope shortcuts
 map <silent><c-n> :cn<cr>
 map <silent><c-p> :cp<cr>
