@@ -11,11 +11,10 @@ ALL_PACKAGES="atool \
     clang \
     ctags \
     fontconfig \
-    i3-wm \
+    i3lock \
     mpd \
     mpv \
     ncmpcpp \
-    newsboat \
     pass \
     python \
     qutebrowser \
@@ -28,18 +27,29 @@ ALL_PACKAGES="atool \
     tmux \
     udisks2 \
     vim \
+    xbindkeys \
+    xcape \
     xclip \
     zathura \
     zsh"
 
 PACKAGES_FEDORA="st \
+    i3 \
     ImageMagick \
     fd-find \
     passmenu \
     python3 \
     python3-tldextract \
+    terminus-fonts \
     terminus-fonts-console \
     unifont-fonts"
+
+# TLP is Thinkpad-specific
+PACKAGES_LAPTOP="acpi \
+    acpid \
+    powertop \
+    tlp \
+    tlp-rdw"
 
 # TODO Fedora RPMSphere
 # udevil
@@ -47,9 +57,11 @@ PACKAGES_FEDORA="st \
 FEDORA_COPR_REPOS="flatcap/neomutt"
 
 PACKAGES_ARCH="terminus-font \
+    i3-wm \
     imagemagick \
     neomutt \
     fd \
+    newsboat \
     python-tldextract \
     udevil"
 
@@ -64,7 +76,7 @@ STOW_LIST="cgdb \
     mimeapps \
     mutt \
     ncmpcpp \
-    pass \
+    profile \
     qutebrowser \
     ranger \
     ssh \
@@ -82,9 +94,10 @@ fi
 
 if [ "$OS" = "Fedora" ]; then
     echo "Fedora system detected..."
-    PKG_MANAGER_INSTALL="sudo dnf install"
+    PACKAGE_MANAGER_INSTALL="sudo dnf install"
     # Setup RPM Fusion
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    # TODO Add rpmsphere per: https://forums.fedoraforum.org/showthread.php?318481-How-to-add-repositories-in-Fedora
     # Install copr plugins package first
     $PACKAGE_MANAGER_INSTALL dnf-plugins-core
     # TODO how do we handle multiple COPR repos (e.g. single command)?
@@ -97,13 +110,13 @@ elif [ "$OS" = "Arch Linux" ]; then
     git clone https://aur.archlinux.org/trizen.git $HOME/trizen
     cd $HOME/trizen
     makepkg -si
-    PKG_MANAGER_INSTALL="trizen -S"
+    PACKAGE_MANAGER_INSTALL="trizen -S"
     # Create package list
     ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_ARCH $PACKAGES_AUR"
 fi
 
 # Install packages
-$PKG_MANAGER_INSTALL $ALL_PACKAGES
+$PACKAGE_MANAGER_INSTALL $ALL_PACKAGES
 
 # Stow dotfiles
 cd $HOME/dotfiles
@@ -116,3 +129,6 @@ git clone git@gitlab.com:rslindee/dotfiles-private.git $HOME/dotfiles-private
 # Stow private dotfiles
 cd $HOME/dotfiles-private
 stow $STOW_LIST_PRIVATE
+
+# Change shell to zsh
+chsh -s $(which zsh)
