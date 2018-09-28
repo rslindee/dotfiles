@@ -6,11 +6,14 @@ set -eu
 # xdg-utils xorg-xmodmap
 
 ALL_PACKAGES="atool \
+    autoconf \
     cgdb \
     chromium \
     clang \
+    cmus \
     ctags \
     fontconfig \
+    fzf \
     i3lock \
     mpd \
     mpv \
@@ -22,6 +25,7 @@ ALL_PACKAGES="atool \
     renameutils \
     ripgrep \
     socat \
+    sshfs \
     stow \
     sxiv \
     tmux \
