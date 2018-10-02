@@ -35,6 +35,7 @@ ALL_PACKAGES="atool \
     xcape \
     xclip \
     zathura \
+    zathura-pdf-poppler \
     zsh"
 
 PACKAGES_FEDORA="st \
