@@ -31,6 +31,7 @@ ALL_PACKAGES="atool \
     tmux \
     udisks2 \
     vim \
+    xautolock \
     xbindkeys \
     xcape \
     xclip \
