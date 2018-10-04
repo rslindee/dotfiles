@@ -305,23 +305,16 @@ set wrap
 autocmd FileType python setlocal formatprg=autopep8\ -
 autocmd FileType c,cpp setlocal formatprg=clang-format
 
-" Runs formatprg on entire buffer
+" Runs formatprg (or default retab/trim whitespace) on entire buffer
 function! AutoformatCurrentFile()
+    let l:save = winsaveview()
     if &filetype ==# 'c' || &filetype ==# 'cpp' || &filetype ==# 'python'
-        " Use 'i' mark to hold place of cursor
-        delmark i
-        normal mi
         normal gggqG
-        normal `i
-        " For whatever reason, we can't use delmark a second time, so just
-        " toggle it instead
-        normal mi
     else
-        normal gg=G``
         retab
-        RemoveTrailingSpaces
+        keeppatterns %s/\s\+$//e
     endif
-
+    call winrestview(l:save)
 endfunction
 
 nnoremap <leader>i :call AutoformatCurrentFile()<cr>
