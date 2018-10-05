@@ -22,7 +22,7 @@
 [alias]
     last = log -1 --stat
     # Delete locally merged branches except current
-    dm = !git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch -d
+    dm = !git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch -delete
     br = branch
     cp = cherry-pick
     co = checkout
@@ -32,16 +32,16 @@
     df = diff
     dr = push origin --delete
     fc = clean -ffxd
-    fe = fetch -p
+    fe = fetch --prune --tags --all
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
     pl = !git pull && git submodule update --init --recursive
-    ps = push -u
+    ps = push --set-upstream
     re = reset --hard HEAD
-    sq = rebase -i master
+    sq = rebase --interactive master
     st = status
     su = submodule update --init --recursive
     un = reset HEAD~
-    up = !git add -A && git commit -am "Update" && git push
+    up = !git add -all && git commit -all -message="Update" && git push
 [diff]
     tool = vimdiff
 [mergetool "diffconflicts"]
