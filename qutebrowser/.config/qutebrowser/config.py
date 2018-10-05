@@ -53,9 +53,9 @@ c.content.geolocation = True
 c.tabs.background = True
 c.messages.timeout = 5000
 c.input.insert_mode.auto_load = True
-c.scrolling.bar = True
+c.scrolling.bar = 'always'
 
 # requires `sudo /usr/share/qutebrowser/scripts/dictcli.py install en-US` be run first
 c.spellcheck.languages = ['en-US']
 
-c.zoom.default = 150
+c.zoom.default = 100
