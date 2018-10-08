@@ -12,9 +12,11 @@ ALL_PACKAGES="atool \
     clang \
     cmus \
     ctags \
+    ffmpeg \
     fontconfig \
     fzf \
     i3lock \
+    mediainfo \
     mpd \
     mpv \
     ncmpcpp \
@@ -39,13 +41,14 @@ ALL_PACKAGES="atool \
     zathura-pdf-poppler \
     zsh"
 
-PACKAGES_FEDORA="st \
+PACKAGES_FEDORA="chromium-libs-media-freeworld \
     i3 \
     ImageMagick \
     fd-find \
     passmenu \
     python3 \
     python3-tldextract \
+    st \
     terminus-fonts \
     terminus-fonts-console \
     unifont-fonts"
