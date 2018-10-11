@@ -580,8 +580,8 @@ source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
 let g:winresizer_start_key = '<leader>W'
 
 " Generate ctags and gtags
-nmap ,tc :AsyncRun ctags<cr>
-" TODO Figure out how to also plug in loading the cscope datatbase
+nmap <leader>j :AsyncRun ctags<cr>
+" TODO Figure out how to also plug in loading the cscope database
 nmap ,tg :AsyncRun gtags<cr>
 
 " Make asyncrun work with vim-fugitive
@@ -598,6 +598,3 @@ let g:devdocs_open_command = "xdg-open"
 
 " Start enhanced substitution
 nmap <leader>S :OverCommandLine %s/<cr>
-
-" Add fzf path for mac and brew-installed fzf
-set rtp+=/usr/local/opt/fzf
