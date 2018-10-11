@@ -22,7 +22,7 @@
 [alias]
     last = log -1 --stat
     # Delete locally merged branches except current
-    dm = !git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch -delete
+    dm = !git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete
     br = branch
     cp = cherry-pick
     co = checkout
