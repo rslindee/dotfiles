@@ -91,6 +91,7 @@ STOW_LIST="cgdb \
     ssh \
     tmux \
     vim \
+    zathura \
     zsh"
 
 STOW_LIST_PRIVATE="newsboat"
