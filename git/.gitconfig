@@ -41,7 +41,7 @@
     st = status
     su = submodule update --init --recursive
     un = reset HEAD~
-    up = !git add -all && git commit -all -message="Update" && git push
+    up = !git add --all && git commit --all --message="Update" && git push
 [diff]
     tool = vimdiff
 [mergetool "diffconflicts"]
