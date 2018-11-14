@@ -13,6 +13,8 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+q kill
 
+# Alt-tab-like behavior when hit workspace number twice
+workspace_auto_back_and_forth yes
 
 # change focus
 bindsym $mod+h focus left
@@ -170,10 +172,14 @@ bindsym --release $mod+Shift+s exec --no-startup-id import -window root ~/screen
 bindsym --release $mod+s exec --no-startup-id import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 
 # call passmenu
-bindsym $mod+p exec passmenu -i -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -fn 'Terminus:size=10'
+bindsym $mod+g exec passmenu -i -nf '$green' -nb '$bg' -sf '$bg' -sb '$green' -fn 'Terminus:size=10'
 
-# TODO toggle xrandr config
-#bindsym $mod+d exec "xrandr --output Screen 0 --auto"
+# toggle xrandr config for hidpi monitor
+# bindsym $mod+d exec xrandr --auto --output DP2 --mode 3840x2160 --auto --output eDP1 --off && echo Xft.dpi:168 | xrdb -merge && sleep .1 && i3-msg -t run_command restart
+# toggle xrandr config for laptop screen
+bindsym $mod+shift+d exec xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080 && echo Xft.dpi:96 | xrdb -merge && sleep .1 && i3-msg -t run_command restart
+
+bindsym $mod+d exec xrandr --auto --output eDP1 --off --auto --output DP2 --mode 3840x2160 --scale-from 1920x1080 --scale .5x.5 --filter nearest 
 
 # Start st terminal with tmux
 exec --no-startup-id i3-msg 'exec st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux'
@@ -183,3 +189,7 @@ bindsym --release $mod+Shift+x exec xkill
 
 # call mons to cycle through modes
 bindsym $mod+Shift+m exec mons -n
+
+# workspace cycling
+bindsym $mod+n workspace next
+bindsym $mod+p workspace prev
