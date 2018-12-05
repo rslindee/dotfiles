@@ -1,24 +1,8 @@
-# zgen
-if [[ ! -d ~/.zgen ]];then
-    git clone https://github.com/rslindee/zgen.git "${HOME}/.zgen"
+# zplugin install if doesn't exist
+if [[ ! -d ~/.zplugin ]];then
+    mkdir ~/.zplugin
+    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
-
-source ~/.zgen/zgen.zsh
-
-# if the init script doesn't exist
-if ! zgen saved; then
-
-    zgen load "zsh-users/zsh-completions"
-    zgen load "ytet5uy4/fzf-widgets"
-    # zsh-syntax highlighting MUST go before substring-search
-    zgen load "zsh-users/zsh-syntax-highlighting"
-    zgen load "zsh-users/zsh-history-substring-search"
-    zgen load "zdharma/zsh-diff-so-fancy"
-
-    # generate the init script from plugins above
-    zgen save
-fi
-
 
 # Get OS version
 if [ -f /etc/os-release ]; then
@@ -74,7 +58,7 @@ alias gitr='cd "$(git rev-parse --show-toplevel)"'
 # Load newsboat with youtube subs
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
-# Update packages, zgen plugins, personal wiki, and dotfiles
+# Update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
 {
     if [ "$OS" = "Fedora" ]; then
@@ -84,8 +68,9 @@ upd()
         echo "Updating Arch and AUR packages..."
         trizen -Syu
     fi
-    echo "Updating zgen plugins..."
-    zgen update
+    echo "Updating zplugin plugins..."
+    zplugin self-update
+    zplugin update --all
     echo "Updating dotfiles..."
     git -C ~/dotfiles pull &
     echo "Updating private dotfiles..."
@@ -268,10 +253,6 @@ zstyle ':completion:*:history-words' menu yes
 zstyle ':completion:*:(rm|kill|diff):*' ignore-line other
 zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 
-# zsh-highlighting color tweaks
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=magenta'
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=magenta'
-
 # Clever binding of fg to Ctrl-z
 fancy-ctrl-z () {
 if [[ $#BUFFER -eq 0 ]]; then
@@ -334,11 +315,26 @@ bindkey '^D' delete-char
 # TODO: fzf-insert-directory and fzf-insert-files is kinda slow after exit for some reason
 # fzf keybinds
 bindkey -r '^O'
-bindkey '^Ot' fzf-insert-directory
-bindkey '^Oo' fzf-insert-files
-bindkey '^Op' fzf-kill-processes
-bindkey '^Or' fzf-insert-history
-bindkey '^Oa' fzf-git-add-files
-bindkey '^Ob' fzf-git-checkout-branch
-bindkey '^Od' fzf-git-delete-branches
+# TODO: Figure out better fzf invocation
+# bindkey '^Ot' fzf-insert-directory
+# bindkey '^Oo' fzf-insert-files
+# bindkey '^Op' fzf-kill-processes
+# bindkey '^Or' fzf-insert-history
+# bindkey '^Oa' fzf-git-add-files
+# bindkey '^Ob' fzf-git-checkout-branch
+# bindkey '^Od' fzf-git-delete-branches
 
+
+### Added by Zplugin's installer
+source ~/.zplugin/bin/zplugin.zsh
+autoload -Uz _zplugin
+(( ${+_comps} )) && _comps[zplugin]=_zplugin
+### End of Zplugin's installer chunk
+# Plugins
+# zplugin light trapd00r/LS_COLORS
+zplugin light zsh-users/zsh-completions
+# TODO: Figure out better fzf invocation
+#zplugin light ytet5uy4/fzf-widgets
+zplugin light zsh-users/zsh-history-substring-search
+zplugin light zdharma/zsh-diff-so-fancy
+zplugin light zdharma/fast-syntax-highlighting
