@@ -463,8 +463,8 @@ nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
 nmap <leader>A :AsyncStop<cr>
-nmap <leader>a :AsyncRun -program=grep<space>
-nmap <leader>s :AsyncRun -program=grep <c-r><c-w><cr>
+nmap <leader>a :AsyncRun -program=grep ""<left>
+nmap <leader>s :AsyncRun -program=grep "<c-r><c-w>"<cr>
 
 " Toggle fugitive Git blame
 nmap <leader>gb :Gblame<cr>
