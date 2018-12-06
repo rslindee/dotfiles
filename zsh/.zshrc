@@ -1,3 +1,7 @@
+# Start zsh completions
+autoload -Uz compinit
+compinit
+
 # zplugin install if doesn't exist
 if [[ ! -d ~/.zplugin ]];then
     mkdir ~/.zplugin
