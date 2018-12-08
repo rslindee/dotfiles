@@ -405,19 +405,20 @@ nmap <leader>wc :AsyncRun pandoc --output $(VIM_FILENOEXT).pdf %:p<cr>
 " All cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
+" TODO: Figure out if I eventually want to use these or not
 " cscope queries
 " Search for all callers of the function name under the cursor
-nmap ,c :cs find c <C-R>=expand('<cword>')<CR><CR>
+" nmap ,c :cs find c <C-R>=expand('<cword>')<CR><CR>
 " Search all the functions called by funtion name under the cursor
-nmap ,g :cs find d <C-R>=expand('<cword>')<CR><CR>
+" nmap ,g :cs find d <C-R>=expand('<cword>')<CR><CR>
 " Search for global definition of the word under the cursor
-nmap ,d :cs find g <C-R>=expand('<cword>')<CR><CR>
+" nmap ,d :cs find g <C-R>=expand('<cword>')<CR><CR>
 " Search for all files matching filename under the cursor
-nmap ,f :cs find f <C-R>=expand('<cfile>')<CR><CR>
+" nmap ,f :cs find f <C-R>=expand('<cfile>')<CR><CR>
 " Search for all files including filename under the cursor
-nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
+" nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
 " Search for all symbol occurances of word under the cursor
-nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
+" nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
 
 " Set ripgrep as grep program
 set grepprg=rg\ --vimgrep\ --smart-case
@@ -431,6 +432,19 @@ nmap <leader>l :redraw!<cr>:noh<cr>
 
 " Use patience diff algorithm
 set diffopt=internal,algorithm:patience,indent-heuristic
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Debugging
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nmap ,b :Break<cr>
+nmap ,d :Clear<cr>
+nmap ,s :Step<cr>
+nmap ,S :Stop<cr>
+nmap ,n :Over<cr>
+nmap ,f :Finish<cr>
+nmap ,c :Continue<cr>
+nmap ,e :Evaluate<cr>
+nmap ,g :Gdb<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
