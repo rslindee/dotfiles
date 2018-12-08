@@ -44,6 +44,7 @@
     up = !git add --all && git commit --all --message="Update" && git push
 [diff]
     tool = vimdiff
+    colorMoved = default
 [mergetool "diffconflicts"]
 	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 	trustExitCode = true
