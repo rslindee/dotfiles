@@ -109,6 +109,9 @@ nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
+" Allow reading of per-project .vimrc files
+set exrc
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -612,3 +615,10 @@ nmap <leader>S :OverCommandLine %s/<cr>
 
 " Look up current word cursor is on in devdocs.io
 nmap <leader>k :DD <c-r><c-w><cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Last
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable shell and write commands (because we set exrc earlier)
+set secure
