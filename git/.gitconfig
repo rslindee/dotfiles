@@ -34,7 +34,7 @@
     fc = clean -ffxd
     fe = fetch --prune --tags --all
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
-    pl = !git pull && git submodule update --init --recursive
+    pl = pull
     ps = push --set-upstream
     re = reset --hard HEAD
     sq = rebase --interactive master
@@ -53,3 +53,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[submodule]
+	recurse = true
