@@ -60,7 +60,7 @@ PACKAGES_LAPTOP="acpi \
     tlp \
     tlp-rdw"
 
-# TODO Fedora RPMSphere
+# TODO Fedora RPMSphere, build from github, or submit to fedora
 # udevil
 
 FEDORA_COPR_REPOS="flatcap/neomutt"
@@ -107,7 +107,6 @@ if [ "$OS" = "Fedora" ]; then
     PACKAGE_MANAGER_INSTALL="sudo dnf install"
     # Setup RPM Fusion
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    # TODO Add rpmsphere per: https://forums.fedoraforum.org/showthread.php?318481-How-to-add-repositories-in-Fedora
     # Install copr plugins package first
     $PACKAGE_MANAGER_INSTALL dnf-plugins-core
     # TODO how do we handle multiple COPR repos (e.g. single command)?
