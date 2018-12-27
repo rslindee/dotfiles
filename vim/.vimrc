@@ -311,7 +311,7 @@ autocmd FileType c,cpp setlocal formatprg=clang-format
 function! AutoformatCurrentFile()
     let l:save = winsaveview()
     if &filetype ==# 'c' || &filetype ==# 'cpp' || &filetype ==# 'python'
-        normal gggqG
+        keepjumps normal gggqG
     else
         retab
         keeppatterns %s/\s\+$//e
