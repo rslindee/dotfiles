@@ -362,22 +362,22 @@ noremap <c-l> <c-w>l
 " use system clipboard
 set clipboard=unnamed
 
-" pipe contents of paste buffer to xclip
-nnoremap <leader>yy :call system("xclip -i -sel clip", getreg("\""))<cr>
+" pipe contents of paste buffer to clipboard via xsel
+nnoremap <leader>yy :call system("xsel -i --clipboard", getreg("\""))<cr>
 
-" add contents of xclip to x register and paste
-function! Xclip_paste()
-    let @x=system('xclip -o -sel clip')
+" add contents of clipboard to x register (via xsel) and paste
+function! Xsel_paste()
+    let @x=system('xsel -o --clipboard')
     normal! "xp
 endfunction
 
-function! Xclip_paste_before()
-    let @x=system('xclip -o -sel clip')
+function! Xsel_paste_before()
+    let @x=system('xsel -o --clipboard')
     normal! "xP
 endfunction
 
-nnoremap <leader>pp :call Xclip_paste()<cr>
-nnoremap <leader>pP :call Xclip_paste_before()<cr>
+nnoremap <leader>pp :call Xsel_paste()<cr>
+nnoremap <leader>pP :call Xsel_paste_before()<cr>
 
 " replace current inner word with yank reg 0
 nnoremap <leader>pw ciw<c-r>0<esc>
