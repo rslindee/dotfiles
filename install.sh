@@ -36,7 +36,7 @@ ALL_PACKAGES="atool \
     xautolock \
     xbindkeys \
     xcape \
-    xclip \
+    xsel \
     zathura \
     zathura-pdf-poppler \
     zsh"
