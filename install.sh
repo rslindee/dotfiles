@@ -15,7 +15,6 @@ ALL_PACKAGES="atool \
     ffmpeg \
     fontconfig \
     fzf \
-    i3lock \
     mediainfo \
     mpd \
     mpv \
@@ -26,6 +25,8 @@ ALL_PACKAGES="atool \
     ranger \
     renameutils \
     ripgrep \
+    sxhkd \
+    slock \
     socat \
     sshfs \
     stow \
@@ -34,7 +35,6 @@ ALL_PACKAGES="atool \
     udisks2 \
     vim \
     xautolock \
-    xbindkeys \
     xcape \
     xsel \
     zathura \
@@ -78,11 +78,13 @@ PACKAGES_AUR="st"
 
 STOW_LIST="cgdb \
     clang \
+    cmus \
     ctags \
     fontconfig \
     git \
     i3 \
     mimeapps \
+    mpv \
     mutt \
     ncmpcpp \
     profile \
