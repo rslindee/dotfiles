@@ -2,20 +2,7 @@
 autoload -Uz compinit
 compinit
 
-# zplugin install if doesn't exist
-if [[ ! -d ~/.zplugin ]];then
-    mkdir ~/.zplugin
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
-fi
-
-# Get OS version
-if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    OS=$NAME
-fi
-
 # Prompt theme
-
 # Allow substitution
 setopt prompt_subst
 
@@ -53,18 +40,29 @@ zle -N zle-keymap-select
 
 # Aliases
 
-# All files, human-readable sizes
+# all files, human-readable sizes
 alias l='ls -lAh --color=auto'
 
-# Change directory to root of current git repo
+# git
+# change directory to root of current git repo
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
+# commit everything and push with commit message "Update"
+alias gitup='git add --all && git commit --all --message="Update" && git push'
+# delete locally merged branches to master or develop except current
+alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete'
 
 # Load newsboat with youtube subs
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
-# Update packages, zplugin plugins, personal wiki, and dotfiles
+# update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
 {
+    # Get OS name
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS=$NAME
+    fi
+
     if [ "$OS" = "Fedora" ]; then
         echo "Updating Fedora packages..."
         sudo dnf update
@@ -142,6 +140,15 @@ pdb()
 
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
 stty -ixon
+
+# less colors
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Set editors to vim
 export VISUAL=vim

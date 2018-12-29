@@ -21,8 +21,6 @@
     trustexitcode = true
 [alias]
     last = log -1 --stat
-    # Delete locally merged branches except current
-    dm = !git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete
     br = branch
     cp = cherry-pick
     co = checkout
@@ -37,11 +35,10 @@
     pl = pull
     ps = push --set-upstream
     re = reset --hard HEAD
-    sq = rebase --interactive master
+    ri = rebase --interactive
     st = status
     su = submodule update --init --recursive
     un = reset HEAD~
-    up = !git add --all && git commit --all --message="Update" && git push
 [diff]
     tool = vimdiff
     colorMoved = default

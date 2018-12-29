@@ -2,6 +2,12 @@
 # Fail right away and prevent use of undefined vars
 set -eu
 
+# zplugin install (if it doesn't already exist)
+if [[ ! -d ~/.zplugin ]];then
+    mkdir ~/.zplugin
+    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+fi
+
 # TODO: Confirm how/if these need to be installed on new system
 # xdg-utils xorg-xmodmap
 
