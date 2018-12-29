@@ -73,6 +73,7 @@ upd()
     echo "Updating zplugin plugins..."
     zplugin self-update
     zplugin update --all
+    # Dotfiles aren't dependent on each other, so we can do them in parallel
     echo "Updating dotfiles..."
     git -C ~/dotfiles pull &
     echo "Updating private dotfiles..."
