@@ -2,10 +2,14 @@
 # Fail right away and prevent use of undefined vars
 set -eu
 
-# zplugin install (if it doesn't already exist)
-if [[ ! -d ~/.zplugin ]];then
-    mkdir ~/.zplugin
+# zplugin clone (if it doesn't already exist)
+if [ ! -d "~/.zplugin" ]; then
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+fi
+
+# vim minpac clone (if it doesn't already exist)
+if [ ! -f "~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
+    git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 fi
 
 # TODO: Confirm how/if these need to be installed on new system

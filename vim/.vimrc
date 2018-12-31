@@ -1,11 +1,5 @@
 set nocompatible
 
-" auto-clone and install minpac if not installed
-if empty(glob('~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim'))
-    silent !git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
-    autocmd VimEnter * call minpac#update() | source $MYVIMRC
-endif
-
 packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -429,9 +423,6 @@ set grepformat=%f:%l:%c:%m
 " quick-execute macro q
 nnoremap Q @q
 
-" redraw and disable highlighting
-nmap <leader>l :redraw!<cr>:noh<cr>
-
 " use patience diff algorithm
 set diffopt=internal,algorithm:patience,indent-heuristic
 
@@ -489,9 +480,10 @@ nmap ]W <Plug>(ale_last)
 nmap [W <Plug>(ale_first)
 
 " asyncrun
-nmap <leader>A :AsyncStop<cr>
-nmap <leader>a :AsyncRun -program=grep ""<left>
-nmap <leader>s :AsyncRun -program=grep "<c-r><c-w>"<cr>
+" stop asyncrun, redraw, and disable highlighting
+nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
+nmap <leader>/ :AsyncRun -program=grep ""<left>
+nmap <leader>f :AsyncRun -program=grep "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " async make with 4 jobs
