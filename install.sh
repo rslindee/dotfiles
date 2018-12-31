@@ -57,7 +57,8 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     st \
     terminus-fonts \
     terminus-fonts-console \
-    unifont-fonts"
+    unifont-fonts \
+    urlview"
 
 # TLP is Thinkpad-specific
 PACKAGES_LAPTOP="acpi \
@@ -80,7 +81,8 @@ PACKAGES_ARCH="terminus-font \
     python-tldextract \
     udevil"
 
-PACKAGES_AUR="st"
+PACKAGES_AUR="st \
+    urlview"
 
 STOW_LIST="cgdb \
     clang \
@@ -98,6 +100,7 @@ STOW_LIST="cgdb \
     ranger \
     ssh \
     tmux \
+    urlview \
     vim \
     zathura \
     zsh"
