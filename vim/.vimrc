@@ -9,10 +9,12 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 call minpac#add('kshenoy/vim-signature')
 " apply colors to different parentheses levels
 call minpac#add('junegunn/rainbow_parentheses.vim')
+" highlight yanked text
+call minpac#add('machakann/vim-highlightedyank')
 " view tag information for current file
 call minpac#add('majutsushi/tagbar')
-" diff entire folders
-call minpac#add('will133/vim-dirdiff')
+" gruvbox theme
+call minpac#add('morhetz/gruvbox')
 " improved quickfix/loclist  behavior
 call minpac#add('romainl/vim-qf')
 " use quickfix for include-search and definition-search with tags
@@ -21,10 +23,10 @@ call minpac#add('romainl/vim-qlist')
 call minpac#add('simeji/winresizer')
 " enhanced merge conflicts
 call minpac#add('whiteinge/diffconflicts')
+" diff entire folders
+call minpac#add('will133/vim-dirdiff')
 " view line indents
 call minpac#add('Yggdroot/indentLine')
-" gruvbox theme
-call minpac#add('morhetz/gruvbox')
 
 " version control
 " view git information in gutter
@@ -43,7 +45,10 @@ call minpac#add('joereynolds/vim-minisnip')
 call minpac#add('junegunn/vim-easy-align')
 " TODO: Re-add and ensure performance is ok
 "Plug 'lifepillar/vim-mucomplete'
+" Add/change/delete surrounding char pairs
 call minpac#add('machakann/vim-sandwich')
+" Reorder delimited items
+call minpac#add('machakann/vim-swap')
 " TODO: Re-add and ensure performance is ok
 "Plug 'Rip-Rip/clang_complete'
 " swap text using motions
