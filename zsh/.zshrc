@@ -296,8 +296,8 @@ bindkey '^N' history-substring-search-down
 bindkey '^P' history-substring-search-up
 
 # Set zsh-history-substring-search up/down in vi mode
-bindkey -M vicmd 'n' history-substring-search-up
-bindkey -M vicmd 'p' history-substring-search-down
+bindkey -M vicmd '^n' history-substring-search-up
+bindkey -M vicmd '^p' history-substring-search-down
 
 # Set jump forward and back words
 bindkey '^F' forward-word
@@ -336,6 +336,11 @@ bindkey -r '^O'
 # bindkey '^Ob' fzf-git-checkout-branch
 # bindkey '^Od' fzf-git-delete-branches
 
+# yank zsh selection
+yank-x-selection () { print -rn -- $CUTBUFFER | xsel -i --clipboard; }
+zle -N yank-x-selection
+bindkey '^Y' yank-x-selection
+bindkey -a '^Y' yank-x-selection
 
 ### Added by Zplugin's installer
 source ~/.zplugin/bin/zplugin.zsh
