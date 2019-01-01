@@ -57,17 +57,17 @@ super + alt + Escape
 super + {_,shift + }q
 	bspc node -{c,k}
 
-# alternate between the tiled and monocle layout
-super + f
+# toggle monocle (zoom)
+super + z
 	bspc desktop -l next
 
-#
-# state/flags
-#
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
 
-# toggle window fullscreen
-super + z
-	bspc node -t {tiled,fullscreen}
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
 
 #
 # focus/swap
@@ -92,6 +92,7 @@ super + {apostrophe,Tab}
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
+
 #
 # move/resize
 #
