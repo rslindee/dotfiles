@@ -292,14 +292,14 @@ def_key "h"
 #def_key "s"
 #  stop
 #
-#def_key "p"
-#  pause
+def_key "c"
+  pause
 #
-#def_key ">"
-#  next
+def_key "ctrl-l"
+  next
 #
-#def_key "<"
-#  previous
+def_key "ctrl-h"
+  previous
 #
 #def_key "ctrl-h"
 #  jump_to_parent_directory
@@ -313,11 +313,11 @@ def_key "h"
 #def_key "backspace"
 #  replay_song
 #
-#def_key "f"
-#  seek_forward
+def_key "L"
+  seek_forward
 #
-#def_key "b"
-#  seek_backward
+def_key "H"
+  seek_backward
 #
 #def_key "r"
 #  toggle_repeat
