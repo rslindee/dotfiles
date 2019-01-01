@@ -27,7 +27,7 @@ super + shift + d
 super + d
     xrandr --auto --output eDP1 --off --auto --output DP2 --mode 3840x2160 --scale-from 1920x1080 --scale .5x.5 --filter nearest 
 super + Return
-    st -f 'Terminus:size=10:antialias=false:autohint=false'
+    st -f 'Terminus:size=10'
 super + a
     exec mv ~/Downloads/*.torrent ~/torrents
 super + c
