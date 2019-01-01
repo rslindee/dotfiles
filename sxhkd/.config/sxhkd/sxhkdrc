@@ -28,10 +28,10 @@ super + d
     xrandr --auto --output eDP1 --off --auto --output DP2 --mode 3840x2160 --scale-from 1920x1080 --scale .5x.5 --filter nearest 
 super + Return
     st -f 'Terminus:size=10'
-super + a
+super + t
     exec mv ~/Downloads/*.torrent ~/torrents
 super + c
-    cmus-remote -u
+    mpc toggle
 super + @o
     dmenu_run -i -nf '#b8bb26' -nb '#282828' -sf '#282828' -sb '#b8bb26' -fn 'Terminus:size=10'
 super + g
