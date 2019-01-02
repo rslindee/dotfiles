@@ -26,6 +26,7 @@ ALL_PACKAGES="atool \
     fontconfig \
     fzf \
     mediainfo \
+    mpc \
     mpd \
     mpv \
     ncmpcpp \
