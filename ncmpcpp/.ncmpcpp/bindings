@@ -361,15 +361,15 @@ def_key "H"
 #def_key "u"
 #  update_database
 #
-#def_key "ctrl-s"
-#  sort_playlist
-#
-#def_key "ctrl-s"
-#  toggle_browser_sort_mode
-#
-#def_key "ctrl-s"
-#  toggle_media_library_sort_mode
-#
+def_key "s"
+  sort_playlist
+
+def_key "s"
+  toggle_browser_sort_mode
+
+def_key "s"
+  toggle_media_library_sort_mode
+
 #def_key "ctrl-r"
 #  reverse_playlist
 #
@@ -441,12 +441,12 @@ def_key "N"
 #def_key "a"
 #  add_selected_items
 #
-#def_key "c"
-#  clear_playlist
-#
-#def_key "c"
-#  clear_main_playlist
-#
+def_key "ctrl-c"
+  clear_playlist
+
+def_key "ctrl-c"
+  clear_main_playlist
+
 #def_key "C"
 #  crop_playlist
 #
@@ -477,8 +477,8 @@ def_key "N"
 #def_key "S"
 #  save_playlist
 #
-#def_key "o"
-#  jump_to_playing_song
+def_key ";"
+  jump_to_playing_song
 #
 #def_key "G"
 #  jump_to_browser
@@ -486,8 +486,8 @@ def_key "N"
 #def_key "G"
 #  jump_to_playlist_editor
 #
-#def_key "~"
-#  jump_to_media_library
+def_key "'"
+  jump_to_media_library
 #
 #def_key "E"
 #  jump_to_tag_editor
