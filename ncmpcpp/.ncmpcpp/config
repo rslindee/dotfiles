@@ -191,13 +191,13 @@ song_status_format = {{%a{ - "%b"{ (%y)}} - }{%N - }{%t}}|{%f}
 #
 #alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
-current_item_prefix = $(green)$r
+current_item_prefix = $(yellow)$r
 #
-#current_item_suffix = $/r$(end)
+current_item_suffix = $/r$(end)
 #
-#current_item_inactive_column_prefix = $(black)$b$r
+current_item_inactive_column_prefix = $(black)$b$r
 #
-#current_item_inactive_column_suffix = $/r$(end)
+current_item_inactive_column_suffix = $/b$/r$(end)
 #
 #now_playing_prefix = $b
 #
@@ -316,7 +316,7 @@ current_item_prefix = $(green)$r
 ## Note: You can specify third character which will be used to build 'empty'
 ## part of progressbar.
 ##
-progressbar_look = ≡>
+progressbar_look = ▓▒░
 #
 ## Available values: database, playlist.
 ##
@@ -527,9 +527,9 @@ main_window_color = white
 #
 #progressbar_color = black:b
 #
-#progressbar_elapsed_color = green:b
+progressbar_elapsed_color = green
 #
-#statusbar_color = default
+statusbar_color = green
 #
 #statusbar_time_color = default:b
 #
