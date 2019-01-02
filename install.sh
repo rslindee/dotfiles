@@ -67,6 +67,7 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
 # TLP is Thinkpad-specific
 PACKAGES_LAPTOP="acpi \
     acpid \
+    acpitool \
     powertop \
     tlp \
     tlp-rdw"
