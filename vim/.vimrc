@@ -432,10 +432,17 @@ nnoremap Q @q
 set diffopt=internal,algorithm:patience,indent-heuristic
 
 " call rubber compiling current tex file
-nnoremap <leader>x :w<CR>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
+nnoremap <leader>x :w<cr>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 
 " view PDF equivalent of current file's root name
 nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
+
+" quick maps for diff get/put
+nmap <leader>dt :windo diffthis<cr>
+" force update of diff
+nmap <leader>du :diffupdate!<cr>
+" turn off all diff views
+nmap <leader>do :diffoff!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
