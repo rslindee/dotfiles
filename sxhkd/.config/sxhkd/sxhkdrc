@@ -22,9 +22,9 @@ super + v
     import -window root ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + s 
     import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
-super + shift + d
+@super + shift + d
     xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080 && echo Xft.dpi:96 | xrdb -merge 
-super + d
+@super + d
     xrandr --auto --output eDP1 --off --auto --output DP2 --mode 3840x2160 --scale-from 1920x1080 --scale .5x.5 --filter nearest 
 super + Return
     st -f 'Terminus:size=10'
@@ -41,7 +41,6 @@ super + shift + m
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
-
 super + space
     scripts/status.sh
 
