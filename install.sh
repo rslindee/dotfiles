@@ -12,16 +12,15 @@ if [ ! -f "~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
     git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 fi
 
-# TODO: Confirm how/if these need to be installed on new system
-# xdg-utils xorg-xmodmap
-
 ALL_PACKAGES="atool \
     autoconf \
+    bspwm \
     cgdb \
     chromium \
     clang \
     cmus \
     ctags \
+    exfat-utils \
     ffmpeg \
     fontconfig \
     fzf \
@@ -53,9 +52,9 @@ ALL_PACKAGES="atool \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
-    i3 \
     ImageMagick \
     fd-find \
+    fuse-exfat \
     passmenu \
     python3 \
     python3-tldextract \
@@ -78,13 +77,12 @@ PACKAGES_LAPTOP="acpi \
 
 FEDORA_COPR_REPOS="flatcap/neomutt"
 
-PACKAGES_ARCH="terminus-font \
-    i3-wm \
+PACKAGES_ARCH="fd \
     imagemagick \
     neomutt \
-    fd \
     newsboat \
     python-tldextract \
+    terminus-font \
     udevil"
 
 PACKAGES_AUR="st \
@@ -92,18 +90,18 @@ PACKAGES_AUR="st \
 
 STOW_LIST="cgdb \
     clang \
-    cmus \
     ctags \
     fontconfig \
     git \
-    i3 \
     mimeapps \
+    mpd \
     mpv \
     mutt \
     ncmpcpp \
     profile \
     qutebrowser \
     ranger \
+    sxhkd \
     ssh \
     tmux \
     urlview \
