@@ -23,6 +23,9 @@ bspc rule --add Zathura state=tiled
 # Set cursor to arrow
 xsetroot -cursor_name left_ptr
 
+# use wmname utility to set a "known" name for java applications
+wmname LG3D
+
 # Startup program(s)
 st -f "Terminus:size=10" -e tmux &
 

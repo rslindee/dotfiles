@@ -307,17 +307,14 @@ set wrap
 
 " set external format tools based on filetype
 autocmd FileType python setlocal formatprg=autopep8\ -
-autocmd FileType c,cpp setlocal formatprg=clang-format
+autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
 
-" runs formatprg (or default retab/trim whitespace) on entire buffer
+" run formatprg, retab, and trim whitespace on entire buffer
 function! AutoformatCurrentFile()
     let l:save = winsaveview()
-    if &filetype ==# 'c' || &filetype ==# 'cpp' || &filetype ==# 'python'
-        keepjumps normal gggqG
-    else
-        retab
-        keeppatterns %s/\s\+$//e
-    endif
+    keepjumps normal gggqG
+    retab
+    keeppatterns %s/\s\+$//e
     call winrestview(l:save)
 endfunction
 
