@@ -110,6 +110,9 @@ let g:mapleader = "\<Space>"
 " allow reading of per-project .vimrc files
 set exrc
 
+" load termdebug plugin
+packadd termdebug
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
