@@ -44,7 +44,6 @@ ALL_PACKAGES="atool \
     tmux \
     udisks2 \
     vim \
-    wmname \
     xautolock \
     xcape \
     xsel \
