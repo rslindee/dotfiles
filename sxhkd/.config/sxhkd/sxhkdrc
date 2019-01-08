@@ -23,9 +23,9 @@ super + v
 @super + s 
     import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + shift + d
-    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080 && echo Xft.dpi:96 | xrdb -merge 
+    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080
 @super + d
-    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 3840x2160 --scale-from 1920x1080 --scale .5x.5 --filter nearest 
+    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440
 super + Return
     st -f 'Terminus:size=10'
 super + t
