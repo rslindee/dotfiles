@@ -65,7 +65,7 @@ upd()
 
     if [ "$OS" = "Fedora" ]; then
         echo "Updating Fedora packages..."
-        sudo dnf check-update && sudo dnf upgrade
+        sudo dnf upgrade
     elif [ "$OS" = "Arch Linux" ]; then
         echo "Updating Arch and AUR packages..."
         trizen -Syu
