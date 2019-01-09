@@ -28,8 +28,3 @@ xsetroot -cursor_name left_ptr
 
 # Startup program(s)
 st -f "Terminus:size=10" -e tmux &
-
-# music player desktop
-# bspc desktop '^9' -l monocle
-# bspc desktop --focus ^9
-# st -f "Terminus:size=10" -e cmus &

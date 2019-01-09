@@ -18,14 +18,13 @@ super + shift + i
     amixer set Master toggle && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk '/Front Left:/ \{print $5 " " $6\}' | tr -d '[]')"
 super + v
     echo 'cycle pause' | socat - /tmp/mpv-socket
-@super + shift + s 
-    import -window root ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + s 
-    import ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
+    import {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
+# TODO: also try bscp wm --adopt-orphans?
 @super + shift + d
-    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080
+    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080 && bspc desktop --focus last
 @super + d
-    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440
+    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440 && bspc desktop --focus last
 super + Return
     st -f 'Terminus:size=10'
 super + t
