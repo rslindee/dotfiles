@@ -57,6 +57,7 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     fuse-exfat \
     passmenu \
     python3 \
+    python3-autopep8 \
     python3-tldextract \
     st \
     terminus-fonts \
@@ -76,7 +77,8 @@ PACKAGES_LAPTOP="acpi \
 
 FEDORA_COPR_REPOS="flatcap/neomutt"
 
-PACKAGES_ARCH="fd \
+PACKAGES_ARCH="autopep8 \
+    fd \
     imagemagick \
     neomutt \
     newsboat \
