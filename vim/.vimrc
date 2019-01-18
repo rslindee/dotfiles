@@ -566,7 +566,10 @@ nmap ga <Plug>(EasyAlign)
 
 " rainbow_parentheses.vim
 " toggle rainbow parentheses
-nmap <leader>R :RainbowParentheses!!<cr>
+nmap <leader>P :RainbowParentheses!!<cr>
+
+" async grep current word, then set up a substitute on populated quickfix list
+nmap <leader>R :AsyncRun -program=grep "<c-r><c-w>"<cr>:cdo %s/<C-r><C-w>//gc<Left><Left><Left>
 
 " vim-anzu
 " use anzu to echo search information
