@@ -14,12 +14,14 @@ fi
 
 ALL_PACKAGES="atool \
     autoconf \
+    bc \
     bspwm \
     cgdb \
     chromium \
     clang \
     cmus \
     ctags \
+    dunst \
     exfat-utils \
     ffmpeg \
     fontconfig \
@@ -92,6 +94,7 @@ PACKAGES_AUR="st \
 STOW_LIST="cgdb \
     clang \
     ctags \
+    dunst \
     fontconfig \
     git \
     mimeapps \
