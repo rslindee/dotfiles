@@ -3,12 +3,12 @@
 set -eu
 
 # zplugin clone (if it doesn't already exist)
-if [ ! -d "~/.zplugin" ]; then
+if [ ! -d "$HOME/.zplugin" ];then
     git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
 fi
 
 # vim minpac clone (if it doesn't already exist)
-if [ ! -f "~/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
+if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
     git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
 fi
 
@@ -135,10 +135,12 @@ if [ "$OS" = "Fedora" ]; then
 elif [ "$OS" = "Arch Linux" ]; then
     echo "Arch system detected..."
     # Install trizen
-    git clone https://aur.archlinux.org/trizen.git $HOME/trizen
-    cd $HOME/trizen
-    makepkg -si
-    PACKAGE_MANAGER_INSTALL="trizen -S"
+    if [ ! -f "/usr/bin/trizen" ]; then
+        git clone https://aur.archlinux.org/trizen.git $HOME/trizen
+        cd $HOME/trizen
+        makepkg -si
+    fi
+    PACKAGE_MANAGER_INSTALL="trizen -S --needed"
     # Create package list
     ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_ARCH $PACKAGES_AUR"
 fi
