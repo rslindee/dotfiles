@@ -14,6 +14,7 @@ fi
 
 ALL_PACKAGES="atool \
     autoconf \
+    bashmount \
     bc \
     bspwm \
     cgdb \
@@ -41,13 +42,14 @@ ALL_PACKAGES="atool \
     slock \
     socat \
     sshfs \
+    st \
     stow \
     sxiv \
     tmux \
     udisks2 \
+    urlview \
     vim \
     xautolock \
-    xcape \
     xsel \
     zathura \
     zathura-pdf-poppler \
@@ -61,11 +63,9 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     python3 \
     python3-autopep8 \
     python3-tldextract \
-    st \
     terminus-fonts \
     terminus-fonts-console \
-    unifont-fonts \
-    urlview"
+    unifont-fonts"
 
 # TLP is Thinkpad-specific
 PACKAGES_LAPTOP="acpi \
@@ -73,9 +73,6 @@ PACKAGES_LAPTOP="acpi \
     powertop \
     tlp \
     tlp-rdw"
-
-# TODO Fedora RPMSphere, build from github, or submit to fedora
-# udevil
 
 FEDORA_COPR_REPOS="flatcap/neomutt"
 
@@ -87,9 +84,6 @@ PACKAGES_ARCH="autopep8 \
     python-tldextract \
     terminus-font \
     udevil"
-
-PACKAGES_AUR="st \
-    urlview"
 
 STOW_LIST="cgdb \
     clang \
@@ -131,7 +125,7 @@ if [ "$OS" = "Fedora" ]; then
     # TODO how do we handle multiple COPR repos (e.g. single command)?
     sudo dnf copr enable $FEDORA_COPR_REPOS
     # Create package list
-    ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_FEDORA $PACKAGES_AUR"
+    ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_FEDORA"
 elif [ "$OS" = "Arch Linux" ]; then
     echo "Arch system detected..."
     # Install trizen
@@ -142,7 +136,7 @@ elif [ "$OS" = "Arch Linux" ]; then
     fi
     PACKAGE_MANAGER_INSTALL="trizen -S --needed"
     # Create package list
-    ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_ARCH $PACKAGES_AUR"
+    ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_ARCH"
 fi
 
 # Install packages
