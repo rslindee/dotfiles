@@ -3,9 +3,9 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
     xbacklight -dec 10
 XF86AudioLowerVolume
-    amixer set Master 5%- && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk '$0~/%/\{print $4 " " $6\}' | tr -d '[]')"
+    amixer set Master 5%- && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk -F"[][]" '/%/ \{ print $2 " " $(NF-1);exit;\}')"
 XF86AudioRaiseVolume
-    amixer set Master 5%+ && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk '$0~/%/\{print $4 " " $6\}' | tr -d '[]')"
+    amixer set Master 5%+ && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk -F"[][]" '/%/ \{ print $2 " " $(NF-1);exit;\}')"
 XF86AudioMicMute
     amixer set Capture toggle
 super + i
@@ -15,7 +15,7 @@ super + shift + i
 @super + BackSpace
     slock
 {super + m,XF86AudioMute}
-    amixer set Master toggle && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk '$0~/%/\{print $4 " " $6\}' | tr -d '[]')"
+    amixer set Master toggle && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk -F"[][]" '/%/ \{ print $2 " " $(NF-1);exit;\}')"
 super + v
     echo 'cycle pause' | socat - /tmp/mpv-socket
 @super + s 
