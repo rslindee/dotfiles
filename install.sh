@@ -2,13 +2,13 @@
 set -eu
 
 # zplugin clone (if it doesn't already exist)
-if [ ! -d "$HOME/.zplugin" ];then
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+if [ ! -d "$HOME/.zplugin" ]; then
+    git clone https://github.com/zdharma/zplugin.git $HOME/.zplugin/bin
 fi
 
 # vim minpac clone (if it doesn't already exist)
 if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
-    git clone https://github.com/k-takata/minpac.git ~/.vim/pack/minpac/opt/minpac
+    git clone https://github.com/k-takata/minpac.git $HOME/.vim/pack/minpac/opt/minpac
 fi
 
 ALL_PACKAGES="atool \
@@ -26,19 +26,25 @@ ALL_PACKAGES="atool \
     ffmpeg \
     fontconfig \
     fzf \
+    gnupg \
     mediainfo \
     mpc \
     mpd \
     mpv \
     msmtp \
+    mutt \
     ncmpcpp \
     newsboat \
+    notmuch \
+    notmuch-mutt \
+    offlineimap \
     pass \
     python \
     qutebrowser \
     ranger \
     renameutils \
     ripgrep \
+    sqlite \
     sxhkd \
     slock \
     socat \
@@ -77,40 +83,42 @@ PACKAGES_LAPTOP="acpi \
     tlp \
     tlp-rdw"
 
-FEDORA_COPR_REPOS="flatcap/neomutt"
-
 PACKAGES_ARCH="autopep8 \
     fd \
     imagemagick \
-    neomutt \
     noto-fonts-cjk \
     python-tldextract \
     terminus-font \
     ttf-dejavu"
 
-STOW_LIST="cgdb \
+STOW_LIST="bspwm \
+    cgdb \
     clang \
     ctags \
     dunst \
+    flake8 \
     fontconfig \
     git \
+    gnupg \
     mimeapps \
     mpd \
     mpv \
     mutt \
     ncmpcpp \
+    offlineimap \
     profile \
     qutebrowser \
     ranger \
-    sxhkd \
     ssh \
+    sxhkd \
     tmux \
     urlview \
     vim \
     zathura \
     zsh"
 
-STOW_LIST_PRIVATE="newsboat"
+STOW_LIST_PRIVATE="newsboat \
+    pass"
 
 # Get OS version
 if [ -f /etc/os-release ]; then
@@ -123,10 +131,6 @@ if [ "$OS" = "Fedora" ]; then
     PACKAGE_MANAGER_INSTALL="sudo dnf install"
     # Setup RPM Fusion
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    # Install copr plugins package first
-    $PACKAGE_MANAGER_INSTALL dnf-plugins-core
-    # TODO how do we handle multiple COPR repos (e.g. single command)?
-    sudo dnf copr enable $FEDORA_COPR_REPOS
     # Create package list
     ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_FEDORA"
 elif [ "$OS" = "Arch Linux" ]; then
@@ -147,11 +151,16 @@ $PACKAGE_MANAGER_INSTALL $ALL_PACKAGES
 
 # Stow dotfiles
 cd $HOME/dotfiles
-stow $STOW_LIST
+stow -R $STOW_LIST
 
-# Clone private repos
-git clone git@gitlab.com:rslindee/wiki.git $HOME/wiki
-git clone git@gitlab.com:rslindee/dotfiles-private.git $HOME/dotfiles-private
+# Clone private repos if they don't already exist
+if [ ! -d "$HOME/wiki" ]; then
+    git clone git@gitlab.com:rslindee/wiki.git $HOME/wiki
+fi
+
+if [ ! -d "$HOME/dotfiles-private" ]; then
+    git clone git@gitlab.com:rslindee/dotfiles-private.git $HOME/dotfiles-private
+fi
 
 # Stow private dotfiles
 cd $HOME/dotfiles-private
