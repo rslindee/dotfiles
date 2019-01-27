@@ -1,0 +1,6 @@
+text/plain; vim %s ;
+text/html; xdg-open '%s' ; nametemplate=%s.html
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+image/*; xdg-open '%s' ;
+video/*; xdg-open '%s' ;
+application/pdf; xdg-open '%s';
