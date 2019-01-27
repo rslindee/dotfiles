@@ -1,4 +1,3 @@
-#!/bin/bash
 # Fail right away and prevent use of undefined vars
 set -eu
 
@@ -31,7 +30,9 @@ ALL_PACKAGES="atool \
     mpc \
     mpd \
     mpv \
+    msmtp \
     ncmpcpp \
+    newsboat \
     pass \
     python \
     qutebrowser \
@@ -49,6 +50,7 @@ ALL_PACKAGES="atool \
     udisks2 \
     urlview \
     vim \
+    w3m \
     xautolock \
     xsel \
     zathura \
@@ -56,6 +58,7 @@ ALL_PACKAGES="atool \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
+    dejavu-fonts \
     ImageMagick \
     fd-find \
     fuse-exfat \
@@ -80,10 +83,10 @@ PACKAGES_ARCH="autopep8 \
     fd \
     imagemagick \
     neomutt \
-    newsboat \
+    noto-fonts-cjk \
     python-tldextract \
     terminus-font \
-    udevil"
+    ttf-dejavu"
 
 STOW_LIST="cgdb \
     clang \
