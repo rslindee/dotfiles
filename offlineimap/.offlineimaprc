@@ -1,0 +1,23 @@
+[general]
+accounts = rslindee-gmail
+starttls = yes
+ssl = yes
+pythonfile = ~/.password-store/pass.py
+
+[Account rslindee-gmail]
+localrepository = rslindee-gmail-local
+remoterepository = rslindee-gmail-remote
+
+[Repository rslindee-gmail-remote]
+auth_mechanisms = LOGIN
+type = Gmail
+remoteuser = rslindee@gmail.com
+remotepasseval = get_pass("mail/rslindee@gmail.com")
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+remoteport = 993
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version=tls1_2
+
+[Repository rslindee-gmail-local]
+type = Maildir
+localfolders = ~/.mail/rslindee-gmail
