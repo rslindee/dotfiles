@@ -128,6 +128,7 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
+# Setup package manager
 if [ "$OS" = "Fedora" ]; then
     echo "Fedora system detected..."
     PACKAGE_MANAGER_INSTALL="sudo dnf install"
@@ -166,7 +167,7 @@ fi
 
 # Stow private dotfiles
 cd $HOME/dotfiles-private
-stow $STOW_LIST_PRIVATE
+stow -R $STOW_LIST_PRIVATE
 
 # Change shell to zsh
 chsh -s $(which zsh)
