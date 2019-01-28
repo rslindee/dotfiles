@@ -63,7 +63,7 @@ ALL_PACKAGES="atool \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
-    dejavu-fonts \
+    dejavu-fonts-common \
     ImageMagick \
     fd-find \
     fuse-exfat \
@@ -103,6 +103,7 @@ STOW_LIST="bspwm \
     mpd \
     mpv \
     ncmpcpp \
+    notmuch \
     offlineimap \
     profile \
     qutebrowser \
