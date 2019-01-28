@@ -37,7 +37,6 @@ ALL_PACKAGES="atool \
     newsboat \
     notmuch \
     notmuch-mutt \
-    offlineimap \
     pass \
     python \
     qutebrowser \
@@ -103,7 +102,6 @@ STOW_LIST="bspwm \
     mimeapps \
     mpd \
     mpv \
-    mutt \
     ncmpcpp \
     offlineimap \
     profile \
@@ -117,7 +115,10 @@ STOW_LIST="bspwm \
     zathura \
     zsh"
 
-STOW_LIST_PRIVATE="newsboat \
+STOW_LIST_PRIVATE="msmtp \
+    mutt \
+    newsboat \
+    offlineimap \
     pass"
 
 # Get OS version
