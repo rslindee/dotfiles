@@ -14,7 +14,6 @@ bspc config focus_follows_pointer true
 
 bspc config remove_unplugged_monitors true
 bspc config remove_disabled_monitors true
-bspc config merge_overlapping_monitors true
 
 #gruvbox dark green
 bspc config focused_border_color "#98971a"
