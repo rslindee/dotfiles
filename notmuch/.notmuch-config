@@ -10,8 +10,8 @@
 # Notmuch will store its database within a sub-directory of the path
 # configured here named ".notmuch".
 #
-[database]
-path=/home/rich/.mail
+#[database]
+#path=/home/rich/.mail
 
 # User configuration
 #
