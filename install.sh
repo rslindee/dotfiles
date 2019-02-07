@@ -53,7 +53,7 @@ ALL_PACKAGES="atool \
     sxiv \
     tmux \
     udisks2 \
-    urlview \
+    urlscan \
     vim \
     w3m \
     xautolock \
@@ -111,7 +111,7 @@ STOW_LIST="bspwm \
     ssh \
     sxhkd \
     tmux \
-    urlview \
+    urlscan \
     vim \
     zathura \
     zsh"
