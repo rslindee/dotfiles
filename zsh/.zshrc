@@ -54,6 +54,9 @@ alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -
 # Load newsboat with youtube subs
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
+# run mutt with offlineimap in background
+alias mail-rs="(offlineimap -u syslog -a rslindee-gmail &); mutt -f ~/mail/rslindee-gmail/INBOX; killall offlineimap"
+
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
 {
