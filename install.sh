@@ -40,6 +40,7 @@ ALL_PACKAGES="abook \
     notmuch-mutt \
     pass \
     python \
+    python-oauth2client \
     qutebrowser \
     ranger \
     renameutils \
@@ -71,6 +72,8 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     passmenu \
     python3 \
     python3-autopep8 \
+    python3-httplib2 \
+    python3-oauth2client \
     python3-tldextract \
     terminus-fonts \
     terminus-fonts-console \
