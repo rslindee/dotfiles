@@ -11,7 +11,8 @@ if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
     git clone https://github.com/k-takata/minpac.git $HOME/.vim/pack/minpac/opt/minpac
 fi
 
-ALL_PACKAGES="atool \
+ALL_PACKAGES="abook \
+    atool \
     autoconf \
     bashmount \
     bc \
