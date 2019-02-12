@@ -362,7 +362,7 @@ noremap <c-l> <c-w>l
 set clipboard=unnamed
 
 " pipe contents of paste buffer to clipboard via xsel
-nnoremap <leader>yy :call system("xsel -i --clipboard", getreg("\""))<cr>
+nnoremap <leader>y :call system("xsel -i --clipboard", getreg("\""))<cr>
 
 " add contents of clipboard to x register (via xsel) and paste
 function! Xsel_paste()
@@ -395,8 +395,8 @@ cnoremap <c-k> <up>
 nmap Y y$
 
 " yank/delete entire C-style functions
-map <leader>yf Vf{%d
-map <leader>df Vf{%y
+map <leader>Y Vf{%d
+map <leader>D Vf{%y
 
 " open index in personal wiki
 nmap <leader>ww :tabe ~/wiki/index.md<cr>
