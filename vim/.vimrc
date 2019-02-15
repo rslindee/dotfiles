@@ -330,7 +330,7 @@ map k gk
 " tmux-like tab creation
 map <leader>c :tabnew<cr>
 
-" cope shortcuts
+" quickfix shortcuts
 map <silent><c-n> :cn<cr>
 map <silent><c-p> :cp<cr>
 
