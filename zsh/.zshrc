@@ -23,7 +23,7 @@ function git_prompt_info() {
 
 precmd () {
     PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
-    RPROMPT='[%W %*]'
+    RPROMPT='[%W %* %n@%m]'
 }
 
 # vi-mode handling
