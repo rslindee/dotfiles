@@ -10,7 +10,7 @@ ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
 ZSH_THEME_GIT_PROMPT_REPO="%F{197}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
-ZSH_THEME_DIRECTORY="%F{30}%~%f"
+ZSH_THEME_DIRECTORY="%F{147}%~%f"
 
 # shortens the pwd for use in prompt
 function git_prompt_info() {
@@ -23,7 +23,7 @@ function git_prompt_info() {
 
 precmd () {
     PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
-    RPROMPT='[%W %* %n@%m]'
+    RPROMPT='[%W %* %n@%F{153}%m%f]'
 }
 
 # vi-mode handling
