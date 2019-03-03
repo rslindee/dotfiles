@@ -18,6 +18,7 @@ ALL_PACKAGES="abook \
     bc \
     bspwm \
     cgdb \
+    cronie \
     chromium \
     clang \
     cmus \
