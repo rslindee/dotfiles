@@ -57,6 +57,7 @@ alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcac
 # run mutt with offlineimap in background
 alias mail-rs="offlineimap -u syslog -a rslindee-gmail &; mutt -f ~/mail/rslindee-gmail/INBOX; killall -w offlineimap"
 alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
+alias mail-rich="offlineimap -u syslog -a richard-slindee &; mutt -f ~/mail/richard-slindee/INBOX; killall -w offlineimap"
 
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()

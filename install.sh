@@ -120,7 +120,8 @@ STOW_LIST="bspwm \
     zathura \
     zsh"
 
-STOW_LIST_PRIVATE="msmtp \
+STOW_LIST_PRIVATE="abook \
+    msmtp \
     mutt \
     newsboat \
     offlineimap \
