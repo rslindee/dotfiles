@@ -1,0 +1,23 @@
+[calendars]
+[[personal]]
+path = ~/.calendars/personal
+type = calendar
+color = auto
+
+[default]
+default_calendar = personal
+highlight_event_days = True
+
+[locale]
+timeformat = %H:%M
+dateformat = %m/%d/%Y
+longdateformat = %m/%d/%Y
+datetimeformat = %m/%d/%Y %H:%M
+longdatetimeformat = %m/%d/%Y %H:%M
+firstweekday = 6
+unicode_symbols = False
+
+[view]
+frame = color
+event_view_always_visible = True
+

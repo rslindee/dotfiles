@@ -29,6 +29,7 @@ ALL_PACKAGES="abook \
     fontconfig \
     fzf \
     gnupg \
+    khal \
     mediainfo \
     mpc \
     mpd \
@@ -57,6 +58,7 @@ ALL_PACKAGES="abook \
     tmux \
     udisks2 \
     urlscan \
+    vdirsyncer \
     vim \
     w3m \
     xautolock \
@@ -73,7 +75,6 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     passmenu \
     python3 \
     python3-autopep8 \
-    python3-httplib2 \
     python3-oauth2client \
     python3-tldextract \
     terminus-fonts \
@@ -104,6 +105,7 @@ STOW_LIST="bspwm \
     fontconfig \
     git \
     gnupg \
+    khal \
     mimeapps \
     mpd \
     mpv \
@@ -126,7 +128,8 @@ STOW_LIST_PRIVATE="abook \
     mutt \
     newsboat \
     offlineimap \
-    pass"
+    pass \
+    vdirsyncer"
 
 # Get OS version
 if [ -f /etc/os-release ]; then
