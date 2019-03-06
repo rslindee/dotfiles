@@ -171,10 +171,12 @@ def_key "j"
 #
 def_key "ctrl-u"
   page_up
-#
+def_key "ctrl-b"
+  page_up
 def_key "ctrl-d"
   page_down
-#
+def_key "ctrl-f"
+  page_down
 def_key "g"
   move_home
 #
@@ -295,12 +297,6 @@ def_key "h"
 def_key "c"
   pause
 #
-def_key "ctrl-l"
-  next
-#
-def_key "ctrl-h"
-  previous
-#
 #def_key "ctrl-h"
 #  jump_to_parent_directory
 #
@@ -358,9 +354,9 @@ def_key "H"
 #def_key "X"
 #  set_crossfade
 #
-#def_key "u"
-#  update_database
-#
+def_key "u"
+  update_database
+
 def_key "s"
   sort_playlist
 
@@ -507,8 +503,8 @@ def_key "'"
 #def_key "L"
 #  toggle_lyrics_fetcher
 #
-#def_key "F"
-#  toggle_fetching_lyrics_in_background
+def_key "F"
+  apply_filter
 #
 #def_key "ctrl-l"
 #  toggle_screen_lock
@@ -522,8 +518,10 @@ def_key "S"
 #def_key "`"
 #  add_random_items
 #
-#def_key "ctrl-p"
-#  set_selected_items_priority
+def_key "ctrl-p"
+  previous
+def_key "ctrl-n"
+  next
 #
 #def_key "q"
 #  quit
