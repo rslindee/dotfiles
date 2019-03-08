@@ -31,7 +31,7 @@
     dr = push origin --delete
     fc = clean -ffxd
     fe = fetch --prune --tags --all
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=human --all
     pl = pull
     ps = push --set-upstream
     re = reset --hard HEAD
