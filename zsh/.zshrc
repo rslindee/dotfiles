@@ -173,6 +173,9 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
+# Don't give error if glob fails. Workaround for issues with cansend '#' issue
+setopt +o nomatch
+
 # Treat single word simple commands without redirection as candidates for resumption of an existing job.
 setopt auto_resume
 # List jobs in the long format by default.
