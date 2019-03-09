@@ -40,7 +40,7 @@ c.url.default_page = ('about:blank')
 c.editor.command = ['st', '-f', 'Terminus:size=10:antialias=false:autohint=false', '-e', 'vim', '{}']
 c.auto_save.session = True
 
-c.downloads.location.directory = ('~/Downloads')
+c.downloads.location.directory = ('~/downloads')
 c.downloads.location.prompt = False
 
 c.hints.next_regexes.append(r'\B›\B')
