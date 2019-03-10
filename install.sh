@@ -30,6 +30,7 @@ ALL_PACKAGES="abook \
     fzf \
     gnupg \
     khal \
+    khard \
     mediainfo \
     mpc \
     mpd \
