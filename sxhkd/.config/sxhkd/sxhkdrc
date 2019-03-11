@@ -30,6 +30,10 @@ super + t
     exec mv ~/Downloads/*.torrent ~/torrents
 super + c
     mpc toggle
+super + shift + n
+    mpc next
+super + shift + p
+    mpc prev
 super + @o
     dmenu_run -i -nf '#b8bb26' -nb '#282828' -sf '#282828' -sb '#b8bb26' -fn 'Terminus:size=10'
 super + g
