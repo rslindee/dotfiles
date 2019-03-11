@@ -21,6 +21,7 @@ ALL_PACKAGES="abook \
     cronie \
     chromium \
     clang \
+    cmake \
     cmus \
     ctags \
     dunst \
