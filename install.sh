@@ -32,6 +32,7 @@ ALL_PACKAGES="abook \
     gnupg \
     khal \
     khard \
+    isync \
     mediainfo \
     mpc \
     mpd \
@@ -113,7 +114,6 @@ STOW_LIST="bspwm \
     mpv \
     ncmpcpp \
     notmuch \
-    offlineimap \
     profile \
     qutebrowser \
     ranger \
@@ -126,10 +126,10 @@ STOW_LIST="bspwm \
     zsh"
 
 STOW_LIST_PRIVATE="abook \
+    mbsync \
     msmtp \
     mutt \
     newsboat \
-    offlineimap \
     pass \
     vdirsyncer"
 
