@@ -26,8 +26,6 @@ config.bind('<Ctrl-t>', 'tab-pin')
 config.bind('<Ctrl-i>', 'spawn --userscript qute-pass --dmenu-invocation dmenu')
 config.bind('<Ctrl-p>', 'spawn --userscript qute-pass --dmenu-invocation dmenu --password-only')
 config.bind('<Ctrl-w>', 'download')
-config.bind('<Ctrl-z>', 'set zoom.default 150')
-config.bind('<Ctrl-shift-z>', 'set zoom.default 100')
 
 c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
         'y': 'http://www.youtube.com/results?search_query={}',
