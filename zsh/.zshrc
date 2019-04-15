@@ -2,6 +2,12 @@
 autoload -Uz compinit
 compinit
 
+# Get OS name
+if [ -f /etc/os-release ]; then
+    . /etc/os-release
+    OS=$NAME
+fi
+
 # Prompt theme
 # Allow substitution
 setopt prompt_subst
@@ -62,12 +68,6 @@ alias mail-rich="offlineimap -u syslog -a richard-slindee &; mutt -f ~/mail/rich
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
 {
-    # Get OS name
-    if [ -f /etc/os-release ]; then
-        . /etc/os-release
-        OS=$NAME
-    fi
-
     if [ "$OS" = "Fedora" ]; then
         echo "Updating Fedora packages..."
         sudo dnf upgrade
@@ -102,6 +102,15 @@ alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
 
+# Set editors to vim
+if [ "$OS" = "Fedora" ]; then
+    alias vim='vimx'
+    export VISUAL=vimx
+else
+    export VISUAL=vim
+fi
+export EDITOR="$VISUAL"
+
 # Show weather
 wttr()
 {
@@ -120,7 +129,7 @@ alias cmus-upd='cmus-remote --clear --library ~/music'
 # Use vim as manpager
 viman ()
 {
-    vim -c "Man $1 $2" -c 'silent only'
+    $EDITOR -c "Man $1 $2" -c 'silent only'
 }
 
 alias rang='ranger'
@@ -155,10 +164,6 @@ export LESS_TERMCAP_se=$'\e[0m'
 export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
-
-# Set editors to vim
-export VISUAL=vim
-export EDITOR="$VISUAL"
 
 # Enable vi mode
 bindkey -v

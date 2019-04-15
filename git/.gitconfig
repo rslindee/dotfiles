@@ -4,7 +4,7 @@
     default = current
 [core]
     trustctime = false
-    editor = vim
+    editor = $EDITOR
     filemode = false
     autocrlf = input
 [color]
@@ -43,7 +43,7 @@
     tool = vimdiff
     colorMoved = default
 [mergetool "diffconflicts"]
-	cmd = vim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+	cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 	trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
