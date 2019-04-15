@@ -30,6 +30,7 @@ ALL_PACKAGES="abook \
     fontconfig \
     fzf \
     gnupg \
+    gvim \
     khal \
     khard \
     isync \
@@ -62,7 +63,6 @@ ALL_PACKAGES="abook \
     udisks2 \
     urlscan \
     vdirsyncer \
-    vim \
     w3m \
     xautolock \
     xsel \

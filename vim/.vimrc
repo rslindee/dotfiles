@@ -358,8 +358,8 @@ noremap <c-l> <c-w>l
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use system clipboard
-set clipboard=unnamed
+" use CLIPBOARD register
+set clipboard=unnamedplus
 
 " pipe contents of paste buffer to clipboard via xsel
 nnoremap <leader>y :call system("xsel -i --clipboard", getreg("\""))<cr>
