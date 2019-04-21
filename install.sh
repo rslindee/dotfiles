@@ -24,18 +24,22 @@ ALL_PACKAGES="abook \
     cmake \
     cmus \
     ctags \
+    dmenu \
     dunst \
     exfat-utils \
+    feh \
     ffmpeg \
     fontconfig \
     fzf \
     gnupg \
     gvim \
+    guvcview \
     isync \
     khal \
     khard \
     libnotify \
     mediainfo \
+    mlocate \
     mpc \
     mpd \
     mpv \
@@ -43,6 +47,7 @@ ALL_PACKAGES="abook \
     mutt \
     ncmpcpp \
     newsboat \
+    nnn \
     notmuch \
     notmuch-mutt \
     pass \
@@ -52,6 +57,7 @@ ALL_PACKAGES="abook \
     ranger \
     renameutils \
     ripgrep \
+    rsync \
     sqlite \
     sxhkd \
     slock \
@@ -59,7 +65,6 @@ ALL_PACKAGES="abook \
     sshfs \
     st \
     stow \
-    sxiv \
     tmux \
     udisks2 \
     urlscan \
@@ -67,6 +72,7 @@ ALL_PACKAGES="abook \
     w3m \
     xautolock \
     xsel \
+    youtube-dl \
     zathura \
     zathura-pdf-poppler \
     zsh"
@@ -90,18 +96,20 @@ PACKAGES_LAPTOP="acpi \
     acpid \
     powertop \
     tlp \
-    tlp-rdw"
+    tlp-rdw \
+    "
 
-PACKAGES_ARCH="autopep8 \
+PACKAGES_ARCH="alsa-utils \
+    autopep8 \
     fd \
     imagemagick \
+    nfs-utils \
     networkmanager \
     noto-fonts-cjk \
     python-tldextract \
     terminus-font \
     ttf-dejavu \
-    xorg-server \
-    xorg-xinit
+    xorg
     "
 
 STOW_LIST="bspwm \
@@ -114,6 +122,7 @@ STOW_LIST="bspwm \
     git \
     gnupg \
     khal \
+    khard \
     mimeapps \
     mpd \
     mpv \
