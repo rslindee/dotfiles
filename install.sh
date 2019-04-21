@@ -25,6 +25,7 @@ ALL_PACKAGES="abook \
     cmus \
     ctags \
     dmenu \
+    dtrx \
     dunst \
     exfat-utils \
     feh \
@@ -38,6 +39,8 @@ ALL_PACKAGES="abook \
     khal \
     khard \
     libnotify \
+    lrzip \
+    lzop \
     mediainfo \
     mlocate \
     mpc \
@@ -50,6 +53,8 @@ ALL_PACKAGES="abook \
     nnn \
     notmuch \
     notmuch-mutt \
+    openvpn \
+    p7zip \
     pass \
     python \
     python-oauth2client \
@@ -67,6 +72,8 @@ ALL_PACKAGES="abook \
     stow \
     tmux \
     udisks2 \
+    unarchiver \
+    unrar \
     unzip \
     urlscan \
     vdirsyncer \
