@@ -47,6 +47,7 @@ c.hints.prev_regexes.append(r'\B«\B')
 c.hints.next_regexes.append(r'\B»\B')
 
 c.hints.chars = ('asdfghjklqwertyuiopzxcvbnm')
+c.hints.uppercase = True
 c.content.geolocation = True
 c.tabs.background = True
 c.messages.timeout = 5000
