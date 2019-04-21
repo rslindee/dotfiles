@@ -19,7 +19,7 @@ super + shift + i
 super + v
     echo 'cycle pause' | socat - /tmp/mpv-socket
 @super + s 
-    import {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
+    import -silent {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + shift + d
     xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080
 @super + d
