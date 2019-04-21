@@ -31,9 +31,10 @@ ALL_PACKAGES="abook \
     fzf \
     gnupg \
     gvim \
+    isync \
     khal \
     khard \
-    isync \
+    libnotify \
     mediainfo \
     mpc \
     mpd \
@@ -94,10 +95,14 @@ PACKAGES_LAPTOP="acpi \
 PACKAGES_ARCH="autopep8 \
     fd \
     imagemagick \
+    networkmanager \
     noto-fonts-cjk \
     python-tldextract \
     terminus-font \
-    ttf-dejavu"
+    ttf-dejavu \
+    xorg-server \
+    xorg-xinit
+    "
 
 STOW_LIST="bspwm \
     cgdb \
@@ -120,7 +125,6 @@ STOW_LIST="bspwm \
     ssh \
     sxhkd \
     tmux \
-    urlscan \
     vim \
     zathura \
     zsh"
