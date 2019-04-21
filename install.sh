@@ -67,6 +67,7 @@ ALL_PACKAGES="abook \
     stow \
     tmux \
     udisks2 \
+    unzip \
     urlscan \
     vdirsyncer \
     w3m \
@@ -75,6 +76,7 @@ ALL_PACKAGES="abook \
     youtube-dl \
     zathura \
     zathura-pdf-poppler \
+    zip \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
