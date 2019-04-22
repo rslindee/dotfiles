@@ -110,6 +110,7 @@ else
     export VISUAL=vim
 fi
 export EDITOR="$VISUAL"
+export MERGE_EDITOR=vimdiff
 
 # Show weather
 wttr()
