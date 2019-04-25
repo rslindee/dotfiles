@@ -70,6 +70,7 @@ ALL_PACKAGES="abook \
     sshfs \
     st \
     stow \
+    surfraw \
     tmux \
     udisks2 \
     unarchiver \
