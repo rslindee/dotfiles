@@ -35,7 +35,7 @@ c.url.searchengines = {'DEFAULT': 'https://google.com/search?q={}',
         'w': 'http://en.wikipedia.org/w/index.php?title=Special:Search&search={}'}
 c.url.default_page = ('about:blank')
 
-c.editor.command = ['st', '-f', 'Terminus:size=10:antialias=false:autohint=false', '-e', 'vim', '{}']
+c.editor.command = ['st', '-f', 'Terminus:size=10', '-e', '$EDITOR', '{}']
 c.auto_save.session = True
 
 c.downloads.location.directory = ('~/downloads')

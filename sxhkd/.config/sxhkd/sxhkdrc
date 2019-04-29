@@ -27,7 +27,7 @@ super + v
 super + Return
     st -f 'Terminus:size=10'
 super + t
-    exec mv ~/Downloads/*.torrent ~/torrents
+    exec mv ~/downloads/*.torrent ~/torrents
 super + c
     mpc toggle
 super + shift + n
