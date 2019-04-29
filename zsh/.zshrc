@@ -55,15 +55,18 @@ alias gitr='cd "$(git rev-parse --show-toplevel)"'
 # commit everything and push with commit message "Update"
 alias gitup='git add --all && git commit --all --message="Update" && git push'
 # delete locally merged branches to master or develop except current
+# TODO: this is currently broken?
 alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete'
 
 # Load newsboat with youtube subs
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
 # run mutt with offlineimap in background
-alias mail-rs="offlineimap -u syslog -a rslindee-gmail &; mutt -f ~/mail/rslindee-gmail/INBOX; killall -w offlineimap"
+alias mail-rs="mutt -f ~/mail/rslindee-gmail/Inbox"
 alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
-alias mail-rich="offlineimap -u syslog -a richard-slindee &; mutt -f ~/mail/richard-slindee/INBOX; killall -w offlineimap"
+alias mail-rich="mutt -f ~/mail/richard-slindee/Inbox"
+
+alias fzf-yank='fzf | xsel -i --clipboard'
 
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
