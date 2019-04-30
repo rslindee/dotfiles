@@ -35,6 +35,7 @@ ALL_PACKAGES="atool \
     gvim \
     guvcview \
     isync \
+    jq \
     khal \
     khard \
     libnotify \
