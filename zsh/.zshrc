@@ -9,7 +9,7 @@ if [ -f /etc/os-release ]; then
 fi
 
 if [ "$OS" = "Fedora" ]; then
-    source /usr/share/fzf/shell/completion.zsh
+    source /usr/share/zsh/site-functions/fzf
 else
     source /usr/share/fzf/completion.zsh
 fi
@@ -54,6 +54,8 @@ zle -N zle-keymap-select
 
 # all files, human-readable sizes
 alias l='ls -lAh --color=auto'
+
+alias bm='bashmount'
 
 # git
 # change directory to root of current git repo
@@ -130,13 +132,10 @@ wttr()
 }
 
 # Show available space of /mnt
-alias dfA='df -h /mnt/*'
+alias dfa='df -h /mnt/*'
 
 # Quick open with xdg-open
 alias o='xdg-open'
-
-# Clear cmus library and update with ~/music
-alias cmus-upd='cmus-remote --clear --library ~/music'
 
 # Use vim as manpager
 viman ()
