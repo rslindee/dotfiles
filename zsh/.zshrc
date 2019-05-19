@@ -72,6 +72,9 @@ alias mail-rs="mutt -f ~/mail/rslindee-gmail/Inbox"
 alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
 alias mail-rich="mutt -f ~/mail/richard-slindee/Inbox"
 
+# show progress of any current operations
+alias p="progress -m"
+
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
 {
