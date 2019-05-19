@@ -8,6 +8,12 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
+if [ "$OS" = "Fedora" ]; then
+    source /usr/share/fzf/shell/completion.zsh
+else
+    source /usr/share/fzf/completion.zsh
+fi
+
 # Prompt theme
 # Allow substitution
 setopt prompt_subst
@@ -65,8 +71,6 @@ alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcac
 alias mail-rs="mutt -f ~/mail/rslindee-gmail/Inbox"
 alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
 alias mail-rich="mutt -f ~/mail/richard-slindee/Inbox"
-
-alias fzf-yank='fzf | xsel -i --clipboard'
 
 # update packages, zplugin plugins, personal wiki, and dotfiles
 upd()
@@ -298,7 +302,7 @@ zle -N fancy-ctrl-z
 # FZF setup
 export FZF_DEFAULT_OPTS="--multi"
 # TODO write my own fzf searches using fd
-#export FZF_DEFAULT_COMMAND='fd -H --color=never'
+export FZF_DEFAULT_COMMAND='fd -H --color=never'
 FZF_WIDGET_TMUX=1
 
 # Key bindings
@@ -342,23 +346,23 @@ bindkey '^S' history-incremental-search-forward
 # Set forward delete
 bindkey '^D' delete-char
 
-# TODO: fzf-insert-directory and fzf-insert-files is kinda slow after exit for some reason
-# fzf keybinds
-bindkey -r '^O'
-# TODO: Figure out better fzf invocation
-# bindkey '^Ot' fzf-insert-directory
-# bindkey '^Oo' fzf-insert-files
-# bindkey '^Op' fzf-kill-processes
-# bindkey '^Or' fzf-insert-history
-# bindkey '^Oa' fzf-git-add-files
-# bindkey '^Ob' fzf-git-checkout-branch
-# bindkey '^Od' fzf-git-delete-branches
-
 # yank zsh selection
 yank-x-selection () { print -rn -- $CUTBUFFER | xsel -i --clipboard; }
 zle -N yank-x-selection
 bindkey '^Y' yank-x-selection
 bindkey -a '^Y' yank-x-selection
+
+# Use fd instead of the default find command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 ### Added by Zplugin's installer
 source ~/.zplugin/bin/zplugin.zsh
@@ -366,10 +370,7 @@ autoload -Uz _zplugin
 (( ${+_comps} )) && _comps[zplugin]=_zplugin
 ### End of Zplugin's installer chunk
 # Plugins
-# zplugin light trapd00r/LS_COLORS
 zplugin light zsh-users/zsh-completions
-# TODO: Figure out better fzf invocation
-#zplugin light ytet5uy4/fzf-widgets
 zplugin light zsh-users/zsh-history-substring-search
 zplugin light zdharma/zsh-diff-so-fancy
 zplugin light zdharma/fast-syntax-highlighting
