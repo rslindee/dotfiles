@@ -619,6 +619,8 @@ let g:winresizer_start_key = '<leader>W'
 let g:sneak#label = 1
 " use vimrc case settings (e.g. smartcase)
 let g:sneak#use_ic_scs = 1
+" use clever-s (e.g. s/S go next/prev)
+let g:sneak#s_next = 1
 
 " vim-over
 " start enhanced substitution
