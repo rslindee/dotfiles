@@ -106,7 +106,7 @@ alias reb='sudo reboot'
 alias shu='sudo shutdown now'
 
 # Set editors to vim
-if [ "$OS" = "Fedora" ]; then
+if [ "$OS" = "Fedora" ] && [[ $DISPLAY ]]; then
     alias vim='vimx'
     export VISUAL=vimx
 else
