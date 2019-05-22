@@ -25,7 +25,7 @@ super + v
 @super + d
     xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440
 super + Return
-    st -f 'Terminus:size=10'
+    st -f 'Terminus:size=10:antialias=false:autohint=false'
 super + t
     exec mv ~/downloads/*.torrent ~/torrents
 super + c
