@@ -29,4 +29,4 @@ bspc rule --add '*:soffice' state=tiled
 xsetroot -cursor_name left_ptr
 
 # Startup program(s)
-st -f "Terminus:size=10" -e tmux &
+st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux &
