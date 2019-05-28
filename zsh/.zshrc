@@ -303,9 +303,7 @@ zle -N fancy-ctrl-z
 
 # FZF setup
 export FZF_DEFAULT_OPTS="--multi"
-# TODO write my own fzf searches using fd
 export FZF_DEFAULT_COMMAND='fd -H --color=never'
-FZF_WIDGET_TMUX=1
 
 # Key bindings
 
@@ -364,6 +362,21 @@ _fzf_compgen_path() {
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# nnn config
+export NNN_TMPFILE="/tmp/nnn"
+export NNN_USE_EDITOR=1
+
+# call nnn with tmpfile (for changing dir)
+n()
+{
+    nnn "$@"
+
+    if [ -f $NNN_TMPFILE ]; then
+        . $NNN_TMPFILE
+        rm $NNN_TMPFILE
+    fi
 }
 
 ### Added by Zplugin's installer
