@@ -92,6 +92,7 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     ImageMagick \
     fd-find \
     fuse-exfat \
+    git-clang-format \
     passmenu \
     python3 \
     python3-autopep8 \
