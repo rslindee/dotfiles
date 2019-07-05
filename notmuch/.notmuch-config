@@ -48,7 +48,7 @@ primary_email=rslindee@gmail.com
 #
 [new]
 tags=unread;inbox;
-ignore=
+ignore=.uidvalidity;.mbsyncstate;.new;.lock;.journal
 
 # Search configuration
 #
