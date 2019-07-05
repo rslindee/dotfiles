@@ -76,9 +76,7 @@ alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
 # run mutt with offlineimap in background
-alias mail-rs="mutt -f ~/mail/rslindee-gmail/Inbox"
 alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
-alias mail-rich="mutt -f ~/mail/richard-slindee/Inbox"
 
 # show progress of any current operations
 alias p="progress -m"
@@ -104,6 +102,47 @@ upd()
     echo "Updating personal wiki..."
     git -C ~/wiki pull &
     wait
+}
+
+mailrich()
+{
+    # Check mail at interval
+    while true; do
+        mbsync -q richard-slindee && notmuch new --quiet
+        sleep 60
+    done &
+    loop_pid=$!
+    mutt -f ~/mail/richard-slindee/Inbox
+    kill $loop_pid
+    mbsync -q richard-slindee &
+    notmuch new --quiet &
+}
+
+mailrs()
+{
+    # Check mail at interval
+    while true; do
+        mbsync -q rslindee-gmail && notmuch new --quiet
+        sleep 60
+    done &
+    loop_pid=$!
+    mutt -f ~/mail/rslindee-gmail/Inbox
+    kill $loop_pid
+    mbsync -q rslindee-gmail &
+    notmuch new --quiet &
+}
+
+calrich()
+{
+    # run vdirsyncer at interval
+    while true; do
+        vdirsyncer sync > /dev/null 2>&1
+        sleep 60
+    done &
+    loop_pid=$!
+    ikhal
+    kill $loop_pid
+    vdirsyncer sync &
 }
 
 # Show directory sizes
@@ -144,7 +183,7 @@ alias dfa='df -h /mnt/*'
 alias o='xdg-open'
 
 # Use vim as manpager
-viman ()
+viman()
 {
     $EDITOR -c "Man $1 $2" -c 'silent only'
 }
