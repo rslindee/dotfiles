@@ -568,8 +568,8 @@ nmap ga <Plug>(EasyAlign)
 " toggle rainbow parentheses
 nmap <leader>P :RainbowParentheses!!<cr>
 
-" async grep current word, then set up a substitute on populated quickfix list
-nmap <leader>R :AsyncRun -program=grep "<c-r><c-w>"<cr>:cdo %s/<C-r><C-w>//gc<Left><Left><Left>
+" replace in quickfix list what word the cursor is currently on
+nmap <leader>R :cdo %s/<C-r><C-w>//gc<Left><Left><Left>
 
 " vim-anzu
 " use anzu to echo search information
