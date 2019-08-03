@@ -58,6 +58,7 @@ ALL_PACKAGES="aspell-en \
     openvpn \
     p7zip \
     pass \
+    pavucontrol \
     python \
     python-oauth2client \
     qutebrowser \
