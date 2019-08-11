@@ -41,6 +41,7 @@ ALL_PACKAGES="aspell-en \
     khal \
     khard \
     libnotify \
+    light \
     lrzip \
     lzop \
     mediainfo \
