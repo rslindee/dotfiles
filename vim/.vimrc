@@ -361,6 +361,9 @@ noremap <c-l> <c-w>l
 " use CLIPBOARD register
 set clipboard=unnamedplus
 
+" De-dupe and sort visual selection
+vnoremap <leader>ds :'<,'>sort u<cr>
+
 " pipe contents of paste buffer to clipboard via xsel
 nnoremap <leader>y :call system("xsel -i --clipboard", getreg("\""))<cr>
 
