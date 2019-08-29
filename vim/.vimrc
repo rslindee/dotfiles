@@ -498,14 +498,14 @@ nmap <leader>/ :AsyncRun -program=grep ""<left>
 nmap <leader>f :AsyncRun -program=grep "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
-" async make with 4 jobs
-nmap <leader>mm :AsyncRun make -j4<cr>
+" async make with parallel jobs
+nmap <leader>mm :AsyncRun make -j<cr>
 " async make clean
 nmap <leader>mc :AsyncRun make clean<cr>
 " async make clang-tidy
 nmap <leader>mt :AsyncRun make clang-tidy<cr>
-" async make with 4 jobs and flash when done
-nmap <leader>mf :AsyncRun make -j4 && make flash<cr>
+" async make with parallel jobs and flash when done
+nmap <leader>mf :AsyncRun make -j && make flash<cr>
 " generate ctags and gtags
 nmap <leader>j :AsyncRun ctags<cr>
 " TODO: Figure out how to also plug in loading the cscope database
