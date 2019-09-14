@@ -8,6 +8,8 @@ XF86AudioRaiseVolume
     amixer set Master 5%+ && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk -F"[][]" '/%/ \{ print $2 " " $(NF-1);exit;\}')"
 XF86AudioMicMute
     amixer set Capture toggle
+XF86Display
+    mons -n right
 super + i
     qutebrowser
 super + shift + i
