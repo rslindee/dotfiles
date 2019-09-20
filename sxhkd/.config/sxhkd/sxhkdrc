@@ -8,8 +8,6 @@ XF86AudioRaiseVolume
     amixer set Master 5%+ && notify-send --urgency=low "Volume" "$(amixer sget 'Master' | awk -F"[][]" '/%/ \{ print $2 " " $(NF-1);exit;\}')"
 XF86AudioMicMute
     amixer set Capture toggle
-XF86Display
-    mons -n right
 super + i
     qutebrowser
 super + shift + i
@@ -23,9 +21,9 @@ super + v
 @super + s 
     import -silent {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + shift + d
-    mons -s
+    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080
 @super + d
-    mons -o
+    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440
 super + Return
     st -f 'Terminus:size=10:antialias=false:autohint=false'
 super + t
