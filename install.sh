@@ -51,6 +51,7 @@ ALL_PACKAGES="aspell-en \
     mpv \
     msmtp \
     mutt \
+    ncdu \
     ncmpcpp \
     newsboat \
     nnn \
