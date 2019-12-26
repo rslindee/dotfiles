@@ -73,6 +73,8 @@ alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -
 # Load newsboat with youtube subs
 alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
+alias nb-tor="newsboat -u $HOME/.newsboat/tor -c $HOME/.newsboat/tor.db"
+
 alias nb='newsboat'
 
 # run mutt with offlineimap in background
