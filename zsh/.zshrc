@@ -8,12 +8,6 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-if [ "$OS" = "Fedora" ]; then
-    source /usr/share/zsh/site-functions/fzf
-else
-    source /usr/share/fzf/completion.zsh
-fi
-
 # Use gpg-agent for ssh
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -440,3 +434,9 @@ zplugin light zsh-users/zsh-completions
 zplugin light zsh-users/zsh-history-substring-search
 zplugin light zdharma/zsh-diff-so-fancy
 zplugin light zdharma/fast-syntax-highlighting
+
+if [ "$OS" = "Fedora" ]; then
+    source /usr/share/zsh/site-functions/fzf
+else
+    source /usr/share/fzf/completion.zsh
+fi
