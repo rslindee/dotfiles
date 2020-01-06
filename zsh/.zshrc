@@ -426,6 +426,17 @@ n()
     fi
 }
 
+# open vifm and change dir when done
+vicd()
+{
+    local dst="$(command vifm --choose-dir - "$@")"
+    if [ -z "$dst" ]; then
+        echo 'Directory picking cancelled/failed'
+        return 1
+    fi
+    cd "$dst"
+}
+
 ### Added by Zplugin's installer
 source ~/.zplugin/bin/zplugin.zsh
 autoload -Uz _zplugin
