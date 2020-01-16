@@ -37,8 +37,10 @@ set history=100
 
 set nofollowlinks
 
-" show hidden files/folders
-set dotfiles
+" show hidden files/folders for version >= .9
+" set dotfiles
+" same, but for vifm version < .9
+windo normal! zo
 
 " With this option turned on you can run partially entered commands with
 " unambiguous beginning using :! (e.g. :!Te instead of :!Terminal or :!Te<tab>).
@@ -165,7 +167,7 @@ command! reload :write | restart
 " program.
 
 " Pdf
-filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+filextype *.pdf zathura %c %i &
 fileviewer *.pdf pdftotext -nopgbrk %c -
 
 " preview directories in color
