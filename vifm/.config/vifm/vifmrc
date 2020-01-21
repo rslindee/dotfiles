@@ -292,6 +292,8 @@ fileviewer *.[ch],*.[ch]pp,*.md,Makefile,*.py,*.sh highlight -O xterm256 -s dant
 " for unknown file types.
 filetype * xdg-open
 
+fileview * defviewer.sh %c
+
 " ------------------------------------------------------------------------------
 
 " What should be saved automatically between vifm sessions.  Drop "savedirs"
