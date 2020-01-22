@@ -84,8 +84,8 @@ ALL_PACKAGES="aspell-en \
     urlscan \
     vdirsyncer \
     w3m \
-    xautolock \
     xsel \
+    xss-lock \
     youtube-dl \
     zathura \
     zathura-pdf-poppler \
