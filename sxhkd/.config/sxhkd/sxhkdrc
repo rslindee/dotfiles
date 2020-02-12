@@ -21,9 +21,9 @@ super + v
 @super + s 
     import -silent {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + shift + d
-    xrandr --auto --output DP2 --off --auto --output eDP1 --mode 1920x1080
+    xrandr_util.sh -p
 @super + d
-    xrandr --auto --output eDP1 --off --auto --output DP2 --mode 2560x1440
+    xrandr_util.sh -s
 super + Return
     st -f 'Terminus:size=10:antialias=false:autohint=false'
 super + t
@@ -44,7 +44,7 @@ super + shift + m
 super + Escape
 	pkill -USR1 -x sxhkd
 super + space
-    scripts/status.sh
+    status.sh
 
 #
 # bspwm hotkeys
