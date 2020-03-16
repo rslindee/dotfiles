@@ -1,9 +1,9 @@
 # Fail right away and prevent use of undefined vars
 set -eu
 
-# zplugin clone (if it doesn't already exist)
-if [ ! -d "$HOME/.zplugin" ]; then
-    git clone https://github.com/zdharma/zplugin.git $HOME/.zplugin/bin
+# zinit clone (if it doesn't already exist)
+if [ ! -d "$HOME/.zinit" ]; then
+    git clone https://github.com/zdharma/zinit.git $HOME/.zinit/bin
 fi
 
 # vim minpac clone (if it doesn't already exist)
@@ -16,6 +16,7 @@ ALL_PACKAGES="aspell-en \
     autoconf \
     bashmount \
     bc \
+    bind-tools \
     bspwm \
     cgdb \
     cronie \
@@ -27,6 +28,7 @@ ALL_PACKAGES="aspell-en \
     dmenu \
     dtrx \
     dunst \
+    entr \
     exfat-utils \
     feh \
     ffmpeg \
