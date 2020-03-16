@@ -108,6 +108,8 @@ set exrc
 
 " load termdebug plugin
 packadd termdebug
+" tip: specify the debugger executable with
+" let g:termdebugger = $TOOLS_DIR . '/my-gdb'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -456,6 +458,9 @@ nmap ,c :Continue<cr>
 nmap ,e :Evaluate<cr>
 nmap ,g :Gdb<cr>
 
+" dark blue program counter when debugging
+hi debugPC term=bold ctermbg=darkblue guibg=darkblue
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -632,7 +637,7 @@ if executable('clangd')
 endif
 
 let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_auto_enable = 1
+let g:lsp_auto_enable = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
