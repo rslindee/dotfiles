@@ -65,8 +65,6 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('justinmk/vim-sneak')
 " adds extra info when searching
 call minpac#add('osyo-manga/vim-anzu')
-" highlighting and enhancements for substitute command
-call minpac#add('osyo-manga/vim-over')
 
 " other
 " view/edit hex data
