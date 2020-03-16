@@ -43,14 +43,10 @@ call minpac#add('AndrewRadev/splitjoin.vim')
 call minpac#add('joereynolds/vim-minisnip')
 " align blocks of text
 call minpac#add('junegunn/vim-easy-align')
-" TODO: Re-add and ensure performance is ok
-"Plug 'lifepillar/vim-mucomplete'
 " Add/change/delete surrounding char pairs
 call minpac#add('machakann/vim-sandwich')
 " Reorder delimited items
 call minpac#add('machakann/vim-swap')
-" TODO: Re-add and ensure performance is ok
-"Plug 'Rip-Rip/clang_complete'
 " swap text using motions
 call minpac#add('tommcdo/vim-exchange')
 " comment out lines via motion
@@ -93,9 +89,9 @@ call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-vinegar')
 " vim manpager
 call minpac#add('vim-utils/vim-man')
-" TODO: ALE causing vim segfaults with sshfs files?!
-" async linter
-"call minpac#add('w0rp/ale')
+" lsp plugins
+call minpac#add('prabirshrestha/async.vim')
+call minpac#add('prabirshrestha/vim-lsp')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -110,6 +106,8 @@ set exrc
 
 " load termdebug plugin
 packadd termdebug
+" tip: specify the debugger executable with
+" let g:termdebugger = $TOOLS_DIR . '/my-gdb'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
@@ -458,6 +456,9 @@ nmap ,c :Continue<cr>
 nmap ,e :Evaluate<cr>
 nmap ,g :Gdb<cr>
 
+" dark blue program counter when debugging
+hi debugPC term=bold ctermbg=darkblue guibg=darkblue
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -596,20 +597,8 @@ nmap <leader>pc :call minpac#clean()<cr>
 let g:minisnip_trigger = '<c-s>'
 
 " vim-sandwich
-" Use vim-surround mappings
-" TODO: This is a little non-ideal, we should be able to use runtime,
-" but this appears a little tricky with minpac
+" Use vim-surround mappings (minpac doesn't support runtime option)
 source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
-
-" vim-mucomplete
-" TODO: Re-add and ensure performance is ok
-"required vim settings
-"set completeopt+=menuone
-"set completeopt+=noinsert
-"inoremap <expr> <c-e> mucomplete#popup_exit("\<c-e>")
-"inoremap <expr> <c-y> mucomplete#popup_exit("\<c-y>")
-"inoremap <expr>  <cr> mucomplete#popup_exit("\<cr>")
-"set shortmess+=c   " Shut off completion messages
 
 " winresizer
 " Enter resizer mode
@@ -631,6 +620,22 @@ nmap <leader>S :OverCommandLine %s/<cr>
 " look up current word cursor is on in devdocs.io
 nmap <leader>k :DD <c-r><c-w><cr>
 
+" lsp setup
+if executable('clangd')
+    augroup lsp_clangd
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'clangd',
+                    \ 'cmd': {server_info->['clangd']},
+                    \ 'whitelist': ['c', 'cpp'],
+                    \ })
+        autocmd FileType c setlocal omnifunc=lsp#complete
+        autocmd FileType cpp setlocal omnifunc=lsp#complete
+    augroup end
+endif
+
+let g:lsp_diagnostics_echo_cursor = 1
+let g:lsp_auto_enable = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
