@@ -83,7 +83,7 @@ alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/
 # show progress of any current operations
 alias p="progress -m"
 
-# update packages, zplugin plugins, personal wiki, and dotfiles
+# update packages, zinit plugins, personal wiki, and dotfiles
 upd()
 {
     if [ "$OS" = "Fedora" ]; then
@@ -93,9 +93,9 @@ upd()
         echo "Updating Arch and AUR packages..."
         trizen -Syu
     fi
-    echo "Updating zplugin plugins..."
-    zplugin self-update
-    zplugin update --all
+    echo "Updating zinit plugins..."
+    zinit self-update
+    zinit update --all
     # Dotfiles aren't dependent on each other, so we can do them in parallel
     echo "Updating dotfiles..."
     git -C ~/dotfiles pull &
@@ -437,16 +437,16 @@ vicd()
     cd "$dst"
 }
 
-### Added by Zplugin's installer
-source ~/.zplugin/bin/zplugin.zsh
-autoload -Uz _zplugin
-(( ${+_comps} )) && _comps[zplugin]=_zplugin
-### End of Zplugin's installer chunk
+# Added by zinit's installer
+source ~/.zinit/bin/zinit.zsh
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+### End of zinit's installer chunk
 # Plugins
-zplugin light zsh-users/zsh-completions
-zplugin light zsh-users/zsh-history-substring-search
-zplugin light zdharma/zsh-diff-so-fancy
-zplugin light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-history-substring-search
+zinit light zdharma/zsh-diff-so-fancy
+zinit light zdharma/fast-syntax-highlighting
 
 if [ "$OS" = "Fedora" ]; then
     source /usr/share/zsh/site-functions/fzf
