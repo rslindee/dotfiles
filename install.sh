@@ -70,6 +70,7 @@ ALL_PACKAGES="aspell-en \
     renameutils \
     ripgrep \
     rsync \
+    shellcheck \
     sqlite \
     sxhkd \
     slock \
@@ -119,6 +120,7 @@ PACKAGES_LAPTOP="acpi \
 
 PACKAGES_ARCH="alsa-utils \
     autopep8 \
+    bash-language-server \
     fd \
     imagemagick \
     nfs-utils \
