@@ -398,8 +398,6 @@ map <leader>D Vf{%y
 
 " open index in personal wiki
 nmap <leader>ww :tabe ~/wiki/index.md<cr>
-" use pandoc to create pdf of markdown file and dump in /tmp
-nmap <leader>wc :AsyncRun pandoc --output $(VIM_FILENOEXT).pdf %:p<cr>
 
 " all cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
@@ -428,12 +426,6 @@ nnoremap Q @q
 
 " use patience diff algorithm
 set diffopt=internal,algorithm:patience,indent-heuristic
-
-" call rubber compiling current tex file
-nnoremap <leader>x :w<cr>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
-
-" view PDF equivalent of current file's root name
-nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
