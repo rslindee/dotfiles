@@ -130,6 +130,8 @@ PACKAGES_ARCH="alsa-utils \
     noto-fonts-cjk \
     python-tldextract \
     terminus-font \
+    texlive-formatsextra \
+    texlive-latexextra \
     ttf-dejavu \
     xorg
     "
