@@ -61,6 +61,8 @@ call minpac#add('junegunn/fzf.vim')
 call minpac#add('justinmk/vim-sneak')
 " adds extra info when searching
 call minpac#add('osyo-manga/vim-anzu')
+" enhanced substitution
+call minpac#add('osyo-manga/vim-over')
 
 " other
 " view/edit hex data
@@ -345,12 +347,6 @@ noremap <leader>0 :tablast<cr>
 " remap ` jumping to ', since I never use the former
 nnoremap ' `
 
-" moving between panes
-noremap <c-h> <c-w>h
-noremap <c-j> <c-w>j
-noremap <c-k> <c-w>k
-noremap <c-l> <c-w>l
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -436,25 +432,22 @@ nnoremap <leader>x :w<cr>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 " view PDF equivalent of current file's root name
 nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 
-" quick maps for diff get/put
-nmap <leader>dt :windo diffthis<cr>
-" force update of diff
-nmap <leader>du :diffupdate!<cr>
-" turn off all diff views
-nmap <leader>do :diffoff!<cr>
+" run shellcheck on save with sh files
+autocmd BufWritePost *.sh :AsyncRun shellcheck -f gcc "%"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap ,b :Break<cr>
-nmap ,d :Clear<cr>
-nmap ,s :Step<cr>
-nmap ,S :Stop<cr>
-nmap ,n :Over<cr>
-nmap ,f :Finish<cr>
-nmap ,c :Continue<cr>
-nmap ,e :Evaluate<cr>
-nmap ,g :Gdb<cr>
+nnoremap ,b :Break<cr>
+nnoremap ,d :Clear<cr>
+nnoremap ,s :Step<cr>
+nnoremap ,S :Source<cr>
+nnoremap ,C :Stop<cr>
+nnoremap ,n :Over<cr>
+nnoremap ,f :Finish<cr>
+nnoremap ,c :Continue<cr>
+nnoremap ,p :Evaluate<cr>
+nnoremap ,g :Gdb<cr>
 
 " dark blue program counter when debugging
 hi debugPC term=bold ctermbg=darkblue guibg=darkblue
@@ -478,20 +471,6 @@ let g:indentLine_enabled = 0
 
 " toggle indentLine plugin (aka show indent markings)
 nmap <leader>I :IndentLinesToggle<cr>
-
-" ale
-" disable ALE on start
-let g:ale_enabled = 0
-let g:ale_lint_on_text_changed = 'never'
-
-" toggle on/off ALE Linter
-nmap <leader>L <Plug>(ale_toggle)
-
-" jump to ale errors
-nmap [w <Plug>(ale_previous_wrap)
-nmap ]w <Plug>(ale_next_wrap)
-nmap ]W <Plug>(ale_last)
-nmap [W <Plug>(ale_first)
 
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
@@ -629,8 +608,7 @@ if executable('clangd')
                     \ 'cmd': {server_info->['clangd']},
                     \ 'whitelist': ['c', 'cpp'],
                     \ })
-        autocmd FileType c setlocal omnifunc=lsp#complete
-        autocmd FileType cpp setlocal omnifunc=lsp#complete
+        autocmd FileType c,cpp setlocal omnifunc=lsp#complete
     augroup end
 endif
 
