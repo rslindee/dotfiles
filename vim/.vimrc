@@ -307,6 +307,9 @@ set wrap
 autocmd FileType python setlocal formatprg=autopep8\ -
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
 
+" set shellcheck for sh/bash files
+autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc 
+
 " run formatprg, retab, and trim whitespace on entire buffer
 function! AutoformatCurrentFile()
     let l:save = winsaveview()
@@ -432,9 +435,6 @@ nnoremap <leader>x :w<cr>:silent !rubber --pdf --warn all %<cr>:redraw!<cr>
 " view PDF equivalent of current file's root name
 nnoremap <leader>X :!zathura %:r.pdf &<cr><cr>
 
-" run shellcheck on save with sh files
-autocmd BufWritePost *.sh :AsyncRun shellcheck -f gcc "%"
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -491,6 +491,8 @@ nmap <leader>mf :AsyncRun make -j && make flash<cr>
 nmap <leader>j :AsyncRun ctags<cr>
 " TODO: Figure out how to also plug in loading the cscope database
 nmap ,tg :AsyncRun gtags<cr>
+" run shellcheck on save with sh files
+nmap <leader>ml :AsyncRun -program=make %<cr>
 " make asyncrun work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
