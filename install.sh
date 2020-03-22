@@ -1,14 +1,15 @@
+#!/bin/bash
 # Fail right away and prevent use of undefined vars
 set -eu
 
 # zinit clone (if it doesn't already exist)
 if [ ! -d "$HOME/.zinit" ]; then
-    git clone https://github.com/zdharma/zinit.git $HOME/.zinit/bin
+    git clone https://github.com/zdharma/zinit.git "$HOME/.zinit/bin"
 fi
 
 # vim minpac clone (if it doesn't already exist)
 if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
-    git clone https://github.com/k-takata/minpac.git $HOME/.vim/pack/minpac/opt/minpac
+    git clone https://github.com/k-takata/minpac.git "$HOME/.vim/pack/minpac/opt/minpach"
 fi
 
 ALL_PACKAGES="aspell-en \
@@ -35,6 +36,7 @@ ALL_PACKAGES="aspell-en \
     fontconfig \
     fzf \
     gnupg \
+    graphviz \
     gvim \
     guvcview \
     hunspell-en_US \
@@ -183,8 +185,8 @@ elif [ "$OS" = "Arch Linux" ]; then
     echo "Arch system detected..."
     # Install trizen
     if [ ! -f "/usr/bin/trizen" ]; then
-        git clone https://aur.archlinux.org/trizen.git $HOME/trizen
-        cd $HOME/trizen
+        git clone https://aur.archlinux.org/trizen.git "$HOME/trizen"
+        cd "$HOME/trizen"
         makepkg -si
     fi
     PACKAGE_MANAGER_INSTALL="trizen -S --needed"
@@ -193,24 +195,24 @@ elif [ "$OS" = "Arch Linux" ]; then
 fi
 
 # Install packages
-$PACKAGE_MANAGER_INSTALL $ALL_PACKAGES
+$PACKAGE_MANAGER_INSTALL "$ALL_PACKAGES"
 
 # Stow dotfiles
-cd $HOME/dotfiles
-stow -R $STOW_LIST
+cd "$HOME/dotfiles"
+stow -R "$STOW_LIST"
 
 # Clone private repos if they don't already exist
 if [ ! -d "$HOME/wiki" ]; then
-    git clone git@gitlab.com:rslindee/wiki.git $HOME/wiki
+    git clone git@gitlab.com:rslindee/wiki.git "$HOME/wiki"
 fi
 
 if [ ! -d "$HOME/dotfiles-private" ]; then
-    git clone git@gitlab.com:rslindee/dotfiles-private.git $HOME/dotfiles-private
+    git clone git@gitlab.com:rslindee/dotfiles-private.git "$HOME/dotfiles-private"
 fi
 
 # Stow private dotfiles
-cd $HOME/dotfiles-private
-stow -R $STOW_LIST_PRIVATE
+cd "$HOME/dotfiles-private"
+stow -R "$STOW_LIST_PRIVATE"
 
 # Change shell to zsh
 chsh -s $(which zsh)
