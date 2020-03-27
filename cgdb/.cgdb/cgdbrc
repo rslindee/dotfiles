@@ -1,9 +1,0 @@
-set tabstop=4
-set ignorecase
-set arrowstyle=long
-
-imap <C-j> <Down>
-imap <C-k> <Up>
-
-map <C-i> down
-map <C-o> up
