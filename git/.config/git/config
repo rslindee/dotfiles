@@ -1,5 +1,5 @@
 [include]
-    path = ~/.gitconfig_private
+    path = ~/.config/git/config-private
 [push]
     default = current
 [core]
