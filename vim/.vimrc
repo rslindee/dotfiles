@@ -89,6 +89,8 @@ call minpac#add('tpope/vim-tbone')
 call minpac#add('tpope/vim-unimpaired')
 " enhanced netrw
 call minpac#add('tpope/vim-vinegar')
+" auto generate doxygen documentation
+call minpac#add('vim-scripts/DoxygenToolkit.vim')
 " vim manpager
 call minpac#add('vim-utils/vim-man')
 " lsp plugins
@@ -289,9 +291,9 @@ nnoremap <leader>e :edit<cr>
 " use spaces instead of tabs
 set expandtab
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" 1 tab == 2 spaces
+set shiftwidth=2
+set tabstop=2
 
 " backspace over automatically inserted indentation
 set bs=2
