@@ -11,7 +11,7 @@ XF86AudioMicMute
 super + i
     qutebrowser
 super + shift + i
-    chromium || chromium-browser
+    firefox
 @super + BackSpace
     slock
 {super + m,XF86AudioMute}
