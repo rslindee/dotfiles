@@ -65,6 +65,7 @@ ALL_PACKAGES="aspell-en \
     p7zip \
     pass \
     pavucontrol \
+    polybar \
     python \
     python-oauth2client \
     qutebrowser \
