@@ -10,12 +10,20 @@ alert = #bd2c40
 [bar/mybar]
 modules-left = bspwm
 modules-center = title
-modules-right = pulseaudio battery wireless-network date
+modules-right = mpd pulseaudio battery wireless-network date
 font-0 = "Terminus:size=10:antialias=false:autohint=false"
 ; Number of spaces to add before/after each module
 module-margin = 1
 ; The separator will be inserted between the output of each module
 separator = ┃
+
+[module/mpd]
+type = internal/mpd
+host = localhost
+port = 6600
+format-playing = mpd on
+format-paused = mpd off
+format-stopped = mpd off
 
 [module/title]
 type = internal/xwindow
