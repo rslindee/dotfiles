@@ -21,9 +21,9 @@ super + v
 @super + s 
     import -silent {_,-window root} ~/screenshot-$(date "+%Y-%m-%d-%H:%M:%S").png
 @super + shift + d
-    xrandr_util.sh -p
+    xrandr_util.sh -p && bspc wm -r
 @super + d
-    xrandr_util.sh -s
+    xrandr_util.sh -s && bspc wm -r
 super + Return
     st -f 'Terminus:size=10:antialias=false:autohint=false'
 super + t

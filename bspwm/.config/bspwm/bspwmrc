@@ -21,6 +21,7 @@ bspc config focused_border_color "#98971a"
 # Rules
 bspc rule --add Chromium desktop='^10'
 bspc rule --add Chromium-browser desktop='^10'
+bspc rule --add Firefox desktop='^10'
 bspc rule --add Zathura state=tiled
 # LibreOffice always tiled
 bspc rule --add '*:soffice' state=tiled
@@ -30,4 +31,5 @@ xsetroot -cursor_name left_ptr
 
 # Startup program(s)
 $HOME/.config/polybar/launch.sh
-st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux &
+killall -eq st
+st -f "Terminus:size=10:antialias=false:autohint=false" -e tmux attach-session &
