@@ -1,6 +1,7 @@
 # Add scripts dir to $PATH
 PATH="$PATH:$HOME/scripts"
-sxhkd &
+# run dwm status script
+dwm-status.sh &
 # call slock on screensaver or suspend
 xss-lock slock &
 mpd &
