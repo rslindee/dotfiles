@@ -11,3 +11,9 @@ disp_fallbackd.sh &
 setxkbmap -option altwin:prtsc_rwin,ctrl:nocaps & 
 # Set only external monitor if connected
 xrandr_util.sh -s
+# attach to existing tmux session if one exists else create one
+if tmux ls ; then
+  st -f Terminus:size=12 -e tmux attach &
+else
+  st -f Terminus:size=12 -e tmux &
+fi
