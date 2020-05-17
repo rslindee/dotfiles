@@ -485,7 +485,7 @@ nmap <leader>mf :AsyncRun make -j && make flash<cr>
 nmap <leader>j :AsyncRun ctags<cr>
 " TODO: Figure out how to also plug in loading the cscope database
 nmap ,tg :AsyncRun gtags<cr>
-" run shellcheck on save with sh files
+" run whatever defined makeprg
 nmap <leader>ml :AsyncRun -program=make %<cr>
 " make asyncrun work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
