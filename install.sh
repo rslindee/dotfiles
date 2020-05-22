@@ -9,7 +9,7 @@ fi
 
 # vim minpac clone (if it doesn't already exist)
 if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
-    git clone https://github.com/k-takata/minpac.git "$HOME/.vim/pack/minpac/opt/minpach"
+    git clone https://github.com/k-takata/minpac.git "$HOME/.vim/pack/minpac/opt/minpac"
 fi
 
 ALL_PACKAGES="aspell-en \
@@ -17,7 +17,6 @@ ALL_PACKAGES="aspell-en \
     autoconf \
     bashmount \
     bc \
-    bind-tools \
     bspwm \
     cgdb \
     cronie \
@@ -27,7 +26,6 @@ ALL_PACKAGES="aspell-en \
     cmus \
     ctags \
     dmenu \
-    dtrx \
     dunst \
     entr \
     exfat-utils \
@@ -35,18 +33,17 @@ ALL_PACKAGES="aspell-en \
     ffmpeg \
     fontconfig \
     fzf \
+    gimp \
     gnupg \
     graphviz \
     gvim \
     guvcview \
-    hunspell-en_US \
     isync \
     jq \
     khal \
     khard \
     libnotify \
     light \
-    lrzip \
     lzop \
     mediainfo \
     mlocate \
@@ -73,7 +70,6 @@ ALL_PACKAGES="aspell-en \
     renameutils \
     ripgrep \
     rsync \
-    shellcheck \
     sqlite \
     sxhkd \
     slock \
@@ -82,9 +78,9 @@ ALL_PACKAGES="aspell-en \
     st \
     stow \
     surfraw \
+    tig \
     tmux \
     udisks2 \
-    unarchiver \
     unrar \
     unzip \
     urlscan \
@@ -99,16 +95,17 @@ ALL_PACKAGES="aspell-en \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
-    dejavu-fonts-common \
     ImageMagick \
     fd-find \
     fuse-exfat \
     git-clang-format \
+    NetworkManager-tui \
     passmenu \
     python3 \
     python3-autopep8 \
     python3-oauth2client \
     python3-tldextract \
+    ShellCheck \
     terminus-fonts \
     terminus-fonts-console \
     unifont-fonts"
@@ -130,6 +127,7 @@ PACKAGES_ARCH="alsa-utils \
     networkmanager \
     noto-fonts-cjk \
     python-tldextract \
+    shellcheck \
     terminus-font \
     texlive-formatsextra \
     texlive-latexextra \
@@ -138,7 +136,6 @@ PACKAGES_ARCH="alsa-utils \
     "
 
 STOW_LIST="bspwm \
-    cgdb \
     clang \
     ctags \
     dunst \
@@ -198,7 +195,7 @@ elif [ "$OS" = "Arch Linux" ]; then
 fi
 
 # Install packages
-$PACKAGE_MANAGER_INSTALL "$ALL_PACKAGES"
+$PACKAGE_MANAGER_INSTALL $ALL_PACKAGES
 
 # Stow dotfiles
 cd "$HOME/dotfiles"
