@@ -7,8 +7,8 @@ xss-lock slock &
 mpd &
 # run display fallback daemon
 disp_fallbackd.sh &
-# set print screen to winkey and caps lock to ctrl
-setxkbmap -option altwin:prtsc_rwin,ctrl:nocaps & 
+# set custom keymap if available
+test -f ~/.config/xkb/keymap.xkb && xkbcomp ~/.config/xkb/keymap.xkb $DISPLAY
 # Set only external monitor if connected
 xrandr_util.sh -s
 # attach to existing tmux session if one exists else create one
