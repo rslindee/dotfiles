@@ -15,7 +15,7 @@ call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('majutsushi/tagbar')
 " gruvbox theme
 call minpac#add('morhetz/gruvbox')
-" improved quickfix/loclist  behavior
+" improved quickfix/loclist behavior
 call minpac#add('romainl/vim-qf')
 " use quickfix for include-search and definition-search with tags
 call minpac#add('romainl/vim-qlist')
@@ -422,6 +422,7 @@ set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 " set ripgrep as grep program
 set grepprg=rg\ --vimgrep\ --smart-case
 set grepformat=%f:%l:%c:%m
+command! -nargs=+ Grep execute 'silent grep! <args>' | execute ':redraw!'
 
 " quick-execute macro q
 nnoremap Q @q
@@ -469,8 +470,8 @@ nmap <leader>I :IndentLinesToggle<cr>
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
 nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
-nmap <leader>/ :AsyncRun -program=grep ""<left>
-nmap <leader>f :AsyncRun -program=grep "<c-r><c-w>"<cr>
+nmap <leader>/ :AsyncRun! -program=grep ""<left>
+nmap <leader>f :AsyncRun! -program=grep "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " async make with parallel jobs
