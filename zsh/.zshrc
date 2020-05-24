@@ -46,8 +46,8 @@ precmd () {
 function zle-line-init zle-keymap-select()
 {
     case $KEYMAP in
-        viins|main) ZSH_THEME_PROMPT_VIMODE=" » " ;;
-        vicmd) ZSH_THEME_PROMPT_VIMODE=" %F{red}!%f " ;;
+        viins|main) ZSH_THEME_PROMPT_VIMODE="%% " ;;
+        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f " ;;
     esac
     zle reset-prompt
 }
@@ -71,14 +71,11 @@ alias gitup='git add --all && git commit --all --message="Update" && git push'
 alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete'
 
 # Load newsboat with youtube subs
-alias youtube="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
+alias nb-yt="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
 
 alias nb-tor="newsboat -u $HOME/.newsboat/tor -c $HOME/.newsboat/tor.db"
 
 alias nb='newsboat'
-
-# run mutt with offlineimap in background
-alias mail-bird="offlineimap -u syslog -a rslindee-bird-gmail &; mutt -f ~/mail/rslindee-bird-gmail/INBOX; killall -w offlineimap"
 
 # show progress of any current operations
 alias p="progress -m"
