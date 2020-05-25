@@ -1,5 +1,5 @@
-# Add scripts dir to $PATH
-PATH="$PATH:$HOME/scripts"
+# Add scripts and sbin (for fedora) dirs to $PATH
+PATH="$PATH:$HOME/scripts:/sbin"
 # run dwm status script
 dwm-status.sh &
 # call slock on screensaver or suspend
