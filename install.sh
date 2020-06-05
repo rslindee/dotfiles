@@ -34,6 +34,7 @@ ALL_PACKAGES="aspell-en \
     fontconfig \
     fzf \
     gimp \
+    git-delta \
     gnupg \
     graphviz \
     gvim \
