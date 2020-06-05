@@ -1,54 +1,55 @@
 [include]
-    path = ~/.config/git/config-private
+  path = ~/.config/git/config-private
+[alias]
+  last = log -1 --stat
+  br = branch
+  cp = cherry-pick
+  co = checkout
+  cl = clone --recursive
+  cm = commit
+  dc = diff --cached
+  df = diff
+  dr = push origin --delete
+  fc = clean -ffxd
+  fe = fetch --prune --tags --all
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+  pl = pull
+  ps = push --set-upstream
+  re = reset --hard HEAD
+  ri = rebase --interactive
+  st = status
+  su = submodule update --init --recursive
+  un = reset HEAD~
 [push]
-    default = current
+  default = current
 [core]
-    trustctime = false
-    editor = $EDITOR
-    filemode = false
-    autocrlf = input
+  trustctime = false
+  editor = $EDITOR
+  filemode = false
+  autocrlf = input
 [color]
-    ui = true
+  ui = true
 [credential]
-    helper = cache --timeout=3600
+  helper = cache --timeout=3600
 [merge]
 	tool = vimdiff
-    conflictstyle = diff3
+  conflictstyle = diff3
 [mergetool]
-    keeptemporaries = false
-	keepBackup = false
-    prompt = false
-    trustexitcode = true
-[alias]
-    last = log -1 --stat
-    br = branch
-    cp = cherry-pick
-    co = checkout
-    cl = clone --recursive
-    cm = commit
-    dc = diff --cached
-    df = diff
-    dr = push origin --delete
-    fc = clean -ffxd
-    fe = fetch --prune --tags --all
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
-    pl = pull
-    ps = push --set-upstream
-    re = reset --hard HEAD
-    ri = rebase --interactive
-    st = status
-    su = submodule update --init --recursive
-    un = reset HEAD~
+  keeptemporaries = false
+  keepBackup = false
+  prompt = false
+  trustexitcode = true
 [diff]
-    tool = vimdiff
-    colorMoved = default
+  tool = vimdiff
+  colorMoved = default
+  colorMovedWS = ignore-all-space
 [mergetool "diffconflicts"]
 	cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
 	trustExitCode = true
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [submodule]
-	recurse = true
+  recurse = true
