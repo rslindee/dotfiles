@@ -5,6 +5,8 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " viewing
+" colorize values
+call minpac#add('chrisbra/Colorizer')
 " show and navigate marks
 call minpac#add('kshenoy/vim-signature')
 " apply colors to different parentheses levels
