@@ -277,6 +277,7 @@ set undodir=~/.vim/.undo//
 set backup
 set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swp//
+set viminfo+=n~/.vim/viminfo
 
 " reload vimrc manually
 nnoremap <leader>vr :source $MYVIMRC<CR>

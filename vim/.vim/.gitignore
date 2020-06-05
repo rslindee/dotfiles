@@ -3,3 +3,4 @@ pack
 .undo
 .backup
 .swp
+.viminfo
