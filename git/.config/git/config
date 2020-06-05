@@ -53,3 +53,5 @@
   required = true
 [submodule]
   recurse = true
+[pull]
+	rebase = false
