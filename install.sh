@@ -17,7 +17,6 @@ ALL_PACKAGES="aspell-en \
     autoconf \
     bashmount \
     bc \
-    bspwm \
     cgdb \
     cronie \
     chromium \
@@ -61,18 +60,16 @@ ALL_PACKAGES="aspell-en \
     notmuch-mutt \
     openvpn \
     p7zip \
+    parallel \
     pass \
     pavucontrol \
-    polybar \
     python \
-    python-oauth2client \
     qutebrowser \
     ranger \
     renameutils \
     ripgrep \
     rsync \
     sqlite \
-    sxhkd \
     slock \
     socat \
     sshfs \
@@ -104,8 +101,6 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     passmenu \
     python3 \
     python3-autopep8 \
-    python3-oauth2client \
-    python3-tldextract \
     ShellCheck \
     terminus-fonts \
     terminus-fonts-console \
@@ -127,18 +122,14 @@ PACKAGES_ARCH="alsa-utils \
     nfs-utils \
     networkmanager \
     noto-fonts-cjk \
-    python-tldextract \
     shellcheck \
     terminus-font \
-    texlive-formatsextra \
-    texlive-latexextra \
     ttf-dejavu \
     xorg
     "
 
 STOW_LIST="bspwm \
     clang \
-    ctags \
     dunst \
     flake8 \
     fontconfig \
@@ -153,7 +144,6 @@ STOW_LIST="bspwm \
     notmuch \
     profile \
     qutebrowser \
-    ranger \
     ssh \
     sxhkd \
     tmux \
