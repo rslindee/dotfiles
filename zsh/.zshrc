@@ -94,13 +94,8 @@ upd()
     zinit self-update
     zinit update --all
     # Dotfiles aren't dependent on each other, so we can do them in parallel
-    echo "Updating dotfiles..."
-    git -C ~/dotfiles pull &
-    echo "Updating private dotfiles..."
-    git -C ~/dotfiles-private pull &
-    echo "Updating personal wiki..."
-    git -C ~/wiki pull &
-    wait
+    echo "Updating repos..."
+    parallel git -C {} pull ::: ~/dotfiles ~/dotfiles-private ~/wiki
 }
 
 mailrich()
