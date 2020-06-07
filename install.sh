@@ -47,6 +47,7 @@ ALL_PACKAGES="aspell-en \
     lzop \
     mediainfo \
     mlocate \
+    moreutils \
     mpc \
     mpd \
     mpv \
@@ -60,7 +61,6 @@ ALL_PACKAGES="aspell-en \
     notmuch-mutt \
     openvpn \
     p7zip \
-    parallel \
     pass \
     pavucontrol \
     python \
