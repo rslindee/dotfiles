@@ -84,21 +84,15 @@ alias p="progress -m"
 upd()
 {
     if [ "$OS" = "Fedora" ]; then
-        echo "Updating Fedora packages..."
         sudo dnf upgrade
     elif [ "$OS" = "Arch Linux" ]; then
-        echo "Updating Arch and AUR packages..."
         trizen -Syu
     fi
-    echo "Updating zinit plugins..."
     zinit self-update
-    zinit update --all
+    zinit update --all &
     # Dotfiles aren't dependent on each other, so we can do them in parallel
-    echo "Updating dotfiles..."
     git -C ~/dotfiles pull &
-    echo "Updating private dotfiles..."
     git -C ~/dotfiles-private pull &
-    echo "Updating personal wiki..."
     git -C ~/wiki pull &
     wait
 }
