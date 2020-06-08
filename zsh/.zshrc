@@ -89,7 +89,7 @@ upd()
         trizen -Syu
     fi
     zinit self-update
-    zinit update --all &
+    zinit update --all
     # Dotfiles aren't dependent on each other, so we can do them in parallel
     git -C ~/dotfiles pull &
     git -C ~/dotfiles-private pull &
