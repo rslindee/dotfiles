@@ -13,6 +13,8 @@
   fc = clean -ffxd
   fe = fetch --prune --tags --all
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
+  # list files modified in specific commit
+  lf = diff-tree --no-commit-id --name-only -r
   pl = pull
   ps = push --set-upstream
   re = reset --hard HEAD
