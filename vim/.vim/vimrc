@@ -559,8 +559,6 @@ nmap <leader>gc :Gcommit<space>-v<cr>
 nmap <leader>gw :Gwrite<cr>
 " git diff of current file against HEAD
 nmap <leader>gd :Gvdiff<cr>
-" git stage hunk
-nmap <leader>ga :GitGutterStageHunk<cr>
 
 " gv.vim
 " load git history of file into location list
