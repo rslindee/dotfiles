@@ -671,5 +671,11 @@ let g:lsp_auto_enable = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" load machine-specific configs/overrides
+try
+  source ~/.vim/vimrc-local
+catch
+endtry
+
 " Disable shell and write commands (because we set exrc earlier)
 set secure
