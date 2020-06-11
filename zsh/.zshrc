@@ -161,7 +161,7 @@ else
 fi
 export EDITOR="$VISUAL"
 export MERGE_EDITOR=vimdiff
-export BROWSER=qutebrowser
+export BROWSER=firefox
 
 # Show weather
 wttr()
