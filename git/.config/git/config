@@ -1,7 +1,7 @@
 [include]
   path = ~/.config/git/config-private
 [alias]
-  last = log -1 --stat
+  last = log -1 --stat --patch
   br = branch
   cp = cherry-pick
   co = checkout
@@ -19,7 +19,7 @@
   ps = push --set-upstream
   re = reset --hard HEAD
   ri = rebase --interactive
-  st = status
+  st = status --short
   su = submodule update --init --recursive
   un = reset HEAD~
 [push]
