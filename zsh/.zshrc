@@ -8,12 +8,6 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
-# Use gpg-agent for ssh
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-fi
-
 # Set the GPG_TTY and refresh the TTY in case user has switched into an X session
 export GPG_TTY=$(tty)
 gpg-connect-agent -q updatestartuptty /bye >/dev/null
@@ -71,9 +65,7 @@ alias gitup='git add --all && git commit --all --message="Update" && git push'
 alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete'
 
 # Load newsboat with youtube subs
-alias nb-yt="newsboat -u $HOME/.newsboat/youtubeurls -c $HOME/.newsboat/youcache.db"
-
-alias nb-tor="newsboat -u $HOME/.newsboat/tor -c $HOME/.newsboat/tor.db"
+alias nb-tor="newsboat -u ~/.config/newsboat/tor -c ~/.local/share/newsboat/tor.db"
 
 alias nb='newsboat'
 

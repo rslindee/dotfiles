@@ -128,8 +128,7 @@ PACKAGES_ARCH="alsa-utils \
     xorg
     "
 
-STOW_LIST="bspwm \
-    clang \
+STOW_LIST="clang \
     dunst \
     flake8 \
     fontconfig \
@@ -142,10 +141,9 @@ STOW_LIST="bspwm \
     mpv \
     ncmpcpp \
     notmuch \
+    pam \
     profile \
-    qutebrowser \
     ssh \
-    sxhkd \
     tmux \
     vim \
     zathura \
