@@ -8,6 +8,12 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
+# Use gpg-agent for ssh
+unset SSH_AGENT_PID
+if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+fi
+
 # Set the GPG_TTY and refresh the TTY in case user has switched into an X session
 export GPG_TTY=$(tty)
 gpg-connect-agent -q updatestartuptty /bye >/dev/null
