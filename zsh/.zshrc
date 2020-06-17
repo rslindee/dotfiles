@@ -9,7 +9,7 @@ if [ -f /etc/os-release ]; then
 fi
 
 if [ "$OS" = "Fedora" ]; then
-  PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
+  PATH="$PATH:/usr/share/git-core/contrib"
 elif [ "$OS" = "Arch Linux" ]; then
   PATH="$PATH:/usr/share/git/diff-highlight"
 fi
@@ -440,7 +440,6 @@ autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of zinit's installer chunk
 # Plugins
-zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
 zinit light zdharma/fast-syntax-highlighting
 
