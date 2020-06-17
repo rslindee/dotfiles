@@ -8,6 +8,12 @@ if [ -f /etc/os-release ]; then
     OS=$NAME
 fi
 
+if [ "$OS" = "Fedora" ]; then
+  PATH="$PATH:/usr/share/doc/git/contrib/diff-highlight"
+elif [ "$OS" = "Arch Linux" ]; then
+  PATH="$PATH:/usr/share/git/diff-highlight"
+fi
+
 # Use gpg-agent for ssh
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -164,7 +170,8 @@ export BROWSER=firefox
 # Show weather
 wttr()
 {
-    curl "wttr.in/$1";
+  curl "wttr.in/$1";
+  mpv "https://radar.weather.gov/lite/N0R/SOX_loop.gif" --osd-level=0 --no-osc
 }
 
 # Show available space of /mnt
@@ -198,6 +205,7 @@ pdb()
 {
     python -m pdb $1;
 }
+
 # General options
 
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
@@ -434,7 +442,6 @@ autoload -Uz _zinit
 # Plugins
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-history-substring-search
-zinit light zdharma/zsh-diff-so-fancy
 zinit light zdharma/fast-syntax-highlighting
 
 if [ "$OS" = "Fedora" ]; then
