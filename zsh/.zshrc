@@ -1,6 +1,6 @@
 # Start zsh completions
 autoload -Uz compinit
-compinit
+compinit -d ~/.cache/zcompdump
 
 # Get OS name
 if [ -f /etc/os-release ]; then
@@ -225,7 +225,7 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # History file location
-HISTFILE=~/.zsh_history
+HISTFILE=~/.cache/zsh_history
 
 # limit of history entries
 HISTSIZE=10000
@@ -286,6 +286,7 @@ unsetopt case_glob
 # Then when completion is requested again, remove the first match and insert the second match, etc.
 unsetopt menu_complete
 
+zstyle ':completion:*' cache-path ~/.cache
 # group matches and describe.
 zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion:*:matches' group 'yes'
