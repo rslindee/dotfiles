@@ -478,6 +478,9 @@ function! ExpandCMacro()
   let @/ = getline('.')
 endfunction
 
+" open corresponding .h file of current .c file and vice-versa
+map <leader>h :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
