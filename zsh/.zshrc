@@ -4,8 +4,8 @@ compinit
 
 # Get OS name
 if [ -f /etc/os-release ]; then
-    . /etc/os-release
-    OS=$NAME
+  . /etc/os-release
+  OS=$NAME
 fi
 
 if [ "$OS" = "Fedora" ]; then
@@ -36,26 +36,26 @@ ZSH_THEME_DIRECTORY="%F{147}%~%f"
 
 # shortens the pwd for use in prompt
 function git_prompt_info() {
-    local ref
-    git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
-    ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-        ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-    print " ${ZSH_THEME_GIT_PROMPT_REPO}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+  local ref
+  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
+  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
+    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
+  print " ${ZSH_THEME_GIT_PROMPT_REPO}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
 precmd () {
-    PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
-    RPROMPT='[%W %* %n@%F{153}%m%f]'
+  PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
+  RPROMPT='[%W %* %n@%F{153}%m%f]'
 }
 
 # vi-mode handling
 function zle-line-init zle-keymap-select()
 {
-    case $KEYMAP in
-        viins|main) ZSH_THEME_PROMPT_VIMODE="%% " ;;
-        vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f " ;;
-    esac
-    zle reset-prompt
+  case $KEYMAP in
+    viins|main) ZSH_THEME_PROMPT_VIMODE="%% " ;;
+    vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f " ;;
+  esac
+  zle reset-prompt
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
@@ -84,62 +84,60 @@ alias nb='newsboat'
 # show progress of any current operations
 alias p="progress -m"
 
-# update packages, zinit plugins, personal wiki, and dotfiles
+# update packages, personal wiki, and dotfiles
 upd()
 {
-    if [ "$OS" = "Fedora" ]; then
-        sudo dnf upgrade
-    elif [ "$OS" = "Arch Linux" ]; then
-        trizen -Syu
-    fi
-    zinit self-update
-    zinit update --all
-    # Dotfiles aren't dependent on each other, so we can do them in parallel
-    git -C ~/dotfiles pull &
-    git -C ~/dotfiles-private pull &
-    git -C ~/wiki pull &
-    wait
+  if [ "$OS" = "Fedora" ]; then
+    sudo dnf upgrade
+  elif [ "$OS" = "Arch Linux" ]; then
+    trizen -Syu
+  fi
+  # Dotfiles aren't dependent on each other, so we can do them in parallel
+  git -C ~/dotfiles pull &
+  git -C ~/dotfiles-private pull &
+  git -C ~/wiki pull &
+  wait
 }
 
 mailrich()
 {
-    # Check mail at interval
-    while true; do
-        mbsync -q richard-slindee && notmuch new --quiet
-        sleep 60
-    done &
-    loop_pid=$!
-    mutt -f ~/mail/richard-slindee/Inbox
-    kill $loop_pid
-    mbsync -q richard-slindee &
-    notmuch new --quiet &
+  # Check mail at interval
+  while true; do
+    mbsync -q richard-slindee && notmuch new --quiet
+    sleep 60
+  done &
+  loop_pid=$!
+  mutt -f ~/mail/richard-slindee/Inbox
+  kill $loop_pid
+  mbsync -q richard-slindee &
+  notmuch new --quiet &
 }
 
 mailrs()
 {
-    # Check mail at interval
-    while true; do
-        mbsync -q rslindee-gmail && notmuch new --quiet
-        sleep 60
-    done &
-    loop_pid=$!
-    mutt -f ~/mail/rslindee-gmail/Inbox
-    kill $loop_pid
-    mbsync -q rslindee-gmail &
-    notmuch new --quiet &
+  # Check mail at interval
+  while true; do
+    mbsync -q rslindee-gmail && notmuch new --quiet
+    sleep 60
+  done &
+  loop_pid=$!
+  mutt -f ~/mail/rslindee-gmail/Inbox
+  kill $loop_pid
+  mbsync -q rslindee-gmail &
+  notmuch new --quiet &
 }
 
 calrich()
 {
-    # run vdirsyncer at interval
-    while true; do
-        vdirsyncer sync > /dev/null 2>&1
-        sleep 60
-    done &
-    loop_pid=$!
-    ikhal
-    kill $loop_pid
-    vdirsyncer sync &
+  # run vdirsyncer at interval
+  while true; do
+    vdirsyncer sync > /dev/null 2>&1
+    sleep 60
+  done &
+  loop_pid=$!
+  ikhal
+  kill $loop_pid
+  vdirsyncer sync &
 }
 
 # Show directory sizes
@@ -158,10 +156,10 @@ alias shu='sudo shutdown now'
 
 # Set editors to vim
 if [ "$OS" = "Fedora" ] && [[ $DISPLAY ]]; then
-    alias vim='vimx'
-    export VISUAL=vimx
+  alias vim='vimx'
+  export VISUAL=vimx
 else
-    export VISUAL=vim
+  export VISUAL=vim
 fi
 export EDITOR="$VISUAL"
 export MERGE_EDITOR=vimdiff
@@ -183,7 +181,7 @@ alias o='xdg-open'
 # Use vim as manpager
 viman()
 {
-    $EDITOR -c "Man $1 $2" -c 'silent only'
+  $EDITOR -c "Man $1 $2" -c 'silent only'
 }
 
 alias rang='ranger'
@@ -192,18 +190,18 @@ alias rang='ranger'
 # Note: Needs to be in current directory of said executable to work.
 cgdb-attach()
 {
-    cgdb attach $(pidof $1) -ex cont;
+  cgdb attach $(pidof $1) -ex cont;
 }
 
 mkcd()
 {
-    mkdir -p $1;
-    cd $1;
+  mkdir -p $1;
+  cd $1;
 }
 
 pdb()
 {
-    python -m pdb $1;
+  python -m pdb $1;
 }
 
 # General options
@@ -336,11 +334,11 @@ zstyle ':completion:*:rm:*' file-patterns '*:all-files'
 # Clever binding of fg to Ctrl-z
 fancy-ctrl-z () {
 if [[ $#BUFFER -eq 0 ]]; then
-    BUFFER="fg"
-    zle accept-line
+  BUFFER="fg"
+  zle accept-line
 else
-    zle push-input
-    zle clear-screen
+  zle push-input
+  zle clear-screen
 fi
 }
 zle -N fancy-ctrl-z
@@ -357,13 +355,13 @@ bindkey "^[[Z" reverse-menu-complete
 # Set fancy-ctrl-z function
 bindkey '^Z' fancy-ctrl-z
 
-# Set zsh-history-substring-search up/down
-bindkey '^N' history-substring-search-down
-bindkey '^P' history-substring-search-up
+# Search history for entered string
+bindkey '^N' history-beginning-search-forward
+bindkey '^P' history-beginning-search-backward
 
-# Set zsh-history-substring-search up/down in vi mode
-bindkey -M vicmd '^n' history-substring-search-up
-bindkey -M vicmd '^p' history-substring-search-down
+# Search history for entered string
+bindkey -M vicmd '^n' history-beginning-search-forward
+bindkey -M vicmd '^p' history-beginning-search-backward
 
 # Set jump forward and back words
 bindkey '^F' forward-word
@@ -415,36 +413,29 @@ export NNN_USE_EDITOR=1
 # call nnn with tmpfile (for changing dir)
 n()
 {
-    nnn "$@"
+  nnn "$@"
 
-    if [ -f $NNN_TMPFILE ]; then
-        . $NNN_TMPFILE
-        rm $NNN_TMPFILE
-    fi
+  if [ -f $NNN_TMPFILE ]; then
+    . $NNN_TMPFILE
+    rm $NNN_TMPFILE
+  fi
 }
 
 # open vifm and change dir when done
 vicd()
 {
-    local dst="$(command vifm --choose-dir - "$@")"
-    if [ -z "$dst" ]; then
-        echo 'Directory picking cancelled/failed'
-        return 1
-    fi
-    cd "$dst"
+  local dst="$(command vifm --choose-dir - "$@")"
+  if [ -z "$dst" ]; then
+    echo 'Directory picking cancelled/failed'
+    return 1
+  fi
+  cd "$dst"
 }
 
-# Added by zinit's installer
-source ~/.zinit/bin/zinit.zsh
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-### End of zinit's installer chunk
-# Plugins
-zinit light zsh-users/zsh-history-substring-search
-
 if [ "$OS" = "Fedora" ]; then
-    source /usr/share/zsh/site-functions/fzf
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  source /usr/share/zsh/site-functions/fzf
+  source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
-    source /usr/share/fzf/completion.zsh
+  source /usr/share/fzf/completion.zsh
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi

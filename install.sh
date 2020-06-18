@@ -2,11 +2,6 @@
 # Fail right away and prevent use of undefined vars
 set -eu
 
-# zinit clone (if it doesn't already exist)
-if [ ! -d "$HOME/.zinit" ]; then
-    git clone https://github.com/zdharma/zinit.git "$HOME/.zinit/bin"
-fi
-
 # vim minpac clone (if it doesn't already exist)
 if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
     git clone https://github.com/k-takata/minpac.git "$HOME/.vim/pack/minpac/opt/minpac"
