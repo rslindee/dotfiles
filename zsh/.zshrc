@@ -441,10 +441,10 @@ autoload -Uz _zinit
 ### End of zinit's installer chunk
 # Plugins
 zinit light zsh-users/zsh-history-substring-search
-zinit light zdharma/fast-syntax-highlighting
 
 if [ "$OS" = "Fedora" ]; then
     source /usr/share/zsh/site-functions/fzf
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
     source /usr/share/fzf/completion.zsh
 fi

@@ -89,6 +89,7 @@ ALL_PACKAGES="aspell-en \
     youtube-dl \
     zathura \
     zathura-pdf-poppler \
+    zsh-syntax-highlighting \
     zip \
     zsh"
 
