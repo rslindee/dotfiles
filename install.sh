@@ -139,7 +139,6 @@ STOW_LIST="clang \
     notmuch \
     pam \
     profile \
-    ssh \
     tmux \
     vim \
     zathura \
