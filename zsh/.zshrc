@@ -2,18 +2,6 @@
 autoload -Uz compinit
 compinit -d ~/.cache/zcompdump
 
-# Get OS name
-if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  OS=$NAME
-fi
-
-if [ "$OS" = "Fedora" ]; then
-  PATH="$PATH:/usr/share/git-core/contrib"
-elif [ "$OS" = "Arch Linux" ]; then
-  PATH="$PATH:/usr/share/git/diff-highlight"
-fi
-
 # Use gpg-agent for ssh
 unset SSH_AGENT_PID
 if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
@@ -87,9 +75,9 @@ alias p="progress -m"
 # update packages, personal wiki, and dotfiles
 upd()
 {
-  if [ "$OS" = "Fedora" ]; then
+  if [ "$DISTRO" = "Fedora" ]; then
     sudo dnf upgrade
-  elif [ "$OS" = "Arch Linux" ]; then
+  elif [ "$DISTRO" = "Arch Linux" ]; then
     trizen -Syu
   fi
   # Dotfiles aren't dependent on each other, so we can do them in parallel
@@ -154,17 +142,6 @@ alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
 
-# Set editors to vim
-if [ "$OS" = "Fedora" ] && [[ $DISPLAY ]]; then
-  alias vim='vimx'
-  export VISUAL=vimx
-else
-  export VISUAL=vim
-fi
-export EDITOR="$VISUAL"
-export MERGE_EDITOR=vimdiff
-export BROWSER=firefox
-
 # Show weather
 wttr()
 {
@@ -209,20 +186,8 @@ pdb()
 # Disable Software Flow Control keys (Ctrl-s / Ctrl-q)
 stty -ixon
 
-# less colors
-export LESS_TERMCAP_mb=$'\e[1;32m'
-export LESS_TERMCAP_md=$'\e[1;32m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;33m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[1;4;31m'
-
 # Enable vi mode
 bindkey -v
-
-# Reduce delay when entering vi mode
-export KEYTIMEOUT=1
 
 # History file location
 HISTFILE=~/.cache/zsh_history
@@ -344,10 +309,6 @@ fi
 }
 zle -N fancy-ctrl-z
 
-# FZF setup
-export FZF_DEFAULT_OPTS="--multi"
-export FZF_DEFAULT_COMMAND='fd -H --color=never'
-
 # Key bindings
 
 # Set shift-tab to backwards completion
@@ -407,10 +368,6 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-# nnn config
-export NNN_TMPFILE="/tmp/nnn"
-export NNN_USE_EDITOR=1
-
 # call nnn with tmpfile (for changing dir)
 n()
 {
@@ -433,7 +390,7 @@ vicd()
   cd "$dst"
 }
 
-if [ "$OS" = "Fedora" ]; then
+if [ "$DISTRO" = "Fedora" ]; then
   source /usr/share/zsh/site-functions/fzf
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
