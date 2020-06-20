@@ -1,12 +1,7 @@
 # Add scripts dir to $PATH
 PATH="$PATH:$HOME/scripts"
 
-# Get OS name
-if [ -f /etc/os-release ]; then
-  . /etc/os-release
-  export DISTRO=$NAME
-fi
-
+# DISTRO is populated in .profile
 if [ "$DISTRO" = "Fedora" ]; then
   PATH="$PATH:/usr/share/git-core/contrib"
 elif [ "$DISTRO" = "Arch Linux" ]; then
