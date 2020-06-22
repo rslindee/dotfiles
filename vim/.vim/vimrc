@@ -426,6 +426,8 @@ set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 set grepprg=rg\ --vimgrep\ --smart-case
 set grepformat=%f:%l:%c:%m
 command! -nargs=+ Grep execute 'silent grep! <args>' | execute ':redraw!'
+" ripgrep, but include all hidden/ignored files
+command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
 
 " quick-execute macro q
 nnoremap Q @q
@@ -522,7 +524,9 @@ nmap <leader>I :IndentLinesToggle<cr>
 " stop asyncrun, redraw, and disable highlighting
 nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
 nmap <leader>/ :Grep ""<left>
+nmap <leader>? :GrepAll ""<left>
 nmap <leader>f :Grep "<c-r><c-w>"<cr>
+nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " async make with parallel jobs
