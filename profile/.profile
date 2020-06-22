@@ -1,3 +1,6 @@
+# Add scripts dir to $PATH
+PATH="$PATH:$HOME/scripts"
+
 # Get OS name
 if [ -f /etc/os-release ]; then
   . /etc/os-release

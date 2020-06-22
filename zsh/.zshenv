@@ -1,6 +1,3 @@
-# Add scripts dir to $PATH
-PATH="$PATH:$HOME/scripts"
-
 # DISTRO is populated in .profile
 if [ "$DISTRO" = "Fedora" ]; then
   PATH="$PATH:/usr/share/git-core/contrib"
@@ -41,6 +38,6 @@ export NNN_USE_EDITOR=1
 export KEYTIMEOUT=1
 
 # local zshenv
-[ -e $ZDOTDIR/.zshenv.local ] && source $ZDOTDIR/.zshenv.local
+[ -e ~/.zshenv.local ] && source ~/.zshenv.local
 
 export PATH
