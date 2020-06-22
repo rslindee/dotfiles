@@ -84,6 +84,7 @@ upd()
   git -C ~/dotfiles pull &
   git -C ~/dotfiles-private pull &
   git -C ~/wiki pull &
+  git -C ~/scripts pull &
   wait
 }
 
