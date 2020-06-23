@@ -390,6 +390,10 @@ vicd()
   fi
   cd "$dst"
 }
+# tweak zsh highlight styles
+typeset -A ZSH_HIGHLIGHT_STYLES
+# to disable highlighting of globbing expressions
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
 
 if [ "$DISTRO" = "Fedora" ]; then
   source /usr/share/zsh/site-functions/fzf
