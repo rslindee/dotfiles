@@ -394,6 +394,7 @@ vicd()
 typeset -A ZSH_HIGHLIGHT_STYLES
 # to disable highlighting of globbing expressions
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=cyan'
 
 if [ "$DISTRO" = "Fedora" ]; then
   source /usr/share/zsh/site-functions/fzf
