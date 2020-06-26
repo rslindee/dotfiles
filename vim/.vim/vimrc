@@ -208,18 +208,18 @@ let g:load_doxygen_syntax=1
 
 " statusline config and helper functions
 function! StatuslineGit()
-    let l:branchname = FugitiveHead(7)
-    return strlen(l:branchname) > 0?'┃ ├'.l:branchname:''
+  let l:branchname = FugitiveHead(7)
+  return strlen(l:branchname) > 0?'┃ ├'.l:branchname:''
 endfunction
 
 function! StatuslineModificationTime()
-    let ftime = getftime(expand('%'))
-    return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
+  let ftime = getftime(expand('%'))
+  return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
 endfunction
 
 function! StatuslineWorkingDir()
-    let workingdir = fnamemodify(getcwd(), ':t')
-    return workingdir
+  let workingdir = fnamemodify(getcwd(), ':t')
+  return workingdir
 endfunction
 
 " clear statusline
@@ -243,27 +243,27 @@ set statusline+=┃\ %{StatuslineModificationTime()}\ "
 
 " tabline config and helper functions
 function! MyTabLabel(n)
-    let buflist = tabpagebuflist(a:n)
-    let winnr = tabpagewinnr(a:n)
-    let string = fnamemodify(bufname(buflist[winnr - 1]), ':t')
-    return empty(string) ? '[unnamed]' : string
+  let buflist = tabpagebuflist(a:n)
+  let winnr = tabpagewinnr(a:n)
+  let string = fnamemodify(bufname(buflist[winnr - 1]), ':t')
+  return empty(string) ? '[unnamed]' : string
 endfunction
 
 function! MyTabLine()
-    let s = ''
-    for i in range(tabpagenr('$'))
-        " select the highlighting
-        if i + 1 == tabpagenr()
-            let s .= '%#TabLineSel#'
-        else
-            let s .= '%#TabLine#'
-        endif
-        " display tabnumber
-        let s .= ' '. (i+1)
-        " the label is made by MyTabLabel()
-        let s .= ':%{MyTabLabel(' . (i + 1) . ')} '
-    endfor
-    return s
+  let s = ''
+  for i in range(tabpagenr('$'))
+    " select the highlighting
+    if i + 1 == tabpagenr()
+      let s .= '%#TabLineSel#'
+    else
+      let s .= '%#TabLine#'
+    endif
+    " display tabnumber
+    let s .= ' '. (i+1)
+    " the label is made by MyTabLabel()
+    let s .= ':%{MyTabLabel(' . (i + 1) . ')} '
+  endfor
+  return s
 endfunction
 
 set tabline=%!MyTabLine()
@@ -309,19 +309,21 @@ set si
 set wrap
 
 " set external format tools based on filetype
-autocmd FileType python setlocal formatprg=autopep8\ -
+if executable('python3-autopep8')
+  autocmd FileType python setlocal formatprg=python3-autopep8\ -
+else
+  autocmd FileType python setlocal formatprg=autopep8\ -
+endif
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
-
-" set shellcheck for sh/bash files
 autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc 
 
 " run formatprg, retab, and trim whitespace on entire buffer
 function! AutoformatCurrentFile()
-    let l:save = winsaveview()
-    keepjumps normal gggqG
-    retab
-    keeppatterns %s/\s\+$//e
-    call winrestview(l:save)
+  let l:save = winsaveview()
+  keepjumps normal gggqG
+  retab
+  keeppatterns %s/\s\+$//e
+  call winrestview(l:save)
 endfunction
 
 nnoremap <leader>i :call AutoformatCurrentFile()<cr>
@@ -369,13 +371,13 @@ nnoremap <leader>y :call system("xsel -i --clipboard", getreg("\""))<cr>
 
 " add contents of clipboard to x register (via xsel) and paste
 function! Xsel_paste()
-    let @x=system('xsel -o --clipboard')
-    normal! "xp
+  let @x=system('xsel -o --clipboard')
+  normal! "xp
 endfunction
 
 function! Xsel_paste_before()
-    let @x=system('xsel -o --clipboard')
-    normal! "xP
+  let @x=system('xsel -o --clipboard')
+  normal! "xP
 endfunction
 
 nnoremap <leader>pp :call Xsel_paste()<cr>
@@ -551,11 +553,11 @@ command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 nmap <leader>gb :Gblame<cr>
 " git status toggle function
 function! ToggleGStatus()
-    if buflisted(bufname('.git/index'))
-        bd .git/index
-    else
-        Gstatus
-    endif
+  if buflisted(bufname('.git/index'))
+    bd .git/index
+  else
+    Gstatus
+  endif
 endfunction
 nmap <leader>gs :call ToggleGStatus()<cr>
 " git push
@@ -653,15 +655,15 @@ nmap <leader>k :DD <c-r><c-w><cr>
 
 " lsp setup
 if executable('clangd')
-    augroup lsp_clangd
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'clangd',
-                    \ 'cmd': {server_info->['clangd']},
-                    \ 'whitelist': ['c', 'cpp'],
-                    \ })
-        autocmd FileType c,cpp setlocal omnifunc=lsp#complete
-    augroup end
+  augroup lsp_clangd
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+                \ 'name': 'clangd',
+                \ 'cmd': {server_info->['clangd']},
+                \ 'whitelist': ['c', 'cpp'],
+                \ })
+    autocmd FileType c,cpp setlocal omnifunc=lsp#complete
+  augroup end
 endif
 
 if executable('bash-language-server')
