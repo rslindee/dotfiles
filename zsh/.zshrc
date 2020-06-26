@@ -1,5 +1,9 @@
 # Start zsh completions
 autoload -Uz compinit
+# version control info
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+
 compinit -d ~/.cache/zcompdump
 
 # Use gpg-agent for ssh
@@ -30,6 +34,8 @@ function git_prompt_info() {
     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
   print " ${ZSH_THEME_GIT_PROMPT_REPO}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
+
+#function precmd() { vcs_info }
 
 precmd () {
   PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
