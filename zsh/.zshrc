@@ -2,7 +2,6 @@
 autoload -Uz compinit
 # version control info
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
 
 compinit -d ~/.cache/zcompdump
 
@@ -14,27 +13,12 @@ gpg-connect-agent -q updatestartuptty /bye >/dev/null
 # Allow substitution
 setopt prompt_subst
 
-ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX="%F{yellow}├"
-ZSH_THEME_GIT_PROMPT_REPO="%F{197}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %F{red}*%f"
-ZSH_THEME_DIRECTORY="%F{147}%~%f"
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}├%b%f"
+function precmd() { vcs_info }
 
-# shortens the pwd for use in prompt
-function git_prompt_info() {
-  local ref
-  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
-  ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-    ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-  print " ${ZSH_THEME_GIT_PROMPT_REPO}${git_root:t} $ZSH_THEME_GIT_PROMPT_BRANCH_PREFIX${ref#refs/heads/}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
-}
-
-#function precmd() { vcs_info }
-
-precmd () {
-  PROMPT='$ZSH_THEME_DIRECTORY$(git_prompt_info)${ZSH_THEME_PROMPT_VIMODE}'
-  RPROMPT='[%W %* %n@%F{153}%m%f]'
-}
+PROMPT='%F{147}%~%f ${vcs_info_msg_0_}${ZSH_THEME_PROMPT_VIMODE}'
+RPROMPT='[%W %* %n@%F{153}%m%f]'
 
 # vi-mode handling
 function zle-line-init zle-keymap-select()
