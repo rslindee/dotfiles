@@ -540,7 +540,7 @@ nmap <leader>mt :AsyncRun make clang-tidy<cr>
 " async make with parallel jobs and flash when done
 nmap <leader>mf :AsyncRun make -j && make flash<cr>
 " generate ctags and gtags
-nmap <leader>j :AsyncRun ctags<cr>
+nmap <leader>j :AsyncRun ctags -R .<cr>
 " TODO: Figure out how to also plug in loading the cscope database
 nmap ,tg :AsyncRun gtags<cr>
 " run whatever defined makeprg
