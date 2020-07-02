@@ -1,0 +1,14 @@
+" ensure you run :nativeinstall first for this file to be sourced
+bind d scrollpage .5
+bind u scrollpage -.5
+bind x tabclose
+bind X undo
+bind <C-f> scrollpage 1
+bind <C-b> scrollpage -1
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
+set modeindicator false
