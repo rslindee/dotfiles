@@ -79,6 +79,7 @@ ALL_PACKAGES="aspell-en \
     urlscan \
     vdirsyncer \
     w3m \
+    xcompmgr \
     xsel \
     xss-lock \
     youtube-dl \

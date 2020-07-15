@@ -1,6 +1,8 @@
 # Add scripts dir to $PATH
 PATH="$PATH:$HOME/scripts"
 
+# run xcompmgr for things like zoom
+xcompmgr -c -l0 -t0 -r0 -o.00 &
 # run dwm status script
 dwm-status.sh &
 # call slock on screensaver or suspend
