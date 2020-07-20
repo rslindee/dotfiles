@@ -65,10 +65,6 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 export FZF_DEFAULT_OPTS="--multi"
 export FZF_DEFAULT_COMMAND='fd -H --color=never'
 
-# nnn config
-export NNN_TMPFILE="/tmp/nnn"
-export NNN_USE_EDITOR=1
-
 # Reduce delay in zsh when entering vi mode
 export KEYTIMEOUT=1
 
@@ -187,13 +183,6 @@ viman()
 }
 
 alias rang='ranger'
-
-# Attaches cgdb to running PID of executable.
-# Note: Needs to be in current directory of said executable to work.
-cgdb-attach()
-{
-  cgdb attach $(pidof $1) -ex cont;
-}
 
 mkcd()
 {
@@ -396,24 +385,36 @@ _fzf_compgen_dir() {
 # call nnn with tmpfile (for changing dir)
 n()
 {
+  # nnn config
+  export NNN_OPTS="adexH"
+  export NNN_TMPFILE="/tmp/nnn"
+  export NNN_USE_EDITOR=1
+  export NNN_PLUG='d:diffs;f:fzcd;i:imgview;o:fzopen;p:preview-tui;r:renamer;t:preview-tabbed;v:imgview;y:x2sel'
+  export NNN_COLORS='2356'
+
+  # Block nesting of nnn in subshells
+  if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
+    echo "nnn is already running"
+    return
+  fi
+
+  # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
+  export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
+
+  # Unmask ^Q (, ^V etc.) (if required, see `stty -a`) to Quit nnn
+  # stty start undef
+  # stty stop undef
+  # stty lwrap undef
+  # stty lnext undef
+
   nnn "$@"
 
-  if [ -f $NNN_TMPFILE ]; then
-    . $NNN_TMPFILE
-    rm $NNN_TMPFILE
+  if [ -f "$NNN_TMPFILE" ]; then
+    . "$NNN_TMPFILE"
+    rm -f "$NNN_TMPFILE" > /dev/null
   fi
 }
 
-# open vifm and change dir when done
-vicd()
-{
-  local dst="$(command vifm --choose-dir - "$@")"
-  if [ -z "$dst" ]; then
-    echo 'Directory picking cancelled/failed'
-    return 1
-  fi
-  cd "$dst"
-}
 # tweak zsh highlight styles
 typeset -A ZSH_HIGHLIGHT_STYLES
 # to disable highlighting of globbing expressions

@@ -11,6 +11,7 @@ ALL_PACKAGES="aspell-en \
     atool \
     autoconf \
     bashmount \
+    bat \
     bc \
     cgdb \
     cronie \
