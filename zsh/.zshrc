@@ -167,6 +167,9 @@ alias shu='sudo shutdown now'
 wttr()
 {
   curl "wttr.in/$1";
+}
+wttr-map()
+{
   mpv "https://radar.weather.gov/lite/N0R/SOX_loop.gif" --osd-level=0 --no-osc
 }
 
