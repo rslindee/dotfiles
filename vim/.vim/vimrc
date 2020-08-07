@@ -531,8 +531,8 @@ nmap <leader>f :Grep "<c-r><c-w>"<cr>
 nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
-" Run last async make command
-nmap <leader>mr :Make<up><cr>
+" Run last make command
+nmap <leader>mr :make<up><cr>
 " async make with parallel jobs
 nmap <leader>mm :Make -j<cr>
 " async make clean
