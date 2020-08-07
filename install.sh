@@ -60,6 +60,7 @@ ALL_PACKAGES="aspell-en \
     pass \
     pavucontrol \
     python \
+    pv \
     qutebrowser \
     ranger \
     renameutils \
