@@ -33,8 +33,6 @@ call minpac#add('Yggdroot/indentLine')
 " version control
 " view git information in gutter
 call minpac#add('airblade/vim-gitgutter')
-" view git commit history
-call minpac#add('junegunn/gv.vim')
 " run git commands, view status
 call minpac#add('tpope/vim-fugitive')
 
@@ -566,14 +564,8 @@ nmap <leader>gc :Gcommit<space>-v<cr>
 nmap <leader>gw :Gwrite<cr>
 " git diff of current file against HEAD
 nmap <leader>gd :Gvdiff<cr>
-
-" gv.vim
-" load git history of file into location list
-nmap <leader>gl :GV?<cr>
 " open git browser with all commits touching current file in new tab
-nmap <leader>gh :GV!<cr>
-" open git browser
-nmap <leader>gv :GV<cr>
+nmap <leader>gh :0Gclog<cr>
 
 " tagbar
 " toggle pane of tags
