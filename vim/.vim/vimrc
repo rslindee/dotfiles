@@ -483,6 +483,9 @@ endfunction
 " open corresponding .h file of current .c file and vice-versa
 map <leader>h :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
 
+" copy current buffer path to clipboard
+command! CopyBuffer let @+ = expand('%:p')
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
