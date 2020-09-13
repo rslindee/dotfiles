@@ -18,7 +18,6 @@ ALL_PACKAGES="aspell-en \
     chromium \
     clang \
     cmake \
-    cmus \
     ctags \
     dmenu \
     dunst \
