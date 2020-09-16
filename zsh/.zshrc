@@ -80,9 +80,6 @@ alias bm='bashmount'
 alias gitr='cd "$(git rev-parse --show-toplevel)"'
 # commit everything and push with commit message "Update"
 alias gitup='git add --all && git commit --all --message="Update" && git push'
-# delete locally merged branches to master or develop except current
-# TODO: this is currently broken?
-alias gitdm='git branch --merged | grep -Ev \"(^\\*|master|^develop)\" | xargs -n 1 git branch --delete'
 
 # Load newsboat with youtube subs
 alias nb-tor="newsboat -u ~/.config/newsboat/tor -c ~/.local/share/newsboat/tor.db"
