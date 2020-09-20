@@ -7,7 +7,8 @@ if [ ! -f "$HOME/.vim/pack/minpac/opt/minpac/plugin/minpac.vim" ]; then
     git clone https://github.com/k-takata/minpac.git "$HOME/.vim/pack/minpac/opt/minpac"
 fi
 
-ALL_PACKAGES="aspell-en \
+ALL_PACKAGES="alsa-utils \
+    aspell-en \
     atool \
     autoconf \
     bashmount \
@@ -112,8 +113,7 @@ PACKAGES_LAPTOP="acpi \
     tlp-rdw \
     "
 
-PACKAGES_ARCH="alsa-utils \
-    autopep8 \
+PACKAGES_ARCH="autopep8 \
     bash-language-server \
     fd \
     imagemagick \
