@@ -86,7 +86,7 @@ ALL_PACKAGES="alsa-utils \
     xss-lock \
     youtube-dl \
     zathura \
-    zathura-pdf-poppler \
+    zathura-pdf-mupdf \
     zsh-syntax-highlighting \
     zip \
     zsh"
