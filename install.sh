@@ -55,14 +55,13 @@ ALL_PACKAGES="alsa-utils \
     nnn \
     notmuch \
     notmuch-mutt \
-    openvpn \
+    oathtool \
     p7zip \
     pass \
+    pass-otp \
     pavucontrol \
     python \
     pv \
-    qutebrowser \
-    ranger \
     renameutils \
     ripgrep \
     rsync \
