@@ -105,47 +105,6 @@ upd()
   wait
 }
 
-mailrich()
-{
-  # Check mail at interval
-  while true; do
-    mbsync -q richard-slindee && notmuch new --quiet
-    sleep 60
-  done &
-  loop_pid=$!
-  mutt -f ~/mail/richard-slindee/Inbox
-  kill $loop_pid
-  mbsync -q richard-slindee &
-  notmuch new --quiet &
-}
-
-mailrs()
-{
-  # Check mail at interval
-  while true; do
-    mbsync -q rslindee-gmail && notmuch new --quiet
-    sleep 60
-  done &
-  loop_pid=$!
-  mutt -f ~/mail/rslindee-gmail/Inbox
-  kill $loop_pid
-  mbsync -q rslindee-gmail &
-  notmuch new --quiet &
-}
-
-calrich()
-{
-  # run vdirsyncer at interval
-  while true; do
-    vdirsyncer sync > /dev/null 2>&1
-    sleep 60
-  done &
-  loop_pid=$!
-  ikhal
-  kill $loop_pid
-  vdirsyncer sync &
-}
-
 # Show directory sizes
 alias dirsize='du -h --max-depth=1'
 
@@ -181,8 +140,6 @@ viman()
 {
   $EDITOR -c "Man $1 $2" -c 'silent only'
 }
-
-alias rang='ranger'
 
 mkcd()
 {
