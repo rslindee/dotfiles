@@ -57,8 +57,6 @@ call minpac#add('tpope/vim-repeat')
 " searching
 " hooks for fzf
 call minpac#add('junegunn/fzf.vim')
-" extra motion for two characters
-call minpac#add('justinmk/vim-sneak')
 " adds extra info when searching
 call minpac#add('osyo-manga/vim-anzu')
 " enhanced substitution
@@ -629,14 +627,6 @@ source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
 " winresizer
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>W'
-
-" vim-sneak
-" enable label mode for easymotion-like behavior
-let g:sneak#label = 1
-" use vimrc case settings (e.g. smartcase)
-let g:sneak#use_ic_scs = 1
-" use clever-s (e.g. s/S go next/prev)
-let g:sneak#s_next = 1
 
 " vim-over
 " start enhanced substitution
