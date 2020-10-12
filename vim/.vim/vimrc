@@ -620,10 +620,6 @@ nmap <leader>pc :call minpac#clean()<cr>
 " remap minisnip default trigger
 let g:minisnip_trigger = '<c-s>'
 
-" vim-sandwich
-" Use vim-surround mappings (minpac doesn't support runtime option)
-source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
-
 " winresizer
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>W'
