@@ -609,6 +609,7 @@ nmap # <Plug>(anzu-sharp-with-echo)
 nmap <leader>o :FZF<cr>
 " use fd for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
 
 " minpac
 " update plugins
