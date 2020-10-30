@@ -24,6 +24,7 @@
   un = reset HEAD~
 [push]
   default = current
+  recurseSubmodules = check
 [core]
   trustctime = false
   editor = $EDITOR
@@ -34,7 +35,7 @@
 [credential]
   helper = cache --timeout=3600
 [merge]
-	tool = vimdiff
+  tool = vimdiff
   conflictstyle = diff3
 [mergetool]
   keeptemporaries = false
@@ -46,8 +47,8 @@
   colorMoved = default
   colorMovedWS = ignore-all-space
 [mergetool "diffconflicts"]
-	cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
-	trustExitCode = true
+  cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
+  trustExitCode = true
 [filter "lfs"]
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
