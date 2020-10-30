@@ -133,7 +133,10 @@ wttr-map()
 alias dfa='df -h /mnt/*'
 
 # Quick open with xdg-open
-alias o='xdg-open'
+o()
+{
+  nohup xdg-open "$*" > /dev/null 2>&1 &
+}
 
 # Use vim as manpager
 viman()
