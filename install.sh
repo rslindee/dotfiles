@@ -93,7 +93,6 @@ ALL_PACKAGES="alsa-utils \
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
     ImageMagick \
     fd-find \
-    fuse-exfat \
     git-clang-format \
     NetworkManager-tui \
     passmenu \
