@@ -31,6 +31,7 @@ ALL_PACKAGES="alsa-utils \
     gimp \
     git-delta \
     gnupg \
+    gnuplot \
     graphviz \
     gvim \
     guvcview \
