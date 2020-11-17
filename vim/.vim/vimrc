@@ -27,8 +27,6 @@ call minpac#add('simeji/winresizer')
 call minpac#add('whiteinge/diffconflicts')
 " diff entire folders
 call minpac#add('will133/vim-dirdiff')
-" view line indents
-call minpac#add('Yggdroot/indentLine')
 
 " version control
 " view git information in gutter
@@ -515,13 +513,6 @@ let g:SignatureMarkTextHLDynamic = 1
 command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
 nnoremap - :VleftDirvish<CR>
 nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-
-" indentLine
-" turn off indentLine by default
-let g:indentLine_enabled = 0
-
-" toggle indentLine plugin (aka show indent markings)
-nmap <leader>I :IndentLinesToggle<cr>
 
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
