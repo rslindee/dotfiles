@@ -311,7 +311,7 @@ else
   autocmd FileType python setlocal formatprg=autopep8\ -
 endif
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
-autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc 
+autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc\ %
 
 " run formatprg, retab, and trim whitespace on entire buffer
 function! AutoformatCurrentFile()
@@ -525,8 +525,8 @@ nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " Run last make command
 nmap <leader>mr :make<up><cr>
-" async make with parallel jobs
-nmap <leader>mm :Make -j<cr>
+" Run make
+nmap <leader>mm :make<cr>
 " async make clean
 nmap <leader>mc :Make clean<cr>
 " generate ctags and gtags
