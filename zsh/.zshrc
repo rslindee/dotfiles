@@ -18,7 +18,7 @@ zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}├%b%f"
 function precmd() { vcs_info }
 
 PROMPT='%F{147}%~%f ${vcs_info_msg_0_}${ZSH_THEME_PROMPT_VIMODE}'
-RPROMPT='[%W %* %n@%F{153}%m%f]'
+RPROMPT='[%W %* %n.%F{153}%m%f]'
 
 # vi-mode handling
 function zle-line-init zle-keymap-select()
