@@ -16,6 +16,7 @@
   # list files modified in specific commit
   lf = diff-tree --no-commit-id --name-only -r
   pl = pull
+  pa = format-patch -1
   ps = push --set-upstream
   re = reset --hard HEAD
   ri = rebase --interactive
@@ -55,7 +56,7 @@
   process = git-lfs filter-process
   required = true
 [submodule]
-  recurse = true
+  #recurse = true
 [pull]
   rebase = false
 [pager]
