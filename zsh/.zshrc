@@ -330,6 +330,12 @@ zle -N yank-x-selection
 bindkey '^Y' yank-x-selection
 bindkey -a '^Y' yank-x-selection
 
+# yank pwd
+yank-pwd () { pwd | xsel -i --clipboard; }
+zle -N yank-pwd
+bindkey '^T' yank-pwd
+bindkey -a '^T' yank-pwd
+
 # Use fd instead of the default find command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
