@@ -3,6 +3,7 @@
 [alias]
   last = log -1 --stat --patch
   br = branch
+  ca = commit --amend
   cp = cherry-pick
   co = checkout
   cl = clone --recursive
