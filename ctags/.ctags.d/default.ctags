@@ -1,5 +1,5 @@
 --recurse=yes
---languages=C
+--languages=C,C++
 --tag-relative=yes
 --exclude=.git
 --exclude=debug/*
