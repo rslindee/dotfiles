@@ -400,7 +400,10 @@ map <leader>Y Vf{%d
 map <leader>D Vf{%y
 
 " open index in personal wiki
-nmap <leader>ww :tabe ~/wiki/index.md<cr>
+nmap <leader>ww :tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>
+
+" change current window directory to current file
+nmap <leader>wc :lcd %:p:h<cr>
 
 " all cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
