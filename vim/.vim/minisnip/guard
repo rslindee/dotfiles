@@ -1,4 +1,9 @@
-#ifndef {{+~toupper(expand('%:t:r'))+}}_H
-#define {{+~\~1+}}_H
+/**
+ * @file {{+~(expand('%:t'))+}}
+ * @brief 
+ */
 
-#endif // {{+~\~2+}}_H
+#ifndef {{+~toupper(expand('%:t:r'))+}}_H
+#define {{+~toupper(expand('%:t:r'))+}}_H
+
+#endif // {{+~toupper(expand('%:t:r'))+}}_H
