@@ -5,6 +5,8 @@ call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " viewing
+" plantuml syntax
+call minpac#add('aklt/plantuml-syntax')
 " colorize values
 call minpac#add('chrisbra/Colorizer')
 " show and navigate marks
@@ -27,6 +29,8 @@ call minpac#add('simeji/winresizer')
 call minpac#add('whiteinge/diffconflicts')
 " diff entire folders
 call minpac#add('will133/vim-dirdiff')
+" gcov syntax highlighting
+call minpac#add('hamsterjam/vim-gcovered')
 
 " version control
 " view git information in gutter
@@ -37,6 +41,8 @@ call minpac#add('tpope/vim-fugitive')
 " editing
 " enhanced splitting and joining lines
 call minpac#add('AndrewRadev/splitjoin.vim')
+" enhanced matching
+call minpac#add('andymass/vim-matchup')
 " snippet tool
 call minpac#add('joereynolds/vim-minisnip')
 " align blocks of text
