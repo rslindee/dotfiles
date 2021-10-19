@@ -370,8 +370,12 @@ set clipboard=unnamedplus
 " De-dupe and sort visual selection
 vnoremap <leader>ds :'<,'>sort u<cr>
 
-" pipe contents of paste buffer to clipboard via xsel
-nnoremap <leader>y :call system("xsel -i --clipboard", getreg("\""))<cr>
+" yank filename to clipboard
+nnoremap <leader>yf :let @*=expand("%:t")<CR>
+" yank file path relative to current vim dir to clipboard
+nnoremap <leader>yr :let @*=expand("%:p:.")<CR>
+" yank absolutely file path to clipboard
+nnoremap <leader>ya :let @*=expand("%:p")<CR>
 
 " add contents of clipboard to x register (via xsel) and paste
 function! Xsel_paste()
@@ -660,6 +664,10 @@ endif
 
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_auto_enable = 0
+
+" matchup
+" disable statusbar info on match, as it seemed buggy
+let g:matchup_matchparen_offscreen = {'scrolloff': 1}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
