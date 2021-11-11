@@ -1,0 +1,2 @@
+# workaround for "broken" HIDPI?
+Xft.dpi: 96
