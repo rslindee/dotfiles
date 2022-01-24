@@ -14,6 +14,7 @@ ALL_PACKAGES="alsa-utils \
     bashmount \
     bat \
     bc \
+    btrfsmaintenance \
     cgdb \
     cronie \
     chromium \

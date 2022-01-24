@@ -73,6 +73,9 @@ export KEYTIMEOUT=1
 # all files, human-readable sizes
 alias l='ls -lAh --color=auto'
 
+# all files, reverse modification time
+alias lsr='ls -lAhtr --color=auto'
+
 alias bm='bashmount'
 
 # git
