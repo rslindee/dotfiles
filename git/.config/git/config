@@ -51,11 +51,6 @@
 [mergetool "diffconflicts"]
   cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
   trustExitCode = true
-[filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
 [submodule]
   #recurse = true
 [pull]
@@ -69,3 +64,8 @@
   oldHighlight = "black brightred"
   newNormal = "green black"
   newHighlight = "black brightgreen"
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
