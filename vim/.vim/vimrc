@@ -313,11 +313,6 @@ set si
 set wrap
 
 " set external format tools based on filetype
-if executable('python3-autopep8')
-  autocmd FileType python setlocal formatprg=python3-autopep8\ -
-else
-  autocmd FileType python setlocal formatprg=autopep8\ -
-endif
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
 autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc\ %
 
@@ -541,7 +536,7 @@ nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " Run last make command
 nmap <leader>mr :make<up><cr>
 " Run make
-nmap <leader>mm :make<cr>
+nmap <leader>mm :silent make!<cr>:redraw!<cr>
 " async make clean
 nmap <leader>mc :Make clean<cr>
 " generate ctags and gtags
@@ -654,6 +649,15 @@ if executable('clangd')
   augroup end
 endif
 
+if executable('pyls')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'pyls',
+        \ 'cmd': {server_info->['pyls']},
+        \ 'whitelist': ['python'],
+        \ 'workspace_config': {'pyls': {'plugins': {'yapf': {'enabled': v:true}}}}
+        \ })
+endif
+
 if executable('bash-language-server')
   au User lsp_setup call lsp#register_server({
         \ 'name': 'bash-language-server',
@@ -664,6 +668,18 @@ endif
 
 let g:lsp_diagnostics_echo_cursor = 1
 let g:lsp_auto_enable = 0
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> <f2> <plug>(lsp-rename)
+endfunction
+
+augroup lsp_install
+    au!
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
 
 " matchup
 " disable statusbar info on match, as it seemed buggy

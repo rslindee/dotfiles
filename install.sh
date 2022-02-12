@@ -63,6 +63,7 @@ ALL_PACKAGES="alsa-utils \
     pass-otp \
     pavucontrol \
     python \
+    python-language-server \
     pv \
     renameutils \
     ripgrep \
@@ -98,8 +99,9 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     git-clang-format \
     NetworkManager-tui \
     passmenu \
+    python-flake8
+    python-yapf
     python3 \
-    python3-autopep8 \
     ShellCheck \
     terminus-fonts \
     terminus-fonts-console \
@@ -113,9 +115,9 @@ PACKAGES_LAPTOP="acpi \
     tlp-rdw \
     "
 
-PACKAGES_ARCH="autopep8 \
-    bash-language-server \
+PACKAGES_ARCH="bash-language-server \
     fd \
+    flake8 \
     imagemagick \
     nfs-utils \
     networkmanager \
@@ -123,6 +125,7 @@ PACKAGES_ARCH="autopep8 \
     shellcheck \
     terminus-font \
     ttf-dejavu \
+    yapf \
     xorg
     "
 
