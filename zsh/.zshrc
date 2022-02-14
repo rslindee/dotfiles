@@ -3,7 +3,7 @@ autoload -Uz compinit
 # version control info
 autoload -Uz vcs_info
 
-compinit -d ~/.cache/zcompdump
+compinit -d $HOME/.cache/zcompdump
 
 # Set the GPG_TTY and refresh the TTY in case user has switched into an X session
 export GPG_TTY=$(tty)
@@ -33,14 +33,14 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # setup git diff highlight
-if [ "$DISTRO" = "Fedora" ]; then
-  PATH="$PATH:/usr/share/git-core/contrib"
+if [ "$DISTRO" = "Fedora Linux" ]; then
+  PATH="/usr/share/git-core/contrib${PATH:+:${PATH}}"
 elif [ "$DISTRO" = "Arch Linux" ]; then
-  PATH="$PATH:/usr/share/git/diff-highlight"
+  PATH="/usr/share/git/diff-highlight${PATH:+:${PATH}}"
 fi
 
 # Set editors to vim
-if [ "$DISTRO" = "Fedora" ] && [[ $DISPLAY ]]; then
+if [ "$DISTRO" = "Fedora Linux" ] && [[ $DISPLAY ]]; then
   alias vim='vimx'
   export VISUAL=vimx
 else
@@ -102,16 +102,16 @@ alias git-largest="git rev-list --objects --all | \
 # update packages, personal wiki, and dotfiles
 upd()
 {
-  if [ "$DISTRO" = "Fedora" ]; then
+  if [ "$DISTRO" = "Fedora Linux" ]; then
     sudo dnf upgrade
   elif [ "$DISTRO" = "Arch Linux" ]; then
     trizen -Syu
   fi
   # Dotfiles aren't dependent on each other, so we can do them in parallel
-  git -C ~/dotfiles pull &
-  git -C ~/dotfiles-private pull &
-  git -C ~/wiki pull &
-  git -C ~/scripts pull &
+  git -C $HOME/dotfiles pull &
+  git -C $HOME/dotfiles-private pull &
+  git -C $HOME/wiki pull &
+  git -C $HOME/scripts pull &
   wait
 }
 
@@ -174,7 +174,7 @@ stty -ixon
 bindkey -v
 
 # History file location
-HISTFILE=~/.cache/zsh_history
+HISTFILE=$HOME/.cache/zsh_history
 
 # limit of history entries
 HISTSIZE=10000
@@ -469,7 +469,7 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=cyan'
 
-if [ "$DISTRO" = "Fedora" ]; then
+if [ "$DISTRO" = "Fedora Linux" ]; then
   source /usr/share/zsh/site-functions/fzf
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else

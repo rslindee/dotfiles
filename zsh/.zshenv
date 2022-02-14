@@ -1,2 +1,2 @@
 # local zshenv
-[ -e ~/.zshenv.local ] && source ~/.zshenv.local
+[ -e $HOME/.zshenv.local ] && source $HOME/.zshenv.local
