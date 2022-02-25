@@ -38,7 +38,7 @@
   helper = cache --timeout=3600
 [merge]
   tool = vimdiff
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [mergetool]
   keeptemporaries = false
   keepBackup = false
