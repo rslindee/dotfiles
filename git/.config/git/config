@@ -1,7 +1,7 @@
 [include]
   path = ~/.config/git/config-private
 [alias]
-  last = log -1 --stat --patch
+  aa = add -A
   br = branch
   ca = commit --amend
   cp = cherry-pick
@@ -13,11 +13,13 @@
   dr = push origin --delete
   fc = clean -ffxd
   fe = fetch --prune --tags --all
+  la = log -1 --stat --patch
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(cyan)<%an>%Creset' --abbrev-commit --date=relative --all
   # list files modified in specific commit
   lf = diff-tree --no-commit-id --name-only -r
-  pl = pull
   pa = format-patch -1
+  pf = push --force-with-lease
+  pl = pull
   ps = push --set-upstream
   re = reset --hard HEAD
   ri = rebase --interactive
