@@ -42,8 +42,10 @@ ALL_PACKAGES="alsa-utils \
     khard \
     libnotify \
     light \
+    lnav \
     lzop \
     mediainfo \
+    miller \
     mlocate \
     moreutils \
     mpc \
@@ -53,6 +55,7 @@ ALL_PACKAGES="alsa-utils \
     mutt \
     ncdu \
     ncmpcpp \
+    nethogs \
     newsboat \
     nnn \
     notmuch \
@@ -75,6 +78,7 @@ ALL_PACKAGES="alsa-utils \
     st \
     stow \
     surfraw \
+    tealdeer \
     tig \
     tmux \
     udisks2 \
@@ -86,7 +90,7 @@ ALL_PACKAGES="alsa-utils \
     xcompmgr \
     xsel \
     xss-lock \
-    youtube-dl \
+    yt-dlp \
     zathura \
     zathura-pdf-mupdf \
     zsh-syntax-highlighting \
