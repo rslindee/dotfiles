@@ -1,0 +1,3 @@
+set connect.host richnas
+set columns.torrents marked, name, size, %downloaded, rate-down, rate-up, ratio, status, eta
+set sort.torrents !added
