@@ -43,6 +43,7 @@ ALL_PACKAGES="alsa-utils \
     libnotify \
     light \
     lnav \
+    lsof \
     lzop \
     mediainfo \
     miller \
@@ -77,10 +78,12 @@ ALL_PACKAGES="alsa-utils \
     sshfs \
     st \
     stow \
+    strace \
     surfraw \
     tealdeer \
     tig \
     tmux \
+    usbutils \
     udisks2 \
     unrar \
     unzip \
