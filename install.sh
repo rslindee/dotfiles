@@ -66,6 +66,7 @@ ALL_PACKAGES="alsa-utils \
     pass \
     pass-otp \
     pavucontrol \
+    power-profiles-daemon \
     python \
     python-language-server \
     pv \
@@ -114,12 +115,9 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     terminus-fonts-console \
     unifont-fonts"
 
-# TLP is Thinkpad-specific
 PACKAGES_LAPTOP="acpi \
     acpid \
     powertop \
-    tlp \
-    tlp-rdw \
     "
 
 PACKAGES_ARCH="bash-language-server \
