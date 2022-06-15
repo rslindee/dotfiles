@@ -5,10 +5,12 @@ bind x tabclose
 bind X undo
 bind <C-f> scrollpage 1
 bind <C-b> scrollpage -1
-bind / fillcmdline find
-bind ? fillcmdline find -?
-bind n findnext 1
-bind N findnext -1
-bind ,<Space> nohlsearch
+unbind /
+" unbinding tridactyl search, as it was problematic in comparison to native ff
+"bind / fillcmdline find
+"bind ? fillcmdline find -?
+"bind n findnext 1
+"bind N findnext -1
+"bind ,<Space> nohlsearch
 
 set modeindicator false
