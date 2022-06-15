@@ -334,6 +334,9 @@ bindkey '^S' history-incremental-search-forward
 # Set forward delete
 bindkey '^D' delete-char
 
+# Alt-. to insert last word
+bindkey '^[.' insert-last-word
+
 # yank zsh selection
 yank-x-selection () { print -rn -- $CUTBUFFER | xsel -i --clipboard; }
 zle -N yank-x-selection
