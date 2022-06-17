@@ -283,8 +283,8 @@ set backupdir=~/.vim/.backup//
 set directory=~/.vim/.swp//
 set viminfo+=n~/.vim/viminfo
 
-" reload vimrc manually
-nnoremap <leader>vr :source $MYVIMRC<CR>
+" reload vimrc
+nnoremap <leader>vv :source $MYVIMRC<CR>
 
 " automatially reload file if shell command is run inside vim
 set autoread
@@ -608,17 +608,28 @@ nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
 " fzf.vim
-" open FZF pane
-nmap <leader>o :FZF<cr>
+" open FZF pane w/ preview
+nmap <leader>o :Files<cr>
+" open fzf of lines in all buffers
+nmap <leader>as :Lines<cr>
+" open fzf of lines in current buffer
+nmap <leader>aa :BLines<cr>
+" open fzf of ctags
+nmap <leader>at :Tags<cr>
+" start fzf-piped Rg search
+nmap <leader>af :Rg<Space>
+" use fzf for path completion
+inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
+
 " use fd for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
 
 " minpac
 " update plugins
-nmap <leader>pu :call minpac#update()<cr>
+nmap <leader>vu :call minpac#update()<cr>
 " clean plugins
-nmap <leader>pc :call minpac#clean()<cr>
+nmap <leader>vc :call minpac#clean()<cr>
 
 " vim-minisnip
 " remap minisnip default trigger
