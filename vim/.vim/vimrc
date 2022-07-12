@@ -608,8 +608,10 @@ nmap * <Plug>(anzu-star-with-echo)
 nmap # <Plug>(anzu-sharp-with-echo)
 
 " fzf.vim
-" open FZF pane w/ preview
+" open fzf for all files
 nmap <leader>o :Files<cr>
+" open fzf for all buffers
+nmap <leader>ao :Buffers<cr>
 " open fzf of lines in all buffers
 nmap <leader>as :Lines<cr>
 " open fzf of lines in current buffer
