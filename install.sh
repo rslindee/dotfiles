@@ -83,6 +83,7 @@ ALL_PACKAGES="alsa-utils \
     surfraw \
     tealdeer \
     tig \
+    tio \
     tmux \
     usbutils \
     udisks2 \
