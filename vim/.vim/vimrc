@@ -616,6 +616,8 @@ nmap <leader>ao :Buffers<cr>
 nmap <leader>as :Lines<cr>
 " open fzf of lines in current buffer
 nmap <leader>aa :BLines<cr>
+" open fzf of modified files tracked by git
+nmap <leader>ag :GFiles?<cr>
 " open fzf of ctags
 nmap <leader>at :Tags<cr>
 " start fzf-piped Rg search
