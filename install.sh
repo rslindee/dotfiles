@@ -108,6 +108,7 @@ PACKAGES_FEDORA="chromium-libs-media-freeworld \
     git-clang-format \
     NetworkManager-tui \
     passmenu \
+    prename \
     python-flake8
     python-yapf
     python3 \
