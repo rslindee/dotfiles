@@ -49,10 +49,12 @@ call minpac#add('andymass/vim-matchup')
 call minpac#add('joereynolds/vim-minisnip')
 " align blocks of text
 call minpac#add('junegunn/vim-easy-align')
-" Add/change/delete surrounding char pairs
+" add/change/delete surrounding char pairs
 call minpac#add('machakann/vim-sandwich')
-" Reorder delimited items
+" reorder delimited items
 call minpac#add('machakann/vim-swap')
+" enhanced replace/substitution
+call minpac#add('svermeulen/vim-subversive')
 " swap text using motions
 call minpac#add('tommcdo/vim-exchange')
 " advanced substitution
@@ -69,8 +71,6 @@ call minpac#add('tpope/vim-speeddating')
 call minpac#add('junegunn/fzf.vim')
 " adds extra info when searching
 call minpac#add('osyo-manga/vim-anzu')
-" enhanced substitution
-call minpac#add('osyo-manga/vim-over')
 
 " other
 " view/edit hex data
@@ -647,9 +647,21 @@ let g:minisnip_trigger = '<c-s>'
 " Enter resizer mode
 let g:winresizer_start_key = '<leader>W'
 
-" vim-over
-" start enhanced substitution
-nmap <leader>S :OverCommandLine %s/<cr>
+" vim-sandwich
+" use vim-surround keymaps (e.g. `ys`, `yss`, `yS`, `ds`, `cs` in normal mode and `S` in visual mode)
+source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
+
+" vim-subversive
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
+nmap <leader>s <plug>(SubversiveSubstituteRangeConfirm)
+xmap <leader>s <plug>(SubversiveSubstituteRangeConfirm)
+nmap <leader>ss <plug>(SubversiveSubstituteWordRangeConfirm)
+" Use abolish's subvert to replace but preserve case
+nmap <leader><leader>s <plug>(SubversiveSubvertRange)
+xmap <leader><leader>s <plug>(SubversiveSubvertRange)
+nmap <leader><leader>ss <plug>(SubversiveSubvertWordRange)
 
 " vim-devdocs
 " look up current word cursor is on in devdocs.io
