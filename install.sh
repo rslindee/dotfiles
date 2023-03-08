@@ -19,6 +19,7 @@ ALL_PACKAGES="alsa-utils \
     cronie \
     chromium \
     clang \
+    clipman \
     cmake \
     ctags \
     dmenu \
@@ -38,6 +39,7 @@ ALL_PACKAGES="alsa-utils \
     guvcview \
     isync \
     jq \
+    kanshi \
     khal \
     khard \
     libnotify \
@@ -81,6 +83,7 @@ ALL_PACKAGES="alsa-utils \
     stow \
     strace \
     surfraw \
+    swaylock \
     tealdeer \
     tig \
     tio \
@@ -95,6 +98,7 @@ ALL_PACKAGES="alsa-utils \
     xcompmgr \
     xsel \
     xss-lock \
+    yambar \
     yt-dlp \
     zathura \
     zathura-pdf-mupdf \
