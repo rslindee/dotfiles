@@ -17,8 +17,6 @@ call minpac#add('hamsterjam/vim-gcovered')
 call minpac#add('kshenoy/vim-signature')
 " apply colors to different parentheses levels
 call minpac#add('junegunn/rainbow_parentheses.vim')
-" highlight yanked text
-call minpac#add('machakann/vim-highlightedyank')
 " view tag information for current file
 call minpac#add('majutsushi/tagbar')
 " gruvbox theme
@@ -363,32 +361,21 @@ nnoremap ' `
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use CLIPBOARD register
-set clipboard=unnamedplus
+" TODO: wayland support someday native? https://github.com/vim/vim/issues/5157
+" Use system clipboard via wl-copy and wl-paste
+autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
+nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 
 " De-dupe and sort visual selection
 vnoremap <leader>ds :'<,'>sort u<cr>
 
+" TODO: update
 " yank filename to clipboard
-nnoremap <leader>yf :let @*=expand("%:t")<CR>
+nnoremap <leader>yf :let @+=expand("%:t")<CR>
 " yank file path relative to current vim dir to clipboard
-nnoremap <leader>yr :let @*=expand("%:p:.")<CR>
+nnoremap <leader>yr :let @+=expand("%:p:.")<CR>
 " yank absolutely file path to clipboard
-nnoremap <leader>ya :let @*=expand("%:p")<CR>
-
-" add contents of clipboard to x register (via xsel) and paste
-function! Xsel_paste()
-  let @x=system('xsel -o --clipboard')
-  normal! "xp
-endfunction
-
-function! Xsel_paste_before()
-  let @x=system('xsel -o --clipboard')
-  normal! "xP
-endfunction
-
-nnoremap <leader>pp :call Xsel_paste()<cr>
-nnoremap <leader>pP :call Xsel_paste_before()<cr>
+nnoremap <leader>ya :let @+=expand("%:p")<CR>
 
 " replace current inner word with yank reg 0
 nnoremap <leader>pw ciw<c-r>0<esc>

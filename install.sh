@@ -19,24 +19,23 @@ ALL_PACKAGES="alsa-utils \
     cronie \
     chromium \
     clang \
-    clipman \
     cmake \
     ctags \
-    dmenu \
     dunst \
     entr \
     exfat-utils \
-    feh \
     ffmpeg \
     fontconfig \
+    fuzzel \
     fzf \
     gimp \
     git-delta \
+    grim \
     gnupg \
     gnuplot \
     graphviz \
-    gvim \
     guvcview \
+    imv \
     isync \
     jq \
     kanshi \
@@ -72,17 +71,16 @@ ALL_PACKAGES="alsa-utils \
     python \
     python-language-server \
     pv \
-    renameutils \
     ripgrep \
     rsync \
     sqlite \
-    slock \
     socat \
+    slurp \
     sshfs \
-    st \
     stow \
     strace \
     surfraw \
+    swayidle \
     swaylock \
     tealdeer \
     tig \
@@ -93,11 +91,11 @@ ALL_PACKAGES="alsa-utils \
     unrar \
     unzip \
     urlscan \
+    vim \
     vdirsyncer \
+    wl-clipboard \
+    wlopm \
     w3m \
-    xcompmgr \
-    xsel \
-    xss-lock \
     yambar \
     yt-dlp \
     zathura \
@@ -107,7 +105,6 @@ ALL_PACKAGES="alsa-utils \
     zsh"
 
 PACKAGES_FEDORA="chromium-libs-media-freeworld \
-    ImageMagick \
     fd-find \
     git-clang-format \
     NetworkManager-tui \
@@ -129,15 +126,13 @@ PACKAGES_LAPTOP="acpi \
 PACKAGES_ARCH="bash-language-server \
     fd \
     flake8 \
-    imagemagick \
     nfs-utils \
     networkmanager \
     noto-fonts-cjk \
     shellcheck \
     terminus-font \
     ttf-dejavu \
-    yapf \
-    xorg
+    yapf
     "
 
 STOW_LIST="clang \

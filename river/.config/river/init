@@ -1,0 +1,175 @@
+#!/bin/sh
+
+# needed for xdg-desktop-portals to work, otherwise, can lead to timeouts
+riverctl spawn "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
+
+# Autostart
+autostart() {
+	prog="$1"
+	shift 1
+
+	killall -q "$prog"
+	riverctl spawn "$prog" "$@"
+}
+
+exec_once() {
+  if ! pgrep -u "$USER" -x "$1" > /dev/null
+  then
+    echo "$0: No '$1' found, starting it."
+    riverctl spawn "$@"
+  fi
+}
+
+# start an instance of foot
+riverctl map normal Super Return spawn foot
+
+# Super+Q to close the focused view
+riverctl map normal Super Q close
+
+# exit river
+riverctl map normal Super+Shift Q exit
+
+# lock screen
+riverctl map normal Super BackSpace spawn 'swaylock --color 000000'
+
+# screenshot to clipboard
+riverctl map normal Super S spawn 'grim -g "$(slurp -d)" - | wl-copy'
+
+# open fuzzel
+riverctl map normal Super O spawn 'fuzzel --font terminus:weight=bold:size=12'
+
+# toggle mpc
+riverctl map normal Super C spawn 'mpc toggle'
+
+# focus the next/previous view in the layout stack
+riverctl map normal Super J focus-view next
+riverctl map normal Super K focus-view previous
+
+# swap the focused view with the next/previous view in the layout stack
+riverctl map normal Super+Shift J swap next
+riverctl map normal Super+Shift K swap previous
+
+# focus the next/previous output
+riverctl map normal Super Period focus-output next
+riverctl map normal Super Comma focus-output previous
+
+# send the focused view to the next/previous output
+riverctl map normal Super+Shift Period send-to-output next
+riverctl map normal Super+Shift Comma send-to-output previous
+
+# bump the focused view to the top of the layout stack
+riverctl map normal Super A zoom
+
+# decrease/increase the main ratio of rivertile(1)
+riverctl map normal Super H send-layout-cmd rivertile "main-ratio -0.05"
+riverctl map normal Super L send-layout-cmd rivertile "main-ratio +0.05"
+
+# increment/decrement the main count of rivertile(1)
+riverctl map normal Super+Shift H send-layout-cmd rivertile "main-count +1"
+riverctl map normal Super+Shift L send-layout-cmd rivertile "main-count -1"
+
+# move views
+riverctl map normal Super+Alt H move left 100
+riverctl map normal Super+Alt J move down 100
+riverctl map normal Super+Alt K move up 100
+riverctl map normal Super+Alt L move right 100
+
+# snap views to screen edges
+riverctl map normal Super+Alt+Control H snap left
+riverctl map normal Super+Alt+Control J snap down
+riverctl map normal Super+Alt+Control K snap up
+riverctl map normal Super+Alt+Control L snap right
+
+# resize views
+riverctl map normal Super+Alt+Shift H resize horizontal -100
+riverctl map normal Super+Alt+Shift J resize vertical 100
+riverctl map normal Super+Alt+Shift K resize vertical -100
+riverctl map normal Super+Alt+Shift L resize horizontal 100
+
+# move views
+riverctl map-pointer normal Super BTN_LEFT move-view
+
+# r + Right Mouse Button to resize views
+riverctl map-pointer normal Super BTN_RIGHT resize-view
+
+# toggle float
+riverctl map-pointer normal Super BTN_MIDDLE toggle-float
+
+for i in $(seq 1 9)
+do
+    tags=$((1 << ($i - 1)))
+
+    # focus tag [0-8]
+    riverctl map normal Super $i set-focused-tags $tags
+
+    # tag focused view with tag [0-8]
+    riverctl map normal Super+Shift $i set-view-tags $tags
+
+    # toggle focus of tag [0-8]
+    riverctl map normal Super+Control $i toggle-focused-tags $tags
+
+    # toggle tag [0-8] of focused view
+    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+done
+
+# focus all tags
+# tag focused view with all tags
+all_tags=$(((1 << 32) - 1))
+riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# toggle float
+riverctl map normal Super Space toggle-float
+
+# toggle fullscreen
+riverctl map normal Super Z toggle-fullscreen
+
+# change layout orientation
+riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
+riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
+riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
+riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
+
+# Various media key mapping examples for both normal and locked mode which do
+# not have a modifier
+for mode in normal locked
+do
+    # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
+    riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+
+    # Control screen backlight brightness with light (https://github.com/haikarainen/light)
+    riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
+    riverctl map $mode None XF86MonBrightnessDown spawn 'light -U 5'
+done
+
+# Set background and border color
+riverctl background-color 0x002b36
+riverctl border-color-focused 0x93a1a1
+riverctl border-color-unfocused 0x586e75
+riverctl border-width 4
+
+# Set the default layout generator to be rivertile and start it.
+# River will send the process group of the init executable SIGTERM on exit.
+riverctl default-layout rivertile
+rivertile -view-padding 0 -outer-padding 0 &
+
+# set keyboard remaps, capslock to ctrl, printscreen to win
+riverctl keyboard-layout -options "caps:ctrl_modifier,altwin:prtsc_rwin" "us"
+
+riverctl focus-follows-cursor always
+
+# screen idle and lock
+exec_once "swayidle -w \
+    timeout 300 'wlopm --off \"*\"' \
+    resume 'wlopm --on \"*\"' \
+    timeout 310 'swaylock -f -c 000000' \
+    before-sleep 'swaylock -f -c 000000'"
+
+autostart yambar
+autostart kanshi
+exec_once mpd
+
+# start foot w/ tmux
+exec_once "foot tmux"
