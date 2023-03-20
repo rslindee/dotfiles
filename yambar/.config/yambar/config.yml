@@ -83,7 +83,7 @@ bar:
                   conditions:
                     state == up && ipv4 != "": {string: {text: eth}}
     - network:
-        name: wlp2s0
+        name: wlan0
         poll-interval: 1000
         content:
           map:
