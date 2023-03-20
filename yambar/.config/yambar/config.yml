@@ -22,7 +22,7 @@ bar:
           - base: &river_base
               left-margin: 10
               right-margin: 13 
-              default: {string: {text: "X"}}
+              default: {string: {text: "0"}}
               conditions:
                 id == 1: {string: {text: "1"}}  
                 id == 2: {string: {text: "2"}}  
@@ -77,11 +77,12 @@ bar:
         content:
           map:
             conditions:
-              ~carrier: {empty: {}}
+              ~carrier: {string: {text: "[eth:▼]"}}
               carrier:
                 map:
                   conditions:
-                    state == up && ipv4 != "": {string: {text: eth}}
+                    state == up && ipv4 != "": {string: {text: "[eth:▲]"}}
+
     - network:
         name: wlan0
         poll-interval: 1000
@@ -91,10 +92,10 @@ bar:
               state == up:
                 map:
                   default:
-                    - string: {text: "{ssid}"}
+                    - string: {text: "[wifi:{ssid}]"}
                   conditions:
                     ipv4 == "":
-                      - string: {text: "{ssid}", foreground: ffffff66}
+                      - string: {text: "[wifi:{ssid}]", foreground: ffffff66}
     - battery:
         name: BAT0
         poll-interval: 30000
@@ -121,8 +122,8 @@ bar:
         anchors:
           volume: &volume
             conditions:
-              muted: {string: {text: "{linear_volume}%", foreground: ff0000ff}}
-              ~muted: {string: {text: "{linear_volume}%"}}
+              muted: {string: {text: "[♫:{linear_volume}%]", foreground: ff0000ff}}
+              ~muted: {string: {text: "[♫:{linear_volume}%]"}}
         content:
           map:
             conditions:
