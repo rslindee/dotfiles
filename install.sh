@@ -21,7 +21,6 @@ ALL_PACKAGES="alsa-utils \
     clang \
     cmake \
     ctags \
-    dunst \
     entr \
     exfat-utils \
     ffmpeg \
@@ -35,6 +34,7 @@ ALL_PACKAGES="alsa-utils \
     gnuplot \
     graphviz \
     guvcview \
+    iwd \
     imv \
     isync \
     jq \
@@ -46,6 +46,7 @@ ALL_PACKAGES="alsa-utils \
     lnav \
     lsof \
     lzop \
+    mako \
     mediainfo \
     miller \
     mlocate \
