@@ -327,7 +327,8 @@ def_key "H"
 #def_key "y"
 #  start_searching
 #
-#def_key "y"
+def_key "y"
+  dummy
 #  toggle_single
 #
 #def_key "R"
@@ -349,9 +350,11 @@ def_key "H"
 #  shuffle
 #
 #def_key "x"
+  dummy
 #  toggle_crossfade
 #
 #def_key "X"
+  dummy
 #  set_crossfade
 #
 def_key "u"

@@ -195,7 +195,7 @@ current_item_prefix = $(yellow)$r
 #
 current_item_suffix = $/r$(end)
 #
-current_item_inactive_column_prefix = $(black)$b$r
+current_item_inactive_column_prefix = $(red)
 #
 current_item_inactive_column_suffix = $/b$/r$(end)
 #
