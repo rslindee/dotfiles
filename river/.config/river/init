@@ -110,14 +110,16 @@ riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
 riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
 riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
 
-# Various media key mapping examples for both normal and locked mode which do
-# not have a modifier
+# Various media key mapping examples for both normal and locked mode 
 for mode in normal locked
 do
     # Control pulse audio volume with pamixer (https://github.com/cdemoulins/pamixer)
-    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 5'
-    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 5'
+    riverctl map $mode None XF86AudioRaiseVolume  spawn 'pamixer -i 2'
+    riverctl map $mode Super equal spawn 'pamixer -i 2'
+    riverctl map $mode None XF86AudioLowerVolume  spawn 'pamixer -d 2'
+    riverctl map $mode Super minus spawn 'pamixer -d 2'
     riverctl map $mode None XF86AudioMute         spawn 'pamixer --toggle-mute'
+    riverctl map $mode Super m spawn 'pamixer --toggle-mute'
 
     # Control screen backlight brightness with light (https://github.com/haikarainen/light)
     riverctl map $mode None XF86MonBrightnessUp   spawn 'light -A 5'
