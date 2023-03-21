@@ -40,12 +40,7 @@ elif [ "$DISTRO" = "Arch Linux" ]; then
 fi
 
 # Set editors to vim
-if [ "$DISTRO" = "Fedora Linux" ] && [[ $DISPLAY ]]; then
-  alias vim='vimx'
-  export VISUAL=vimx
-else
-  export VISUAL=vim
-fi
+export VISUAL=vim
 
 export EDITOR="$VISUAL"
 export MERGE_EDITOR=vimdiff
@@ -331,13 +326,13 @@ bindkey '^D' delete-char
 bindkey '^[.' insert-last-word
 
 # yank zsh selection
-yank-x-selection () { print -rn -- $CUTBUFFER | xsel -i --clipboard; }
+yank-x-selection () { print -rn -- $CUTBUFFER | wl-copy; }
 zle -N yank-x-selection
 bindkey '^Y' yank-x-selection
 bindkey -a '^Y' yank-x-selection
 
 # yank pwd
-yank-pwd () { pwd | xsel -i --clipboard; }
+yank-pwd () { pwd | wl-copy; }
 zle -N yank-pwd
 bindkey '^T' yank-pwd
 bindkey -a '^T' yank-pwd
