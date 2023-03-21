@@ -366,6 +366,9 @@ nnoremap ' `
 autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
 nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
 
+" map middlemouse to paste from primary clipboard
+nnoremap <MiddleMouse> :let @"=substitute(system("wl-paste --primary --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
+
 " De-dupe and sort visual selection
 vnoremap <leader>ds :'<,'>sort u<cr>
 
