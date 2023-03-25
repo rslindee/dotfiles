@@ -102,8 +102,7 @@ call minpac#add('vim-scripts/DoxygenToolkit.vim')
 " vim manpager
 call minpac#add('vim-utils/vim-man')
 " lsp plugins
-call minpac#add('prabirshrestha/async.vim')
-call minpac#add('prabirshrestha/vim-lsp')
+call minpac#add('neovim/nvim-lspconfig')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -400,21 +399,6 @@ nmap <leader>wc :lcd %:p:h<cr>
 " all cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
-" TODO: Figure out if I eventually want to use these or not
-" cscope queries
-" Search for all callers of the function name under the cursor
-" nmap ,c :cs find c <C-R>=expand('<cword>')<CR><CR>
-" Search all the functions called by funtion name under the cursor
-" nmap ,g :cs find d <C-R>=expand('<cword>')<CR><CR>
-" Search for global definition of the word under the cursor
-" nmap ,d :cs find g <C-R>=expand('<cword>')<CR><CR>
-" Search for all files matching filename under the cursor
-" nmap ,f :cs find f <C-R>=expand('<cfile>')<CR><CR>
-" Search for all files including filename under the cursor
-" nmap ,i :cs find i <C-R>=expand('<cfile>')<CR><CR>
-" Search for all symbol occurances of word under the cursor
-" nmap ,s :cs find s <C-R>=expand('<cword>')<CR><CR>
-
 " set ripgrep as grep program
 set grepprg=rg\ --vimgrep\ --smart-case
 set grepformat=%f:%l:%c:%m
@@ -631,7 +615,7 @@ let g:winresizer_start_key = '<leader>W'
 
 " vim-sandwich
 " use vim-surround keymaps (e.g. `ys`, `yss`, `yS`, `ds`, `cs` in normal mode and `S` in visual mode)
-source ~/.vim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
+source ~/.config/nvim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
 
 " vim-subversive
 nmap s <plug>(SubversiveSubstitute)
