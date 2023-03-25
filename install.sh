@@ -58,6 +58,7 @@ ALL_PACKAGES="alsa-utils \
     mutt \
     ncdu \
     ncmpcpp \
+    neovim \
     nethogs \
     newsboat \
     nnn \

@@ -39,11 +39,11 @@ elif [ "$DISTRO" = "Arch Linux" ]; then
   PATH="/usr/share/git/diff-highlight${PATH:+:${PATH}}"
 fi
 
-# Set editors to vim
-export VISUAL=vim
+# Set editors to nvim
+export VISUAL=nvim
 
 export EDITOR="$VISUAL"
-export MERGE_EDITOR=vimdiff
+export MERGE_EDITOR="nvim -d"
 
 export BROWSER=firefox
 

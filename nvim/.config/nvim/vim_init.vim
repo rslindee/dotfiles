@@ -21,6 +21,8 @@ call minpac#add('junegunn/rainbow_parentheses.vim')
 call minpac#add('majutsushi/tagbar')
 " gruvbox theme
 call minpac#add('morhetz/gruvbox')
+" nvim treesitter
+call minpac#add('nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'})
 " improved quickfix/loclist behavior
 call minpac#add('romainl/vim-qf')
 " use quickfix for include-search and definition-search with tags
@@ -175,9 +177,6 @@ set completeopt-=preview
 
 " mouse setup
 set mouse=a
-if !has('nvim')
-  set ttymouse=xterm2
-endif
 
 " cursor line/column highlighting
 set cursorline
@@ -283,13 +282,6 @@ set showcmd
 set undofile
 set backup
 
-if !has('nvim')
-  set undodir=~/.vim/.undo//
-  set backupdir=~/.vim/.backup//
-  set directory=~/.vim/.swp//
-  set viminfo+=n~/.vim/viminfo
-endif
-
 " reload vimrc
 nnoremap <leader>vv :source $MYVIMRC<CR>
 
@@ -366,15 +358,6 @@ nnoremap ' `
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if !has('nvim')
-  " TODO: wayland support someday native? https://github.com/vim/vim/issues/5157
-  " Use system clipboard via wl-copy and wl-paste
-  autocmd TextYankPost * if (v:event.operator == 'y' || v:event.operator == 'd') | silent! execute 'call system("wl-copy", @")' | endif
-  nnoremap p :let @"=substitute(system("wl-paste --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
-
-  " map middlemouse to paste from primary clipboard
-  nnoremap <MiddleMouse> :let @"=substitute(system("wl-paste --primary --no-newline"), '<C-v><C-m>', '', 'g')<cr>p
-endif 
 set clipboard+=unnamedplus
 
 " De-dupe and sort visual selection
