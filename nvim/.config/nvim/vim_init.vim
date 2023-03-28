@@ -7,17 +7,17 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 " viewing
 " plantuml syntax
 call minpac#add('aklt/plantuml-syntax')
-" enhanced c/c++ highlighting
-call minpac#add('bfrg/vim-cpp-modern')
 " colorize values
 call minpac#add('chrisbra/Colorizer')
 " gcov syntax highlighting
 call minpac#add('hamsterjam/vim-gcovered')
 " show and navigate marks
+" TODO: replace w/ chentoast/marks.nvim?
 call minpac#add('kshenoy/vim-signature')
 " apply colors to different parentheses levels
 call minpac#add('junegunn/rainbow_parentheses.vim')
 " view tag information for current file
+" TODO: replace w/ treesitter if possible?
 call minpac#add('majutsushi/tagbar')
 " nvim treesitter
 call minpac#add('nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'})
@@ -31,20 +31,22 @@ call minpac#add('sainnhe/gruvbox-material')
 call minpac#add('simeji/winresizer')
 " enhanced merge conflicts
 call minpac#add('whiteinge/diffconflicts')
+" TODO: setup another diff conflict tool
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'sindrets/diffview.nvim'
 " diff entire folders
 call minpac#add('will133/vim-dirdiff')
-
+" TODO try rhysd/git-messenger.vim
+"
 " version control
 " view git information in gutter
-call minpac#add('airblade/vim-gitgutter')
+"call minpac#add('airblade/vim-gitgutter')
 " run git commands, view status
 call minpac#add('tpope/vim-fugitive')
 
 " editing
 " enhanced splitting and joining lines
 call minpac#add('AndrewRadev/splitjoin.vim')
-" enhanced matching
-call minpac#add('andymass/vim-matchup')
 " snippet tool
 call minpac#add('joereynolds/vim-minisnip')
 " align blocks of text
@@ -60,7 +62,7 @@ call minpac#add('tommcdo/vim-exchange')
 " advanced substitution
 call minpac#add('tpope/vim-abolish')
 " comment out lines via motion
-call minpac#add('tpope/vim-commentary')
+"call minpac#add('tpope/vim-commentary')
 " repeat support for various plugins
 call minpac#add('tpope/vim-repeat')
 " enhanced time/date editing
@@ -77,8 +79,6 @@ call minpac#add('osyo-manga/vim-anzu')
 call minpac#add('fidian/hexmode')
 " opens term or file manager of current file
 call minpac#add('justinmk/vim-gtfo')
-" directory browser
-call minpac#add('justinmk/vim-dirvish')
 " open dev docs site for current word
 call minpac#add('romainl/vim-devdocs')
 " call commands async
@@ -87,16 +87,12 @@ call minpac#add('skywind3000/asyncrun.vim')
 call minpac#add('tpope/vim-eunuch')
 " session support
 call minpac#add('tpope/vim-obsession')
-" basic settings everyone can agree on
-call minpac#add('tpope/vim-sensible')
 " vimscript debugger
 call minpac#add('tpope/vim-scriptease')
 " enhanced tmux support/commands
 call minpac#add('tpope/vim-tbone')
 " extra keymaps
 call minpac#add('tpope/vim-unimpaired')
-" enhanced netrw
-call minpac#add('tpope/vim-vinegar')
 " auto generate doxygen documentation
 call minpac#add('vim-scripts/DoxygenToolkit.vim')
 " vim manpager
@@ -115,11 +111,6 @@ let g:mapleader = "\<Space>"
 " allow reading of per-project .vimrc files
 set exrc
 
-" load termdebug plugin
-packadd termdebug
-" tip: specify the debugger executable with
-" let g:termdebugger = $TOOLS_DIR . '/my-gdb'
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,46 +120,13 @@ set wildignore=*.o,*~,*.pyc,*.d
 " height of the command bar
 set cmdheight=2
 
-" a buffer becomes hidden when it is abandoned
-set hid
-
-" configure backspace so it acts as it should act
-set whichwrap+=<,>,h,l
-
-" ignore case when searching
-set ignorecase
-
-" when searching try to be smart about cases
-set smartcase
-
-" highlight search results
-set hlsearch
-
-" don't redraw while executing macros (good performance config)
-set lazyredraw
-
-" faster drawing
-set ttyfast
-
-" for regular expressions turn magic on
-set magic
-
-" show matching brackets when text indicator is over them
-set showmatch
-
 " how many tenths of a second to blink when matching brackets
 set mat=2
 
 " no annoying sound on errors
 set noerrorbells
-set novisualbell
-set t_vb=
-set tm=500
 
-" add a bit extra margin to the left
-set foldcolumn=1
-
-" show absolute line numbers
+" line numbers
 set number
 
 " disable scratch window preview in omni
@@ -179,7 +137,6 @@ set mouse=a
 
 " cursor line/column highlighting
 set cursorline
-" TODO: This is still real slow (hold down h/l and let go to exhibit)
 set cursorcolumn
 
 " show 10 lines below/above cursor at all times
@@ -195,7 +152,6 @@ set termguicolors
 
 " themes
 set background=dark
-"let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_material_foreground='original'
 let g:gruvbox_material_background='hard'
 colorscheme gruvbox-material
@@ -308,16 +264,6 @@ set expandtab
 set shiftwidth=2
 set tabstop=2
 
-" backspace over automatically inserted indentation
-set bs=2
-
-" auto indent
-set ai
-" smart indent
-set si
-" wrap lines
-set wrap
-
 " set external format tools based on filetype
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
 autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc\ %
@@ -336,10 +282,6 @@ nnoremap <leader>i :call AutoformatCurrentFile()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
-
 " tmux-like tab creation
 map <leader>c :tabnew<cr>
 
@@ -467,10 +409,6 @@ endfunction
 
 " open corresponding .h file of current .c file and vice-versa
 map <leader>h :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
-
-" TODO deprecated?
-" copy current buffer path to clipboard
-"command! CopyBuffer let @+ = expand('%:p')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
@@ -623,7 +561,7 @@ let g:winresizer_start_key = '<leader>W'
 
 " vim-sandwich
 " use vim-surround keymaps (e.g. `ys`, `yss`, `yS`, `ds`, `cs` in normal mode and `S` in visual mode)
-source ~/.config/nvim/pack/minpac/start/vim-sandwich/macros/sandwich/keymap/surround.vim
+runtime macros/sandwich/keymap/surround.vim
 
 " vim-subversive
 nmap s <plug>(SubversiveSubstitute)
