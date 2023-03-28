@@ -19,14 +19,14 @@ call minpac#add('kshenoy/vim-signature')
 call minpac#add('junegunn/rainbow_parentheses.vim')
 " view tag information for current file
 call minpac#add('majutsushi/tagbar')
-" gruvbox theme
-call minpac#add('morhetz/gruvbox')
 " nvim treesitter
 call minpac#add('nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'})
 " improved quickfix/loclist behavior
 call minpac#add('romainl/vim-qf')
 " use quickfix for include-search and definition-search with tags
 call minpac#add('romainl/vim-qlist')
+" gruvbox theme
+call minpac#add('sainnhe/gruvbox-material')
 " window pane resize mode
 call minpac#add('simeji/winresizer')
 " enhanced merge conflicts
@@ -180,7 +180,7 @@ set mouse=a
 " cursor line/column highlighting
 set cursorline
 " TODO: This is still real slow (hold down h/l and let go to exhibit)
-" set cursorcolumn
+set cursorcolumn
 
 " show 10 lines below/above cursor at all times
 set scrolloff=10
@@ -195,8 +195,10 @@ set termguicolors
 
 " themes
 set background=dark
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+"let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_material_foreground='original'
+let g:gruvbox_material_background='hard'
+colorscheme gruvbox-material
 
 " use Unix as the standard file type
 set ffs=unix,dos,mac
@@ -274,10 +276,16 @@ set tabline=%!MyTabLine()
 
 set showcmd
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set undo/backup/swap files to directory in home
+set undodir=~/.config/nvim/.undo//
+set backupdir=~/.config/nvim/.backup//
+set directory=~/.config/nvim/.swp//
+set viminfo+=n~/.config/nvim/viminfo
+
 set undofile
 set backup
 
