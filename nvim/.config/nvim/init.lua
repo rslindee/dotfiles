@@ -1,4 +1,33 @@
 vim.cmd('source ~/.config/nvim/vim_init.vim')
+
+-- Ignore compiled files
+vim.o.wildignore = '*.o,*~,*.pyc,*.d'
+
+-- Height of the command bar
+vim.o.cmdheight = 2
+
+-- How many tenths of a second to blink when matching brackets
+vim.o.mat = 2
+
+-- No annoying sound on errors
+vim.o.noerrorbells = true
+
+-- Line numbers
+vim.wo.number = true
+
+-- Disable scratch window preview in omni
+vim.o.completeopt = vim.o.completeopt .. ',noselect'
+
+-- Mouse setup
+vim.o.mouse = 'a'
+
+-- Cursor line/column highlighting
+vim.wo.cursorline = true
+vim.wo.cursorcolumn = true
+
+-- Show 10 lines below/above cursor at all times
+vim.o.scrolloff = 10
+
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = { "c", "lua", "vim", "help", "query" },
@@ -20,3 +49,4 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+

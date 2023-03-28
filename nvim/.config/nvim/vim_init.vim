@@ -1,5 +1,4 @@
-set nocompatible
-
+" TODO: migrate to packer
 packadd minpac
 call minpac#init()
 call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -69,6 +68,7 @@ call minpac#add('tpope/vim-repeat')
 call minpac#add('tpope/vim-speeddating')
 
 " searching
+" TODO try fzf-lua
 " hooks for fzf
 call minpac#add('junegunn/fzf.vim')
 " adds extra info when searching
@@ -83,12 +83,6 @@ call minpac#add('justinmk/vim-gtfo')
 call minpac#add('romainl/vim-devdocs')
 " call commands async
 call minpac#add('skywind3000/asyncrun.vim')
-" unix commands
-call minpac#add('tpope/vim-eunuch')
-" session support
-call minpac#add('tpope/vim-obsession')
-" vimscript debugger
-call minpac#add('tpope/vim-scriptease')
 " enhanced tmux support/commands
 call minpac#add('tpope/vim-tbone')
 " extra keymaps
@@ -108,46 +102,10 @@ nnoremap <Space> <nop>
 let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 
-" allow reading of per-project .vimrc files
-set exrc
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VIM user interface
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ignore compiled files
-set wildignore=*.o,*~,*.pyc,*.d
-
-" height of the command bar
-set cmdheight=2
-
-" how many tenths of a second to blink when matching brackets
-set mat=2
-
-" no annoying sound on errors
-set noerrorbells
-
-" line numbers
-set number
-
-" disable scratch window preview in omni
-set completeopt-=preview
-
-" mouse setup
-set mouse=a
-
-" cursor line/column highlighting
-set cursorline
-set cursorcolumn
-
-" show 10 lines below/above cursor at all times
-set scrolloff=10
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" true color support
 set termguicolors
 
 " themes
@@ -155,9 +113,6 @@ set background=dark
 let g:gruvbox_material_foreground='original'
 let g:gruvbox_material_background='hard'
 colorscheme gruvbox-material
-
-" use Unix as the standard file type
-set ffs=unix,dos,mac
 
 " make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
@@ -203,35 +158,7 @@ set statusline+=┃\ %P\ "
 " file modification date/time
 set statusline+=┃\ %{StatuslineModificationTime()}\ "
 
-" tabline config and helper functions
-function! MyTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let string = fnamemodify(bufname(buflist[winnr - 1]), ':t')
-  return empty(string) ? '[unnamed]' : string
-endfunction
-
-function! MyTabLine()
-  let s = ''
-  for i in range(tabpagenr('$'))
-    " select the highlighting
-    if i + 1 == tabpagenr()
-      let s .= '%#TabLineSel#'
-    else
-      let s .= '%#TabLine#'
-    endif
-    " display tabnumber
-    let s .= ' '. (i+1)
-    " the label is made by MyTabLabel()
-    let s .= ':%{MyTabLabel(' . (i + 1) . ')} '
-  endfor
-  return s
-endfunction
-
-set tabline=%!MyTabLine()
-
 set showcmd
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
@@ -312,16 +239,12 @@ set clipboard+=unnamedplus
 " De-dupe and sort visual selection
 vnoremap <leader>ds :'<,'>sort u<cr>
 
-" TODO: update
 " yank filename to clipboard
 nnoremap <leader>yf :let @+=expand("%:t")<CR>
 " yank file path relative to current vim dir to clipboard
 nnoremap <leader>yr :let @+=expand("%:p:.")<CR>
 " yank absolutely file path to clipboard
 nnoremap <leader>ya :let @+=expand("%:p")<CR>
-
-" replace current inner word with yank reg 0
-nnoremap <leader>pw ciw<c-r>0<esc>
 
 " highlight and replace current word cursor is on
 nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
@@ -361,51 +284,6 @@ nnoremap Q @q
 
 " use patience diff algorithm
 set diffopt=internal,algorithm:patience,indent-heuristic
-
-" expand C macro
-function! ExpandCMacro()
-  "get current info
-  let l:macro_file_name = "__macroexpand__" . tabpagenr()
-  let l:file_row = line(".")
-  let l:file_name = expand("%")
-  let l:file_window = winnr()
-  "create mark
-  execute "normal! Oint " . l:macro_file_name . ";"
-  execute "w"
-  "open tiny window ... check if we have already an open buffer for macro
-  if bufwinnr( l:macro_file_name ) != -1
-    execute bufwinnr( l:macro_file_name) . "wincmd w"
-    setlocal modifiable
-    execute "normal! ggdG"
-  else
-    execute "bot 10split " . l:macro_file_name
-    execute "setlocal filetype=cpp"
-    execute "setlocal buftype=nofile"
-    nnoremap <buffer> q :q!<CR>
-  endif
-  "read file with gcc
-  silent! execute "r!gcc -E " . l:file_name
-  "keep specific macro line
-  execute "normal! ggV/int " . l:macro_file_name . ";$\<CR>d"
-  execute "normal! jdG"
-  "indent
-  execute "%!indent -st -kr"
-  execute "normal! gg=G"
-  "resize window
-  execute "normal! G"
-  let l:macro_end_row = line(".")
-  execute "resize " . l:macro_end_row
-  execute "normal! gg"
-  "no modifiable
-  setlocal nomodifiable
-  "return to origin place
-  execute l:file_window . "wincmd w"
-  execute l:file_row
-  execute "normal!u"
-  execute "w"
-  "highlight origin line
-  let @/ = getline('.')
-endfunction
 
 " open corresponding .h file of current .c file and vice-versa
 map <leader>h :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
@@ -579,55 +457,6 @@ nmap <leader><leader>ss <plug>(SubversiveSubvertWordRange)
 " look up current word cursor is on in devdocs.io
 nmap <leader>k :DD <c-r><c-w><cr>
 
-" lsp setup
-if executable('clangd')
-  augroup lsp_clangd
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-                \ 'name': 'clangd',
-                \ 'cmd': {server_info->['clangd']},
-                \ 'whitelist': ['c', 'cpp'],
-                \ })
-    autocmd FileType c,cpp setlocal omnifunc=lsp#complete
-  augroup end
-endif
-
-if executable('pyls')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'pyls',
-        \ 'cmd': {server_info->['pyls']},
-        \ 'whitelist': ['python'],
-        \ 'workspace_config': {'pyls': {'plugins': {'yapf': {'enabled': v:true}}}}
-        \ })
-endif
-
-if executable('bash-language-server')
-  au User lsp_setup call lsp#register_server({
-        \ 'name': 'bash-language-server',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
-        \ 'whitelist': ['sh'],
-        \ })
-endif
-
-let g:lsp_diagnostics_echo_cursor = 1
-let g:lsp_auto_enable = 0
-
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=yes
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> <f2> <plug>(lsp-rename)
-endfunction
-
-augroup lsp_install
-    au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-" matchup
-" disable statusbar info on match, as it seemed buggy
-let g:matchup_matchparen_offscreen = {'scrolloff': 1}
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -636,6 +465,3 @@ try
   source ~/.vim/vimrc-local
 catch
 endtry
-
-" Disable shell and write commands (because we set exrc earlier)
-set secure
