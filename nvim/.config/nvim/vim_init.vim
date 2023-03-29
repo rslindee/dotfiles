@@ -1,100 +1,3 @@
-" TODO: migrate to packer
-packadd minpac
-call minpac#init()
-call minpac#add('k-takata/minpac', {'type': 'opt'})
-
-" viewing
-" plantuml syntax
-call minpac#add('aklt/plantuml-syntax')
-" colorize values
-call minpac#add('chrisbra/Colorizer')
-" gcov syntax highlighting
-call minpac#add('hamsterjam/vim-gcovered')
-" show and navigate marks
-" TODO: replace w/ chentoast/marks.nvim?
-call minpac#add('kshenoy/vim-signature')
-" apply colors to different parentheses levels
-call minpac#add('junegunn/rainbow_parentheses.vim')
-" view tag information for current file
-" TODO: replace w/ treesitter if possible?
-call minpac#add('majutsushi/tagbar')
-" nvim treesitter
-call minpac#add('nvim-treesitter/nvim-treesitter', {'do': 'TSUpdate'})
-" improved quickfix/loclist behavior
-call minpac#add('romainl/vim-qf')
-" use quickfix for include-search and definition-search with tags
-call minpac#add('romainl/vim-qlist')
-" gruvbox theme
-call minpac#add('sainnhe/gruvbox-material')
-" window pane resize mode
-call minpac#add('simeji/winresizer')
-" enhanced merge conflicts
-call minpac#add('whiteinge/diffconflicts')
-" TODO: setup another diff conflict tool
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'sindrets/diffview.nvim'
-" diff entire folders
-call minpac#add('will133/vim-dirdiff')
-" TODO try rhysd/git-messenger.vim
-"
-" version control
-" view git information in gutter
-"call minpac#add('airblade/vim-gitgutter')
-" run git commands, view status
-call minpac#add('tpope/vim-fugitive')
-
-" editing
-" enhanced splitting and joining lines
-call minpac#add('AndrewRadev/splitjoin.vim')
-" snippet tool
-call minpac#add('joereynolds/vim-minisnip')
-" align blocks of text
-call minpac#add('junegunn/vim-easy-align')
-" add/change/delete surrounding char pairs
-call minpac#add('machakann/vim-sandwich')
-" reorder delimited items
-call minpac#add('machakann/vim-swap')
-" enhanced replace/substitution
-call minpac#add('svermeulen/vim-subversive')
-" swap text using motions
-call minpac#add('tommcdo/vim-exchange')
-" advanced substitution
-call minpac#add('tpope/vim-abolish')
-" comment out lines via motion
-"call minpac#add('tpope/vim-commentary')
-" repeat support for various plugins
-call minpac#add('tpope/vim-repeat')
-" enhanced time/date editing
-call minpac#add('tpope/vim-speeddating')
-
-" searching
-" TODO try fzf-lua
-" hooks for fzf
-call minpac#add('junegunn/fzf.vim')
-" adds extra info when searching
-call minpac#add('osyo-manga/vim-anzu')
-
-" other
-" view/edit hex data
-call minpac#add('fidian/hexmode')
-" opens term or file manager of current file
-call minpac#add('justinmk/vim-gtfo')
-" open dev docs site for current word
-call minpac#add('romainl/vim-devdocs')
-" call commands async
-call minpac#add('skywind3000/asyncrun.vim')
-" enhanced tmux support/commands
-call minpac#add('tpope/vim-tbone')
-" extra keymaps
-call minpac#add('tpope/vim-unimpaired')
-" auto generate doxygen documentation
-call minpac#add('vim-scripts/DoxygenToolkit.vim')
-" vim manpager
-call minpac#add('vim-utils/vim-man')
-" lsp plugins
-call minpac#add('neovim/nvim-lspconfig')
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map leader to space
@@ -423,11 +326,8 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
 
-" minpac
 " update plugins
-nmap <leader>vu :call minpac#update()<cr>
-" clean plugins
-nmap <leader>vc :call minpac#clean()<cr>
+nmap <leader>vu :PackerSync<cr>
 
 " vim-minisnip
 " remap minisnip default trigger

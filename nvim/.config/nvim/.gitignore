@@ -2,4 +2,5 @@ pack/*
 .backup/*
 .swp/*
 .undo/*
+plugin/
 viminfo
