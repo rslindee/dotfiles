@@ -1,9 +1,9 @@
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " map leader to space
-nnoremap <Space> <nop>
-let mapleader = "\<Space>"
-let g:mapleader = "\<Space>"
+"nnoremap <Space> <nop>
+"let mapleader = "\<Space>"
+"let g:mapleader = "\<Space>"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
@@ -159,9 +159,6 @@ inoremap <c-d> <del>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
-" map Y to yank until end of line
-nmap Y y$
-
 " yank/delete entire C-style functions
 map <leader>Y Vf{%d
 map <leader>D Vf{%y
@@ -189,7 +186,7 @@ nnoremap Q @q
 set diffopt=internal,algorithm:patience,indent-heuristic
 
 " open corresponding .h file of current .c file and vice-versa
-map <leader>h :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
+map <leader>H :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Debugging
@@ -215,12 +212,6 @@ hi debugPC term=bold ctermbg=darkblue guibg=darkblue
 " highlight colors marks based on gitgutter status
 let g:SignatureMarkTextHLDynamic = 1
 
-" vim-dirvish
-" dirvish sidetab
-command! VleftDirvish leftabove vsplit | vertical resize 50 | silent Dirvish
-nnoremap - :VleftDirvish<CR>
-nnoremap gx :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<cr>
-
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
 nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
@@ -229,7 +220,7 @@ nmap <leader>? :GrepAll ""<left>
 nmap <leader>f :Grep "<c-r><c-w>"<cr>
 nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
-nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
+" nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
 " Run last make command
 nmap <leader>mr :make<up><cr>
 " Run make
@@ -270,7 +261,7 @@ nmap <leader>gh :0Gclog<cr>
 
 " tagbar
 " toggle pane of tags
-nmap <leader>t :TagbarToggle<cr>
+nmap <leader>T:TagbarToggle<cr>
 
 " hexmode
 " toggle Hexmode
@@ -296,13 +287,6 @@ nmap <leader>P :RainbowParentheses!!<cr>
 
 " replace in quickfix list what word the cursor is currently on
 nmap <leader>R :cdo %s/<C-r><C-w>//gc<Left><Left><Left>
-
-" vim-anzu
-" use anzu to echo search information
-nmap n <Plug>(anzu-n-with-echo)
-nmap N <Plug>(anzu-N-with-echo)
-nmap * <Plug>(anzu-star-with-echo)
-nmap # <Plug>(anzu-sharp-with-echo)
 
 " fzf.vim
 " open fzf for all files

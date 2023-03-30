@@ -10,6 +10,12 @@ local ensure_packer = function()
   return false
 end
 
+-- maps leader to space
+vim.g.mapleader = " "
+vim.api.nvim_set_keymap('n', '<space>', '<nop>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>', '<space>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('x', '<leader>', '<space>', { noremap = true, silent = true })
+
 local packer_bootstrap = ensure_packer()
 
 -- Plugins
@@ -31,10 +37,6 @@ require('packer').startup(function(use)
   use 'majutsushi/tagbar'
   -- nvim treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-  -- improved quickfix/loclist behavior
-  use 'romainl/vim-qf'
-  -- use quickfix for include-search and definition-search with tags
-  use 'romainl/vim-qlist'
   -- gruvbox theme
   use 'sainnhe/gruvbox-material'
   -- window pane resize mode
@@ -49,8 +51,13 @@ require('packer').startup(function(use)
   -- TODO try rhysd/git-messenger.vim
   --
   -- version control
-  -- view git information in gutter
-  use 'airblade/vim-gitgutter'
+  -- view git information
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
   -- run git commands, view status
   use 'tpope/vim-fugitive'
 
@@ -83,8 +90,6 @@ require('packer').startup(function(use)
   -- TODO try fzf-lua
   -- hooks for fzf
   use 'junegunn/fzf.vim'
-  -- adds extra info when searching
-  use 'osyo-manga/vim-anzu'
 
   -- other
   -- view/edit hex data
@@ -113,7 +118,6 @@ require('packer').startup(function(use)
   end
 end)
 
-vim.cmd('source ~/.config/nvim/vim_init.vim')
 
 -- Ignore compiled files
 vim.o.wildignore = '*.o,*~,*.pyc,*.d'
@@ -162,3 +166,37 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+-- Function for custom keybinds
+function map(mode, l, r, opts)
+  opts = opts or {}
+  opts.buffer = bufnr
+  vim.keymap.set(mode, l, r, opts)
+end
+
+-- Navigation
+map('n', ']c', function()
+  if vim.wo.diff then return ']c' end
+  return ':Gitsigns next_hunk<CR>'
+end, {expr=true})
+
+map('n', '[c', function()
+  if vim.wo.diff then return '[c' end
+  return ':Gitsigns prev_hunk<CR>'
+end, {expr=true})
+
+-- Actions
+map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+map('n', '<leader>hS', ':Gitsigns stage_buffer<CR>')
+map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
+map('n', '<leader>hR', ':Gitsigns reset_buffer<CR>')
+map('n', '<leader>hp', ':Gitsigns preview_hunk<CR>')
+map('n', '<leader>hb', ':Gitsigns blame_line<CR>')
+map('n', '<leader>tb', ':Gitsigns toggle_current_line_blame<CR>')
+map('n', '<leader>hd', ':Gitsigns diffthis<CR>')
+map('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
+
+-- Text object
+map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+
+vim.cmd('source ~/.config/nvim/vim_init.vim')
