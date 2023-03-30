@@ -1,22 +1,6 @@
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" map leader to space
-"nnoremap <Space> <nop>
-"let mapleader = "\<Space>"
-"let g:mapleader = "\<Space>"
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" true color support
-set termguicolors
-
-" themes
-set background=dark
-let g:gruvbox_material_foreground='original'
-let g:gruvbox_material_background='hard'
-colorscheme gruvbox-material
-
 " make Scons files show up as python
 autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
 
@@ -63,23 +47,8 @@ set statusline+=┃\ %{StatuslineModificationTime()}\ "
 
 set showcmd
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set undo/backup/swap files to directory in home
-set undodir=~/.config/nvim/.undo//
-set backupdir=~/.config/nvim/.backup//
-set directory=~/.config/nvim/.swp//
-set viminfo+=n~/.config/nvim/viminfo
-
-set undofile
-set backup
-
 " reload vimrc
 nnoremap <leader>vv :source $MYVIMRC<CR>
-
-" automatially reload file if shell command is run inside vim
-set autoread
 
 " reload current buffer only if there are no edits
 nnoremap <leader>e :edit<cr>
@@ -87,13 +56,6 @@ nnoremap <leader>e :edit<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" use spaces instead of tabs
-set expandtab
-
-" 1 tab == 2 spaces
-set shiftwidth=2
-set tabstop=2
-
 " set external format tools based on filetype
 autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
 autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc\ %

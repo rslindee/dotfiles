@@ -118,6 +118,34 @@ require('packer').startup(function(use)
   end
 end)
 
+-- Set undo/backup/swap files to directory in home
+vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
+vim.o.backupdir = vim.fn.expand("~/.config/nvim/.backup//")
+vim.o.directory = vim.fn.expand("~/.config/nvim/.swp//")
+vim.o.viminfo = vim.o.viminfo .. ",n~/.config/nvim/viminfo"
+
+vim.o.undofile = true
+vim.o.backup = true
+
+-- Automatically reload file if shell command is run inside vim
+vim.o.autoread = true
+
+
+-- Use spaces instead of tabs
+vim.o.expandtab = true
+
+-- 1 tab == 2 spaces
+vim.o.shiftwidth = 2
+vim.o.tabstop = 2
+
+-- Set termguicolors
+vim.opt.termguicolors = true
+
+-- Themes
+vim.opt.background = "dark"
+vim.g.gruvbox_material_foreground = 'original'
+vim.g.gruvbox_material_background = 'hard'
+vim.cmd('colorscheme gruvbox-material')
 
 -- Ignore compiled files
 vim.o.wildignore = '*.o,*~,*.pyc,*.d'
