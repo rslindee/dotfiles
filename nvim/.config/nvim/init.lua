@@ -58,6 +58,7 @@ require('packer').startup(function(use)
       require('gitsigns').setup()
     end
   }
+
   -- run git commands, view status
   use 'tpope/vim-fugitive'
 
@@ -146,11 +147,17 @@ vim.g.gruvbox_material_foreground = 'original'
 vim.g.gruvbox_material_background = 'hard'
 vim.cmd('colorscheme gruvbox-material')
 
+-- Dark blue program counter when debugging
+vim.cmd('highlight debugPC term=bold ctermbg=darkblue guibg=darkblue')
+
 -- Make Scons files show up as python
 vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
 
 -- Make clang config files show up as yaml
 vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
+
+-- auto open quickfix when populated
+vim.cmd('autocmd QuickFixCmdPost * copen')
 
 -- Enable special doxygen highlighting
 vim.g.load_doxygen_syntax = 1
@@ -180,27 +187,9 @@ vim.wo.cursorcolumn = true
 -- Show 10 lines below/above cursor at all times
 vim.o.scrolloff = 10
 
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "help", "query" },
-
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
-
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
-
-  highlight = {
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+-- Use ripgrep as the search tool
+vim.o.grepprg = 'rg --vimgrep --smart-case'
+vim.o.grepformat = '%f:%l:%c:%m'
 
 -- Helper function for custom keybinds
 function map(mode, l, r, opts)
@@ -208,11 +197,10 @@ function map(mode, l, r, opts)
   vim.keymap.set(mode, l, r, opts)
 end
 
--- reload vimrc
-map('n', '<leader>vv', ':source $MYVIMRC<CR>')
+require('gitsigns').setup {
+}
 
--- reload current buffer only if there are no edits
-map('n', '<leader>e', ':edit<cr>')
+vim.o.signcolumn="auto:2",
 
 -- Gitsigns Navigation
 map('n', ']c', function()
@@ -240,12 +228,43 @@ map('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
 -- Gitsigns Text object
 map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all" (the five listed parsers should always be installed)
+  ensure_installed = { "c", "lua", "vim", "help", "query" },
+
+  -- Install parsers synchronously (only applied to `ensure_installed`)
+  sync_install = false,
+
+  -- Automatically install missing parsers when entering buffer
+  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+  auto_install = true,
+
+  highlight = {
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+-- reload vimrc
+map('n', '<leader>vv', ':source $MYVIMRC<CR>')
+
+-- reload current buffer only if there are no edits
+map('n', '<leader>e', ':edit<cr>')
+
+-- quick-execute macro q
+map('n', 'Q', '@q')
+
 -- tmux-like tab creation
 map('n', '<leader>c', ':tabnew<cr>')
 
 -- quickfix shortcuts
-map('n', '<silent><c-n>', ':cn<cr>')
-map('n', '<silent><c-p>', ':cp<cr>')
+map('n', '<c-n>', ':cn<cr>')
+map('n', '<c-p>', ':cp<cr>')
 
 -- quick-map tabs
 map('n', '<leader>1', '1gt')
@@ -344,4 +363,18 @@ map('n', '<leader>ag', ':GFiles?<cr>')
 map('n', '<leader>at', ':Tags<cr>')
 -- start fzf-piped Rg search
 map('n', '<leader>af', ':Rg<Space>')
+
+
+-- debugging
+map('n', ',b', ':Break<cr>')
+map('n', ',d', ':Clear<cr>')
+map('n', ',s', ':Step<cr>')
+map('n', ',S', ':Source<cr>')
+map('n', ',C', ':Stop<cr>')
+map('n', ',n', ':Over<cr>')
+map('n', ',f', ':Finish<cr>')
+map('n', ',c', ':Continue<cr>')
+map('n', ',p', ':Evaluate<cr>')
+map('n', ',g', ':Gdb<cr>')
+
 vim.cmd('source ~/.config/nvim/vim_init.vim')

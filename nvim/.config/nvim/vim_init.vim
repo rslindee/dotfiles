@@ -70,38 +70,14 @@ nnoremap <leader>ya :let @+=expand("%:p")<CR>
 " all cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
-" set ripgrep as grep program
-set grepprg=rg\ --vimgrep\ --smart-case
-set grepformat=%f:%l:%c:%m
-command! -nargs=+ Grep execute 'silent grep! <args>' | execute ':redraw!'
 " ripgrep, but include all hidden/ignored files
 command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
-
-" quick-execute macro q
-nnoremap Q @q
 
 " use patience diff algorithm
 set diffopt=internal,algorithm:patience,indent-heuristic
 
 " open corresponding .h file of current .c file and vice-versa
 map <leader>H :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Debugging
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap ,b :Break<cr>
-nnoremap ,d :Clear<cr>
-nnoremap ,s :Step<cr>
-nnoremap ,S :Source<cr>
-nnoremap ,C :Stop<cr>
-nnoremap ,n :Over<cr>
-nnoremap ,f :Finish<cr>
-nnoremap ,c :Continue<cr>
-nnoremap ,p :Evaluate<cr>
-nnoremap ,g :Gdb<cr>
-
-" dark blue program counter when debugging
-hi debugPC term=bold ctermbg=darkblue guibg=darkblue
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
