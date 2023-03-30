@@ -122,7 +122,6 @@ end)
 vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
 vim.o.backupdir = vim.fn.expand("~/.config/nvim/.backup//")
 vim.o.directory = vim.fn.expand("~/.config/nvim/.swp//")
-vim.o.viminfo = vim.o.viminfo .. ",n~/.config/nvim/viminfo"
 
 vim.o.undofile = true
 vim.o.backup = true
@@ -146,6 +145,15 @@ vim.opt.background = "dark"
 vim.g.gruvbox_material_foreground = 'original'
 vim.g.gruvbox_material_background = 'hard'
 vim.cmd('colorscheme gruvbox-material')
+
+-- Make Scons files show up as python
+vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
+
+-- Make clang config files show up as yaml
+vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
+
+-- Enable special doxygen highlighting
+vim.g.load_doxygen_syntax = 1
 
 -- Ignore compiled files
 vim.o.wildignore = '*.o,*~,*.pyc,*.d'
@@ -194,14 +202,19 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
--- Function for custom keybinds
+-- Helper function for custom keybinds
 function map(mode, l, r, opts)
   opts = opts or {}
-  opts.buffer = bufnr
   vim.keymap.set(mode, l, r, opts)
 end
 
--- Navigation
+-- reload vimrc
+map('n', '<leader>vv', ':source $MYVIMRC<CR>')
+
+-- reload current buffer only if there are no edits
+map('n', '<leader>e', ':edit<cr>')
+
+-- Gitsigns Navigation
 map('n', ']c', function()
   if vim.wo.diff then return ']c' end
   return ':Gitsigns next_hunk<CR>'
@@ -212,7 +225,7 @@ map('n', '[c', function()
   return ':Gitsigns prev_hunk<CR>'
 end, {expr=true})
 
--- Actions
+-- Gitsigns Actions
 map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
 map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
 map('n', '<leader>hS', ':Gitsigns stage_buffer<CR>')
@@ -224,7 +237,111 @@ map('n', '<leader>tb', ':Gitsigns toggle_current_line_blame<CR>')
 map('n', '<leader>hd', ':Gitsigns diffthis<CR>')
 map('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
 
--- Text object
+-- Gitsigns Text object
 map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
+-- tmux-like tab creation
+map('n', '<leader>c', ':tabnew<cr>')
+
+-- quickfix shortcuts
+map('n', '<silent><c-n>', ':cn<cr>')
+map('n', '<silent><c-p>', ':cp<cr>')
+
+-- quick-map tabs
+map('n', '<leader>1', '1gt')
+map('n', '<leader>2', '2gt')
+map('n', '<leader>3', '3gt')
+map('n', '<leader>4', '4gt')
+map('n', '<leader>5', '5gt')
+map('n', '<leader>6', '6gt')
+map('n', '<leader>7', '7gt')
+map('n', '<leader>8', '8gt')
+map('n', '<leader>9', '9gt')
+map('n', '<leader>0', ':tablast<cr>')
+
+-- remap ` jumping to ', since I never use the former
+map('n', "'", "`")
+
+-- vim-subversive
+map('n', 's', '<plug>(SubversiveSubstitute)')
+map('n', 'ss', '<plug>(SubversiveSubstituteLine)')
+map('n', 'S', '<plug>(SubversiveSubstituteToEndOfLine)')
+map('n', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
+map('x', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
+map('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRangeConfirm)')
+map('n', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
+map('x', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
+map('n', '<leader><leader>ss', '<plug>(SubversiveSubvertWordRange)')
+
+-- vim-devdocs
+-- look up current word cursor is on in devdocs.io
+map('n', '<leader>k', ':DD <c-r><c-w><cr>')
+
+-- git push
+map('n', '<leader>gp', '<cmd>Gpush<cr>')
+-- git commit
+map('n', '<leader>gc', '<cmd>Gcommit -v<cr>')
+-- write (essentially a write and git add)
+map('n', '<leader>gw', '<cmd>Gwrite<cr>')
+-- git diff of current file against HEAD
+map('n', '<leader>gd', '<cmd>Gvdiff<cr>')
+-- open git browser with all commits touching current file in new tab
+map('n', '<leader>gh', '0Gclog<cr>')
+
+-- tagbar
+-- toggle pane of tags
+map('n', '<leader>T', ':TagbarToggle<cr>')
+
+-- hexmode
+-- toggle Hexmode
+map('n', '<leader>H', ':Hexmode<cr>')
+
+-- highlight and replace current word cursor is on
+map('n', '<leader>r', ':%s/<C-r><C-w>//gc<Left><Left><Left>', {silent = true})
+
+-- set <c-d> to forward-delete in insert mode
+map('i', '<c-d>', '<del>', {silent = true})
+
+-- go up/down command history
+map('c', '<c-j>', '<down>', {silent = true})
+map('c', '<c-k>', '<up>', {silent = true})
+
+-- yank/delete entire C-style functions
+map('', '<leader>Y', 'Vf{%d', {silent = true})
+map('', '<leader>D', 'Vf{%y', {silent = true})
+
+-- open index in personal wiki
+map('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {silent = true})
+
+-- change current window directory to current file
+map('n', '<leader>wc', ':lcd %:p:h<cr>', {silent = true})
+
+-- vim-easy-align
+-- start interactive EasyAlign in visual mode (e.g. vipga)
+map('x', 'ga', '<Plug>(EasyAlign)')
+-- start interactive EasyAlign for a motion/text object (e.g. gaip)
+map('n', 'ga', '<Plug>(EasyAlign)')
+
+-- rainbow_parentheses.vim
+-- toggle rainbow parentheses
+map('n', '<leader>P', ':RainbowParentheses!!<cr>')
+
+-- replace in quickfix list what word the cursor is currently on
+map('n', '<leader>R', ':cdo %s/<C-r><C-w>//gc<Left><Left><Left>')
+
+-- fzf.vim
+-- open fzf for all files
+map('n', '<leader>o', ':Files<cr>')
+-- open fzf for all buffers
+map('n', '<leader>ao', ':Buffers<cr>')
+-- open fzf of lines in all buffers
+map('n', '<leader>as', ':Lines<cr>')
+-- open fzf of lines in current buffer
+map('n', '<leader>aa', ':BLines<cr>')
+-- open fzf of modified files tracked by git
+map('n', '<leader>ag', ':GFiles?<cr>')
+-- open fzf of ctags
+map('n', '<leader>at', ':Tags<cr>')
+-- start fzf-piped Rg search
+map('n', '<leader>af', ':Rg<Space>')
 vim.cmd('source ~/.config/nvim/vim_init.vim')

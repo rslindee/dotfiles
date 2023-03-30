@@ -1,15 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Colors and Fonts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" make Scons files show up as python
-autocmd BufNew,BufRead SConstruct,SConscript set filetype=python
-
-" make clang config files show up as yaml
-autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml
-
-" enable special doxygen highlighting
-let g:load_doxygen_syntax=1
-
 " statusline config and helper functions
 function! StatuslineGit()
   let l:branchname = FugitiveHead(7)
@@ -47,12 +35,6 @@ set statusline+=┃\ %{StatuslineModificationTime()}\ "
 
 set showcmd
 
-" reload vimrc
-nnoremap <leader>vv :source $MYVIMRC<CR>
-
-" reload current buffer only if there are no edits
-nnoremap <leader>e :edit<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -72,31 +54,6 @@ endfunction
 nnoremap <leader>i :call AutoformatCurrentFile()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Moving around, tabs, windows and buffers
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" tmux-like tab creation
-map <leader>c :tabnew<cr>
-
-" quickfix shortcuts
-map <silent><c-n> :cn<cr>
-map <silent><c-p> :cp<cr>
-
-" quick-map tabs
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
-
-" remap ` jumping to ', since I never use the former
-nnoremap ' `
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set clipboard+=unnamedplus
@@ -110,27 +67,6 @@ nnoremap <leader>yf :let @+=expand("%:t")<CR>
 nnoremap <leader>yr :let @+=expand("%:p:.")<CR>
 " yank absolutely file path to clipboard
 nnoremap <leader>ya :let @+=expand("%:p")<CR>
-
-" highlight and replace current word cursor is on
-nnoremap <leader>r :%s/<C-r><C-w>//gc<Left><Left><Left>
-
-" set <c-d> to forward-delete in insert mode
-inoremap <c-d> <del>
-
-" go up/down command history
-cnoremap <c-j> <down>
-cnoremap <c-k> <up>
-
-" yank/delete entire C-style functions
-map <leader>Y Vf{%d
-map <leader>D Vf{%y
-
-" open index in personal wiki
-nmap <leader>ww :tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>
-
-" change current window directory to current file
-nmap <leader>wc :lcd %:p:h<cr>
-
 " all cscope results go to quickfix and not wonky number-driven list
 set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
@@ -210,25 +146,6 @@ function! ToggleGStatus()
   endif
 endfunction
 nmap <leader>gs :call ToggleGStatus()<cr>
-" git push
-nmap <leader>gp :Gpush<cr>
-" git commit
-nmap <leader>gc :Gcommit<space>-v<cr>
-" write (essentially a write and git add)
-nmap <leader>gw :Gwrite<cr>
-" git diff of current file against HEAD
-nmap <leader>gd :Gvdiff<cr>
-" open git browser with all commits touching current file in new tab
-nmap <leader>gh :0Gclog<cr>
-
-" tagbar
-" toggle pane of tags
-nmap <leader>T:TagbarToggle<cr>
-
-" hexmode
-" toggle Hexmode
-nmap <leader>H :Hexmode<cr>
-
 " vim-qf
 " disable wrapping in quickfix
 let g:qf_nowrap = 0
@@ -237,34 +154,6 @@ nmap <leader>Q <Plug>QfLtoggle
 " toggle quickfix list
 nmap <leader>q <Plug>QfCtoggle
 
-" vim-easy-align
-" start interactive EasyAlign in visual mode (e.g. vipga)
-xmap ga <Plug>(EasyAlign)
-" start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
-
-" rainbow_parentheses.vim
-" toggle rainbow parentheses
-nmap <leader>P :RainbowParentheses!!<cr>
-
-" replace in quickfix list what word the cursor is currently on
-nmap <leader>R :cdo %s/<C-r><C-w>//gc<Left><Left><Left>
-
-" fzf.vim
-" open fzf for all files
-nmap <leader>o :Files<cr>
-" open fzf for all buffers
-nmap <leader>ao :Buffers<cr>
-" open fzf of lines in all buffers
-nmap <leader>as :Lines<cr>
-" open fzf of lines in current buffer
-nmap <leader>aa :BLines<cr>
-" open fzf of modified files tracked by git
-nmap <leader>ag :GFiles?<cr>
-" open fzf of ctags
-nmap <leader>at :Tags<cr>
-" start fzf-piped Rg search
-nmap <leader>af :Rg<Space>
 " use fzf for path completion
 inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 
@@ -275,33 +164,9 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
 " update plugins
 nmap <leader>vu :PackerSync<cr>
 
-" vim-minisnip
-" remap minisnip default trigger
-let g:minisnip_trigger = '<c-s>'
-
-" winresizer
-" Enter resizer mode
-let g:winresizer_start_key = '<leader>W'
-
 " vim-sandwich
 " use vim-surround keymaps (e.g. `ys`, `yss`, `yS`, `ds`, `cs` in normal mode and `S` in visual mode)
 runtime macros/sandwich/keymap/surround.vim
-
-" vim-subversive
-nmap s <plug>(SubversiveSubstitute)
-nmap ss <plug>(SubversiveSubstituteLine)
-nmap S <plug>(SubversiveSubstituteToEndOfLine)
-nmap <leader>s <plug>(SubversiveSubstituteRangeConfirm)
-xmap <leader>s <plug>(SubversiveSubstituteRangeConfirm)
-nmap <leader>ss <plug>(SubversiveSubstituteWordRangeConfirm)
-" Use abolish's subvert to replace but preserve case
-nmap <leader><leader>s <plug>(SubversiveSubvertRange)
-xmap <leader><leader>s <plug>(SubversiveSubvertRange)
-nmap <leader><leader>ss <plug>(SubversiveSubvertWordRange)
-
-" vim-devdocs
-" look up current word cursor is on in devdocs.io
-nmap <leader>k :DD <c-r><c-w><cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last
