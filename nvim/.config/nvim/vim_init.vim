@@ -56,8 +56,6 @@ nnoremap <leader>i :call AutoformatCurrentFile()<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set clipboard+=unnamedplus
-
 " De-dupe and sort visual selection
 vnoremap <leader>ds :'<,'>sort u<cr>
 
@@ -72,9 +70,6 @@ set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
 " ripgrep, but include all hidden/ignored files
 command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
-
-" use patience diff algorithm
-set diffopt=internal,algorithm:patience,indent-heuristic
 
 " open corresponding .h file of current .c file and vice-versa
 map <leader>H :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
@@ -139,10 +134,6 @@ let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
 
 " update plugins
 nmap <leader>vu :PackerSync<cr>
-
-" vim-sandwich
-" use vim-surround keymaps (e.g. `ys`, `yss`, `yS`, `ds`, `cs` in normal mode and `S` in visual mode)
-runtime macros/sandwich/keymap/surround.vim
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last

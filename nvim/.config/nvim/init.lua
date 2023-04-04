@@ -63,6 +63,7 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
 
   -- editing
+  -- TODO: replace w/ Wansmer/treesj
   -- enhanced splitting and joining lines
   use 'AndrewRadev/splitjoin.vim'
   -- TODO: try hrsh7th/vim-vsnip
@@ -71,7 +72,15 @@ require('packer').startup(function(use)
   -- align blocks of text
   use 'junegunn/vim-easy-align'
   -- add/change/delete surrounding char pairs
-  use 'machakann/vim-sandwich'
+  use({
+      "kylechui/nvim-surround",
+      tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+      config = function()
+          require("nvim-surround").setup({
+              -- Configuration here, or leave empty to use defaults
+          })
+      end
+  })
   -- reorder delimited items
   use 'machakann/vim-swap'
   -- enhanced replace/substitution
@@ -132,9 +141,10 @@ vim.o.directory = vim.fn.expand("~/.config/nvim/.swp//")
 vim.o.undofile = true
 vim.o.backup = true
 
+vim.opt.clipboard:append("unnamedplus")
+
 -- Automatically reload file if shell command is run inside vim
 vim.o.autoread = true
-
 
 -- Use spaces instead of tabs
 vim.o.expandtab = true
@@ -199,6 +209,9 @@ vim.o.grepformat = '%f:%l:%c:%m'
 -- Use smartcase for inc searching
 vim.o.ignorecase = true
 vim.o.smartcase = true
+
+-- use patience diff algorithm
+vim.o.diffopt = 'internal,algorithm:patience,indent-heuristic'
 
 -- Helper function for custom keybinds
 function map(mode, l, r, opts)
