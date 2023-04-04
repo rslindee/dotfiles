@@ -80,8 +80,13 @@ require('packer').startup(function(use)
   use 'tommcdo/vim-exchange'
   -- advanced substitution
   use 'tpope/vim-abolish'
-  -- comment out lines via motion
-  --call minpac#add('tpope/vim-commentary')
+  -- comments
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
   -- repeat support for various plugins
   use 'tpope/vim-repeat'
   -- enhanced time/date editing
@@ -190,6 +195,10 @@ vim.o.scrolloff = 10
 -- Use ripgrep as the search tool
 vim.o.grepprg = 'rg --vimgrep --smart-case'
 vim.o.grepformat = '%f:%l:%c:%m'
+
+-- Use smartcase for inc searching
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- Helper function for custom keybinds
 function map(mode, l, r, opts)

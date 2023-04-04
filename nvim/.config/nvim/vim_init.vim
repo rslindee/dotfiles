@@ -89,9 +89,9 @@ let g:SignatureMarkTextHLDynamic = 1
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
 nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
-nmap <leader>/ :Grep ""<left>
+nmap <leader>/ :silent! grep ""<left>
 nmap <leader>? :GrepAll ""<left>
-nmap <leader>f :Grep "<c-r><c-w>"<cr>
+nmap <leader>f :silent! grep "<c-r><c-w>"<cr>
 nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 " search for all todo/fixme and put into quickfix list
 " nmap <leader>T :AsyncRun -program=grep '(TODO\|FIXME)'<cr>
