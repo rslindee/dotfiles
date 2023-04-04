@@ -222,7 +222,9 @@ end
 require('gitsigns').setup {
 }
 
-vim.o.signcolumn="auto:2",
+vim.o.signcolumn="auto:2"
+
+vim.g.winresizer_start_key='<leader>W'
 
 -- Gitsigns Navigation
 map('n', ']c', function()
