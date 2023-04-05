@@ -97,7 +97,8 @@ nmap <leader>mm :silent make!<cr>:redraw!<cr>
 " async make clean
 nmap <leader>mc :Make clean<cr>
 " generate ctags and gtags
-nmap <leader>j :AsyncRun ctags -R .<cr>
+" TODO: replace with something more auto
+" nmap <leader>j :AsyncRun ctags -R .<cr>
 " TODO: Figure out how to also plug in loading the cscope database
 nmap ,tg :AsyncRun gtags<cr>
 " run whatever defined makeprg

@@ -28,13 +28,20 @@ require('packer').startup(function(use)
   -- gcov syntax highlighting
   use 'hamsterjam/vim-gcovered'
   -- show and navigate marks
-  -- TODO: replace w/ chentoast/marks.nvim?
-  use 'kshenoy/vim-signature'
+  use({
+    'chentoast/marks.nvim',
+    config = function()
+      require('marks').setup({
+        default_mappings = true,
+        signs = true,
+        })
+    end,
+  })
   -- apply colors to different parentheses levels
   use 'junegunn/rainbow_parentheses.vim'
   -- view tag information for current file
-  -- TODO: replace w/ treesitter if possible?
-  use 'majutsushi/tagbar'
+  -- TODO: needs LSP
+  use 'simrat39/symbols-outline.nvim'
   -- nvim treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   -- gruvbox theme
@@ -63,9 +70,17 @@ require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
 
   -- editing
-  -- TODO: replace w/ Wansmer/treesj
   -- enhanced splitting and joining lines
-  use 'AndrewRadev/splitjoin.vim'
+  use({
+    'Wansmer/treesj',
+    requires = { 'nvim-treesitter' },
+    config = function()
+      require('treesj').setup({
+        use_default_keymaps = false,
+        dot_repeat = true
+        })
+    end,
+  })
   -- TODO: try hrsh7th/vim-vsnip
   -- snippet tool
   use 'joereynolds/vim-minisnip'
@@ -132,6 +147,8 @@ require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
+ 
+require("symbols-outline").setup()
 
 -- Set undo/backup/swap files to directory in home
 vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
@@ -333,7 +350,7 @@ map('n', '<leader>gh', '0Gclog<cr>')
 
 -- tagbar
 -- toggle pane of tags
-map('n', '<leader>T', ':TagbarToggle<cr>')
+map('n', '<leader>T', ':SymbolsOutline<cr>')
 
 -- hexmode
 -- toggle Hexmode
@@ -400,5 +417,8 @@ map('n', ',f', ':Finish<cr>')
 map('n', ',c', ':Continue<cr>')
 map('n', ',p', ':Evaluate<cr>')
 map('n', ',g', ':Gdb<cr>')
+
+-- split/join lines toggle
+map('n', '<leader>j', require('treesj').toggle)
 
 vim.cmd('source ~/.config/nvim/vim_init.vim')
