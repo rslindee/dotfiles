@@ -40,8 +40,44 @@ require('packer').startup(function(use)
   -- apply colors to different parentheses levels
   use 'junegunn/rainbow_parentheses.vim'
   -- view tag information for current file
-  -- TODO: needs LSP
-  use 'simrat39/symbols-outline.nvim'
+  use {
+    'simrat39/symbols-outline.nvim',
+    config = function()
+      require("symbols-outline").setup({
+        fold_markers = { '▶', '▼' },
+        symbols = {
+          File = { icon = "F", hl = "@text.uri" },
+          Module = { icon = "M", hl = "@namespace" },
+          Namespace = { icon = "n", hl = "@namespace" },
+          Package = { icon = "P", hl = "@namespace" },
+          Class = { icon = "C", hl = "@type" },
+          Method = { icon = "f", hl = "@method" },
+          Property = { icon = "p", hl = "@method" },
+          Field = { icon = "m", hl = "@field" },
+          Constructor = { icon = "C", hl = "@constructor" },
+          Enum = { icon = "e", hl = "@type" },
+          Interface = { icon = "i", hl = "@type" },
+          Function = { icon = "f", hl = "@function" },
+          Variable = { icon = "v", hl = "@constant" },
+          Constant = { icon = "c", hl = "@constant" },
+          String = { icon = "A", hl = "@string" },
+          Number = { icon = "#", hl = "@number" },
+          Boolean = { icon = "=", hl = "@boolean" },
+          Array = { icon = "a", hl = "@constant" },
+          Object = { icon = "O", hl = "@type" },
+          Key = { icon = "k", hl = "@type" },
+          Null = { icon = "NULL", hl = "@type" },
+          EnumMember = { icon = "e", hl = "@field" },
+          Struct = { icon = "S", hl = "@type" },
+          Event = { icon = "E", hl = "@type" },
+          Operator = { icon = "+", hl = "@operator" },
+          TypeParameter = { icon = "T", hl = "@parameter" },
+          Component = { icon = "C", hl = "@function" },
+          Fragment = { icon = "F", hl = "@constant" },
+        },
+      })
+    end
+  }
   -- nvim treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   -- gruvbox theme
@@ -147,7 +183,11 @@ require('packer').startup(function(use)
     require('packer').sync()
   end
 end)
- 
+-- Setup language servers.
+local lspconfig = require('lspconfig')
+require'lspconfig'.clangd.setup{}
+require'lspconfig'.pyright.setup{}
+
 require("symbols-outline").setup()
 
 -- Set undo/backup/swap files to directory in home
