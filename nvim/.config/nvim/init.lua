@@ -185,10 +185,28 @@ require('packer').startup(function(use)
 end)
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-require'lspconfig'.clangd.setup{}
+lspconfig.clangd.setup({
+  filetypes = { "c", "cpp" },
+  init_options = {
+    clangdFileStatus = false,
+    usePlaceholders = false,
+    completeUnimported = true,
+    semanticHighlighting = false,
+    showTodos = false,
+  },
+  handlers = {
+    ["textDocument/publishDiagnostics"] = vim.lsp.with(
+      vim.lsp.diagnostic.on_publish_diagnostics, {
+        underline = false,
+        virtual_text = false,
+        signs = false,
+        update_in_insert = false,
+      }
+    ),
+  },
+})
 require'lspconfig'.pyright.setup{}
 
-require("symbols-outline").setup()
 
 -- Set undo/backup/swap files to directory in home
 vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
