@@ -1,57 +1,3 @@
-" statusline config and helper functions
-function! StatuslineGit()
-  let l:branchname = FugitiveHead(7)
-  return strlen(l:branchname) > 0?'┃ ├'.l:branchname:''
-endfunction
-
-function! StatuslineModificationTime()
-  let ftime = getftime(expand('%'))
-  return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
-endfunction
-
-function! StatuslineWorkingDir()
-  let workingdir = fnamemodify(getcwd(), ':t')
-  return workingdir
-endfunction
-
-" clear statusline
-set statusline=
-" filename
-set statusline+=\ %f
-" modified or modifiable flag
-set statusline+=%m\ "
-" current vim working directory
-set statusline+=┃\ %{StatuslineWorkingDir()}\ "
-" git repo information
-set statusline+=%{StatuslineGit()}
-" start right justify and truncation point
-set statusline+=%=%<
-" line and col
-set statusline+=%l,%c\ "
-" percent location in file
-set statusline+=┃\ %P\ "
-" file modification date/time
-set statusline+=┃\ %{StatuslineModificationTime()}\ "
-
-set showcmd
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set external format tools based on filetype
-autocmd FileType c,cpp setlocal formatprg=clang-format\ --assume-filename=%
-autocmd FileType sh,bash setlocal makeprg=shellcheck\ -f\ gcc\ %
-
-" run formatprg, retab, and trim whitespace on entire buffer
-function! AutoformatCurrentFile()
-  let l:save = winsaveview()
-  keepjumps normal gggqG
-  retab
-  keeppatterns %s/\s\+$//e
-  call winrestview(l:save)
-endfunction
-
-nnoremap <leader>i :call AutoformatCurrentFile()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
@@ -65,8 +11,6 @@ nnoremap <leader>yf :let @+=expand("%:t")<CR>
 nnoremap <leader>yr :let @+=expand("%:p:.")<CR>
 " yank absolutely file path to clipboard
 nnoremap <leader>ya :let @+=expand("%:p")<CR>
-" all cscope results go to quickfix and not wonky number-driven list
-set cscopequickfix=s-,g-,d-,c-,t-,e-,f-,i-,a-
 
 " ripgrep, but include all hidden/ignored files
 command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
@@ -99,8 +43,6 @@ nmap <leader>mc :Make clean<cr>
 " generate ctags and gtags
 " TODO: replace with something more auto
 " nmap <leader>j :AsyncRun ctags -R .<cr>
-" TODO: Figure out how to also plug in loading the cscope database
-nmap ,tg :AsyncRun gtags<cr>
 " run whatever defined makeprg
 nmap <leader>ml :AsyncRun -program=make %<cr>
 " make asyncrun work with vim-fugitive
@@ -132,9 +74,6 @@ inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
 " use fd for FZF (which respects .gitignore)
 let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
-
-" update plugins
-nmap <leader>vu :PackerSync<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Last

@@ -84,15 +84,8 @@ require('packer').startup(function(use)
   use 'sainnhe/gruvbox-material'
   -- window pane resize mode
   use 'simeji/winresizer'
-  -- enhanced merge conflicts
-  use 'whiteinge/diffconflicts'
-  -- TODO: setup another diff conflict tool
-  --Plug 'nvim-lua/plenary.nvim'
-  --Plug 'sindrets/diffview.nvim'
   -- diff entire folders
   use 'will133/vim-dirdiff'
-  -- TODO try rhysd/git-messenger.vim
-  --
   -- version control
   -- view git information
   use {
@@ -246,6 +239,29 @@ vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
 -- Make clang config files show up as yaml
 vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
 
+-- statusline
+-- TODO: fix for gstatus showing stale time in other panes
+function StatuslineModificationTime()
+  if vim.bo.buftype ~= 'nofile' then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local ftime = vim.fn.getftime(vim.fn.bufname(bufnr))
+    return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
+  end
+  return ''
+end
+
+function my_statusline()
+  local branch = vim.fn.FugitiveHead()
+  local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+  if branch and #branch > 0 then
+    branch = ' ├ '..branch
+  end
+
+  return ' %f%m ┃ '..workingdir..' ┃ '..branch..'%=%<%l,%c ┃ %P ┃ '..StatuslineModificationTime()
+end
+
+vim.cmd[[ set statusline=%!luaeval('my_statusline()') ]]
+
 -- auto open quickfix when populated
 vim.cmd('autocmd QuickFixCmdPost * copen')
 
@@ -294,10 +310,21 @@ function map(mode, l, r, opts)
   vim.keymap.set(mode, l, r, opts)
 end
 
-require('gitsigns').setup {
-}
+-- TODO: get all gutters playing nice
+-- vim.o.signcolumn="auto:2"
 
-vim.o.signcolumn="auto:2"
+-- set external format tools based on filetype
+vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
+vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
+
+-- run formatprg, retab, and trim whitespace on entire buffer
+function AutoformatCurrentFile()
+  local save = vim.fn.winsaveview()
+  vim.cmd('keepjumps normal! gggqG')
+  vim.cmd('retab')
+  vim.cmd('keeppatterns %s/\\s\\+$//e')
+  vim.fn.winrestview(save)
+end
 
 vim.g.winresizer_start_key='<leader>W'
 
@@ -396,15 +423,15 @@ map('n', '<leader><leader>ss', '<plug>(SubversiveSubvertWordRange)')
 map('n', '<leader>k', ':DD <c-r><c-w><cr>')
 
 -- git push
-map('n', '<leader>gp', '<cmd>Gpush<cr>')
+map('n', '<leader>gp', ':Gpush<cr>')
 -- git commit
-map('n', '<leader>gc', '<cmd>Gcommit -v<cr>')
+map('n', '<leader>gc', ':Gcommit -v<cr>')
 -- write (essentially a write and git add)
-map('n', '<leader>gw', '<cmd>Gwrite<cr>')
+map('n', '<leader>gw', ':Gwrite<cr>')
 -- git diff of current file against HEAD
-map('n', '<leader>gd', '<cmd>Gvdiff<cr>')
+map('n', '<leader>gd', ':Gvdiff<cr>')
 -- open git browser with all commits touching current file in new tab
-map('n', '<leader>gh', '0Gclog<cr>')
+map('n', '<leader>gh', ':Gclog<cr>')
 
 -- tagbar
 -- toggle pane of tags
@@ -478,5 +505,11 @@ map('n', ',g', ':Gdb<cr>')
 
 -- split/join lines toggle
 map('n', '<leader>j', require('treesj').toggle)
+
+-- run formatter
+map('n', '<leader>i', ':call AutoformatCurrentFile()<cr>')
+
+-- update plugins
+map('n', '<leader>vu', ':PackerSync<cr>')
 
 vim.cmd('source ~/.config/nvim/vim_init.vim')

@@ -39,7 +39,7 @@
 [credential]
   helper = cache --timeout=3600
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
   conflictstyle = zdiff3
 [mergetool]
   keeptemporaries = false
