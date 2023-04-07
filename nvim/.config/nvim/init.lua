@@ -320,7 +320,7 @@ vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\
 -- run formatprg, retab, and trim whitespace on entire buffer
 function AutoformatCurrentFile()
   local save = vim.fn.winsaveview()
-  vim.cmd('keepjumps normal! gggqG')
+  vim.cmd('execute "keepjumps normal! gggqG"')
   vim.cmd('retab')
   vim.cmd('keeppatterns %s/\\s\\+$//e')
   vim.fn.winrestview(save)
@@ -507,7 +507,7 @@ map('n', ',g', ':Gdb<cr>')
 map('n', '<leader>j', require('treesj').toggle)
 
 -- run formatter
-map('n', '<leader>i', ':call AutoformatCurrentFile()<cr>')
+map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 
 -- update plugins
 map('n', '<leader>vu', ':PackerSync<cr>')
