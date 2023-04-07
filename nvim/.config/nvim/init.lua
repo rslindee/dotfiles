@@ -240,27 +240,52 @@ vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
 vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
 
 -- statusline
+
 -- TODO: fix for gstatus showing stale time in other panes
-function StatuslineModificationTime()
-  if vim.bo.buftype ~= 'nofile' then
-    local bufnr = vim.api.nvim_get_current_buf()
-    local ftime = vim.fn.getftime(vim.fn.bufname(bufnr))
-    return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
-  end
-  return ''
-end
+-- local file_modification_time = function()
+--   if vim.bo.buftype ~= 'nofile' then
+--     local bufnr = vim.api.nvim_get_current_buf()
+--     local ftime = vim.fn.getftime(vim.fn.bufname(bufnr))
+--     return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
+--   end
+--   return ''
+-- end
+--
+-- function my_statusline()
+--   local branch = vim.fn.git_branch()
+--   local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+--   if branch and #branch > 0 then
+--     branch = ' ├ '..branch
+--   end
+--
+--   return ' %f%m ┃ '..workingdir..' ┃ '..branch..'%=%<%l,%c ┃ %P ┃ '..StatuslineModificationTime()
+-- end
+--
+-- local working_dir = function()
+--   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+-- end
+--
+-- local git_branch = function()
+--     if vim.g.loaded_fugitive then
+--         local branch = vim.fn.FugitiveHead()
+--         if branch ~= '' then return branch end
+--     end
+--     return ''
+-- end
+-- function status_line()
+--     return table.concat {
+--         "├ " .. git_branch(), -- branch name
+--         " ┃ " .. working_dir(),
+--         " ┃ %f%m ", -- spacing
+--         "%=%<%l,%c ┃ %P ┃ ",
+--         file_modification_time()
+--     }
+-- end
 
-function my_statusline()
-  local branch = vim.fn.FugitiveHead()
-  local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-  if branch and #branch > 0 then
-    branch = ' ├ '..branch
-  end
-
-  return ' %f%m ┃ '..workingdir..' ┃ '..branch..'%=%<%l,%c ┃ %P ┃ '..StatuslineModificationTime()
-end
-
-vim.cmd[[ set statusline=%!luaeval('my_statusline()') ]]
+--vim.cmd[[ set statusline=%!luaeval('my_statusline()') ]]
+--vim.opt.statusline = %{luaeval('my_statusline()')}
+-- TODO: latest
+--vim.opt.statusline = "%!v:lua.status_line()"
 
 -- auto open quickfix when populated
 vim.cmd('autocmd QuickFixCmdPost * copen')
@@ -391,6 +416,10 @@ map('n', '<leader>c', ':tabnew<cr>')
 -- quickfix shortcuts
 map('n', '<c-n>', ':cn<cr>')
 map('n', '<c-p>', ':cp<cr>')
+
+-- wrapped movement
+map('n', 'j', 'gj')
+map('n', 'k', 'gk')
 
 -- quick-map tabs
 map('n', '<leader>1', '1gt')
