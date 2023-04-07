@@ -55,10 +55,6 @@ map <leader>H :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-signature
-" highlight colors marks based on gitgutter status
-let g:SignatureMarkTextHLDynamic = 1
-
 " asyncrun
 " stop asyncrun, redraw, and disable highlighting
 nmap <leader><esc> :AsyncStop<cr>:redraw!<cr>:noh<cr>
