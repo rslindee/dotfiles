@@ -339,6 +339,7 @@ end
 -- vim.o.signcolumn="auto:2"
 
 -- set external format tools based on filetype
+-- TODO: move these to ftplugin dirs
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
 vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
 
@@ -346,8 +347,8 @@ vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\
 function AutoformatCurrentFile()
   local save = vim.fn.winsaveview()
   vim.cmd('execute "keepjumps normal! gggqG"')
-  vim.cmd('retab')
-  vim.cmd('keeppatterns %s/\\s\\+$//e')
+  --vim.cmd('retab')
+  --vim.cmd('keeppatterns %s/\\s\\+$//e')
   vim.fn.winrestview(save)
 end
 
