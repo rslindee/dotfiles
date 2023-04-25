@@ -40,44 +40,51 @@ require('packer').startup(function(use)
   -- apply colors to different parentheses levels
   use 'junegunn/rainbow_parentheses.vim'
   -- view tag information for current file
-  use {
-    'simrat39/symbols-outline.nvim',
+  -- use {
+  --   'simrat39/symbols-outline.nvim',
+  --   config = function()
+  --     require("symbols-outline").setup({
+  --       fold_markers = { '▶', '▼' },
+  --       symbols = {
+  --         File = { icon = "F", hl = "@text.uri" },
+  --         Module = { icon = "M", hl = "@namespace" },
+  --         Namespace = { icon = "n", hl = "@namespace" },
+  --         Package = { icon = "P", hl = "@namespace" },
+  --         Class = { icon = "C", hl = "@type" },
+  --         Method = { icon = "f", hl = "@method" },
+  --         Property = { icon = "p", hl = "@method" },
+  --         Field = { icon = "m", hl = "@field" },
+  --         Constructor = { icon = "C", hl = "@constructor" },
+  --         Enum = { icon = "e", hl = "@type" },
+  --         Interface = { icon = "i", hl = "@type" },
+  --         Function = { icon = "f", hl = "@function" },
+  --         Variable = { icon = "v", hl = "@constant" },
+  --         Constant = { icon = "c", hl = "@constant" },
+  --         String = { icon = "A", hl = "@string" },
+  --         Number = { icon = "#", hl = "@number" },
+  --         Boolean = { icon = "=", hl = "@boolean" },
+  --         Array = { icon = "a", hl = "@constant" },
+  --         Object = { icon = "O", hl = "@type" },
+  --         Key = { icon = "k", hl = "@type" },
+  --         Null = { icon = "NULL", hl = "@type" },
+  --         EnumMember = { icon = "e", hl = "@field" },
+  --         Struct = { icon = "S", hl = "@type" },
+  --         Event = { icon = "E", hl = "@type" },
+  --         Operator = { icon = "+", hl = "@operator" },
+  --         TypeParameter = { icon = "T", hl = "@parameter" },
+  --         Component = { icon = "C", hl = "@function" },
+  --         Fragment = { icon = "F", hl = "@constant" },
+  --       },
+  --     })
+  --   end
+  -- }
+  -- outline of code
+  use({
+    'stevearc/aerial.nvim',
     config = function()
-      require("symbols-outline").setup({
-        fold_markers = { '▶', '▼' },
-        symbols = {
-          File = { icon = "F", hl = "@text.uri" },
-          Module = { icon = "M", hl = "@namespace" },
-          Namespace = { icon = "n", hl = "@namespace" },
-          Package = { icon = "P", hl = "@namespace" },
-          Class = { icon = "C", hl = "@type" },
-          Method = { icon = "f", hl = "@method" },
-          Property = { icon = "p", hl = "@method" },
-          Field = { icon = "m", hl = "@field" },
-          Constructor = { icon = "C", hl = "@constructor" },
-          Enum = { icon = "e", hl = "@type" },
-          Interface = { icon = "i", hl = "@type" },
-          Function = { icon = "f", hl = "@function" },
-          Variable = { icon = "v", hl = "@constant" },
-          Constant = { icon = "c", hl = "@constant" },
-          String = { icon = "A", hl = "@string" },
-          Number = { icon = "#", hl = "@number" },
-          Boolean = { icon = "=", hl = "@boolean" },
-          Array = { icon = "a", hl = "@constant" },
-          Object = { icon = "O", hl = "@type" },
-          Key = { icon = "k", hl = "@type" },
-          Null = { icon = "NULL", hl = "@type" },
-          EnumMember = { icon = "e", hl = "@field" },
-          Struct = { icon = "S", hl = "@type" },
-          Event = { icon = "E", hl = "@type" },
-          Operator = { icon = "+", hl = "@operator" },
-          TypeParameter = { icon = "T", hl = "@parameter" },
-          Component = { icon = "C", hl = "@function" },
-          Fragment = { icon = "F", hl = "@constant" },
-        },
-      })
-    end
-  }
+      require('aerial').setup()
+    end,
+  })
   -- nvim treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   -- gruvbox theme
@@ -200,6 +207,8 @@ lspconfig.clangd.setup({
 })
 require'lspconfig'.pyright.setup{}
 
+-- load local rc files
+vim.o.exrc = true
 
 -- Set undo/backup/swap files to directory in home
 vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
@@ -343,12 +352,13 @@ end
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
 vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
 
+-- TODO: this is problematic, as it seems to not work with uncrustify after loading a 2nd buffer
 -- run formatprg, retab, and trim whitespace on entire buffer
 function AutoformatCurrentFile()
   local save = vim.fn.winsaveview()
   vim.cmd('execute "keepjumps normal! gggqG"')
-  --vim.cmd('retab')
-  --vim.cmd('keeppatterns %s/\\s\\+$//e')
+  -- vim.cmd('retab')
+  -- vim.cmd('keeppatterns %s/\\s\\+$//e')
   vim.fn.winrestview(save)
 end
 
@@ -373,7 +383,6 @@ map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
 map('n', '<leader>hR', ':Gitsigns reset_buffer<CR>')
 map('n', '<leader>hp', ':Gitsigns preview_hunk<CR>')
 map('n', '<leader>hb', ':Gitsigns blame_line<CR>')
-map('n', '<leader>tb', ':Gitsigns toggle_current_line_blame<CR>')
 map('n', '<leader>hd', ':Gitsigns diffthis<CR>')
 map('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
 
@@ -463,9 +472,10 @@ map('n', '<leader>gd', ':Gvdiff<cr>')
 -- open git browser with all commits touching current file in new tab
 map('n', '<leader>gh', ':Gclog<cr>')
 
--- tagbar
 -- toggle pane of tags
-map('n', '<leader>T', ':SymbolsOutline<cr>')
+-- map('n', '<leader>T', ':SymbolsOutline<cr>')
+-- You probably also want to set a keymap to toggle aerial
+map('n', '<leader>tt', '<cmd>AerialToggle!<CR>')
 
 -- hexmode
 -- toggle Hexmode
@@ -541,5 +551,9 @@ map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 
 -- update plugins
 map('n', '<leader>vu', ':PackerSync<cr>')
+
+-- lsp binds
+map('n', 'gd', vim.lsp.buf.definition)
+map('n', 'gi', vim.lsp.buf.implementation)
 
 vim.cmd('source ~/.config/nvim/vim_init.vim')
