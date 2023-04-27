@@ -72,17 +72,26 @@ bar:
                 - string: {text: "{app-id}", foreground: ffa0a0ff}
                 - string: {text: ": {title}"}
   right:
+    # thinkpad ethernet
     - network:
         name: enp0s31f6
         content:
           map:
             conditions:
-              ~carrier: {string: {text: "[eth:▼]"}}
               carrier:
                 map:
                   conditions:
                     state == up && ipv4 != "": {string: {text: "[eth:▲]"}}
-
+    # dell laptop ethernet
+    - network:
+        name: enp12s0
+        content:
+          map:
+            conditions:
+              carrier:
+                map:
+                  conditions:
+                    state == up && ipv4 != "": {string: {text: "[eth:▲]"}}
     - network:
         name: wlan0
         poll-interval: 1000
