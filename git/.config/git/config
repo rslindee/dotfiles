@@ -23,6 +23,7 @@
   ps = push --set-upstream
   re = reset --hard HEAD
   ri = rebase --interactive
+  ss = show --name-only
   st = status --short
   su = submodule update --init --recursive
   un = reset HEAD~
