@@ -117,29 +117,16 @@ alias reb='sudo reboot'
 
 alias shu='sudo shutdown now'
 
-# Show weather
-wttr()
-{
-  curl "wttr.in/$1";
-}
-wttr-map()
-{
-  mpv "https://radar.weather.gov/lite/N0R/SOX_loop.gif" --osd-level=0 --no-osc
-}
-
 # Show available space of /mnt
 alias dfa='df -h /mnt/*'
+
+# Map vim to nvim
+alias vim='nvim'
 
 # Quick open with xdg-open
 o()
 {
   nohup xdg-open "$*" > /dev/null 2>&1 &
-}
-
-# Use vim as manpager
-viman()
-{
-  $EDITOR -c "Man $1 $2" -c 'silent only'
 }
 
 mkcd()
