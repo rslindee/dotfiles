@@ -185,7 +185,8 @@ require('packer').startup(function(use)
 end)
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-lspconfig.clangd.setup({
+lspconfig.pyright.setup {}
+lspconfig.clangd.setup{
   filetypes = { "c", "cpp" },
   init_options = {
     clangdFileStatus = false,
@@ -204,9 +205,7 @@ lspconfig.clangd.setup({
       }
     ),
   },
-})
-require'lspconfig'.pyright.setup{}
-
+}
 -- load local rc files
 vim.o.exrc = true
 
@@ -491,10 +490,6 @@ map('i', '<c-d>', '<del>', {silent = true})
 map('c', '<c-j>', '<down>', {silent = true})
 map('c', '<c-k>', '<up>', {silent = true})
 
--- yank/delete entire C-style functions
-map('', '<leader>Y', 'Vf{%d', {silent = true})
-map('', '<leader>D', 'Vf{%y', {silent = true})
-
 -- open index in personal wiki
 map('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {silent = true})
 
@@ -552,8 +547,26 @@ map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 -- update plugins
 map('n', '<leader>vu', ':PackerSync<cr>')
 
--- lsp binds
-map('n', 'gd', vim.lsp.buf.definition)
-map('n', 'gi', vim.lsp.buf.implementation)
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('UserLspConfig', {}),
+  callback = function(ev)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+    -- Buffer local mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    local opts = { buffer = ev.buf }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+    vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
+    vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename)
+    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references)
+  end,
+})
 
 vim.cmd('source ~/.config/nvim/vim_init.vim')
