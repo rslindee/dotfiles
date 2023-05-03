@@ -21,7 +21,7 @@ local packer_bootstrap = ensure_packer()
 -- Plugins
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  -- My plugins here
+  -- plantuml syntax highlighting
   use 'aklt/plantuml-syntax'
   -- colorize values
   use 'chrisbra/Colorizer'
@@ -37,47 +37,6 @@ require('packer').startup(function(use)
         })
     end,
   })
-  -- apply colors to different parentheses levels
-  use 'junegunn/rainbow_parentheses.vim'
-  -- view tag information for current file
-  -- use {
-  --   'simrat39/symbols-outline.nvim',
-  --   config = function()
-  --     require("symbols-outline").setup({
-  --       fold_markers = { '▶', '▼' },
-  --       symbols = {
-  --         File = { icon = "F", hl = "@text.uri" },
-  --         Module = { icon = "M", hl = "@namespace" },
-  --         Namespace = { icon = "n", hl = "@namespace" },
-  --         Package = { icon = "P", hl = "@namespace" },
-  --         Class = { icon = "C", hl = "@type" },
-  --         Method = { icon = "f", hl = "@method" },
-  --         Property = { icon = "p", hl = "@method" },
-  --         Field = { icon = "m", hl = "@field" },
-  --         Constructor = { icon = "C", hl = "@constructor" },
-  --         Enum = { icon = "e", hl = "@type" },
-  --         Interface = { icon = "i", hl = "@type" },
-  --         Function = { icon = "f", hl = "@function" },
-  --         Variable = { icon = "v", hl = "@constant" },
-  --         Constant = { icon = "c", hl = "@constant" },
-  --         String = { icon = "A", hl = "@string" },
-  --         Number = { icon = "#", hl = "@number" },
-  --         Boolean = { icon = "=", hl = "@boolean" },
-  --         Array = { icon = "a", hl = "@constant" },
-  --         Object = { icon = "O", hl = "@type" },
-  --         Key = { icon = "k", hl = "@type" },
-  --         Null = { icon = "NULL", hl = "@type" },
-  --         EnumMember = { icon = "e", hl = "@field" },
-  --         Struct = { icon = "S", hl = "@type" },
-  --         Event = { icon = "E", hl = "@type" },
-  --         Operator = { icon = "+", hl = "@operator" },
-  --         TypeParameter = { icon = "T", hl = "@parameter" },
-  --         Component = { icon = "C", hl = "@function" },
-  --         Fragment = { icon = "F", hl = "@constant" },
-  --       },
-  --     })
-  --   end
-  -- }
   -- outline of code
   use({
     'stevearc/aerial.nvim',
@@ -91,8 +50,6 @@ require('packer').startup(function(use)
   use 'sainnhe/gruvbox-material'
   -- window pane resize mode
   use 'simeji/winresizer'
-  -- diff entire folders
-  use 'will133/vim-dirdiff'
   -- version control
   -- view git information
   use {
@@ -172,8 +129,6 @@ require('packer').startup(function(use)
   use 'tpope/vim-unimpaired'
   -- auto generate doxygen documentation
   use 'vim-scripts/DoxygenToolkit.vim'
-  -- vim manpager
-  use 'vim-utils/vim-man'
   -- lsp plugins
   use 'neovim/nvim-lspconfig'
 
@@ -552,6 +507,8 @@ map('n', '<leader>vu', ':PackerSync<cr>')
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('UserLspConfig', {}),
   callback = function(ev)
+    -- disable LSP formatting when using the |gq| command
+    vim.bo[ev.buf].formatexpr = nil
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
