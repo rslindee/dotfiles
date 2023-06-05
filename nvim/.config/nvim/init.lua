@@ -457,10 +457,6 @@ map('x', 'ga', '<Plug>(EasyAlign)')
 -- start interactive EasyAlign for a motion/text object (e.g. gaip)
 map('n', 'ga', '<Plug>(EasyAlign)')
 
--- rainbow_parentheses.vim
--- toggle rainbow parentheses
-map('n', '<leader>P', ':RainbowParentheses!!<cr>')
-
 -- replace in quickfix list what word the cursor is currently on
 map('n', '<leader>R', ':cdo %s/<C-r><C-w>//gc<Left><Left><Left>')
 
@@ -479,7 +475,6 @@ map('n', '<leader>ag', ':GFiles?<cr>')
 map('n', '<leader>at', ':Tags<cr>')
 -- start fzf-piped Rg search
 map('n', '<leader>af', ':Rg<Space>')
-
 
 -- debugging
 map('n', ',b', ':Break<cr>')
@@ -525,5 +520,4 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references)
   end,
 })
-
 vim.cmd('source ~/.config/nvim/vim_init.vim')
