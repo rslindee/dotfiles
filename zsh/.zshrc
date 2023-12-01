@@ -39,6 +39,8 @@ elif [ "$DISTRO" = "Arch Linux" ]; then
   PATH="/usr/share/git/diff-highlight${PATH:+:${PATH}}"
 fi
 
+export XDG_CACHE_HOME=~/.cache
+
 # Set editors to nvim
 export VISUAL=nvim
 
@@ -224,7 +226,7 @@ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*' format ' %F{yellow}-- %d --%f'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 # directories
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
