@@ -19,6 +19,8 @@ ALL_PACKAGES="alsa-utils \
     entr \
     exfat-utils \
     ffmpeg \
+    foot \
+    foot-terminfo \
     fontconfig \
     fuzzel \
     fzf \
