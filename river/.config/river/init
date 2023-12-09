@@ -29,8 +29,8 @@ riverctl map normal Super Q close
 # exit river
 riverctl map normal Super+Shift Q exit
 
-# lock screen
-riverctl map normal Super BackSpace spawn 'swaylock --color 000000'
+# Immediately trigger swayidle timeout (lock and turn off monitor)
+riverctl map normal Super BackSpace spawn 'wlopm --off \"*\" && sleep 0.5 && killall -SIGUSR1 swayidle'
 
 # screenshot to clipboard
 riverctl map normal Super S spawn 'grim -g "$(slurp -d)" - | wl-copy'
@@ -142,10 +142,10 @@ riverctl keyboard-layout -options "caps:ctrl_modifier,altwin:prtsc_rwin" "us"
 
 riverctl focus-follows-cursor always
 
-# screen idle and lock
+# screen idle and lock. sleep on resume is for handling kvm switch "delay"
 exec_once "swayidle -w \
     timeout 300 'wlopm --off \"*\"' \
-    resume 'wlopm --on \"*\"' \
+    resume 'sleep 0.5 && wlopm --on \"*\"' \
     timeout 310 'swaylock -f -c 000000' \
     before-sleep 'swaylock -f -c 000000'"
 
