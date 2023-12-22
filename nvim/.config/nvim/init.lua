@@ -1,14 +1,16 @@
--- Install packer if needed
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- lazy.nvim bootstrap
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
 -- maps leader to space
 vim.g.mapleader = " "
@@ -16,19 +18,16 @@ vim.api.nvim_set_keymap('n', '<space>', '<nop>', { noremap = true, silent = true
 vim.api.nvim_set_keymap('n', '<leader>', '<space>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('x', '<leader>', '<space>', { noremap = true, silent = true })
 
-local packer_bootstrap = ensure_packer()
-
 -- Plugins
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+require("lazy").setup({
   -- plantuml syntax highlighting
-  use 'aklt/plantuml-syntax'
+  "aklt/plantuml-syntax",
   -- colorize values
-  use 'chrisbra/Colorizer'
+  "chrisbra/Colorizer",
   -- gcov syntax highlighting
-  use 'hamsterjam/vim-gcovered'
+  "hamsterjam/vim-gcovered",
   -- show and navigate marks
-  use({
+  {
     'chentoast/marks.nvim',
     config = function()
       require('marks').setup({
@@ -36,108 +35,109 @@ require('packer').startup(function(use)
         signs = true,
         })
     end,
-  })
+  },
   -- outline of code
-  use({
+  {
     'stevearc/aerial.nvim',
     config = function()
       require('aerial').setup()
     end,
-  })
+  },
   -- nvim treesitter
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   -- gruvbox theme
-  use 'sainnhe/gruvbox-material'
+  'sainnhe/gruvbox-material',
   -- window pane resize mode
-  use 'simeji/winresizer'
+  'simeji/winresizer',
   -- version control
   -- view git information
-  use {
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
     end
-  }
+  },
 
   -- run git commands, view status
-  use 'tpope/vim-fugitive'
+  'tpope/vim-fugitive',
 
   -- editing
   -- enhanced splitting and joining lines
-  use({
+  {
     'Wansmer/treesj',
-    requires = { 'nvim-treesitter' },
+    dependencies = { 'nvim-treesitter' },
     config = function()
       require('treesj').setup({
         use_default_keymaps = false,
         dot_repeat = true
         })
     end,
-  })
+  },
   -- TODO: try hrsh7th/vim-vsnip
   -- snippet tool
-  use 'joereynolds/vim-minisnip'
+  'joereynolds/vim-minisnip',
   -- align blocks of text
-  use 'junegunn/vim-easy-align'
+  'junegunn/vim-easy-align',
   -- add/change/delete surrounding char pairs
-  use({
+  {
       "kylechui/nvim-surround",
-      tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+      version = "*", -- Use for stability; omit to use `main` branch for the latest features
       config = function()
           require("nvim-surround").setup({
               -- Configuration here, or leave empty to use defaults
           })
       end
-  })
+  },
   -- reorder delimited items
-  use 'machakann/vim-swap'
+  'machakann/vim-swap',
   -- enhanced replace/substitution
-  use 'svermeulen/vim-subversive'
+  'svermeulen/vim-subversive',
   -- swap text using motions
-  use 'tommcdo/vim-exchange'
+  'tommcdo/vim-exchange',
   -- advanced substitution
-  use 'tpope/vim-abolish'
+  'tpope/vim-abolish',
   -- comments
-  use {
+{
     'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
-  }
+    opts = {
+        -- add any options here
+    },
+    lazy = false,
+},
   -- repeat support for various plugins
-  use 'tpope/vim-repeat'
+  'tpope/vim-repeat',
   -- enhanced time/date editing
-  use 'tpope/vim-speeddating'
+  'tpope/vim-speeddating',
 
   -- searching
-  -- TODO try fzf-lua
   -- hooks for fzf
-  use 'junegunn/fzf.vim'
+  {
+  'ibhagwan/fzf-lua',
+    config = function()
+        require("fzf-lua").setup({})
+    end
+  },
 
   -- other
   -- view/edit hex data
-  use 'fidian/hexmode'
+  'fidian/hexmode',
   -- opens term or file manager of current file
-  use 'justinmk/vim-gtfo'
+  'justinmk/vim-gtfo',
   -- open dev docs site for current word
-  use 'romainl/vim-devdocs'
+  'romainl/vim-devdocs',
   -- call commands async
-  use 'skywind3000/asyncrun.vim'
+  'skywind3000/asyncrun.vim',
   -- enhanced tmux support/commands
-  use 'tpope/vim-tbone'
+  'tpope/vim-tbone',
   -- extra keymaps
-  use 'tpope/vim-unimpaired'
+  'tpope/vim-unimpaired',
   -- auto generate doxygen documentation
-  use 'vim-scripts/DoxygenToolkit.vim'
+  'vim-scripts/DoxygenToolkit.vim',
   -- lsp plugins
-  use 'neovim/nvim-lspconfig'
+  'neovim/nvim-lspconfig'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+})
+
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 lspconfig.pyright.setup {}
@@ -153,10 +153,11 @@ lspconfig.clangd.setup{
   handlers = {
     ["textDocument/publishDiagnostics"] = vim.lsp.with(
       vim.lsp.diagnostic.on_publish_diagnostics, {
-        underline = false,
-        virtual_text = false,
-        signs = false,
-        update_in_insert = false,
+         -- Enable underline, use default values
+        underline = true,
+         -- Enable virtual text
+        virtual_text = true,
+        signs = true
       }
     ),
   },
@@ -298,8 +299,8 @@ function map(mode, l, r, opts)
   vim.keymap.set(mode, l, r, opts)
 end
 
--- TODO: get all gutters playing nice
--- vim.o.signcolumn="auto:2"
+-- maximum 2 signs in signcolumn
+vim.opt.signcolumn="auto:2"
 
 -- set external format tools based on filetype
 -- TODO: move these to ftplugin dirs
@@ -343,7 +344,7 @@ map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "help", "query" },
+  ensure_installed = { "c", "lua", "vim", "query" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -460,19 +461,21 @@ map('n', '<leader>R', ':cdo %s/<C-r><C-w>//gc<Left><Left><Left>')
 
 -- fzf.vim
 -- open fzf for all files
-map('n', '<leader>o', ':Files<cr>')
+map('n', '<leader>o', ':FzfLua files<cr>')
 -- open fzf for all buffers
-map('n', '<leader>ao', ':Buffers<cr>')
+map('n', '<leader>ao', ':FzfLua buffers<cr>')
 -- open fzf of lines in all buffers
-map('n', '<leader>as', ':Lines<cr>')
+map('n', '<leader>as', ':FzfLua lines<cr>')
 -- open fzf of lines in current buffer
-map('n', '<leader>aa', ':BLines<cr>')
+map('n', '<leader>aa', ':FzfLua blines<cr>')
 -- open fzf of modified files tracked by git
-map('n', '<leader>ag', ':GFiles?<cr>')
+map('n', '<leader>ag', ':FzfLua git_files<cr>')
 -- open fzf of ctags
-map('n', '<leader>at', ':Tags<cr>')
+map('n', '<leader>at', ':FzfLua tags<cr>')
 -- start fzf-piped Rg search
-map('n', '<leader>af', ':Rg<Space>')
+map('n', '<leader>af', ':FzfLua grep<cr>')
+-- start fzf-piped live Rg search
+map('n', '<leader>al', ':FzfLua live_grep<cr>')
 
 -- debugging
 map('n', ',b', ':Break<cr>')
@@ -493,7 +496,8 @@ map('n', '<leader>j', require('treesj').toggle)
 map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 
 -- update plugins
-map('n', '<leader>vu', ':PackerSync<cr>')
+-- TODO: update for lazy.nvim
+map('n', '<leader>vu', ':Lazy sync<cr>')
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -518,4 +522,40 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references)
   end,
 })
+
+
+--show a sign for the highest severity diagnostic on a given line:
+-- Create a custom namespace. This will aggregate signs from all other
+-- namespaces and only show the one with the highest severity on a
+-- given line
+local ns = vim.api.nvim_create_namespace("my_namespace")
+
+-- Get a reference to the original signs handler
+local orig_signs_handler = vim.diagnostic.handlers.signs
+
+-- Override the built-in signs handler
+vim.diagnostic.handlers.signs = {
+  show = function(_, bufnr, _, opts)
+    -- Get all diagnostics from the whole buffer rather than just the
+    -- diagnostics passed to the handler
+    local diagnostics = vim.diagnostic.get(bufnr)
+
+    -- Find the "worst" diagnostic per line
+    local max_severity_per_line = {}
+    for _, d in pairs(diagnostics) do
+      local m = max_severity_per_line[d.lnum]
+      if not m or d.severity < m.severity then
+        max_severity_per_line[d.lnum] = d
+      end
+    end
+
+    -- Pass the filtered diagnostics (with our custom namespace) to
+    -- the original handler
+    local filtered_diagnostics = vim.tbl_values(max_severity_per_line)
+    orig_signs_handler.show(ns, bufnr, filtered_diagnostics, opts)
+  end,
+  hide = function(_, bufnr)
+    orig_signs_handler.hide(ns, bufnr)
+  end,
+}
 vim.cmd('source ~/.config/nvim/vim_init.vim')

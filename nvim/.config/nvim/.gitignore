@@ -4,3 +4,4 @@ pack/*
 .undo/*
 plugin/
 viminfo
+lazy-lock.json
