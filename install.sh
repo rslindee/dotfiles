@@ -63,12 +63,12 @@ ALL_PACKAGES="alsa-utils \
     notmuch-mutt \
     oathtool \
     p7zip \
+    pamixer \
     pass \
     pass-otp \
     pavucontrol \
     power-profiles-daemon \
     python \
-    python-language-server \
     pv \
     ripgrep \
     rsync \
@@ -103,7 +103,7 @@ ALL_PACKAGES="alsa-utils \
     zip \
     zsh"
 
-PACKAGES_FEDORA="chromium-libs-media-freeworld \
+PACKAGES_FEDORA="
     fd-find \
     git-clang-format \
     NetworkManager-tui \
@@ -168,9 +168,9 @@ if [ -f /etc/os-release ]; then
 fi
 
 # Setup package manager
-if [ "$OS" = "Fedora" ]; then
+if [ "$OS" = "Fedora Linux" ]; then
     echo "Fedora system detected..."
-    PACKAGE_MANAGER_INSTALL="sudo dnf install"
+    PACKAGE_MANAGER_INSTALL="sudo dnf install --allowerasing"
     # Setup RPM Fusion
     sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     # Create package list
@@ -189,11 +189,11 @@ elif [ "$OS" = "Arch Linux" ]; then
 fi
 
 # Install packages
-$PACKAGE_MANAGER_INSTALL $ALL_PACKAGES
+$PACKAGE_MANAGER_INSTALL $ALL_PACKAGES 
 
 # Stow dotfiles
-cd "$HOME/dotfiles"
-stow -R "$STOW_LIST"
+#cd "$HOME/dotfiles"
+#stow -R "$STOW_LIST"
 
 # Clone private repos if they don't already exist
 if [ ! -d "$HOME/wiki" ]; then
