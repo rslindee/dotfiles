@@ -496,8 +496,13 @@ map('n', '<leader>j', require('treesj').toggle)
 map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 
 -- update plugins
--- TODO: update for lazy.nvim
 map('n', '<leader>vu', ':Lazy sync<cr>')
+
+-- vim-fugitive
+-- blame
+map('n', '<leader>gb', ':Git blame<cr>')
+-- status
+map('n', '<leader>gs', ':Git <cr>')
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -520,9 +525,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
     vim.keymap.set('n', '<leader>ln', vim.lsp.buf.rename)
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.references)
+    -- perform suggested fix
+    vim.keymap.set('n', '<leader>lf', vim.lsp.buf.code_action)
+    vim.keymap.set('n', '<leader>lh', ':ClangdSwitchSourceHeader<cr>')
   end,
 })
-
 
 --show a sign for the highest severity diagnostic on a given line:
 -- Create a custom namespace. This will aggregate signs from all other

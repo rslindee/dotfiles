@@ -49,9 +49,6 @@ nnoremap <leader>ya :let @+=expand("%:p")<CR>
 " ripgrep, but include all hidden/ignored files
 command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
 
-" open corresponding .h file of current .c file and vice-versa
-map <leader>H :e %:p:s,.h$,.X1X,:s,.c$,.h,:s,.X1X$,.c,<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugin configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -70,26 +67,11 @@ nmap <leader>mr :make<up><cr>
 nmap <leader>mm :silent make!<cr>:redraw!<cr>
 " async make clean
 nmap <leader>mc :Make clean<cr>
-" generate ctags and gtags
-" TODO: replace with something more auto
-" nmap <leader>j :AsyncRun ctags -R .<cr>
 " run whatever defined makeprg
 nmap <leader>ml :AsyncRun -program=make %<cr>
 " make asyncrun work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
 
-" vim-fugitive
-" toggle git blame
-nmap <leader>gb :Git blame<cr>
-" git status toggle function
-function! ToggleGStatus()
-  if buflisted(bufname('.git/index'))
-    bd .git/index
-  else
-    Git
-  endif
-endfunction
-nmap <leader>gs :call ToggleGStatus()<cr>
 " vim-qf
 " disable wrapping in quickfix
 let g:qf_nowrap = 0
