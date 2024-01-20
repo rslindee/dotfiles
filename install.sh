@@ -25,7 +25,6 @@ ALL_PACKAGES="alsa-utils \
     fuzzel \
     fzf \
     gimp \
-    git-delta \
     grim \
     gnupg \
     gnuplot \
