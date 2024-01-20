@@ -47,8 +47,6 @@ require("lazy").setup({
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
   -- gruvbox theme
   'sainnhe/gruvbox-material',
-  -- window pane resize mode
-  'simeji/winresizer',
   -- version control
   -- view git information
   {
@@ -314,8 +312,6 @@ function AutoformatCurrentFile()
   vim.cmd('execute "keepjumps normal! gggqG"')
   vim.fn.winrestview(save)
 end
-
-vim.g.winresizer_start_key='<leader>W'
 
 -- Gitsigns Navigation
 map('n', ']c', function()

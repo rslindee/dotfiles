@@ -80,9 +80,3 @@ nmap <leader>Q <Plug>QfLtoggle
 " toggle quickfix list
 nmap <leader>q <Plug>QfCtoggle
 
-" use fzf for path completion
-inoremap <expr> <c-x><c-f> fzf#vim#complete#path('fd')
-
-" use fd for FZF (which respects .gitignore)
-let $FZF_DEFAULT_COMMAND = 'fd --type f --color=never'
-let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 1 } }
