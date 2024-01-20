@@ -58,6 +58,8 @@ require("lazy").setup({
 
   -- run git commands, view status
   'tpope/vim-fugitive',
+  -- managing window splits
+  'mrjones2014/smart-splits.nvim',
 
   -- editing
   -- enhanced splitting and joining lines
@@ -445,6 +447,9 @@ map('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {silent = true
 
 -- change current window directory to current file
 map('n', '<leader>wc', ':lcd %:p:h<cr>', {silent = true})
+
+-- Enter window resize mode
+map('n', '<leader>W', ':SmartResizeMode<cr>')
 
 -- vim-easy-align
 -- start interactive EasyAlign in visual mode (e.g. vipga)
