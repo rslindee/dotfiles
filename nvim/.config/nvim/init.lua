@@ -408,6 +408,16 @@ map('n', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
 map('x', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
 map('n', '<leader><leader>ss', '<plug>(SubversiveSubvertWordRange)')
 
+-- De-dupe and sort visual selection
+map('v', '<leader>ds', ':\'<,\'>sort u<cr>')
+
+-- yank filename to clipboard
+map('n', '<leader>yf', ':let @+=expand("%:t")<CR>')
+-- yank file path relative to current vim dir to clipboard
+map('n', '<leader>yr', ':let @+=expand("%:p:.")<CR>')
+-- yank absolute file path to clipboard
+map('n', '<leader>ya', ':let @+=expand("%:p")<CR>')
+
 -- vim-devdocs
 -- look up current word cursor is on in devdocs.io
 map('n', '<leader>k', ':DD <c-r><c-w><cr>')

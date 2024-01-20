@@ -36,15 +36,6 @@ set statusline+=┃\ %{StatuslineModificationTime()}\ "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" De-dupe and sort visual selection
-vnoremap <leader>ds :'<,'>sort u<cr>
-
-" yank filename to clipboard
-nnoremap <leader>yf :let @+=expand("%:t")<CR>
-" yank file path relative to current vim dir to clipboard
-nnoremap <leader>yr :let @+=expand("%:p:.")<CR>
-" yank absolutely file path to clipboard
-nnoremap <leader>ya :let @+=expand("%:p")<CR>
 
 " ripgrep, but include all hidden/ignored files
 command! -nargs=+ GrepAll execute 'silent grep! <args> -uu' | execute ':redraw!'
