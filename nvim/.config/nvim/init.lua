@@ -134,7 +134,14 @@ require("lazy").setup({
   -- auto generate doxygen documentation
   'vim-scripts/DoxygenToolkit.vim',
   -- lsp plugins
-  'neovim/nvim-lspconfig'
+  'neovim/nvim-lspconfig',
+  -- markdown preview
+{
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function() vim.fn["mkdp#util#install"]() end,
+},
 
 })
 
@@ -342,7 +349,7 @@ map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "query" },
+  ensure_installed = { "c", "lua", "vim", "query", "markdown" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
