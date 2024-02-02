@@ -88,7 +88,6 @@ ALL_PACKAGES="alsa-utils \
     udisks2 \
     unrar \
     unzip \
-    urlscan \
     vim \
     vdirsyncer \
     wl-clipboard \
