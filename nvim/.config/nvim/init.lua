@@ -147,7 +147,8 @@ require("lazy").setup({
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
-lspconfig.pyright.setup {}
+lspconfig.marksman.setup{}
+lspconfig.pyright.setup{}
 lspconfig.clangd.setup{
   filetypes = { "c", "cpp" },
   init_options = {
@@ -548,6 +549,20 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lh', ':ClangdSwitchSourceHeader<cr>')
   end,
 })
+
+-- Toggle diagnostics
+vim.g["diagnostics_active"] = true
+function Toggle_diagnostics()
+    if vim.g.diagnostics_active then
+        vim.g.diagnostics_active = false
+        vim.diagnostic.disable()
+    else
+        vim.g.diagnostics_active = true
+        vim.diagnostic.enable()
+    end
+end
+
+map('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 --show a sign for the highest severity diagnostic on a given line:
 -- Create a custom namespace. This will aggregate signs from all other

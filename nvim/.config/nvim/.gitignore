@@ -3,5 +3,6 @@ pack/*
 .swp/*
 .undo/*
 plugin/
+spell/
 viminfo
 lazy-lock.json
