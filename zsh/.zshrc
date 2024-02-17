@@ -105,6 +105,13 @@ upd()
   wait
 }
 
+sshr()
+{
+  until ssh $1; do
+    sleep 5
+  done
+}
+
 # Show directory sizes
 alias dirsize='du -h --max-depth=1'
 
