@@ -6,8 +6,8 @@ autoload -Uz vcs_info
 compinit -d $HOME/.cache/zcompdump
 
 # Set the GPG_TTY and refresh the TTY in case user has switched into an X session
-export GPG_TTY=$(tty)
-gpg-connect-agent -q updatestartuptty /bye >/dev/null
+#export GPG_TTY=$(tty)
+#gpg-connect-agent -q updatestartuptty /bye >/dev/null
 
 # Prompt theme
 # Allow substitution
