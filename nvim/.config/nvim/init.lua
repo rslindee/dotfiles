@@ -121,6 +121,20 @@ require("lazy").setup({
   -- other
   -- view/edit hex data
   'fidian/hexmode',
+  -- dap debugger
+  'mfussenegger/nvim-dap',
+  -- dap ui
+  'rcarriga/nvim-dap-ui',
+  -- neodev
+  { "folke/neodev.nvim", opts = {} },
+  -- bazel build integration w/ maktaba dep
+  {
+    'bazelbuild/vim-bazel',
+
+    dependencies = {
+      'google/vim-maktaba',
+    }
+  },
   -- opens term or file manager of current file
   'justinmk/vim-gtfo',
   -- open dev docs site for current word
@@ -142,6 +156,8 @@ require("lazy").setup({
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
 },
+  -- github copilot
+  'github/copilot.vim',
 
 })
 
@@ -170,6 +186,51 @@ lspconfig.clangd.setup{
     ),
   },
 }
+
+-- neodev.nvim setup for type checking, autocomplete, etc.
+require("neodev").setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
+require("dapui").setup()
+
+-- run dapui on dap events
+local dap, dapui = require("dap"), require("dapui")
+dap.listeners.before.attach.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.launch.dapui_config = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+  dapui.close()
+end
+
+-- Setup nvim-dap debugger
+local dap = require("dap")
+
+dap.adapters.gdb = {
+  type = "executable",
+  command = "gdb",
+  args = { "-i", "dap" }
+}
+
+dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+}
+
 -- load local rc files
 vim.o.exrc = true
 
@@ -201,9 +262,6 @@ vim.opt.background = "dark"
 vim.g.gruvbox_material_foreground = 'original'
 vim.g.gruvbox_material_background = 'hard'
 vim.cmd('colorscheme gruvbox-material')
-
--- Dark blue program counter when debugging
-vim.cmd('highlight debugPC term=bold ctermbg=darkblue guibg=darkblue')
 
 -- Make Scons files show up as python
 vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
@@ -322,6 +380,18 @@ function AutoformatCurrentFile()
   vim.cmd('execute "keepjumps normal! gggqG"')
   vim.fn.winrestview(save)
 end
+
+-- automatically resize windows when the host window size changes (e.g. tmux pane resize)
+local wr_group = vim.api.nvim_create_augroup('WinResize', { clear = true })
+vim.api.nvim_create_autocmd(
+    'VimResized',
+    {
+        group = wr_group,
+        pattern = '*',
+        command = 'wincmd =',
+        desc = 'Automatically resize windows when the host window size changes.'
+    }
+)
 
 -- Gitsigns Navigation
 map('n', ']c', function()
@@ -497,16 +567,19 @@ map('n', '<leader>af', ':FzfLua grep<cr>')
 map('n', '<leader>al', ':FzfLua live_grep<cr>')
 
 -- debugging
-map('n', ',b', ':Break<cr>')
-map('n', ',d', ':Clear<cr>')
-map('n', ',s', ':Step<cr>')
-map('n', ',S', ':Source<cr>')
-map('n', ',C', ':Stop<cr>')
-map('n', ',n', ':Over<cr>')
-map('n', ',f', ':Finish<cr>')
-map('n', ',c', ':Continue<cr>')
-map('n', ',p', ':Evaluate<cr>')
-map('n', ',g', ':Gdb<cr>')
+map('n', ',c', function() require('dap').continue() end)
+map('n', ',o', function() require('dap').step_over() end)
+map('n', ',s', function() require('dap').step_into() end)
+map('n', ',S', function() require('dap').step_out() end)
+map('n', ',b', function() require('dap').toggle_breakpoint() end)
+map('n', ',r', function() require('dap').repl.open() end)
+map('n', ',dl', function() require('dap').run_last() end)
+map({'n', 'v'}, ',h', function()
+  require('dap.ui.widgets').hover()
+end)
+map({'n', 'v'}, ',p', function()
+  require('dap.ui.widgets').preview()
+end)
 
 -- split/join lines toggle
 map('n', '<leader>j', require('treesj').toggle)
