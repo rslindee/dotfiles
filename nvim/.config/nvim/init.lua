@@ -122,9 +122,13 @@ require("lazy").setup({
   -- view/edit hex data
   'fidian/hexmode',
   -- dap debugger
-  'mfussenegger/nvim-dap',
-  -- dap ui
-  'rcarriga/nvim-dap-ui',
+  { 
+    "rcarriga/nvim-dap-ui", 
+    dependencies = {
+      "mfussenegger/nvim-dap", 
+      "nvim-neotest/nvim-nio"
+    }
+  },
   -- neodev
   { "folke/neodev.nvim", opts = {} },
   -- bazel build integration w/ maktaba dep
@@ -359,12 +363,6 @@ vim.o.smartcase = true
 -- use patience diff algorithm
 vim.o.diffopt = 'internal,algorithm:patience,indent-heuristic'
 
--- Helper function for custom keybinds
-function map(mode, l, r, opts)
-  opts = opts or {}
-  vim.keymap.set(mode, l, r, opts)
-end
-
 -- maximum 2 signs in signcolumn
 vim.opt.signcolumn="auto:2"
 
@@ -394,29 +392,29 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Gitsigns Navigation
-map('n', ']c', function()
+vim.keymap.set('n', ']c', function()
   if vim.wo.diff then return ']c' end
   return ':Gitsigns next_hunk<CR>'
 end, {expr=true})
 
-map('n', '[c', function()
+vim.keymap.set('n', '[c', function()
   if vim.wo.diff then return '[c' end
   return ':Gitsigns prev_hunk<CR>'
 end, {expr=true})
 
 -- Gitsigns Actions
-map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-map('n', '<leader>hS', ':Gitsigns stage_buffer<CR>')
-map('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
-map('n', '<leader>hR', ':Gitsigns reset_buffer<CR>')
-map('n', '<leader>hp', ':Gitsigns preview_hunk<CR>')
-map('n', '<leader>hb', ':Gitsigns blame_line<CR>')
-map('n', '<leader>hd', ':Gitsigns diffthis<CR>')
-map('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
+vim.keymap.set({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
+vim.keymap.set({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
+vim.keymap.set('n', '<leader>hS', ':Gitsigns stage_buffer<CR>')
+vim.keymap.set('n', '<leader>hu', ':Gitsigns undo_stage_hunk<CR>')
+vim.keymap.set('n', '<leader>hR', ':Gitsigns reset_buffer<CR>')
+vim.keymap.set('n', '<leader>hp', ':Gitsigns preview_hunk<CR>')
+vim.keymap.set('n', '<leader>hb', ':Gitsigns blame_line<CR>')
+vim.keymap.set('n', '<leader>hd', ':Gitsigns diffthis<CR>')
+vim.keymap.set('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
 
 -- Gitsigns Text object
-map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
+vim.keymap.set({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
@@ -441,160 +439,161 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- reload vimrc
-map('n', '<leader>vv', ':source $MYVIMRC<CR>')
+vim.keymap.set('n', '<leader>vv', ':source $MYVIMRC<CR>')
 
 -- reload current buffer only if there are no edits
-map('n', '<leader>e', ':edit<cr>')
+vim.keymap.set('n', '<leader>e', ':edit<cr>')
 
 -- quick-execute macro q
-map('n', 'Q', '@q')
+vim.keymap.set('n', 'Q', '@q')
 
 -- tmux-like tab creation
-map('n', '<leader>c', ':tabnew<cr>')
+vim.keymap.set('n', '<leader>c', ':tabnew<cr>')
 
 -- quickfix shortcuts
-map('n', '<c-n>', ':cn<cr>')
-map('n', '<c-p>', ':cp<cr>')
+vim.keymap.set('n', '<c-n>', ':cn<cr>')
+vim.keymap.set('n', '<c-p>', ':cp<cr>')
 
 -- wrapped movement
-map('n', 'j', 'gj')
-map('n', 'k', 'gk')
+vim.keymap.set('n', 'j', 'gj')
+vim.keymap.set('n', 'k', 'gk')
 
 -- quick-map tabs
-map('n', '<leader>1', '1gt')
-map('n', '<leader>2', '2gt')
-map('n', '<leader>3', '3gt')
-map('n', '<leader>4', '4gt')
-map('n', '<leader>5', '5gt')
-map('n', '<leader>6', '6gt')
-map('n', '<leader>7', '7gt')
-map('n', '<leader>8', '8gt')
-map('n', '<leader>9', '9gt')
-map('n', '<leader>0', ':tablast<cr>')
+vim.keymap.set('n', '<leader>1', '1gt')
+vim.keymap.set('n', '<leader>2', '2gt')
+vim.keymap.set('n', '<leader>3', '3gt')
+vim.keymap.set('n', '<leader>4', '4gt')
+vim.keymap.set('n', '<leader>5', '5gt')
+vim.keymap.set('n', '<leader>6', '6gt')
+vim.keymap.set('n', '<leader>7', '7gt')
+vim.keymap.set('n', '<leader>8', '8gt')
+vim.keymap.set('n', '<leader>9', '9gt')
+vim.keymap.set('n', '<leader>0', ':tablast<cr>')
 
 -- remap ` jumping to ', since I never use the former
-map('n', "'", "`")
+vim.keymap.set('n', "'", "`")
 
 -- vim-subversive
-map('n', 's', '<plug>(SubversiveSubstitute)')
-map('n', 'ss', '<plug>(SubversiveSubstituteLine)')
-map('n', 'S', '<plug>(SubversiveSubstituteToEndOfLine)')
-map('n', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
-map('x', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
-map('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRangeConfirm)')
-map('n', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
-map('x', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
-map('n', '<leader><leader>ss', '<plug>(SubversiveSubvertWordRange)')
+vim.keymap.set('n', 's', '<plug>(SubversiveSubstitute)')
+vim.keymap.set('n', 'ss', '<plug>(SubversiveSubstituteLine)')
+vim.keymap.set('n', 'S', '<plug>(SubversiveSubstituteToEndOfLine)')
+vim.keymap.set('n', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
+vim.keymap.set('x', '<leader>s', '<plug>(SubversiveSubstituteRangeConfirm)')
+vim.keymap.set('n', '<leader>ss', '<plug>(SubversiveSubstituteWordRangeConfirm)')
+vim.keymap.set('n', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
+vim.keymap.set('x', '<leader><leader>s', '<plug>(SubversiveSubvertRange)')
+vim.keymap.set('n', '<leader><leader>ss', '<plug>(SubversiveSubvertWordRange)')
 
 -- De-dupe and sort visual selection
-map('v', '<leader>ds', ':\'<,\'>sort u<cr>')
+vim.keymap.set('v', '<leader>ds', ':\'<,\'>sort u<cr>')
 
 -- yank filename to clipboard
-map('n', '<leader>yf', ':let @+=expand("%:t")<CR>')
+vim.keymap.set('n', '<leader>yf', ':let @+=expand("%:t")<CR>')
 -- yank file path relative to current vim dir to clipboard
-map('n', '<leader>yr', ':let @+=expand("%:p:.")<CR>')
+vim.keymap.set('n', '<leader>yr', ':let @+=expand("%:p:.")<CR>')
 -- yank absolute file path to clipboard
-map('n', '<leader>ya', ':let @+=expand("%:p")<CR>')
+vim.keymap.set('n', '<leader>ya', ':let @+=expand("%:p")<CR>')
 
 -- vim-devdocs
 -- look up current word cursor is on in devdocs.io
-map('n', '<leader>k', ':DD <c-r><c-w><cr>')
+vim.keymap.set('n', '<leader>k', ':DD <c-r><c-w><cr>')
 
 -- git push
-map('n', '<leader>gp', ':Gpush<cr>')
+vim.keymap.set('n', '<leader>gp', ':Gpush<cr>')
 -- git commit
-map('n', '<leader>gc', ':Gcommit -v<cr>')
+vim.keymap.set('n', '<leader>gc', ':Gcommit -v<cr>')
 -- write (essentially a write and git add)
-map('n', '<leader>gw', ':Gwrite<cr>')
+vim.keymap.set('n', '<leader>gw', ':Gwrite<cr>')
 -- git diff of current file against HEAD
-map('n', '<leader>gd', ':Gvdiff<cr>')
+vim.keymap.set('n', '<leader>gd', ':Gvdiff<cr>')
 -- open git browser with all commits touching current file in new tab
-map('n', '<leader>gh', ':Gclog<cr>')
+vim.keymap.set('n', '<leader>gh', ':Gclog<cr>')
 
 -- toggle pane of tags
 -- map('n', '<leader>T', ':SymbolsOutline<cr>')
 -- You probably also want to set a keymap to toggle aerial
-map('n', '<leader>tt', '<cmd>AerialToggle!<CR>')
+vim.keymap.set('n', '<leader>tt', '<cmd>AerialToggle!<CR>')
 
 -- hexmode
 -- toggle Hexmode
-map('n', '<leader>H', ':Hexmode<cr>')
+vim.keymap.set('n', '<leader>H', ':Hexmode<cr>')
 
 -- highlight and replace current word cursor is on
-map('n', '<leader>r', ':%s/<C-r><C-w>//gc<Left><Left><Left>', {silent = true})
+vim.keymap.set('n', '<leader>r', ':%s/<C-r><C-w>//gc<Left><Left><Left>', {silent = true})
 
 -- set <c-d> to forward-delete in insert mode
-map('i', '<c-d>', '<del>', {silent = true})
+vim.keymap.set('i', '<c-d>', '<del>', {silent = true})
 
 -- go up/down command history
-map('c', '<c-j>', '<down>', {silent = true})
-map('c', '<c-k>', '<up>', {silent = true})
+vim.keymap.set('c', '<c-j>', '<down>', {silent = true})
+vim.keymap.set('c', '<c-k>', '<up>', {silent = true})
 
 -- open index in personal wiki
-map('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {silent = true})
+vim.keymap.set('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {silent = true})
 
 -- change current window directory to current file
-map('n', '<leader>wc', ':lcd %:p:h<cr>', {silent = true})
+vim.keymap.set('n', '<leader>wc', ':lcd %:p:h<cr>', {silent = true})
 
 -- Enter window resize mode
-map('n', '<leader>W', ':SmartResizeMode<cr>')
+vim.keymap.set('n', '<leader>W', ':SmartResizeMode<cr>')
 
 -- vim-easy-align
 -- start interactive EasyAlign in visual mode (e.g. vipga)
-map('x', 'ga', '<Plug>(EasyAlign)')
+vim.keymap.set('x', 'ga', '<Plug>(EasyAlign)')
 -- start interactive EasyAlign for a motion/text object (e.g. gaip)
-map('n', 'ga', '<Plug>(EasyAlign)')
+vim.keymap.set('n', 'ga', '<Plug>(EasyAlign)')
 
 -- replace in quickfix list what word the cursor is currently on
-map('n', '<leader>R', ':cdo %s/<C-r><C-w>//gc<Left><Left><Left>')
+vim.keymap.set('n', '<leader>R', ':cdo %s/<C-r><C-w>//gc<Left><Left><Left>')
 
 -- fzf.vim
 -- open fzf for all files
-map('n', '<leader>o', ':FzfLua files<cr>')
+vim.keymap.set('n', '<leader>o', ':FzfLua files<cr>')
 -- open fzf for all buffers
-map('n', '<leader>ao', ':FzfLua buffers<cr>')
+vim.keymap.set('n', '<leader>ao', ':FzfLua buffers<cr>')
 -- open fzf of lines in all buffers
-map('n', '<leader>as', ':FzfLua lines<cr>')
+vim.keymap.set('n', '<leader>as', ':FzfLua lines<cr>')
 -- open fzf of lines in current buffer
-map('n', '<leader>aa', ':FzfLua blines<cr>')
+vim.keymap.set('n', '<leader>aa', ':FzfLua blines<cr>')
 -- open fzf of modified files tracked by git
-map('n', '<leader>ag', ':FzfLua git_files<cr>')
+vim.keymap.set('n', '<leader>ag', ':FzfLua git_files<cr>')
 -- open fzf of ctags
-map('n', '<leader>at', ':FzfLua tags<cr>')
+vim.keymap.set('n', '<leader>at', ':FzfLua tags<cr>')
 -- start fzf-piped Rg search
-map('n', '<leader>af', ':FzfLua grep<cr>')
+vim.keymap.set('n', '<leader>af', ':FzfLua grep<cr>')
 -- start fzf-piped live Rg search
-map('n', '<leader>al', ':FzfLua live_grep<cr>')
+vim.keymap.set('n', '<leader>al', ':FzfLua live_grep<cr>')
 
 -- debugging
-map('n', ',c', function() require('dap').continue() end)
-map('n', ',o', function() require('dap').step_over() end)
-map('n', ',s', function() require('dap').step_into() end)
-map('n', ',S', function() require('dap').step_out() end)
-map('n', ',b', function() require('dap').toggle_breakpoint() end)
-map('n', ',r', function() require('dap').repl.open() end)
-map('n', ',dl', function() require('dap').run_last() end)
-map({'n', 'v'}, ',h', function()
+--
+vim.keymap.set('n', ',c', function() require('dap').continue() end)
+vim.keymap.set('n', ',o', function() require('dap').step_over() end)
+vim.keymap.set('n', ',s', function() require('dap').step_into() end)
+vim.keymap.set('n', ',S', function() require('dap').step_out() end)
+vim.keymap.set('n', ',b', function() require('dap').toggle_breakpoint() end)
+vim.keymap.set('n', ',r', function() require('dap').repl.open() end)
+vim.keymap.set('n', ',dl', function() require('dap').run_last() end)
+vim.keymap.set({'n', 'v'}, ',h', function()
   require('dap.ui.widgets').hover()
 end)
-map({'n', 'v'}, ',p', function()
+vim.keymap.set({'n', 'v'}, ',p', function()
   require('dap.ui.widgets').preview()
 end)
 
 -- split/join lines toggle
-map('n', '<leader>j', require('treesj').toggle)
+vim.keymap.set('n', '<leader>j', require('treesj').toggle)
 
 -- run formatter
-map('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
+vim.keymap.set('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 
 -- update plugins
-map('n', '<leader>vu', ':Lazy sync<cr>')
+vim.keymap.set('n', '<leader>vu', ':Lazy sync<cr>')
 
 -- vim-fugitive
 -- blame
-map('n', '<leader>gb', ':Git blame<cr>')
+vim.keymap.set('n', '<leader>gb', ':Git blame<cr>')
 -- status
-map('n', '<leader>gs', ':Git <cr>')
+vim.keymap.set('n', '<leader>gs', ':Git <cr>')
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -635,7 +634,7 @@ function Toggle_diagnostics()
     end
 end
 
-map('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 --show a sign for the highest severity diagnostic on a given line:
 -- Create a custom namespace. This will aggregate signs from all other
@@ -671,4 +670,5 @@ vim.diagnostic.handlers.signs = {
     orig_signs_handler.hide(ns, bufnr)
   end,
 }
+
 vim.cmd('source ~/.config/nvim/vim_init.vim')
