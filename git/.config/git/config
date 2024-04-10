@@ -48,7 +48,7 @@
   prompt = false
   trustexitcode = true
 [diff]
-  tool = vimdiff
+  tool = nvimdiff
   colorMoved = default
   colorMovedWS = ignore-all-space
 [mergetool "diffconflicts"]
