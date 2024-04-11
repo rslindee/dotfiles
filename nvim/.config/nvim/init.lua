@@ -33,7 +33,7 @@ require("lazy").setup({
       require('marks').setup({
         default_mappings = true,
         signs = true,
-        })
+      })
     end,
   },
   -- outline of code
@@ -70,23 +70,20 @@ require("lazy").setup({
       require('treesj').setup({
         use_default_keymaps = false,
         dot_repeat = true
-        })
+      })
     end,
   },
-  -- TODO: try hrsh7th/vim-vsnip
-  -- snippet tool
-  'joereynolds/vim-minisnip',
   -- align blocks of text
   'junegunn/vim-easy-align',
   -- add/change/delete surrounding char pairs
   {
-      "kylechui/nvim-surround",
-      version = "*", -- Use for stability; omit to use `main` branch for the latest features
-      config = function()
-          require("nvim-surround").setup({
-              -- Configuration here, or leave empty to use defaults
-          })
-      end
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   },
   -- reorder delimited items
   'machakann/vim-swap',
@@ -97,13 +94,13 @@ require("lazy").setup({
   -- advanced substitution
   'tpope/vim-abolish',
   -- comments
-{
+  {
     'numToStr/Comment.nvim',
     opts = {
-        -- add any options here
+      -- add any options here
     },
     lazy = false,
-},
+  },
   -- repeat support for various plugins
   'tpope/vim-repeat',
   -- enhanced time/date editing
@@ -112,9 +109,9 @@ require("lazy").setup({
   -- searching
   -- hooks for fzf
   {
-  'ibhagwan/fzf-lua',
+    'ibhagwan/fzf-lua',
     config = function()
-        require("fzf-lua").setup({})
+      require("fzf-lua").setup({})
     end
   },
 
@@ -154,22 +151,102 @@ require("lazy").setup({
   -- lsp plugins
   'neovim/nvim-lspconfig',
   -- markdown preview
-{
+  {
     "iamcco/markdown-preview.nvim",
     cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
     ft = { "markdown" },
     build = function() vim.fn["mkdp#util#install"]() end,
-},
-  -- github copilot
-  'github/copilot.vim',
+  },
+  -- autocompletion
+  {
+    "hrsh7th/nvim-cmp",
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function()
+      require("copilot").setup({})
+    end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+
+    config = function ()
+      require("copilot_cmp").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
+    end
+  },
+  {
+    "hrsh7th/cmp-vsnip"
+  },
+  {
+    "hrsh7th/vim-vsnip"
+  },
 
 })
+
+-- nvim-cmp setup
+
+-- used for copilot 
+local has_words_before = function()
+  if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then return false end
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_text(0, line-1, 0, line-1, col, {})[1]:match("^%s*$") == nil
+end
+local cmp = require('cmp')
+
+cmp.setup({
+  snippet = {
+    -- specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- vim.snippet.expand(args.body) -- TODO: Enable when nvim .10 installed and remove vsnip - For native neovim snippets
+    end,
+  },
+  mapping = {
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<Tab>'] = vim.schedule_wrap(function(fallback)
+      if cmp.visible() and has_words_before() then
+        cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+      else
+        fallback()
+      end
+    end),
+  },
+  sources = {
+    { name = "nvim_lsp", group_index = 1 },
+    { name = "copilot", group_index = 2 },
+    { name = "vsnip", group_index = 2 },
+  },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+})
+
+-- vsnip jump binds
+vim.api.nvim_set_keymap('i', '<Tab>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<Tab>"', { expr = true })
+vim.api.nvim_set_keymap('s', '<Tab>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<Tab>"', { expr = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', { expr = true })
+vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', { expr = true })
+
+-- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
 lspconfig.marksman.setup{}
 lspconfig.pyright.setup{}
 lspconfig.clangd.setup{
+  capabilities = capabilities,
   filetypes = { "c", "cpp" },
   init_options = {
     clangdFileStatus = false,
