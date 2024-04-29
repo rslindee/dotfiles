@@ -51,9 +51,6 @@
   tool = nvimdiff
   colorMoved = default
   colorMovedWS = ignore-all-space
-[mergetool "diffconflicts"]
-  cmd = $EDITOR -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\"
-  trustExitCode = true
 [submodule]
   #recurse = true
 [pull]
