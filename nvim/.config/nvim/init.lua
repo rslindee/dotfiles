@@ -26,6 +26,8 @@ require("lazy").setup({
   "chrisbra/Colorizer",
   -- gcov syntax highlighting
   "hamsterjam/vim-gcovered",
+  -- diff/merge viewing
+  "sindrets/diffview.nvim",
   -- show and navigate marks
   {
     'chentoast/marks.nvim',
