@@ -95,14 +95,6 @@ require("lazy").setup({
   'tommcdo/vim-exchange',
   -- advanced substitution
   'tpope/vim-abolish',
-  -- comments
-  {
-    'numToStr/Comment.nvim',
-    opts = {
-      -- add any options here
-    },
-    lazy = false,
-  },
   -- repeat support for various plugins
   'tpope/vim-repeat',
   -- enhanced time/date editing
@@ -184,13 +176,6 @@ require("lazy").setup({
       })
     end
   },
-  {
-    "hrsh7th/cmp-vsnip"
-  },
-  {
-    "hrsh7th/vim-vsnip"
-  },
-
 })
 
 -- nvim-cmp setup
@@ -207,8 +192,7 @@ cmp.setup({
   snippet = {
     -- specify a snippet engine
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-      -- vim.snippet.expand(args.body) -- TODO: Enable when nvim .10 installed and remove vsnip - For native neovim snippets
+      vim.snippet.expand(args.body) -- use native neovim snippets
     end,
   },
   mapping = {
@@ -325,6 +309,7 @@ vim.o.directory = vim.fn.expand("~/.config/nvim/.swp//")
 vim.o.undofile = true
 vim.o.backup = true
 
+-- TODO: per https://gpanders.com/blog/whats-new-in-neovim-0.10/ nvim .10 supports OSC 52, but foot does not (yet?)
 vim.opt.clipboard:append("unnamedplus")
 
 -- Automatically reload file if shell command is run inside vim
@@ -336,9 +321,6 @@ vim.o.expandtab = true
 -- 1 tab == 2 spaces
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
-
--- Set termguicolors
-vim.opt.termguicolors = true
 
 -- Themes
 vim.opt.background = "dark"
@@ -523,9 +505,6 @@ vim.keymap.set('n', '<leader>vv', ':source $MYVIMRC<CR>')
 -- reload current buffer only if there are no edits
 vim.keymap.set('n', '<leader>e', ':edit<cr>')
 
--- quick-execute macro q
-vim.keymap.set('n', 'Q', '@q')
-
 -- tmux-like tab creation
 vim.keymap.set('n', '<leader>c', ':tabnew<cr>')
 
@@ -689,7 +668,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
