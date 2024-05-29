@@ -145,7 +145,7 @@ riverctl focus-follows-cursor always
 # screen idle and lock. sleep on resume is for handling kvm switch "delay"
 exec_once "swayidle -w \
     after-resume 'sleep 0.5 && wlopm --on \"*\"' \
-    timeout 310 'waylock -fork-on-lock' \
+    timeout 610 'waylock -fork-on-lock' \
     before-sleep 'waylock -fork-on-lock'"
 
 autostart yambar
