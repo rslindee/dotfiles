@@ -229,6 +229,19 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Setup language servers.
 local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup({
+  -- Server-specific settings. See `:help lspconfig-setup`
+  on_attach = function(client, bufnr)
+      vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end,
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = true;
+      }
+    },
+  },
+})
 lspconfig.marksman.setup{}
 lspconfig.pyright.setup{}
 lspconfig.clangd.setup{
@@ -286,6 +299,19 @@ dap.adapters.gdb = {
 }
 
 dap.configurations.c = {
+  {
+    name = "Launch",
+    type = "gdb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = "${workspaceFolder}",
+    stopAtBeginningOfMainSubprogram = false,
+  },
+}
+
+dap.configurations.rust = {
   {
     name = "Launch",
     type = "gdb",
