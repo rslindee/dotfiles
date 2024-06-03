@@ -227,8 +227,32 @@ vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+-- for responsiveness of lsp diagnostic windows
+vim.o.updatetime = 250
+-- diagnostic display settings
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = false,
+})
+
 -- Setup language servers.
 local lspconfig = require('lspconfig')
+vim.api.nvim_create_autocmd("CursorHold", {
+  buffer = bufnr,
+  callback = function()
+    local opts = {
+      focusable = false,
+      close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+      border = 'rounded',
+      source = 'always',
+      prefix = ' ',
+    }
+    vim.diagnostic.open_float(nil, opts)
+  end
+})
 lspconfig.rust_analyzer.setup({
   -- Server-specific settings. See `:help lspconfig-setup`
   on_attach = function(client, bufnr)
@@ -254,17 +278,7 @@ lspconfig.clangd.setup{
     semanticHighlighting = false,
     showTodos = false,
   },
-  handlers = {
-    ["textDocument/publishDiagnostics"] = vim.lsp.with(
-      vim.lsp.diagnostic.on_publish_diagnostics, {
-         -- Enable underline, use default values
-        underline = true,
-         -- Enable virtual text
-        virtual_text = true,
-        signs = true
-      }
-    ),
-  },
+  handlers = {},
 }
 
 -- neodev.nvim setup for type checking, autocomplete, etc.
