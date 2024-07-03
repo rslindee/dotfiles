@@ -210,7 +210,6 @@ cmp.setup({
   sources = {
     { name = "nvim_lsp", group_index = 1 },
     { name = "copilot", group_index = 2 },
-    { name = "vsnip", group_index = 2 },
   },
   window = {
     completion = cmp.config.window.bordered(),
@@ -218,11 +217,21 @@ cmp.setup({
   },
 })
 
--- vsnip jump binds
-vim.api.nvim_set_keymap('i', '<Tab>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<Tab>"', { expr = true })
-vim.api.nvim_set_keymap('s', '<Tab>', 'vsnip#jumpable(1) ? "<Plug>(vsnip-jump-next)" : "<Tab>"', { expr = true })
-vim.api.nvim_set_keymap('i', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', { expr = true })
-vim.api.nvim_set_keymap('s', '<S-Tab>', 'vsnip#jumpable(-1) ? "<Plug>(vsnip-jump-prev)" : "<S-Tab>"', { expr = true })
+-- snippet binds
+vim.keymap.set({ 'i', 's' }, '<Tab>', function()
+   if vim.snippet.active({ direction = 1 }) then
+     return '<cmd>lua vim.snippet.jump(1)<cr>'
+   else
+     return '<Tab>'
+   end
+ end, { expr = true })
+vim.keymap.set({ 'i', 's' }, '<S-Tab>', function()
+   if vim.snippet.active({ direction = -1 }) then
+     return '<cmd>lua vim.snippet.jump(-1)<cr>'
+   else
+     return '<S-Tab>'
+   end
+ end, { expr = true })
 
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -260,9 +269,27 @@ lspconfig.rust_analyzer.setup({
   end,
   settings = {
     ['rust-analyzer'] = {
+      cargo = {
+        allFeatures = true,
+        loadOutDirsFromCheck = true,
+        runBuildScripts = true,
+      },
       diagnostics = {
         enable = true;
-      }
+      },
+      -- Add clippy lints for Rust.
+      checkOnSave = {
+        allFeatures = true,
+        command = "clippy",
+        extraArgs = {
+          "--",
+          "--no-deps",
+          "-Dclippy::correctness",
+          "-Dclippy::complexity",
+          "-Wclippy::perf",
+          "-Wclippy::pedantic",
+        },
+      },
     },
   },
 })
