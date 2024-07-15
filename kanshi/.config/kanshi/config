@@ -1,10 +1,10 @@
 profile laptop { 
      output eDP-1 enable
-     exec "killall -q yambar; yambar &"
+     exec killall -q yambar; yambar &
 }
 
 profile external {
     output "*" enable 
     output eDP-1 disable
-    exec "killall -q yambar; yambar &"
+    exec killall -q yambar; yambar &
 }
