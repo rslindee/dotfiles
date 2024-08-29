@@ -176,6 +176,21 @@ require("lazy").setup({
       })
     end
   },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {
+      debug = true, -- Enable debugging
+      -- See Configuration section for rest
+    },
+    -- See Commands section for default commands if you want to lazy load on them
+  },
+
 })
 
 -- nvim-cmp setup
@@ -759,6 +774,17 @@ function Toggle_diagnostics()
 end
 
 vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+
+  -- Quick chat with Copilot of current buffer
+vim.keymap.set('n', "<leader>lc",
+    function()
+      local input = vim.fn.input("Quick Chat: ")
+      if input ~= "" then
+        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+      end
+    end,
+    { noremap = true, silent = true, desc = "CopilotChat - Quick chat"}
+    )
 
 --show a sign for the highest severity diagnostic on a given line:
 -- Create a custom namespace. This will aggregate signs from all other
