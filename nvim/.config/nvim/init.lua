@@ -775,7 +775,10 @@ end
 
 vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
-  -- Quick chat with Copilot of current buffer
+-- Explain current text selection
+vim.keymap.set('v', '<leader>le', ':\'<,\'>CopilotChatExplain <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+
+-- Quick chat with Copilot of current buffer
 vim.keymap.set('n', "<leader>lc",
     function()
       local input = vim.fn.input("Quick Chat: ")
