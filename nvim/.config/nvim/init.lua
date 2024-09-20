@@ -146,11 +146,15 @@ require("lazy").setup({
   'neovim/nvim-lspconfig',
   -- markdown preview
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function() vim.fn["mkdp#util#install"]() end,
+    "Tweekism/markdown-preview.nvim",
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.cmd [[Lazy load markdown-preview.nvim]]
+      vim.fn['mkdp#util#install']()
+    end,
   },
+
   -- autocompletion
   {
     "hrsh7th/nvim-cmp",
@@ -410,11 +414,14 @@ vim.g.gruvbox_material_foreground = 'original'
 vim.g.gruvbox_material_background = 'hard'
 vim.cmd('colorscheme gruvbox-material')
 
--- Make Scons files show up as python
+-- Make Scons files highlight as python
 vim.cmd('autocmd BufNew,BufRead SConstruct,SConscript set filetype=python')
 
--- Make clang config files show up as yaml
+-- Make clang config highlight as yaml
 vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
+
+-- Make systemd service files highlight as gitconfig files
+vim.cmd('autocmd BufNew,BufRead *.service set filetype=gitconfig')
 
 -- statusline
 
