@@ -154,6 +154,15 @@ require("lazy").setup({
       vim.fn['mkdp#util#install']()
     end,
   },
+  -- markdown toc generation
+  {
+    "richardbizik/nvim-toc",
+    config = function ()
+      require("nvim-toc").setup({
+        toc_header = "Table of Contents"
+      })
+    end
+  },
 
   -- autocompletion
   {
