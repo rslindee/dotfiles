@@ -26,6 +26,7 @@
   ss = show --name-only
   st = status --short
   su = submodule update --init --recursive
+  sw = switch
   un = reset HEAD~
 [push]
   default = current
@@ -69,3 +70,6 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[user]
+	name = Richard Slindee
+	email = rslindee@ford.com
