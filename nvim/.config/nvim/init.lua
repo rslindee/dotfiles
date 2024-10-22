@@ -193,10 +193,10 @@ require("lazy").setup({
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
     dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "zbirenbaum/copilot.lua" },
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
-    build = "make tiktoken", -- Only on MacOS or Linux
+    build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
       -- See Configuration section for rest
@@ -652,7 +652,7 @@ vim.keymap.set('n', '<leader>ya', ':let @+=expand("%:p")<CR>')
 
 -- vim-devdocs
 -- look up current word cursor is on in devdocs.io
-vim.keymap.set('n', '<leader>k', ':DD <c-r><c-w><cr>')
+vim.keymap.set('n', '<leader>kd', ':DD <c-r><c-w><cr>')
 
 -- git push
 vim.keymap.set('n', '<leader>gp', ':Gpush<cr>')
@@ -792,10 +792,19 @@ end
 vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 -- Explain current text selection
-vim.keymap.set('v', '<leader>le', ':\'<,\'>CopilotChatExplain <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+vim.keymap.set('v', '<leader>ke', ':\'<,\'>CopilotChatExplain <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+
+-- Review selected code
+vim.keymap.set('v', '<leader>kr', ':\'<,\'>CopilotChatReview <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+
+-- Fix selected code
+vim.keymap.set('v', '<leader>kf', ':\'<,\'>CopilotChatFix <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+
+-- Optimize selected code
+vim.keymap.set('v', '<leader>ko', ':\'<,\'>CopilotChatOptimize <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
 
 -- Quick chat with Copilot of current buffer
-vim.keymap.set('n', "<leader>lc",
+vim.keymap.set('n', "<leader>kc",
     function()
       local input = vim.fn.input("Quick Chat: ")
       if input ~= "" then
