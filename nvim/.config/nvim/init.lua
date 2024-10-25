@@ -745,6 +745,9 @@ vim.keymap.set('n', '<leader>i', '<cmd>lua AutoformatCurrentFile()<cr>')
 -- update plugins
 vim.keymap.set('n', '<leader>vu', ':Lazy sync<cr>')
 
+-- map esc when in terminal mode
+vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
+
 -- vim-fugitive
 -- blame
 vim.keymap.set('n', '<leader>gb', ':Git blame<cr>')
@@ -795,13 +798,16 @@ vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent =
 vim.keymap.set('v', '<leader>ke', ':\'<,\'>CopilotChatExplain <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
 
 -- Review selected code
-vim.keymap.set('v', '<leader>kr', ':\'<,\'>CopilotChatReview <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+vim.keymap.set('v', '<leader>kr', ':\'<,\'>CopilotChatReview <cr>', { noremap = true, silent = true, desc = "CopilotChat - Review visual selection"})
 
 -- Fix selected code
-vim.keymap.set('v', '<leader>kf', ':\'<,\'>CopilotChatFix <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+vim.keymap.set('v', '<leader>kf', ':\'<,\'>CopilotChatFix <cr>', { noremap = true, silent = true, desc = "CopilotChat - Fix visual selection"})
 
 -- Optimize selected code
-vim.keymap.set('v', '<leader>ko', ':\'<,\'>CopilotChatOptimize <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
+vim.keymap.set('v', '<leader>ko', ':\'<,\'>CopilotChatOptimize <cr>', { noremap = true, silent = true, desc = "CopilotChat - Optimize visual selection"})
+
+-- Document selected code
+vim.keymap.set('v', '<leader>kd', ':\'<,\'>CopilotChatDocs <cr>', { noremap = true, silent = true, desc = "CopilotChat - Document visual selection"})
 
 -- Quick chat with Copilot of current buffer
 vim.keymap.set('n', "<leader>kc",
