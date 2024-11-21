@@ -140,6 +140,17 @@ require("lazy").setup({
   'tpope/vim-tbone',
   -- extra keymaps
   'tpope/vim-unimpaired',
+  -- repeatable movements
+  {
+    "ghostbuster91/nvim-next",
+    config = function ()
+      require("nvim-next").setup({
+       default_mappings = {
+           repeat_style = "original",
+       }
+      })
+    end
+  },
   -- auto generate doxygen documentation
   'vim-scripts/DoxygenToolkit.vim',
   -- lsp plugins
@@ -774,6 +785,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
     vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
     vim.keymap.set('n', '<leader>lf', vim.lsp.buf.references)
+    vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
+    vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
     -- perform suggested fix
     vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action)
     vim.keymap.set('n', '<leader>lh', ':ClangdSwitchSourceHeader<cr>')
@@ -819,6 +832,9 @@ vim.keymap.set('n', "<leader>kc",
     end,
     { noremap = true, silent = true, desc = "CopilotChat - Quick chat"}
     )
+
+-- Toggle CopilotChat pane
+vim.keymap.set('n', '<leader>kk', ':CopilotChatToggle<cr>', { noremap = true, silent = true, desc = "CopilotChat - Toggle CopilotChat pane"})
 
 --show a sign for the highest severity diagnostic on a given line:
 -- Create a custom namespace. This will aggregate signs from all other
