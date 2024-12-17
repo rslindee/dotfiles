@@ -89,6 +89,9 @@ alias nb='newsboat'
 # show progress of any current operations
 alias p="progress -m"
 
+# startup ncmpcpp w/ systemd-inhibit to prevent sleep
+alias jamz="systemd-inhibit ncmpcpp"
+
 # update packages, personal wiki, and dotfiles
 upd()
 {
