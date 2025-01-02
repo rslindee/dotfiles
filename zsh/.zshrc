@@ -98,7 +98,7 @@ upd()
   if [ "$DISTRO" = "Fedora Linux" ]; then
     sudo dnf upgrade
   elif [ "$DISTRO" = "Arch Linux" ]; then
-    trizen -Syu
+    paru -Syu
   fi
   # Dotfiles aren't dependent on each other, so we can do them in parallel
   git -C $HOME/dotfiles pull &

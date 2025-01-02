@@ -38,7 +38,6 @@ ALL_PACKAGES="alsa-utils \
     khal \
     khard \
     libnotify \
-    light \
     lnav \
     lsof \
     lzop \
@@ -60,7 +59,6 @@ ALL_PACKAGES="alsa-utils \
     nnn \
     notmuch \
     notmuch-mutt \
-    oathtool \
     p7zip \
     pamixer \
     pass \
@@ -118,6 +116,7 @@ PACKAGES_FEDORA="
 
 PACKAGES_LAPTOP="acpi \
     acpid \
+    light \
     powertop \
     "
 
@@ -176,13 +175,13 @@ if [ "$OS" = "Fedora Linux" ]; then
     ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_FEDORA"
 elif [ "$OS" = "Arch Linux" ]; then
     echo "Arch system detected..."
-    # Install trizen
-    if [ ! -f "/usr/bin/trizen" ]; then
-        git clone https://aur.archlinux.org/trizen.git "$HOME/trizen"
-        cd "$HOME/trizen"
+    # Install paru
+    if [ ! -f "/usr/bin/paru" ]; then
+        git clone https://aur.archlinux.org/paru.git "$HOME/paru"
+        cd "$HOME/paru"
         makepkg -si
     fi
-    PACKAGE_MANAGER_INSTALL="trizen -S --needed"
+    PACKAGE_MANAGER_INSTALL="paru -S --needed"
     # Create package list
     ALL_PACKAGES="$ALL_PACKAGES $PACKAGES_ARCH"
 fi
