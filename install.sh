@@ -104,6 +104,7 @@ ALL_PACKAGES="alsa-utils \
 PACKAGES_FEDORA="
     fd-find \
     git-clang-format \
+    mozilla-openh264 \
     NetworkManager-tui \
     passmenu \
     prename \
@@ -189,6 +190,9 @@ fi
 # Install packages
 $PACKAGE_MANAGER_INSTALL $ALL_PACKAGES 
 
+if [ "$OS" = "Fedora Linux" ]; then
+    sudo dnf group install Multimedia
+fi
 # Stow dotfiles
 #cd "$HOME/dotfiles"
 #stow -R "$STOW_LIST"
