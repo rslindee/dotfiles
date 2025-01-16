@@ -536,6 +536,17 @@ vim.o.diffopt = 'internal,algorithm:patience,indent-heuristic'
 -- maximum 2 signs in signcolumn
 vim.opt.signcolumn="auto:2"
 
+-- Mouse-selected text copies to primary selection clipboard
+vim.api.nvim_create_autocmd("CursorMoved", {
+  desc = "Keep * synced with selection",
+  callback = function()
+    local mode = vim.fn.mode(false)
+    if mode == "v" or mode == "V" or mode == "^V" then
+      vim.cmd([[silent norm "*ygv]])
+    end
+  end,
+})
+
 -- set external format tools based on filetype
 -- TODO: move these to ftplugin dirs
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
