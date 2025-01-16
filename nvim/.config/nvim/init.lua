@@ -833,6 +833,17 @@ vim.keymap.set('n', "<leader>kc",
     { noremap = true, silent = true, desc = "CopilotChat - Quick chat"}
     )
 
+-- Quick chat with Copilot about the current visual selection
+vim.keymap.set('v', '<leader>kv',
+    function()
+      local input = vim.fn.input("Quick Chat: ")
+      if input ~= "" then
+        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").visual })
+      end
+    end,
+    { noremap = true, silent = true, desc = "CopilotChat - Quick chat about visual selection"}
+)
+
 -- Toggle CopilotChat pane
 vim.keymap.set('n', '<leader>kk', ':CopilotChatToggle<cr>', { noremap = true, silent = true, desc = "CopilotChat - Toggle CopilotChat pane"})
 
