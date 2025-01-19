@@ -134,6 +134,7 @@ require("lazy").setup({
   'justinmk/vim-gtfo',
   -- open dev docs site for current word
   'romainl/vim-devdocs',
+  -- TODO: replace with overseer
   -- call commands async
   'skywind3000/asyncrun.vim',
   -- enhanced tmux support/commands

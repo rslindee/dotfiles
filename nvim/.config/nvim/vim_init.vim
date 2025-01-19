@@ -56,18 +56,9 @@ nmap <leader>F :GrepAll "<c-r><c-w>"<cr>
 nmap <leader>mr :make<up><cr>
 " Run make
 nmap <leader>mm :silent make!<cr>:redraw!<cr>
-" async make clean
-nmap <leader>mc :Make clean<cr>
+" make clean
+nmap <leader>mc :make clean<cr>
 " run whatever defined makeprg
 nmap <leader>ml :AsyncRun -program=make %<cr>
 " make asyncrun work with vim-fugitive
 command! -bang -nargs=* -complete=file Make AsyncRun -program=make @ <args>
-
-" vim-qf
-" disable wrapping in quickfix
-let g:qf_nowrap = 0
-" toggle location list
-nmap <leader>Q <Plug>QfLtoggle
-" toggle quickfix list
-nmap <leader>q <Plug>QfCtoggle
-
