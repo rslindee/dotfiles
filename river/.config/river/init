@@ -69,7 +69,7 @@ riverctl map normal Super+Alt L move right 100
 # move views
 riverctl map-pointer normal Super BTN_LEFT move-view
 
-# r + Right Mouse Button to resize views
+# resize views
 riverctl map-pointer normal Super BTN_RIGHT resize-view
 
 # toggle float
@@ -92,11 +92,14 @@ do
     riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
 done
 
-# focus all tags
-# tag focused view with all tags
 all_tags=$(((1 << 32) - 1))
+# focus all tags
 riverctl map normal Super 0 set-focused-tags $all_tags
+# tag focused view with all tags
 riverctl map normal Super+Shift 0 set-view-tags $all_tags
+
+# focus view on previous tag
+riverctl map normal Super W focus-previous-tags
 
 # toggle float
 riverctl map normal Super Space toggle-float

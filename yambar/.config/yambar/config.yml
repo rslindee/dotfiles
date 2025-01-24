@@ -22,15 +22,17 @@ bar:
           - base: &river_base
               left-margin: 10
               right-margin: 13 
-              default: {string: {text: "0"}}
+              default: {string: {text: ""}}
               conditions:
                 id == 1: {string: {text: "1"}}  
                 id == 2: {string: {text: "2"}}  
                 id == 3: {string: {text: "3"}}  
                 id == 4: {string: {text: "4"}}  
                 id == 5: {string: {text: "5"}}  
-                id == 10: {string: {text: "scratchpad"}}  
-                id == 11: {string: {text: "work"}}  
+                id == 6: {string: {text: "6"}}  
+                id == 7: {string: {text: "7"}}  
+                id == 8: {string: {text: "8"}}  
+                id == 9: {string: {text: "9"}}  
 
         content:
           map:
@@ -63,6 +65,7 @@ bar:
                   <<: *river_base
                   deco: {underline: {size: 3, color: ea6962ff}}
 
+  center:
     - foreign-toplevel:
         content:
           map:
@@ -88,20 +91,20 @@ bar:
           discharging: &discharging
             list:
               items:
-                - string: {text: "▼{capacity}% {estimate}"}
+                - string: {text: "[▼{capacity}% {estimate}]"}
         content:
           map:
             conditions:
               state == unknown:
-                - string: {text: "▼{capacity}% {estimate}"}
+                - string: {text: "[▼{capacity}% {estimate}]"}
               state == discharging:
-                - string: {text: "▼{capacity}% {estimate}"}
+                - string: {text: "[▼{capacity}% {estimate}]"}
               state == charging:
-                - string: {text: "▲{capacity}% {estimate}"}
+                - string: {text: "[▲{capacity}% {estimate}]"}
               state == full:
-                - string: {text: "▲{capacity}% full"}
+                - string: {text: "[▲{capacity}% full]"}
               state == "not charging":
-                - string: {text: "▲{capacity}%"}
+                - string: {text: "[▲{capacity}%]"}
 
     - pipewire:
         anchors:
