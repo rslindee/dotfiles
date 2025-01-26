@@ -65,6 +65,7 @@ ALL_PACKAGES="alsa-utils \
     pass-otp \
     pavucontrol \
     power-profiles-daemon \
+    progress \
     python \
     pv \
     ripgrep \
