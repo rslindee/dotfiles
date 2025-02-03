@@ -472,7 +472,7 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=cyan'
 
 if [ "$DISTRO" = "Fedora Linux" ]; then
-  source /usr/share/zsh/site-functions/fzf
+  source /usr/share/zsh/site-functions/_fzf
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 else
   source /usr/share/fzf/completion.zsh
