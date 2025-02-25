@@ -446,51 +446,60 @@ vim.cmd('autocmd BufNew,BufRead *.service set filetype=gitconfig')
 
 -- statusline
 
--- TODO: fix for gstatus showing stale time in other panes
--- local file_modification_time = function()
---   if vim.bo.buftype ~= 'nofile' then
---     local bufnr = vim.api.nvim_get_current_buf()
---     local ftime = vim.fn.getftime(vim.fn.bufname(bufnr))
---     return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
---   end
---   return ''
--- end
---
--- function my_statusline()
---   local branch = vim.fn.git_branch()
---   local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
---   if branch and #branch > 0 then
---     branch = ' ├ '..branch
---   end
---
---   return ' %f%m ┃ '..workingdir..' ┃ '..branch..'%=%<%l,%c ┃ %P ┃ '..StatuslineModificationTime()
--- end
---
--- local working_dir = function()
---   return vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
--- end
---
--- local git_branch = function()
---     if vim.g.loaded_fugitive then
---         local branch = vim.fn.FugitiveHead()
---         if branch ~= '' then return branch end
---     end
---     return ''
--- end
--- function status_line()
---     return table.concat {
---         "├ " .. git_branch(), -- branch name
---         " ┃ " .. working_dir(),
---         " ┃ %f%m ", -- spacing
---         "%=%<%l,%c ┃ %P ┃ ",
---         file_modification_time()
---     }
--- end
+Statusline = {}
 
---vim.cmd[[ set statusline=%!luaeval('my_statusline()') ]]
---vim.opt.statusline = %{luaeval('my_statusline()')}
--- TODO: latest
---vim.opt.statusline = "%!v:lua.status_line()"
+local function statusline_git_branch()
+    if vim.g.loaded_fugitive then
+        local branch = vim.fn.FugitiveHead()
+        if branch ~= '' then 
+          branch = ' ┃ ├'..branch
+          return branch 
+        end
+    end
+    return ''
+end
+
+local function statusline_working_dir()
+    local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+    return workingdir
+end
+
+local function statusline_file_modification_time()
+    local ftime = vim.fn.getftime(vim.fn.expand('%'))
+    return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
+end
+
+
+Statusline.active = function()
+  return table.concat {
+    " %f", -- filename
+    "%m ", -- modify status
+    "┃ ", statusline_working_dir(),
+    statusline_git_branch(), -- branch name
+    "%=%<", -- start right justify and truncation point
+    "%l,%c ", -- line, column
+    "┃ %P ", -- percentage through file
+    "┃ ", statusline_file_modification_time(),
+  }
+end
+
+function Statusline.inactive()
+  return table.concat {
+    " %F", -- filename
+    "%m ", -- modify status
+    "%=%<", -- start right justify and truncation point
+    "%l,%c ", -- line, column
+    "┃ %P ", -- percentage through file
+  }
+end
+
+vim.api.nvim_exec([[
+  augroup Statusline
+  au!
+  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
+  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
+  augroup END
+]], false)
 
 -- auto open quickfix when populated
 vim.cmd('autocmd QuickFixCmdPost * copen')

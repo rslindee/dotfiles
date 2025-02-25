@@ -1,38 +1,3 @@
-" statusline config and helper functions
-function! StatuslineGit()
-  let l:branchname = FugitiveHead(7)
-  return strlen(l:branchname) > 0?'┃ ├'.l:branchname:''
-endfunction
-
-function! StatuslineModificationTime()
-  let ftime = getftime(expand('%'))
-  return ftime != -1 ? strftime('%m/%d/%y %H:%M', ftime) : ''
-endfunction
-
-function! StatuslineWorkingDir()
-  let workingdir = fnamemodify(getcwd(), ':t')
-  return workingdir
-endfunction
-
-" clear statusline
-set statusline=
-" filename
-set statusline+=\ %f
-" modified or modifiable flag
-set statusline+=%m\ "
-" current vim working directory
-set statusline+=┃\ %{StatuslineWorkingDir()}\ "
-" git repo information
-set statusline+=%{StatuslineGit()}
-" start right justify and truncation point
-set statusline+=%=%<
-" line and col
-set statusline+=%l,%c\ "
-" percent location in file
-set statusline+=┃\ %P\ "
-" file modification date/time
-set statusline+=┃\ %{StatuslineModificationTime()}\ "
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
