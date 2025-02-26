@@ -752,6 +752,46 @@ vim.keymap.set('n', '<leader>af', ':FzfLua grep<cr>')
 -- start fzf-piped live Rg search
 vim.keymap.set('n', '<leader>al', ':FzfLua live_grep<cr>')
 
+-- asyncrun
+-- stop asyncrun, redraw, and disable highlighting
+vim.api.nvim_set_keymap('n', '<leader><esc>', ':AsyncStop<CR>:redraw!<CR>:noh<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>/', ':silent! grep ""<Left>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>?', ':GrepAll ""<Left>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>f', ':silent! grep "<C-R><C-W>"<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>F', ':GrepAll "<C-R><C-W>"<CR>', { noremap = true, silent = true })
+-- search for all todo/fixme and put into quickfix list
+-- vim.api.nvim_set_keymap('n', '<leader>T', ':AsyncRun -program=grep \'(TODO\\|FIXME)\'<CR>', { noremap = true, silent = true })
+-- Run last make command
+vim.api.nvim_set_keymap('n', '<leader>mr', ':make<Up><CR>', { noremap = true, silent = true })
+-- Run make
+vim.api.nvim_set_keymap('n', '<leader>mm', ':silent make!<CR>:redraw!<CR>', { noremap = true, silent = true })
+-- make clean
+vim.api.nvim_set_keymap('n', '<leader>mc', ':make clean<CR>', { noremap = true, silent = true })
+-- run whatever defined makeprg
+vim.api.nvim_set_keymap('n', '<leader>ml', ':AsyncRun -program=make %<CR>', { noremap = true, silent = true })
+
+-- Misc
+-- use ripgrep, but include all hidden/ignored files
+vim.api.nvim_create_user_command('GrepAll', function(opts)
+  vim.cmd('silent grep! ' .. table.concat(opts.fargs, ' ') .. ' -uu')
+  vim.cmd('redraw!')
+end, { nargs = '+' })
+
+-- make asyncrun work with vim-fugitive
+vim.api.nvim_create_user_command('Make', function(opts)
+  vim.cmd('AsyncRun -program=make @ ' .. table.concat(opts.fargs, ' '))
+end, { bang = true, nargs = '*', complete = 'file' })
+
+vim.api.nvim_create_user_command('Gpush', function(opts)
+  local git_dir = vim.fn.fnameescape(vim.fn.FugitiveGitDir())
+  vim.cmd('AsyncRun' .. (opts.bang and '!' or '') .. ' -cwd=' .. git_dir .. ' git push ' .. table.concat(opts.fargs, ' '))
+end, { bang = true, bar = true, nargs = '*' })
+
+vim.api.nvim_create_user_command('Gfetch', function(opts)
+  local git_dir = vim.fn.fnameescape(vim.fn.FugitiveGitDir())
+  vim.cmd('AsyncRun' .. (opts.bang and '!' or '') .. ' -cwd=' .. git_dir .. ' git fetch ' .. table.concat(opts.fargs, ' '))
+end, { bang = true, bar = true, nargs = '*' })
+
 -- debugging
 --
 vim.keymap.set('n', ',c', function() require('dap').continue() end)
