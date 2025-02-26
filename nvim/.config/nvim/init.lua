@@ -942,5 +942,3 @@ vim.diagnostic.handlers.signs = {
     orig_signs_handler.hide(ns, bufnr)
   end,
 }
-
-vim.cmd('source ~/.config/nvim/vim_init.vim')
