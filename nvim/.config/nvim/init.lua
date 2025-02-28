@@ -594,6 +594,19 @@ vim.api.nvim_create_autocmd(
         desc = 'Automatically resize windows when the host window size changes.'
     }
 )
+-- toggle quickfix list
+local function toggle_quickfix()
+  local windows = vim.fn.getwininfo()
+  for _, win in pairs(windows) do
+    if win["quickfix"] == 1 then
+      vim.cmd.cclose()
+      return
+    end
+  end
+  vim.cmd.copen()
+end
+
+vim.keymap.set('n', '<Leader>q', toggle_quickfix, { desc = "Toggle Quickfix Window" })
 
 -- Gitsigns Navigation
 vim.keymap.set('n', ']c', function()
@@ -780,6 +793,8 @@ vim.api.nvim_set_keymap('n', '<leader>mr', ':make<Up><CR>', { noremap = true, si
 vim.api.nvim_set_keymap('n', '<leader>mm', ':silent make!<CR>:redraw!<CR>', { noremap = true, silent = true })
 -- make clean
 vim.api.nvim_set_keymap('n', '<leader>mc', ':make clean<CR>', { noremap = true, silent = true })
+-- make test
+vim.api.nvim_set_keymap('n', '<leader>mt', ':make test<CR>', { noremap = true, silent = true })
 -- run whatever defined makeprg
 vim.api.nvim_set_keymap('n', '<leader>ml', ':AsyncRun -program=make %<CR>', { noremap = true, silent = true })
 
