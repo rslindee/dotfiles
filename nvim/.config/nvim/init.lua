@@ -228,6 +228,8 @@ require("lazy").setup({
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
+  -- statusline plugin
+  "rebelot/heirline.nvim",
 
 })
 
@@ -441,6 +443,8 @@ vim.o.expandtab = true
 -- 1 tab == 2 spaces
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
+vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
+vim.opt_local.expandtab = true
 
 -- Themes
 vim.opt.background = "dark"
@@ -457,63 +461,108 @@ vim.cmd('autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml')
 -- Make systemd service files highlight as gitconfig files
 vim.cmd('autocmd BufNew,BufRead *.service set filetype=gitconfig')
 
--- statusline
+-- heirline
+local conditions = require("heirline.conditions")
+local utils = require("heirline.utils")
 
-Statusline = {}
+local Ruler = {
+    -- %l = current line number
+    -- %c = column number
+    -- %P = percentage through file of displayed window
+    provider = "%l,%c %P",
+}
 
-local function statusline_git_branch()
-    if vim.g.loaded_fugitive then
-        local branch = vim.fn.FugitiveHead()
-        if branch ~= '' then 
-          branch = ' ┃ ├'..branch
-          return branch 
-        end
+local FileLastModified = {
+    provider = function()
+        local ftime = vim.fn.getftime(vim.api.nvim_buf_get_name(0))
+        return (ftime > 0) and os.date('%m/%d/%y %H:%M', ftime)
     end
-    return ''
-end
+}
 
-local function statusline_working_dir()
-    local workingdir = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
-    return workingdir
-end
+local Git = {
+  condition = conditions.is_git_repo,
 
-local function statusline_file_modification_time()
-    local ftime = vim.fn.getftime(vim.fn.expand('%'))
-    return ftime ~= -1 and os.date('%m/%d/%y %H:%M', ftime) or ''
-end
+  init = function(self)
+      self.status_dict = vim.b.gitsigns_status_dict
+      self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+  end,
+
+  {   -- git branch name
+    provider = function(self)
+        return "├" .. self.status_dict.head
+    end,
+  },
+}
+
+local FileNameBlock = {
+    init = function(self)
+        self.filename = vim.api.nvim_buf_get_name(0)
+    end,
+}
+
+local FileName = {
+    provider = function(self)
+        -- first, trim the pattern relative to the current directory. For other
+        -- options, see :h filename-modifers
+        local filename = vim.fn.fnamemodify(self.filename, ":.")
+        if filename == "" then return "[No Name]" end
+        -- now, if the filename would occupy more than 1/4th of the available
+        -- space, we trim the file path to its initials
+        -- See Flexible Components section below for dynamic truncation
+        if not conditions.width_percent_below(#filename, 0.25) then
+            filename = vim.fn.pathshorten(filename)
+        end
+        return filename
+    end,
+}
+
+local FileFlags = {
+    {
+        condition = function()
+            return vim.bo.modified
+        end,
+        provider = "[+]",
+    },
+    {
+        condition = function()
+            return not vim.bo.modifiable or vim.bo.readonly
+        end,
+        provider = "[-]",
+    },
+}
 
 
-Statusline.active = function()
-  return table.concat {
-    " %f", -- filename
-    "%m ", -- modify status
-    "┃ ", statusline_working_dir(),
-    statusline_git_branch(), -- branch name
-    "%=%<", -- start right justify and truncation point
-    "%l,%c ", -- line, column
-    "┃ %P ", -- percentage through file
-    "┃ ", statusline_file_modification_time(),
-  }
-end
+local WorkingDir = {
+  provider = function()
+    return vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+  end
+}
 
-function Statusline.inactive()
-  return table.concat {
-    " %F", -- filename
-    "%m ", -- modify status
-    "%=%<", -- start right justify and truncation point
-    "%l,%c ", -- line, column
-    "┃ %P ", -- percentage through file
-  }
-end
+FileNameBlock = utils.insert(FileNameBlock,
+    utils.insert(FileName), -- a new table where FileName is a child of FileNameModifier
+    FileFlags,
+    { 
+      provider = '%<',
+  } -- this means that the statusline is cut here when there's not enough space
 
-vim.api.nvim_exec([[
-  augroup Statusline
-  au!
-  au WinEnter,BufEnter * setlocal statusline=%!v:lua.Statusline.active()
-  au WinLeave,BufLeave * setlocal statusline=%!v:lua.Statusline.inactive()
-  augroup END
-]], false)
+)
 
+local StatusLine = {
+  FileNameBlock,
+  { provider = " ┃ " },
+  WorkingDir,
+  { provider = " ┃ " },
+  Git,
+  { provider = "%=" }, -- align right
+  Ruler,
+  { provider = " ┃ " },
+  FileLastModified
+}
+
+
+require("heirline").setup({
+    statusline = StatusLine,
+})
 -- auto open quickfix when populated
 vim.cmd('autocmd QuickFixCmdPost * copen')
 
@@ -575,7 +624,6 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
 vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
 
--- TODO: this is problematic, as it seems to not work with uncrustify after loading a 2nd buffer
 -- run formatprg, retab, and trim whitespace on entire buffer
 function AutoformatCurrentFile()
   local save = vim.fn.winsaveview()
