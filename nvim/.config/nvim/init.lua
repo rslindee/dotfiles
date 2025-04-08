@@ -211,6 +211,7 @@ require("lazy").setup({
     build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
+      model = "gpt-4o",
       -- See Configuration section for rest
       window = {
         layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
