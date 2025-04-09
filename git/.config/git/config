@@ -19,6 +19,7 @@
   lf = diff-tree --no-commit-id --name-only -r
   pa = format-patch -1
   pf = push --force-with-lease
+  pfn = push --force-with-lease --no-verify
   pl = pull
   ps = push --set-upstream
   re = reset --hard HEAD
