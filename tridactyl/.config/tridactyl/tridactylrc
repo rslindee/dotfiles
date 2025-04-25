@@ -13,4 +13,7 @@ unbind /
 "bind N findnext -1
 "bind ,<Space> nohlsearch
 
+unbind >>
+unbind <<
+
 set modeindicator false
