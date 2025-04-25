@@ -497,7 +497,7 @@ local Git = {
 
   {   -- git branch name
     provider = function(self)
-        return "├" .. self.status_dict.head
+        return " ┃ ├" .. self.status_dict.head
     end,
   },
 }
@@ -558,7 +558,7 @@ local LspProgress = {
   provider = function()
     return require('lsp-progress').progress({
       format = function(messages)
-        local sign = "LSP"
+        local sign = " ┃ LSP"
         if #messages > 0 then
             return sign .. " " .. table.concat(messages, " ")
         end
@@ -583,9 +583,7 @@ local StatusLine = {
   FileNameBlock,
   { provider = " ┃ " },
   WorkingDir,
-  { provider = " ┃ " },
   Git,
-  { provider = " ┃ " },
   LspProgress,
   { provider = "%=" }, -- align right
   Ruler,
