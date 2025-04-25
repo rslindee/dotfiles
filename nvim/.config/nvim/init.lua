@@ -558,9 +558,10 @@ local LspProgress = {
   provider = function()
     return require('lsp-progress').progress({
       format = function(messages)
+        -- icon: nf-fa-gear \uf013
         local sign = " ┃ LSP"
         if #messages > 0 then
-            return sign .. " " .. table.concat(messages, " ")
+            return sign .. " "
         end
         local active_clients = vim.lsp.get_clients()
         if #active_clients > 0 then
