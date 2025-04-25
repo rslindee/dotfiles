@@ -231,6 +231,13 @@ require("lazy").setup({
   },
   -- statusline plugin
   "rebelot/heirline.nvim",
+  -- lsp status
+  {
+    'linrongbin16/lsp-progress.nvim',
+    config = function()
+      require('lsp-progress').setup()
+    end
+  }
 
 })
 
@@ -507,10 +514,10 @@ local FileName = {
         -- options, see :h filename-modifers
         local filename = vim.fn.fnamemodify(self.filename, ":.")
         if filename == "" then return "[No Name]" end
-        -- now, if the filename would occupy more than 1/4th of the available
+        -- if the filename would occupy more than a specified fraction of the available
         -- space, we trim the file path to its initials
         -- See Flexible Components section below for dynamic truncation
-        if not conditions.width_percent_below(#filename, 0.25) then
+        if not conditions.width_percent_below(#filename, 0.4) then
             filename = vim.fn.pathshorten(filename)
         end
         return filename
@@ -539,7 +546,7 @@ local WorkingDir = {
   end
 }
 
-FileNameBlock = utils.insert(FileNameBlock,
+local FileNameBlock = utils.insert(FileNameBlock,
     utils.insert(FileName), -- a new table where FileName is a child of FileNameModifier
     FileFlags,
     { 
@@ -547,6 +554,30 @@ FileNameBlock = utils.insert(FileNameBlock,
   } -- this means that the statusline is cut here when there's not enough space
 
 )
+local LspProgress = {
+  provider = function()
+    return require('lsp-progress').progress({
+      format = function(messages)
+        local sign = "LSP"
+        if #messages > 0 then
+            return sign .. " " .. table.concat(messages, " ")
+        end
+        local active_clients = vim.lsp.get_clients()
+        if #active_clients > 0 then
+            return sign
+        end
+        return ""
+      end,
+    })
+  end,
+  update = {
+    'User',
+    pattern = 'LspProgressStatusUpdated',
+    callback = vim.schedule_wrap(function()
+      vim.cmd('redrawstatus')
+    end),
+  }
+}
 
 local StatusLine = {
   FileNameBlock,
@@ -554,6 +585,8 @@ local StatusLine = {
   WorkingDir,
   { provider = " ┃ " },
   Git,
+  { provider = " ┃ " },
+  LspProgress,
   { provider = "%=" }, -- align right
   Ruler,
   { provider = " ┃ " },
