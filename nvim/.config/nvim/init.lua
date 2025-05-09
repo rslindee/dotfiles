@@ -950,15 +950,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local opts = { buffer = ev.buf }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
-    vim.keymap.set('n', '<leader>lr', vim.lsp.buf.rename)
-    vim.keymap.set('n', '<leader>lf', vim.lsp.buf.references)
-    vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
-    vim.keymap.set("n", "[g", vim.diagnostic.goto_prev)
     -- perform suggested fix
-    vim.keymap.set('n', '<leader>la', vim.lsp.buf.code_action)
     vim.keymap.set('n', '<leader>lh', ':ClangdSwitchSourceHeader<cr>')
   end,
 })
