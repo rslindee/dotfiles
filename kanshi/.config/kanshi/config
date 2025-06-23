@@ -1,10 +1,26 @@
+output "Dell Inc. DELL S3422DWG 4K11KK3" {
+  mode 3440x1440@99.982002Hz 
+  alias $dell_ultrawide
+}
+
 profile laptop { 
      output eDP-1 enable
      exec killall -q yambar; yambar &
 }
 
-profile external {
+profile laptop_generic_external {
     output "*" enable 
+    output eDP-1 disable
+    exec killall -q yambar; yambar &
+}
+
+profile desktop_dell_ultrawide {
+    output $dell_ultrawide enable
+    exec killall -q yambar; yambar &
+}
+
+profile laptop_dell_ultrawide {
+    output $dell_ultrawide enable
     output eDP-1 disable
     exec killall -q yambar; yambar &
 }
