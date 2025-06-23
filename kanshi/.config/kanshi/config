@@ -8,6 +8,12 @@ profile laptop {
      exec killall -q yambar; yambar &
 }
 
+profile laptop_dell_ultrawide {
+    output $dell_ultrawide enable
+    output eDP-1 disable
+    exec killall -q yambar; yambar &
+}
+
 profile laptop_generic_external {
     output "*" enable 
     output eDP-1 disable
@@ -16,11 +22,5 @@ profile laptop_generic_external {
 
 profile desktop_dell_ultrawide {
     output $dell_ultrawide enable
-    exec killall -q yambar; yambar &
-}
-
-profile laptop_dell_ultrawide {
-    output $dell_ultrawide enable
-    output eDP-1 disable
     exec killall -q yambar; yambar &
 }
