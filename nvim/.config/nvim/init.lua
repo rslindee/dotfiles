@@ -60,8 +60,36 @@ require("lazy").setup({
 
   -- run git commands, view status
   'tpope/vim-fugitive',
-  -- managing window splits
-  'mrjones2014/smart-splits.nvim',
+  -- manage window splits
+  {
+    'mrjones2014/smart-splits.nvim',
+    dependencies = {
+      'pogyomo/submode.nvim',
+    },
+    config = function()
+      -- Resize submode
+      local submode = require 'submode'
+      submode.create('WinResize', {
+        mode = 'n',
+        enter = '<C-w>r',
+        leave = { '<Esc>', 'q', '<C-c>' },
+        hook = {
+          on_enter = function()
+            vim.notify 'Use { h, j, k, l } to resize the window'
+          end,
+          on_leave = function()
+            vim.notify ''
+          end,
+        },
+        default = function(register)
+          register('h', require('smart-splits').resize_left, { desc = 'Resize left' })
+          register('j', require('smart-splits').resize_down, { desc = 'Resize down' })
+          register('k', require('smart-splits').resize_up, { desc = 'Resize up' })
+          register('l', require('smart-splits').resize_right, { desc = 'Resize right' })
+        end,
+      })
+    end,
+  },
 
   -- editing
   -- enhanced splitting and joining lines
@@ -311,6 +339,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
+vim.lsp.set_log_level("WARN")
 local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
@@ -828,9 +857,6 @@ vim.keymap.set('n', '<leader>ww', ':tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>', {si
 
 -- change current window directory to current file
 vim.keymap.set('n', '<leader>wc', ':lcd %:p:h<cr>', {silent = true})
-
--- Enter window resize mode
-vim.keymap.set('n', '<leader>W', ':SmartResizeMode<cr>')
 
 -- vim-easy-align
 -- start interactive EasyAlign in visual mode (e.g. vipga)
