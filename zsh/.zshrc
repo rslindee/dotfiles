@@ -47,7 +47,7 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export MERGE_EDITOR="nvim -d"
 
-export BROWSER=firefox
+#export BROWSER=firefox
 
 # less colors
 export LESS_TERMCAP_mb=$'\e[1;32m'
@@ -478,3 +478,6 @@ else
   source /usr/share/fzf/completion.zsh
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+
+# source .zshrc.local if it exists
+[ -f "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
