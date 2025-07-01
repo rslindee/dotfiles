@@ -878,8 +878,8 @@ vim.keymap.set('n', '<leader>as', ':FzfLua lines<cr>')
 vim.keymap.set('n', '<leader>aa', ':FzfLua blines<cr>')
 -- open fzf of modified files tracked by git
 vim.keymap.set('n', '<leader>ag', ':FzfLua git_files<cr>')
--- open fzf of ctags
-vim.keymap.set('n', '<leader>at', ':FzfLua tags<cr>')
+-- open fzf of treesitter symbols of current buffer
+vim.keymap.set('n', '<leader>at', ':FzfLua treesitter<cr>')
 -- start fzf-piped Rg search
 vim.keymap.set('n', '<leader>af', ':FzfLua grep<cr>')
 -- start fzf-piped live Rg search
