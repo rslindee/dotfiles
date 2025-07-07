@@ -339,7 +339,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("WARN")
+vim.lsp.set_log_level("ERROR")
 local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
@@ -978,7 +978,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
     vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
     vim.keymap.set('n', '<leader>lt', vim.lsp.buf.type_definition)
-    -- perform suggested fix
     vim.keymap.set('n', '<leader>lh', ':ClangdSwitchSourceHeader<cr>')
   end,
 })
