@@ -339,7 +339,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("ERROR")
+vim.lsp.set_log_level("OFF")
 local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
