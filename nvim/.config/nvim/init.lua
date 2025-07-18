@@ -817,6 +817,8 @@ vim.keymap.set('n', '<leader>yf', ':let @+=expand("%:t")<CR>')
 vim.keymap.set('n', '<leader>yr', ':let @+=expand("%:p:.")<CR>')
 -- yank absolute file path to clipboard
 vim.keymap.set('n', '<leader>ya', ':let @+=expand("%:p")<CR>')
+-- print file path relative to current vim dir
+vim.keymap.set('n', '<leader>Y', ':echo expand("%:p:.")<CR>')
 
 -- vim-devdocs
 -- look up current word cursor is on in devdocs.io
@@ -833,9 +835,7 @@ vim.keymap.set('n', '<leader>gd', ':Gvdiff<cr>')
 -- open git browser with all commits touching current file in new tab
 vim.keymap.set('n', '<leader>gh', ':Gclog<cr>')
 
--- toggle pane of tags
--- map('n', '<leader>T', ':SymbolsOutline<cr>')
--- You probably also want to set a keymap to toggle aerial
+-- toggle tag pane
 vim.keymap.set('n', '<leader>tt', '<cmd>AerialToggle!<CR>')
 
 -- hexmode
