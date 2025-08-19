@@ -354,7 +354,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("OFF")
+vim.lsp.set_log_level("INFO")
 local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
@@ -369,6 +369,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
     vim.diagnostic.open_float(nil, opts)
   end
 })
+-- rust lsp
 lspconfig.rust_analyzer.setup({
   -- Server-specific settings. See `:help lspconfig-setup`
   on_attach = function(client, bufnr)
@@ -400,8 +401,11 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+-- markdown lsp
 lspconfig.marksman.setup{}
+-- python lsp
 lspconfig.pyright.setup{}
+-- clang lsp
 lspconfig.clangd.setup{
   capabilities = capabilities,
   filetypes = { "c", "cpp" },
@@ -413,6 +417,19 @@ lspconfig.clangd.setup{
     showTodos = false,
   },
   handlers = {},
+}
+-- protocol buffers lsp
+lspconfig.protols.setup{}
+-- grammar lsp
+lspconfig.harper_ls.setup{
+  settings = {
+    ["harper-ls"] = {
+      linters = {
+        SentenceCapitalization = false,
+        SpellCheck = false
+      }
+    }
+  }
 }
 
 -- neodev.nvim setup for type checking, autocomplete, etc.
