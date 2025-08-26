@@ -239,7 +239,7 @@ require("lazy").setup({
     build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
-      model = "gpt-4o",
+      model = "gpt-4.1",
       -- See Configuration section for rest
       window = {
         layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
@@ -1014,19 +1014,9 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end,
 })
 
--- Toggle diagnostics
-vim.g["diagnostics_active"] = true
-function Toggle_diagnostics()
-    if vim.g.diagnostics_active then
-        vim.g.diagnostics_active = false
-        vim.diagnostic.disable()
-    else
-        vim.g.diagnostics_active = true
-        vim.diagnostic.enable()
-    end
-end
-
-vim.keymap.set('n', '<leader>ll', Toggle_diagnostics, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+vim.keymap.set('n', '<leader>ll', function() 
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 -- Explain current text selection
 vim.keymap.set('v', '<leader>ke', ':\'<,\'>CopilotChatExplain <cr>', { noremap = true, silent = true, desc = "CopilotChat - Explain visual selection"})
@@ -1043,16 +1033,15 @@ vim.keymap.set('v', '<leader>ko', ':\'<,\'>CopilotChatOptimize <cr>', { noremap 
 -- Document selected code
 vim.keymap.set('v', '<leader>kd', ':\'<,\'>CopilotChatDocs <cr>', { noremap = true, silent = true, desc = "CopilotChat - Document visual selection"})
 
--- Quick chat with Copilot of current buffer
-vim.keymap.set('n', "<leader>kc",
-    function()
-      local input = vim.fn.input("Quick Chat: ")
-      if input ~= "" then
-        require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
-      end
-    end,
-    { noremap = true, silent = true, desc = "CopilotChat - Quick chat"}
-    )
+-- Quick chat keybinding
+vim.keymap.set('n', '<leader>kc', function()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").buffer
+    })
+  end
+end, { desc = "CopilotChat - Quick chat" })
 
 -- Quick chat with Copilot about the current visual selection
 vim.keymap.set('v', '<leader>kv',
