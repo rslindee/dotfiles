@@ -240,6 +240,7 @@ require("lazy").setup({
     opts = {
       debug = true, -- Enable debugging
       model = "gpt-4.1",
+      sticky = {"#buffer", "#gitdiff"},
       -- See Configuration section for rest
       window = {
         layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace'
@@ -354,7 +355,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("INFO")
+vim.lsp.set_log_level("ERROR")
 local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
@@ -426,7 +427,8 @@ lspconfig.harper_ls.setup{
     ["harper-ls"] = {
       linters = {
         SentenceCapitalization = false,
-        SpellCheck = false
+        SpellCheck = false,
+        ToDoHyphen = false,
       }
     }
   }
