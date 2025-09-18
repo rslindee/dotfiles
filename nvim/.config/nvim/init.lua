@@ -356,7 +356,6 @@ vim.diagnostic.config({
 
 -- Setup language servers.
 vim.lsp.set_log_level("ERROR")
-local lspconfig = require('lspconfig')
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
   callback = function()
@@ -371,7 +370,7 @@ vim.api.nvim_create_autocmd("CursorHold", {
   end
 })
 -- rust lsp
-lspconfig.rust_analyzer.setup({
+vim.lsp.config('rust_analyzer', {
   -- Server-specific settings. See `:help lspconfig-setup`
   on_attach = function(client, bufnr)
       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
@@ -402,12 +401,15 @@ lspconfig.rust_analyzer.setup({
     },
   },
 })
+vim.lsp.enable({'rust_analyzer'})
 -- markdown lsp
-lspconfig.marksman.setup{}
+vim.lsp.config('marksman', {})
+vim.lsp.enable({'marksman'})
 -- python lsp
-lspconfig.pyright.setup{}
+vim.lsp.config('pyright', {})
+vim.lsp.enable({'pyright'})
 -- clang lsp
-lspconfig.clangd.setup{
+vim.lsp.config('clangd', {
   capabilities = capabilities,
   filetypes = { "c", "cpp" },
   init_options = {
@@ -418,11 +420,13 @@ lspconfig.clangd.setup{
     showTodos = false,
   },
   handlers = {},
-}
+})
+vim.lsp.enable({'clangd'})
 -- protocol buffers lsp
-lspconfig.protols.setup{}
+vim.lsp.config('protols', {})
+vim.lsp.enable({'protols'})
 -- grammar lsp
-lspconfig.harper_ls.setup{
+vim.lsp.config('harper_ls', {
   settings = {
     ["harper-ls"] = {
       linters = {
@@ -432,7 +436,8 @@ lspconfig.harper_ls.setup{
       }
     }
   }
-}
+})
+vim.lsp.enable({'harper_ls'})
 
 -- neodev.nvim setup for type checking, autocomplete, etc.
 require("neodev").setup({
