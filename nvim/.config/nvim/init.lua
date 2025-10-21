@@ -216,7 +216,10 @@ require("lazy").setup({
     cmd = "Copilot",
     event = "InsertEnter",
     config = function()
-      require("copilot").setup({})
+      require("copilot").setup({
+        -- Always use system node version, as build env scripts may use old versions
+        copilot_node_command = "/usr/bin/node"
+      })
     end,
   },
   {
