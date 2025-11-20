@@ -167,6 +167,20 @@ require("lazy").setup({
   'skywind3000/asyncrun.vim',
   -- enhanced tmux support/commands
   'tpope/vim-tbone',
+  -- TODO: remove all mappings using brackets
+  -- Jump to next conflict marker
+  -- function NextConflict()
+  --   vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
+  -- end
+
+  -- Jump to previous conflict marker
+  -- function PrevConflict()
+  --   vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
+  -- end
+
+  -- Example mappings
+  -- vim.keymap.set('n', ']n', NextConflict, { desc = 'Next conflict marker' })
+  -- vim.keymap.set('n', '[n', PrevConflict, { desc = 'Previous conflict marker' })
   -- extra keymaps
   'tpope/vim-unimpaired',
   -- repeatable movements
