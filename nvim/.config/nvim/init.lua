@@ -402,8 +402,9 @@ vim.lsp.config('rust_analyzer', {
       diagnostics = {
         enable = true;
       },
+      checkOnSave = true,
       -- Add clippy lints for Rust.
-      checkOnSave = {
+      check = {
         allFeatures = true,
         command = "clippy",
         extraArgs = {
@@ -454,7 +455,8 @@ vim.lsp.config('harper_ls', {
     }
   }
 })
-vim.lsp.enable({'harper_ls'})
+-- TODO: disabling harper for now, as it has a lot of false positives
+-- vim.lsp.enable({'harper_ls'})
 
 -- neodev.nvim setup for type checking, autocomplete, etc.
 require("neodev").setup({
@@ -1010,6 +1012,11 @@ vim.keymap.set('n', '<leader>vu', ':Lazy sync<cr>')
 
 -- map esc when in terminal mode
 vim.keymap.set('t', '<esc>', '<C-\\><C-n>')
+
+-- Use fzf for path completion
+vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>",
+  function() FzfLua.complete_path() end,
+  { silent = true, desc = "Fuzzy complete path" })
 
 -- vim-fugitive
 -- blame
