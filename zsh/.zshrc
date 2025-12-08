@@ -135,6 +135,9 @@ alias dfa='df -h /mnt/*'
 # Map vim to nvim
 alias vim='nvim'
 
+# Start music player and prevent sleep
+alias jamz='systemd-inhibit ncmpcpp'
+
 # Quick open with xdg-open
 o()
 {
