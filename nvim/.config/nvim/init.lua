@@ -256,7 +256,7 @@ require("lazy").setup({
     build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
-      model = "gpt-4.1",
+      model = "gpt-5.1-codex",
       sticky = {"#buffer", "#gitdiff"},
       -- See Configuration section for rest
       window = {
@@ -372,7 +372,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("ERROR")
+vim.lsp.set_log_level("OFF")
 vim.api.nvim_create_autocmd("CursorHold", {
   buffer = bufnr,
   callback = function()
@@ -648,7 +648,7 @@ local LspProgress = {
         -- icon: nf-fa-gear \uf013
         local sign = " ┃ LSP"
         if #messages > 0 then
-            return sign .. " "
+            return sign .. "*"
         end
         local active_clients = vim.lsp.get_clients()
         if #active_clients > 0 then
