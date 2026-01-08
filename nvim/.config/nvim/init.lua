@@ -167,20 +167,6 @@ require("lazy").setup({
   'skywind3000/asyncrun.vim',
   -- enhanced tmux support/commands
   'tpope/vim-tbone',
-  -- TODO: remove all mappings using brackets
-  -- Jump to next conflict marker
-  -- function NextConflict()
-  --   vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
-  -- end
-
-  -- Jump to previous conflict marker
-  -- function PrevConflict()
-  --   vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
-  -- end
-
-  -- Example mappings
-  -- vim.keymap.set('n', ']n', NextConflict, { desc = 'Next conflict marker' })
-  -- vim.keymap.set('n', '[n', PrevConflict, { desc = 'Previous conflict marker' })
   -- extra keymaps
   'tpope/vim-unimpaired',
   -- repeatable movements
@@ -256,7 +242,7 @@ require("lazy").setup({
     build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
-      model = "gpt-5.1-codex",
+      model = "gpt-5",
       sticky = {"#buffer", "#gitdiff"},
       -- See Configuration section for rest
       window = {
@@ -835,6 +821,23 @@ vim.keymap.set('n', '<leader>c', ':tabnew<cr>')
 -- quickfix shortcuts
 vim.keymap.set('n', '<c-n>', ':cn<cr>')
 vim.keymap.set('n', '<c-p>', ':cp<cr>')
+
+
+-- Jump to next conflict marker
+function NextConflict()
+  vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
+end
+
+-- Jump to previous conflict marker
+function PrevConflict()
+  vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
+end
+
+-- conflict jump mappings
+vim.keymap.set('n', ']n', NextConflict, { desc = 'Next conflict marker' })
+vim.keymap.set('n', '[n', PrevConflict, { desc = 'Previous conflict marker' })
+
+vim.keymap.set('n', 'gld', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 
 -- wrapped movement
 vim.keymap.set('n', 'j', 'gj')
