@@ -102,7 +102,7 @@ riverctl map normal Super+Shift 0 set-view-tags $all_tags
 riverctl map normal Super W focus-previous-tags
 
 # toggle float
-riverctl map normal Super Space toggle-float
+riverctl map normal Super T toggle-float
 
 # toggle fullscreen
 riverctl map normal Super Z toggle-fullscreen
