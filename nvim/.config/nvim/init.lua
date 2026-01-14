@@ -242,7 +242,7 @@ require("lazy").setup({
     build = "make tiktoken",
     opts = {
       debug = true, -- Enable debugging
-      model = "gpt-5",
+      model = "gpt-5.2",
       sticky = {"#buffer", "#gitdiff"},
       -- See Configuration section for rest
       window = {
@@ -631,8 +631,7 @@ local LspProgress = {
   provider = function()
     return require('lsp-progress').progress({
       format = function(messages)
-        -- icon: nf-fa-gear \uf013
-        local sign = " ┃ LSP"
+        local sign = " ┃ LSP "
         if #messages > 0 then
             return sign .. "*"
         end
