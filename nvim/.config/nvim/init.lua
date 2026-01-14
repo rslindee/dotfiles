@@ -261,6 +261,24 @@ require("lazy").setup({
     },
     -- See Commands section for default commands if you want to lazy load on them
   },
+  -- code coverage. requires grcov be installed
+  {
+    "andythigpen/nvim-coverage",
+    version = "*",
+    config = function()
+      require("coverage").setup({
+        auto_reload = true,
+        lang = {
+          rust = {
+            project_files_only = true,
+            project_files = {
+              "services/app/as-nimbus/src/**",
+            },
+          }
+        },
+      })
+    end,
+  },
   -- statusline plugin
   "rebelot/heirline.nvim",
   -- lsp status
@@ -833,10 +851,20 @@ function PrevConflict()
 end
 
 -- conflict jump mappings
-vim.keymap.set('n', ']n', NextConflict, { desc = 'Next conflict marker' })
-vim.keymap.set('n', '[n', PrevConflict, { desc = 'Previous conflict marker' })
+vim.keymap.set('n', 'gln', NextConflict, { desc = 'Next conflict marker' })
+vim.keymap.set('n', 'gnN', PrevConflict, { desc = 'Previous conflict marker' })
 
 vim.keymap.set('n', 'gld', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+vim.keymap.set('n', 'glD', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
+
+vim.keymap.set('n', 'glc', ']c', { remap = true, desc = 'Next diff change' })
+vim.keymap.set('n', 'glC', '[c', { remap = true, desc = 'Prev diff change' })
+
+vim.keymap.set('n', 'glt', function() require('coverage').jump_next('uncovered') end, { desc = 'Next uncovered coverage' })
+vim.keymap.set('n', 'glT', function() require('coverage').jump_prev('uncovered') end, { desc = 'Prev uncovered coverage' })
+
+-- vim.keymap.set('n', 'glt', coverage.jump_next, { desc = 'Next coverage' })
+-- vim.keymap.set('n', 'glT', coverage.jump_prev, { desc = 'Prev coverage' })
 
 -- wrapped movement
 vim.keymap.set('n', 'j', 'gj')
@@ -1124,3 +1152,8 @@ vim.diagnostic.handlers.signs = {
     orig_signs_handler.hide(ns, bufnr)
   end,
 }
+
+-- Load code coverage
+vim.keymap.set('n', '<leader>T', ':Coverage<CR>')
+-- Toggle code coverage
+vim.keymap.set('n', '<leader>tc', ':CoverageToggle<CR>')
