@@ -20,8 +20,6 @@ vim.api.nvim_set_keymap("x", "<leader>", "<space>", { noremap = true, silent = t
 
 -- Plugins
 require("lazy").setup({
-	-- plantuml syntax highlighting
-	"aklt/plantuml-syntax",
 	-- colorize values
 	"chrisbra/Colorizer",
 	-- gcov syntax highlighting
@@ -51,6 +49,7 @@ require("lazy").setup({
 	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	-- gruvbox theme
 	"sainnhe/gruvbox-material",
+
 	-- version control
 	-- view git information
 	{
@@ -150,8 +149,7 @@ require("lazy").setup({
 			"nvim-neotest/nvim-nio",
 		},
 	},
-	-- neodev
-	{ "folke/neodev.nvim", opts = {} },
+	"folke/lazydev.nvim",
 	-- bazel build integration w/ maktaba dep
 	{
 		"bazelbuild/vim-bazel",
@@ -167,10 +165,6 @@ require("lazy").setup({
 	-- TODO: replace with overseer
 	-- call commands async
 	"skywind3000/asyncrun.vim",
-	-- enhanced tmux support/commands
-	"tpope/vim-tbone",
-	-- extra keymaps
-	"tpope/vim-unimpaired",
 	-- repeatable movements
 	{
 		"ghostbuster91/nvim-next",
@@ -188,13 +182,11 @@ require("lazy").setup({
 	"neovim/nvim-lspconfig",
 	-- markdown preview
 	{
-		"Tweekism/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
-		build = function()
-			vim.cmd([[Lazy load markdown-preview.nvim]])
-			vim.fn["mkdp#util#install"]()
-		end,
+		"brianhuster/live-preview.nvim",
+		dependencies = {
+			-- You can choose one of the following pickers
+			"ibhagwan/fzf-lua",
+		},
 	},
 	-- markdown toc generation
 	{
@@ -263,7 +255,7 @@ require("lazy").setup({
 		},
 		-- See Commands section for default commands if you want to lazy load on them
 	},
-	-- code coverage. requires grcov be installed
+	-- code coverage. requires grcov and llvm-cov be installed
 	{
 		"andythigpen/nvim-coverage",
 		version = "*",
@@ -463,12 +455,10 @@ vim.lsp.config("harper_ls", {
 		},
 	},
 })
--- TODO: disabling harper for now, as it has a lot of false positives
--- vim.lsp.enable({'harper_ls'})
 
--- neodev.nvim setup for type checking, autocomplete, etc.
-require("neodev").setup({
-	library = { plugins = { "nvim-dap-ui" }, types = true },
+-- lazydev.nvim setup for type checking, autocomplete, etc.
+require("lazydev").setup({
+	library = { "nvim-dap-ui" },
 })
 
 require("dapui").setup()
