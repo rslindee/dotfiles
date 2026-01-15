@@ -750,6 +750,7 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 -- TODO: move these to ftplugin dirs
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
 vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
+vim.api.nvim_command("autocmd FileType lua setlocal formatprg=stylua\\ -")
 
 -- run formatprg, retab, and trim whitespace on entire buffer
 function AutoformatCurrentFile()
@@ -1107,8 +1108,6 @@ vim.keymap.set("n", "<leader>gs", ":Git <cr>")
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
-		-- disable LSP formatting when using the |gq| command
-		vim.bo[ev.buf].formatexpr = nil
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
 
