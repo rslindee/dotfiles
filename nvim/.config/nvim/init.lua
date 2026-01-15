@@ -47,6 +47,8 @@ require("lazy").setup({
   },
   -- nvim treesitter
   { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
+  -- treesitter textobjects
+  { 'nvim-treesitter/nvim-treesitter-textobjects', dependencies = { 'nvim-treesitter/nvim-treesitter' } },
   -- gruvbox theme
   'sainnhe/gruvbox-material',
   -- version control
@@ -267,9 +269,10 @@ require("lazy").setup({
     version = "*",
     config = function()
       require("coverage").setup({
-        auto_reload = true,
+        auto_reload = false,
         lang = {
           rust = {
+            coverage_command = "( LLVM_PROFILE_FILE=\"llvm_profile.profraw\" cargo llvm-cov --package as-nimbus >/dev/null 2>&1 ) && grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN",
             project_files_only = true,
             project_files = {
               "services/app/as-nimbus/src/**",
@@ -805,8 +808,8 @@ vim.keymap.set('n', '<leader>td', ':Gitsigns toggle_deleted<CR>')
 vim.keymap.set({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
 
 require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "c", "lua", "vim", "query", "markdown" },
+  -- A list of parser names, or "all"
+  ensure_installed = { "c", "lua", "vim", "query", "markdown", "rust" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -823,6 +826,31 @@ require'nvim-treesitter.configs'.setup {
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
+  },
+
+  -- requires textobjects plugin
+  textobjects = {
+    select = {
+      enable = true,
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true,
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+      },
+      goto_previous_start = {
+    	  ["[m"] = "@function.outer",
+      },
+    },
   },
 }
 
@@ -862,9 +890,6 @@ vim.keymap.set('n', 'glC', '[c', { remap = true, desc = 'Prev diff change' })
 
 vim.keymap.set('n', 'glt', function() require('coverage').jump_next('uncovered') end, { desc = 'Next uncovered coverage' })
 vim.keymap.set('n', 'glT', function() require('coverage').jump_prev('uncovered') end, { desc = 'Prev uncovered coverage' })
-
--- vim.keymap.set('n', 'glt', coverage.jump_next, { desc = 'Next coverage' })
--- vim.keymap.set('n', 'glT', coverage.jump_prev, { desc = 'Prev coverage' })
 
 -- wrapped movement
 vim.keymap.set('n', 'j', 'gj')
@@ -1153,7 +1178,19 @@ vim.diagnostic.handlers.signs = {
   end,
 }
 
--- Load code coverage
-vim.keymap.set('n', '<leader>T', ':Coverage<CR>')
+-- Generate and display code coverage
+vim.keymap.set('n', '<leader>tg', ':Coverage<CR>')
 -- Toggle code coverage
 vim.keymap.set('n', '<leader>tc', ':CoverageToggle<CR>')
+
+
+-- Select previous function.outer (acts like a textobject)
+vim.keymap.set({ "x", "o" }, "aF", function()
+  vim.cmd("normal! [m")
+  require("nvim-treesitter.textobjects.select").select_textobject("@function.outer", "textobjects")
+end, { desc = "Select previous function.outer" })
+
+vim.keymap.set({ "x", "o" }, "iF", function()
+  vim.cmd("normal! [m")
+  require("nvim-treesitter.textobjects.select").select_textobject("@function.inner", "textobjects")
+end, { desc = "Select previous function.inner" })
