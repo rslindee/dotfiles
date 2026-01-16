@@ -118,8 +118,6 @@ require("lazy").setup({
 	},
 	-- reorder delimited items
 	"machakann/vim-swap",
-	-- enhanced replace/substitution
-	"svermeulen/vim-subversive",
 	-- swap text using motions
 	"tommcdo/vim-exchange",
 	-- advanced substitution
@@ -374,7 +372,6 @@ vim.diagnostic.config({
 -- Setup language servers.
 vim.lsp.set_log_level("OFF")
 vim.api.nvim_create_autocmd("CursorHold", {
-	buffer = bufnr,
 	callback = function()
 		local opts = {
 			focusable = false,
@@ -537,7 +534,6 @@ vim.o.expandtab = true
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
 vim.o.softtabstop = 2 -- Number of spaces inserted instead of a TAB character
-vim.opt_local.expandtab = true
 
 -- Themes
 vim.opt.background = "dark"
@@ -905,17 +901,6 @@ vim.keymap.set("n", "<leader>0", ":tablast<cr>")
 
 -- remap ` jumping to ', since I never use the former
 vim.keymap.set("n", "'", "`")
-
--- vim-subversive
-vim.keymap.set("n", "s", "<plug>(SubversiveSubstitute)")
-vim.keymap.set("n", "ss", "<plug>(SubversiveSubstituteLine)")
-vim.keymap.set("n", "S", "<plug>(SubversiveSubstituteToEndOfLine)")
-vim.keymap.set("n", "<leader>s", "<plug>(SubversiveSubstituteRangeConfirm)")
-vim.keymap.set("x", "<leader>s", "<plug>(SubversiveSubstituteRangeConfirm)")
-vim.keymap.set("n", "<leader>ss", "<plug>(SubversiveSubstituteWordRangeConfirm)")
-vim.keymap.set("n", "<leader><leader>s", "<plug>(SubversiveSubvertRange)")
-vim.keymap.set("x", "<leader><leader>s", "<plug>(SubversiveSubvertRange)")
-vim.keymap.set("n", "<leader><leader>ss", "<plug>(SubversiveSubvertWordRange)")
 
 -- De-dupe and sort visual selection
 vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>")
