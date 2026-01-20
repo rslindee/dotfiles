@@ -21,6 +21,7 @@
   pf = push --force-with-lease
   pfn = push --force-with-lease --no-verify
   pl = pull
+  pr = pull --rebase origin
   ps = push --set-upstream
   psn= push --set-upstream --no-verify
   re = reset --hard HEAD
