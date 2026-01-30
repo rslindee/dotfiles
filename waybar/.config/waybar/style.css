@@ -1,0 +1,47 @@
+* {
+  font-family: terminus, monospace;
+  font-size: 14px;
+  min-height: 0;
+  background: black;
+  color: white;
+}
+
+.modules-right > widget > * {
+    margin: 0 10px 0 0;
+}
+
+#tags button:hover {
+  opacity: 1;
+  background: inherit;
+  box-shadow: none;
+  transition: none;
+
+  border-radius: 0;
+  outline: none;
+}
+
+#tags button * {
+  background: transparent;
+}
+
+#tags button {
+    background: transparent;
+    border-bottom: 3px solid transparent;
+    color: #ffffff;
+    padding: 0 5px;
+    transition: none;
+}
+
+#tags button.focused {
+    background: #64727D;
+    border-bottom: 3px solid #ffffff;
+    border-radius: 0;
+}
+
+#tags button.urgent {
+    background-color: #eb4d4b;
+}
+
+#wireplumber.muted {
+  color: #FF0000; /* pick whatever */
+}

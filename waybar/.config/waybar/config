@@ -1,0 +1,42 @@
+{
+    "layer": "top",
+    "modules-left": ["river/tags"],
+    "modules-center": ["ext/workspaces", "river/window"],
+    "modules-right": ["network", "battery", "wireplumber", "clock"],
+
+    "river/window": {
+        "format": "{}",
+    },
+
+    "battery": {
+        "format-charging": "[▲{capacity}%]",
+        "format-plugged": "[▲{capacity}%]",
+        "format-discharging": "[▼{capacity}%]"
+    },
+
+    "clock": {
+        "tooltip": false,
+        "format": "{:%m/%d/%Y %H:%M}"
+    },
+
+    "network": {
+      "format-wifi": "[{essid} ({signalStrength}%)]",
+      "format-ethernet": "[{ifname}]",
+      "format-disconnected": "", //An empty format will hide the module.
+    },
+
+    // currently experimental/unspupported
+    "ext/workspaces": {
+        "active-only": true, 
+        "format": "[{icon}{title}]"
+    },
+
+    "river/tags": {
+      "hide-vacant": true
+    },
+
+    "wireplumber": {
+      "format": "[♫:{volume}%]",
+    }
+}
+
