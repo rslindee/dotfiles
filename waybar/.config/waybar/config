@@ -6,9 +6,11 @@
 
     "river/window": {
         "format": "{}",
+        "tooltip": false,
     },
 
     "battery": {
+        "format": "[▼{capacity}%]",
         "format-charging": "[▲{capacity}%]",
         "format-plugged": "[▲{capacity}%]",
         "format-discharging": "[▼{capacity}%]"
@@ -23,6 +25,7 @@
       "format-wifi": "[{essid} ({signalStrength}%)]",
       "format-ethernet": "[{ifname}]",
       "format-disconnected": "", //An empty format will hide the module.
+      "tooltip": false,
     },
 
     // currently experimental/unspupported

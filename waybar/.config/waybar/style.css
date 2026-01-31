@@ -32,6 +32,19 @@
     transition: none;
 }
 
+/* hack to hide empty tags at start */
+#tags button:not(.occupied):not(.focused) {
+	font-size: 0;
+	min-width: 0;
+	min-height: 0;
+	margin: -17px;
+	padding: 0;
+	border: 0;
+	opacity: 0;
+	box-shadow: none;
+	background-color: transparent;
+}
+
 #tags button.focused {
     background: #64727D;
     border-bottom: 3px solid #ffffff;
@@ -43,5 +56,5 @@
 }
 
 #wireplumber.muted {
-  color: #FF0000; /* pick whatever */
+  color: #FF0000;
 }
