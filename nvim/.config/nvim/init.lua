@@ -278,7 +278,19 @@ require("lazy").setup({
 	{
 		"linrongbin16/lsp-progress.nvim",
 		config = function()
-			require("lsp-progress").setup()
+			require("lsp-progress").setup({
+				format = function(messages)
+					local sign = " ┃ LSP "
+					if #messages > 0 then
+						return sign .. "*"
+					end
+					local active_clients = vim.lsp.get_clients()
+					if #active_clients > 0 then
+						return sign
+					end
+					return ""
+				end,
+			})
 		end,
 	},
 	-- enhanced search
@@ -636,29 +648,18 @@ local FileNameBlock = utils.insert(
 		provider = "%<",
 	} -- this means that the statusline is cut here when there's not enough space
 )
+
 local LspProgress = {
-	provider = function()
-		return require("lsp-progress").progress({
-			format = function(messages)
-				local sign = " ┃ LSP "
-				if #messages > 0 then
-					return sign .. "*"
-				end
-				local active_clients = vim.lsp.get_clients()
-				if #active_clients > 0 then
-					return sign
-				end
-				return ""
-			end,
-		})
-	end,
-	update = {
-		"User",
-		pattern = "LspProgressStatusUpdated",
-		callback = vim.schedule_wrap(function()
-			vim.cmd("redrawstatus")
-		end),
-	},
+  provider = function()
+    return require('lsp-progress').progress()
+  end,
+  update = {
+    'User',
+    pattern = 'LspProgressStatusUpdated',
+    callback = vim.schedule_wrap(function()
+      vim.cmd('redrawstatus')
+    end),
+  }
 }
 
 local StatusLine = {
