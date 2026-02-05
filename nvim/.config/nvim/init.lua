@@ -163,27 +163,27 @@ require("lazy").setup({
 	-- TODO: replace with overseer
 	-- call commands async
 	"skywind3000/asyncrun.vim",
-  -- repeatble semicolon/colon motions
-  {
-    'mawkler/demicolon.nvim',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    opts = {
-      keymaps = {
-        horizontal_motions = false,
-        -- Don't create default ; and , keymaps, I'll create my own
-        repeat_motions = false,
-        -- `f` is removed from this table because we have mapped it to
-        -- `@function.outer` with nvim-treesitter-textobjects
-        disabled_keys = { "p", "I", "A", "i" },
-      },
-    },
-    config = function(_, opts)
-      require("demicolon").setup(opts)
-    end,
-  },
+	-- repeatble semicolon/colon motions
+	{
+		"mawkler/demicolon.nvim",
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-treesitter/nvim-treesitter-textobjects",
+		},
+		opts = {
+			keymaps = {
+				horizontal_motions = false,
+				-- Don't create default ; and , keymaps, I'll create my own
+				repeat_motions = false,
+				-- `f` is removed from this table because we have mapped it to
+				-- `@function.outer` with nvim-treesitter-textobjects
+				disabled_keys = { "p", "I", "A", "i" },
+			},
+		},
+		config = function(_, opts)
+			require("demicolon").setup(opts)
+		end,
+	},
 	-- auto generate doxygen documentation
 	"vim-scripts/DoxygenToolkit.vim",
 	-- lsp plugins
@@ -660,16 +660,16 @@ local FileNameBlock = utils.insert(
 )
 
 local LspProgress = {
-  provider = function()
-    return require('lsp-progress').progress()
-  end,
-  update = {
-    'User',
-    pattern = 'LspProgressStatusUpdated',
-    callback = vim.schedule_wrap(function()
-      vim.cmd('redrawstatus')
-    end),
-  }
+	provider = function()
+		return require("lsp-progress").progress()
+	end,
+	update = {
+		"User",
+		pattern = "LspProgressStatusUpdated",
+		callback = vim.schedule_wrap(function()
+			vim.cmd("redrawstatus")
+		end),
+	},
 }
 
 local StatusLine = {
@@ -845,14 +845,14 @@ require("nvim-treesitter.configs").setup({
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
-        [']f'] = '@function.outer',
-        [']a'] = '@argument.outer',
-        [']m'] = '@method.outer',
+				["]f"] = "@function.outer",
+				["]a"] = "@argument.outer",
+				["]m"] = "@method.outer",
 			},
 			goto_previous_start = {
-        ['[f'] = '@function.outer',
-        ['[a'] = '@argument.outer',
-        ['[m'] = '@method.outer',
+				["[f"] = "@function.outer",
+				["[a"] = "@argument.outer",
+				["[m"] = "@method.outer",
 			},
 		},
 	},
@@ -1234,5 +1234,8 @@ vim.keymap.set({ "x", "o" }, "iF", function()
 end, { desc = "Select previous function.inner" })
 
 -- Demicolon repeatable motions
-vim.keymap.set({"n", "x", "o" }, ';', require('demicolon.repeat_jump').next)
-vim.keymap.set({"n", "x", "o" }, ',', require('demicolon.repeat_jump').prev)
+vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").next)
+vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").prev)
+
+-- Toggle spellcheck
+vim.keymap.set("n", "<leader>S", ":setlocal spell!<cr>")
