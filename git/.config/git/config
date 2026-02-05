@@ -8,9 +8,11 @@
   co = checkout
   cl = clone --recursive
   cm = commit
-  dc = diff --cached
+  # diff against merge base with main 
+  db = diff main...
   df = diff
   dr = push origin --delete
+  ds = diff --staged
   fc = clean -ffxd
   fe = fetch --prune --tags --all
   la = log -1 --stat --patch
