@@ -163,17 +163,27 @@ require("lazy").setup({
 	-- TODO: replace with overseer
 	-- call commands async
 	"skywind3000/asyncrun.vim",
-	-- repeatable movements
-	{
-		"ghostbuster91/nvim-next",
-		config = function()
-			require("nvim-next").setup({
-				default_mappings = {
-					repeat_style = "original",
-				},
-			})
-		end,
-	},
+  -- repeatble semicolon/colon motions
+  {
+    'mawkler/demicolon.nvim',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-treesitter/nvim-treesitter-textobjects',
+    },
+    opts = {
+      keymaps = {
+        horizontal_motions = false,
+        -- Don't create default ; and , keymaps, I'll create my own
+        repeat_motions = false,
+        -- `f` is removed from this table because we have mapped it to
+        -- `@function.outer` with nvim-treesitter-textobjects
+        disabled_keys = { "p", "I", "A", "i" },
+      },
+    },
+    config = function(_, opts)
+      require("demicolon").setup(opts)
+    end,
+  },
 	-- auto generate doxygen documentation
 	"vim-scripts/DoxygenToolkit.vim",
 	-- lsp plugins
@@ -835,10 +845,14 @@ require("nvim-treesitter.configs").setup({
 			enable = true,
 			set_jumps = true,
 			goto_next_start = {
-				["]m"] = "@function.outer",
+        [']f'] = '@function.outer',
+        [']a'] = '@argument.outer',
+        [']m'] = '@method.outer',
 			},
 			goto_previous_start = {
-				["[m"] = "@function.outer",
+        ['[f'] = '@function.outer',
+        ['[a'] = '@argument.outer',
+        ['[m'] = '@method.outer',
 			},
 		},
 	},
@@ -1027,34 +1041,34 @@ vim.api.nvim_create_user_command("Gfetch", function(opts)
 end, { bang = true, bar = true, nargs = "*" })
 
 -- debugging
---
-vim.keymap.set("n", ",c", function()
-	require("dap").continue()
-end)
-vim.keymap.set("n", ",o", function()
-	require("dap").step_over()
-end)
-vim.keymap.set("n", ",s", function()
-	require("dap").step_into()
-end)
-vim.keymap.set("n", ",S", function()
-	require("dap").step_out()
-end)
-vim.keymap.set("n", ",b", function()
-	require("dap").toggle_breakpoint()
-end)
-vim.keymap.set("n", ",r", function()
-	require("dap").repl.open()
-end)
-vim.keymap.set("n", ",dl", function()
-	require("dap").run_last()
-end)
-vim.keymap.set({ "n", "v" }, ",h", function()
-	require("dap.ui.widgets").hover()
-end)
-vim.keymap.set({ "n", "v" }, ",p", function()
-	require("dap.ui.widgets").preview()
-end)
+-- TODO: figure out alternate prefix than ,
+-- vim.keymap.set("n", ",c", function()
+-- 	require("dap").continue()
+-- end)
+-- vim.keymap.set("n", ",o", function()
+-- 	require("dap").step_over()
+-- end)
+-- vim.keymap.set("n", ",s", function()
+-- 	require("dap").step_into()
+-- end)
+-- vim.keymap.set("n", ",S", function()
+-- 	require("dap").step_out()
+-- end)
+-- vim.keymap.set("n", ",b", function()
+-- 	require("dap").toggle_breakpoint()
+-- end)
+-- vim.keymap.set("n", ",r", function()
+-- 	require("dap").repl.open()
+-- end)
+-- vim.keymap.set("n", ",dl", function()
+-- 	require("dap").run_last()
+-- end)
+-- vim.keymap.set({ "n", "v" }, ",h", function()
+-- 	require("dap.ui.widgets").hover()
+-- end)
+-- vim.keymap.set({ "n", "v" }, ",p", function()
+-- 	require("dap.ui.widgets").preview()
+-- end)
 
 -- split/join lines toggle
 vim.keymap.set("n", "<leader>j", require("treesj").toggle)
@@ -1218,3 +1232,7 @@ vim.keymap.set({ "x", "o" }, "iF", function()
 	vim.cmd("normal! [m")
 	require("nvim-treesitter.textobjects.select").select_textobject("@function.inner", "textobjects")
 end, { desc = "Select previous function.inner" })
+
+-- Demicolon repeatable motions
+vim.keymap.set({"n", "x", "o" }, ';', require('demicolon.repeat_jump').next)
+vim.keymap.set({"n", "x", "o" }, ',', require('demicolon.repeat_jump').prev)
