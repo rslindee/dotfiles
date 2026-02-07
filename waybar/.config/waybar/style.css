@@ -53,6 +53,7 @@
 
 #tags button.urgent {
     background-color: #eb4d4b;
+    border-radius: 0;
 }
 
 #wireplumber.muted {
