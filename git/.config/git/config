@@ -28,6 +28,7 @@
   psn= push --set-upstream --no-verify
   re = reset --hard HEAD
   ri = rebase --interactive
+  sh = show HEAD
   ss = show --name-only
   st = status --short
   su = submodule update --init --recursive
