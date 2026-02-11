@@ -47,8 +47,6 @@ export VISUAL=nvim
 export EDITOR="$VISUAL"
 export MERGE_EDITOR="nvim -d"
 
-#export BROWSER=firefox
-
 # less colors
 export LESS_TERMCAP_mb=$'\e[1;32m'
 export LESS_TERMCAP_md=$'\e[1;32m'
