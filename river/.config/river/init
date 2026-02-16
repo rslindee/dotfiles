@@ -107,12 +107,6 @@ riverctl map normal Super T toggle-float
 # toggle fullscreen
 riverctl map normal Super Z toggle-fullscreen
 
-# change layout orientation
-riverctl map normal Super Up    send-layout-cmd rivertile "main-location top"
-riverctl map normal Super Right send-layout-cmd rivertile "main-location right"
-riverctl map normal Super Down  send-layout-cmd rivertile "main-location bottom"
-riverctl map normal Super Left  send-layout-cmd rivertile "main-location left"
-
 # Various media key mapping examples for both normal and locked mode 
 for mode in normal locked
 do
