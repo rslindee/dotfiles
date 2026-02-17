@@ -36,7 +36,7 @@ riverctl map normal Super BackSpace spawn 'wlopm --off \"*\" && sleep 0.5 && kil
 riverctl map normal Super S spawn 'grim -g "$(slurp -d)" - | wl-copy'
 
 # open fuzzel
-riverctl map normal Super O spawn 'fuzzel --font terminus:weight=bold:size=12'
+riverctl map normal Super F spawn 'fuzzel --font terminus:weight=bold:size=12'
 
 # toggle mpc
 riverctl map normal Super C spawn 'mpc toggle'
@@ -69,28 +69,39 @@ riverctl map-pointer normal Super BTN_RIGHT resize-view
 # toggle float
 riverctl map-pointer normal Super BTN_MIDDLE toggle-float
 
-for i in $(seq 1 9)
+# Tags: use only 4 tags, mapped to y u i o => tags 1..4
+for key_i in 0 1 2 3
 do
-    tags=$((1 << ($i - 1)))
+    case "$key_i" in
+        0) key=y ;;
+        1) key=u ;;
+        2) key=i ;;
+        3) key=o ;;
+    esac
 
-    # focus tag [0-8]
-    riverctl map normal Super $i set-focused-tags $tags
+    tags=$((1 << key_i))
 
-    # tag focused view with tag [0-8]
-    riverctl map normal Super+Shift $i set-view-tags $tags
+    # focus tag [1-4]
+    riverctl map normal Super "$key" set-focused-tags $tags
 
-    # toggle focus of tag [0-8]
-    riverctl map normal Super+Control $i toggle-focused-tags $tags
+    # tag focused view with tag [1-4]
+    riverctl map normal Super+Shift "$key" set-view-tags $tags
 
-    # toggle tag [0-8] of focused view
-    riverctl map normal Super+Shift+Control $i toggle-view-tags $tags
+    # toggle focus of tag [1-4]
+    riverctl map normal Super+Control "$key" toggle-focused-tags $tags
+
+    # toggle tag [1-4] of focused view
+    riverctl map normal Super+Shift+Control "$key" toggle-view-tags $tags
 done
 
-all_tags=$(((1 << 32) - 1))
+# all tags (same as tags 1-4 combined)
+all_tags=$(((1 << 4) - 1))
+
 # focus all tags
-riverctl map normal Super 0 set-focused-tags $all_tags
+riverctl map normal Super p set-focused-tags $all_tags
+
 # tag focused view with all tags
-riverctl map normal Super+Shift 0 set-view-tags $all_tags
+riverctl map normal Super+Shift p set-view-tags $all_tags
 
 # focus view on previous tag
 riverctl map normal Super W focus-previous-tags
