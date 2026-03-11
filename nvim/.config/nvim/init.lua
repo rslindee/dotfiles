@@ -241,7 +241,7 @@ require("lazy").setup({
 		build = "make tiktoken",
 		opts = {
 			debug = true, -- Enable debugging
-			model = "gpt-5.2",
+			model = "gpt-5.4",
 			sticky = { "#buffer", "#gitdiff" },
 			-- See Configuration section for rest
 			window = {
