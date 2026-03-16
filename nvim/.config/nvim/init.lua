@@ -377,6 +377,22 @@ end, { expr = true })
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+local function toggle_autocomplete()
+  local cmp = require('cmp')
+  local current_setting = cmp.get_config().completion.autocomplete
+  if current_setting and #current_setting > 0 then
+    cmp.setup({ completion = { autocomplete = false } })
+    vim.notify('Autocomplete disabled')
+  else
+    cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
+    vim.notify('Autocomplete enabled')
+  end
+end
+
+vim.api.nvim_create_user_command('NvimCmpToggle', toggle_autocomplete, {})
+
+vim.api.nvim_set_keymap('n', '<Leader>la', ':NvimCmpToggle<CR>', { noremap = true, silent = true })
+
 -- for responsiveness of lsp diagnostic windows
 vim.o.updatetime = 250
 -- diagnostic display settings
