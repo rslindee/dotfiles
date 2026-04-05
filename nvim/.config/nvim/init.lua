@@ -719,7 +719,7 @@ vim.o.mat = 2
 vim.wo.number = true
 
 -- Disable scratch window preview in omni
-vim.o.completeopt = vim.o.completeopt .. ",noselect"
+vim.o.completeopt = vim.o.completeopt .. ",noselect,noinsert,popup"
 
 -- Mouse setup
 vim.o.mouse = "a"
