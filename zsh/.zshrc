@@ -14,10 +14,10 @@ compinit -d $HOME/.cache/zcompdump
 setopt prompt_subst
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}%b%f"
+zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}%b%f "
 function precmd() { vcs_info }
 
-PROMPT='%F{147}%~%f ${vcs_info_msg_0_} ${ZSH_THEME_PROMPT_VIMODE}'
+PROMPT='%F{147}%~%f ${vcs_info_msg_0_}${ZSH_THEME_PROMPT_VIMODE}'
 RPROMPT='[%W %* %n.%F{153}%m%f]'
 
 # vi-mode handling
