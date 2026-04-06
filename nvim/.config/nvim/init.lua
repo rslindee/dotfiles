@@ -158,8 +158,6 @@ require("lazy").setup({
 	},
 	-- opens term or file manager of current file
 	"justinmk/vim-gtfo",
-	-- open dev docs site for current word
-	"romainl/vim-devdocs",
 	-- repeatble semicolon/colon motions
 	{
 		"mawkler/demicolon.nvim",
@@ -305,6 +303,50 @@ require("lazy").setup({
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
 	},
+	-- llm support. uses copilot.lua for copilot functionality
+	{
+		"olimorris/codecompanion.nvim",
+		version = "^19.0.0",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+
+		opts = {
+			adapters = {
+				http = {
+					copilot = function()
+						return require("codecompanion.adapters").extend("copilot", {
+							schema = {
+								model = {
+									default = "claude-opus-4.6",
+								},
+								-- TODO: gpt-5.4 not working https://github.com/olimorris/codecompanion.nvim/issues/2884#issue-4058701391
+								-- top_p = {
+								-- 	default = false,
+								-- },
+							},
+						})
+					end,
+				},
+			},
+			interactions = {
+				chat = {
+					adapter = "copilot",
+					auto_scroll = false,
+					completion_provider = "cmp",
+				},
+				inline = { adapter = "copilot" },
+				cmd = { adapter = "copilot" },
+				background = { adapter = "copilot" },
+			},
+			opts = {
+				log_level = "DEBUG",
+			},
+		},
+	},
+	-- TODO: add codecompanion completion to nvim-lsp
+	-- TODO: perhaps add cli agent git copilot cli or opencode?
 })
 
 -- nvim-cmp setup
@@ -313,15 +355,24 @@ require("lazy").setup({
 local cmp = require("cmp")
 
 cmp.setup({
-	snippet = {
-		-- specify a snippet engine
-		expand = function(args)
-			vim.snippet.expand(args.body) -- use native neovim snippets
-		end,
-	},
 	mapping = {
 		["<C-b>"] = cmp.mapping.scroll_docs(-4),
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
+		-- only use tab to select if cmp menu open
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = {
@@ -333,40 +384,24 @@ cmp.setup({
 	},
 })
 
--- snippet binds
-vim.keymap.set({ "i", "s" }, "<Tab>", function()
-	if vim.snippet.active({ direction = 1 }) then
-		return "<cmd>lua vim.snippet.jump(1)<cr>"
-	else
-		return "<Tab>"
-	end
-end, { expr = true })
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-	if vim.snippet.active({ direction = -1 }) then
-		return "<cmd>lua vim.snippet.jump(-1)<cr>"
-	else
-		return "<S-Tab>"
-	end
-end, { expr = true })
-
 -- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 local function toggle_autocomplete()
-  local cmp = require('cmp')
-  local current_setting = cmp.get_config().completion.autocomplete
-  if current_setting and #current_setting > 0 then
-    cmp.setup({ completion = { autocomplete = false } })
-    vim.notify('Autocomplete disabled')
-  else
-    cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
-    vim.notify('Autocomplete enabled')
-  end
+	local cmp = require("cmp")
+	local current_setting = cmp.get_config().completion.autocomplete
+	if current_setting and #current_setting > 0 then
+		cmp.setup({ completion = { autocomplete = false } })
+		vim.notify("Autocomplete disabled")
+	else
+		cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
+		vim.notify("Autocomplete enabled")
+	end
 end
 
-vim.api.nvim_create_user_command('NvimCmpToggle', toggle_autocomplete, {})
+vim.api.nvim_create_user_command("NvimCmpToggle", toggle_autocomplete, {})
 
-vim.api.nvim_set_keymap('n', '<Leader>la', ':NvimCmpToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Leader>la", ":NvimCmpToggle<CR>", { noremap = true, silent = true })
 
 -- for responsiveness of lsp diagnostic windows
 vim.o.updatetime = 250
@@ -917,10 +952,6 @@ vim.keymap.set("n", "<leader>ya", ':let @+=expand("%:p")<CR>')
 -- print file path relative to current vim dir
 vim.keymap.set("n", "<leader>Y", ':echo expand("%:p:.")<CR>')
 
--- vim-devdocs
--- look up current word cursor is on in devdocs.io
-vim.keymap.set("n", "<leader>kd", ":DD <c-r><c-w><cr>")
-
 -- git push
 vim.keymap.set("n", "<leader>gp", ":Gpush<cr>")
 -- git commit
@@ -1115,8 +1146,8 @@ vim.keymap.set(
 vim.keymap.set(
 	"v",
 	"<leader>kd",
-	":'<,'>CopilotChatDocs <cr>",
-	{ noremap = true, silent = true, desc = "CopilotChat - Document visual selection" }
+	":'<,'>CodeCompanion Write detailed documentation for this code<cr>",
+	{ noremap = true, silent = true, desc = "CodeCompanion - Document visual selection" }
 )
 
 -- Quick chat keybinding
