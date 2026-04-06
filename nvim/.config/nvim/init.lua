@@ -350,8 +350,6 @@ require("lazy").setup({
 })
 
 -- nvim-cmp setup
-
--- nvim-cmp setup
 local cmp = require("cmp")
 
 cmp.setup({
@@ -1146,8 +1144,8 @@ vim.keymap.set(
 vim.keymap.set(
 	"v",
 	"<leader>kd",
-	":'<,'>CodeCompanion Write detailed documentation for this code<cr>",
-	{ noremap = true, silent = true, desc = "CodeCompanion - Document visual selection" }
+	":'<,'>CopilotChatDocs <cr>",
+	{ noremap = true, silent = true, desc = "CopilotChat - Document visual selection" }
 )
 
 -- Quick chat keybinding
