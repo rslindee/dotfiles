@@ -475,9 +475,12 @@ ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=cyan'
 if [ "$DISTRO" = "Fedora Linux" ]; then
   source /usr/share/zsh/site-functions/_fzf
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-else
+elif [ "$DISTRO" = "Arch Linux" ]; then
   source /usr/share/fzf/completion.zsh
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
 fi
 
 # source .zshrc.local if it exists
