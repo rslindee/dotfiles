@@ -44,7 +44,8 @@ require("lazy").setup({
 		end,
 	},
 	-- nvim treesitter
-	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	-- TODO: update "master" to "main" for nvim 0.12
+	{ "nvim-treesitter/nvim-treesitter", branch = "master", build = ":TSUpdate" },
 	-- treesitter textobjects
 	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	-- gruvbox theme
@@ -214,13 +215,13 @@ require("lazy").setup({
 		event = "InsertEnter",
 		config = function()
 			require("copilot").setup({
-        -- TODO: delete when binary server verified working
+				-- TODO: delete when binary server verified working
 				-- Always use system node version, as build env scripts may use old versions
 				-- copilot_node_command = "/usr/bin/node",
-        server = {
-          -- use experimental "binary" server instead of "nodejs"
-          type = "binary"
-        }
+				server = {
+					-- use experimental "binary" server instead of "nodejs"
+					type = "binary",
+				},
 			})
 		end,
 	},
