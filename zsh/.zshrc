@@ -2,6 +2,9 @@
 autoload -Uz compinit
 # version control info
 autoload -Uz vcs_info
+# words respect directory separators
+autoload -U select-word-style
+select-word-style bash
 
 compinit -d $HOME/.cache/zcompdump
 
