@@ -481,9 +481,6 @@ if [ "$DISTRO" = "Fedora Linux" ]; then
 elif [ "$DISTRO" = "Arch Linux" ]; then
   source /usr/share/fzf/completion.zsh
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [ -n "${commands[fzf-share]}" ]; then
-  source "$(fzf-share)/key-bindings.zsh"
-  source "$(fzf-share)/completion.zsh"
 fi
 
 # source .zshrc.local if it exists
