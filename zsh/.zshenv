@@ -1,7 +1,5 @@
 # local zshenv
 [ -e $HOME/.zshenv.local ] && source $HOME/.zshenv.local
-# used by browser
-export XDG_SESSION_TYPE=wayland
 # used for finding appropriate xdg-desktop-portal portal implementation
 export XDG_CURRENT_DESKTOP=river
 # for pam. TODO: is river recognized or should i use sway?
