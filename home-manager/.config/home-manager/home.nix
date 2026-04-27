@@ -10,6 +10,7 @@
     curl
     direnv
     fzf
+    jdk
     jq
     mosquitto
     protols
