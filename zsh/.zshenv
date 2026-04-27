@@ -1,7 +1,5 @@
 # local zshenv
 [ -e $HOME/.zshenv.local ] && source $HOME/.zshenv.local
-# hardware acceleration for firefox
-export MOZ_ENABLE_WAYLAND=1
 # used by browser
 export XDG_SESSION_TYPE=wayland
 # used for finding appropriate xdg-desktop-portal portal implementation
