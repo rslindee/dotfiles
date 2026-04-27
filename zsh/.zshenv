@@ -1,17 +1,7 @@
-# local zshenv
+# source local zshenv if available
 [ -e $HOME/.zshenv.local ] && source $HOME/.zshenv.local
-# used for finding appropriate xdg-desktop-portal portal implementation
-export XDG_CURRENT_DESKTOP=river
-# for pam. TODO: is river recognized or should i use sway?
-export XDG_SESSION_DESKTOP=river
-# Get OS name
+# Get OS name for my own cross-distro scripts/configs
 if [ -f /etc/os-release ]; then
   . /etc/os-release
   export DISTRO=$NAME
-fi
-
-# Use gpg-agent for ssh
-unset SSH_AGENT_PID
-if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 fi
