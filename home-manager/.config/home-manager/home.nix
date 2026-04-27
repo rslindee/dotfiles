@@ -11,6 +11,7 @@
     direnv
     fzf
     jq
+    mosquitto
     protols
     ripgrep
     tmux
