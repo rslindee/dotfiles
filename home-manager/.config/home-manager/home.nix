@@ -9,6 +9,7 @@
   home.packages = with pkgs; [
     curl
     direnv
+    fd
     fzf
     jdk
     jq
