@@ -130,6 +130,7 @@ PACKAGES_ARCH="bash-language-server \
     shellcheck \
     terminus-font \
     ttf-dejavu \
+    xdg-desktop-portal-wlr
     yapf
     "
 
