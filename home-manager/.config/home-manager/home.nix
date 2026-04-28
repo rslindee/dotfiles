@@ -20,6 +20,11 @@
     tree-sitter
   ];
 
+  # opencode manually installed to use bleeding edge versions
+  home.sessionPath = [
+    "$HOME/.opencode/bin"
+  ];
+
   programs.direnv.enable = true;
 
   programs.git = {

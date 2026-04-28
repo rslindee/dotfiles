@@ -475,7 +475,10 @@ typeset -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=cyan'
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=cyan'
 
-if [ "$DISTRO" = "Fedora Linux" ]; then
+if [ -n "${commands[fzf-share]}" ]; then
+  source "$(fzf-share)/key-bindings.zsh"
+  source "$(fzf-share)/completion.zsh"
+elif [ "$DISTRO" = "Fedora Linux" ]; then
   source /usr/share/zsh/site-functions/_fzf
   source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ "$DISTRO" = "Arch Linux" ]; then
