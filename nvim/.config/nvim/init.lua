@@ -560,6 +560,38 @@ dap.configurations.rust = {
 	},
 }
 
+vim.g.rustfmt_command = 'rustfmt --edition 2021'
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'rust',
+  callback = function(args)
+    vim.keymap.set('n', '<leader>i', '<cmd>RustFmt<cr>', {
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+      desc = 'Run rustfmt on current file',
+    })
+
+    vim.keymap.set('n', '<leader>mm', '<cmd>silent !cargo run<cr>', {
+      buffer = args.buf,
+      noremap = true,
+      silent = true,
+      desc = 'Cargo run',
+    })
+
+    vim.api.nvim_buf_call(args.buf, function()
+      vim.cmd('compiler cargo')
+    end)
+  end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'python',
+  callback = function()
+    vim.opt_local.formatprg = 'black --quiet -'
+  end,
+})
+
 -- load local rc files
 vim.o.exrc = true
 

@@ -19,6 +19,7 @@
     tmux
     tree-sitter
   ];
+
   programs.direnv.enable = true;
 
   programs.git = {
@@ -40,10 +41,12 @@
   };
 
   programs.neovim = {
+    defaultEditor = true;
     enable = true;
     extraConfig = ''
       luafile ~/dotfiles/nvim/.config/nvim/init.lua
     '';
+    vimAlias = true;
   };
 
   programs.zsh = {
