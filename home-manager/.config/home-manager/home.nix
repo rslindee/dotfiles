@@ -7,6 +7,7 @@
   targets.genericLinux.enable = true;
 
   home.packages = with pkgs; [
+    bat
     curl
     direnv
     fd
