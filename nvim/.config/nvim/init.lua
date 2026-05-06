@@ -445,6 +445,8 @@ vim.lsp.config("rust_analyzer", {
 				allFeatures = true,
 				loadOutDirsFromCheck = true,
 				runBuildScripts = true,
+        -- use a separate dir so Cargo.lock isn't held. duplicates artifacts
+        targetDir = true,
 			},
 			diagnostics = {
 				enable = true,
