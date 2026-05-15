@@ -36,13 +36,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	-- outline of code
-	{
-		"stevearc/aerial.nvim",
-		config = function()
-			require("aerial").setup()
-		end,
-	},
 	-- nvim treesitter
 	-- TODO: update "master" to "main" for nvim 0.12
 	{ "nvim-treesitter/nvim-treesitter", branch = "master", build = ":TSUpdate" },
@@ -1001,9 +994,6 @@ vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
 vim.keymap.set("n", "<leader>gd", ":Gvdiff<cr>")
 -- open git browser with all commits touching current file in new tab
 vim.keymap.set("n", "<leader>gh", ":Gclog<cr>")
-
--- toggle tag pane
-vim.keymap.set("n", "<leader>tt", "<cmd>AerialToggle!<CR>")
 
 -- hexmode
 -- toggle Hexmode
