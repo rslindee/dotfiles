@@ -630,7 +630,8 @@ dap.configurations.rust = {
 	},
 }
 
-vim.g.rustfmt_command = 'rustfmt --edition 2021'
+-- needed for newer versions of rustfmt(?)
+vim.g.rustfmt_emit_files = 1
 
 vim.api.nvim_create_autocmd('FileType', {
   pattern = 'rust',
