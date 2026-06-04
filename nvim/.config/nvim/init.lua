@@ -115,7 +115,7 @@ require("lazy").setup({
 		end,
 	},
 	-- treesitter textobjects
-	{ "nvim-treesitter/nvim-treesitter-textobjects", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+	{ "nvim-treesitter/nvim-treesitter-textobjects", branch = 'main', dependencies = { "nvim-treesitter/nvim-treesitter" } },
 	-- gruvbox theme
 	"sainnhe/gruvbox-material",
 
