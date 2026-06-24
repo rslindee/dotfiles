@@ -711,7 +711,7 @@ local Ruler = {
 	-- %l = current line number
 	-- %c = column number
 	-- %P = percentage through file of displayed window
-	provider = "%l,%c %P",
+	provider = " %l,%c %P",
 }
 
 local FileLastModified = {
