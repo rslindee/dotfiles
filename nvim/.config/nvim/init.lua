@@ -349,7 +349,7 @@ require("lazy").setup({
 		config = function()
 			require("lsp-progress").setup({
 				format = function(messages)
-					local sign = " ┃ LSP "
+					local sign = " ┃ £"
 					if #messages > 0 then
 						return sign .. "*"
 					end
