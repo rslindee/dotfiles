@@ -1,427 +1,261 @@
--- lazy.nvim bootstrap
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable", -- latest stable release
-		lazypath,
+-- Plugins
+vim.pack.add({
+	{ src = "https://github.com/chrisbra/Colorizer" },
+	{ src = "https://github.com/hamsterjam/vim-gcovered" },
+	{ src = "https://github.com/sindrets/diffview.nvim" },
+	{ src = "https://github.com/chentoast/marks.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
+	{ src = "https://github.com/sainnhe/gruvbox-material" },
+	{ src = "https://github.com/lewis6991/gitsigns.nvim" },
+	{ src = "https://github.com/tpope/vim-fugitive" },
+	{ src = "https://github.com/mrjones2014/smart-splits.nvim" },
+	{ src = "https://github.com/pogyomo/submode.nvim" },
+	{ src = "https://github.com/Wansmer/treesj" },
+	{ src = "https://github.com/junegunn/vim-easy-align" },
+	{ src = "https://github.com/kylechui/nvim-surround" },
+	{ src = "https://github.com/machakann/vim-swap" },
+	{ src = "https://github.com/tommcdo/vim-exchange" },
+	{ src = "https://github.com/tpope/vim-abolish" },
+	{ src = "https://github.com/tpope/vim-repeat" },
+	{ src = "https://github.com/tpope/vim-speeddating" },
+	{ src = "https://github.com/ibhagwan/fzf-lua" },
+	{ src = "https://github.com/fidian/hexmode" },
+	{ src = "https://github.com/rcarriga/nvim-dap-ui" },
+	{ src = "https://github.com/mfussenegger/nvim-dap" },
+	{ src = "https://github.com/nvim-neotest/nvim-nio" },
+	{ src = "https://github.com/folke/lazydev.nvim" },
+	{ src = "https://github.com/bazelbuild/vim-bazel" },
+	{ src = "https://github.com/google/vim-maktaba" },
+	{ src = "https://github.com/justinmk/vim-gtfo" },
+	{ src = "https://github.com/mawkler/demicolon.nvim" },
+	{ src = "https://github.com/vim-scripts/DoxygenToolkit.vim" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/brianhuster/live-preview.nvim" },
+	{ src = "https://github.com/richardbizik/nvim-toc" },
+	{ src = "https://github.com/hrsh7th/nvim-cmp" },
+	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
+	{ src = "https://github.com/zbirenbaum/copilot.lua" },
+	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim", version = "main" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/andythigpen/nvim-coverage" },
+	{ src = "https://github.com/rebelot/heirline.nvim" },
+	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
+	{ src = "https://github.com/folke/flash.nvim" },
+	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "v19.17.0" },
+})
+
+-- Plugin setup
+
+require("marks").setup({
+	default_mappings = true,
+	signs = true,
+})
+
+do
+	local ts = require("nvim-treesitter")
+	ts.setup({
+		highlight = { enable = true, additional_vim_regex_highlighting = false },
+		textobjects = {
+			select = {
+				enable = true,
+				lookahead = true,
+				keymaps = {
+					["af"] = "@function.outer",
+					["if"] = "@function.inner",
+				},
+			},
+			move = {
+				enable = true,
+				set_jumps = true,
+				goto_next_start = {
+					["]f"] = "@function.outer",
+					["]a"] = "@argument.outer",
+					["]m"] = "@method.outer",
+				},
+				goto_previous_start = {
+					["[f"] = "@function.outer",
+					["[a"] = "@argument.outer",
+					["[m"] = "@method.outer",
+				},
+			},
+		},
+		auto_install = true,
+		sync_install = false,
+	})
+
+	ts.install({
+		"c",
+		"lua",
+		"vim",
+		"query",
+		"markdown",
+		"rust",
+		"java",
+		"elixir",
+		"heex",
+		"javascript",
+		"typescript",
+		"html",
+		"yaml",
+	})
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = {
+			"c",
+			"lua",
+			"vim",
+			"query",
+			"markdown",
+			"rust",
+			"java",
+			"elixir",
+			"heex",
+			"javascript",
+			"typescript",
+			"html",
+			"yaml",
+		},
+		callback = function()
+			vim.treesitter.start()
+			vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+		end,
 	})
 end
-vim.opt.rtp:prepend(lazypath)
+
+require("gitsigns").setup()
+
+do
+	local submode = require("submode")
+	submode.create("WinResize", {
+		mode = "n",
+		enter = "<C-w>r",
+		leave = { "<Esc>", "q", "<C-c>" },
+		hook = {
+			on_enter = function()
+				vim.notify("Use { h, j, k, l } to resize the window")
+			end,
+			on_leave = function()
+				vim.notify("")
+			end,
+		},
+		default = function(register)
+			register("h", require("smart-splits").resize_left, { desc = "Resize left" })
+			register("j", require("smart-splits").resize_down, { desc = "Resize down" })
+			register("k", require("smart-splits").resize_up, { desc = "Resize up" })
+			register("l", require("smart-splits").resize_right, { desc = "Resize right" })
+		end,
+	})
+end
+
+require("treesj").setup({
+	use_default_keymaps = false,
+	dot_repeat = true,
+})
+
+require("nvim-surround").setup({})
+
+require("fzf-lua").setup({})
+
+require("demicolon").setup({
+	keymaps = {
+		horizontal_motions = false,
+		repeat_motions = false,
+		disabled_keys = { "p", "I", "A", "i" },
+	},
+})
+
+require("copilot").setup({
+	server = {
+		type = "binary",
+	},
+})
+
+require("CopilotChat").setup({
+	debug = true,
+	model = "gpt-5.4",
+	sticky = { "#buffer", "#gitdiff" },
+	window = {
+		layout = "vertical",
+		width = 0.3,
+		height = 0.5,
+		relative = "editor",
+		border = "single",
+		row = nil,
+		col = nil,
+		title = "Copilot Chat",
+		footer = nil,
+		zindex = 1,
+	},
+})
+
+require("coverage").setup({
+	auto_reload = false,
+	lang = {
+		rust = {
+			coverage_command = '( LLVM_PROFILE_FILE="llvm_profile.profraw" cargo llvm-cov --package as-nimbus >/dev/null 2>&1 ) && grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN',
+			project_files_only = true,
+			project_files = {
+				"services/app/as-nimbus/src/**",
+			},
+		},
+	},
+})
+
+require("lsp-progress").setup({
+	format = function(messages)
+		local sign = " ┃ £"
+		if #messages > 0 then
+			return sign .. "*"
+		end
+		local active_clients = vim.lsp.get_clients()
+		if #active_clients > 0 then
+			return sign
+		end
+		return ""
+	end,
+})
+
+require("flash").setup({})
+
+require("nvim-toc").setup({
+	toc_header = "Table of Contents",
+})
+
+require("codecompanion").setup({
+	adapters = {
+		http = {
+			copilot = function()
+				return require("codecompanion.adapters").extend("copilot", {
+					schema = {
+						model = {
+							default = "claude-opus-4.6",
+						},
+					},
+				})
+			end,
+		},
+	},
+	interactions = {
+		chat = {
+			adapter = "copilot",
+			auto_scroll = false,
+			completion_provider = "cmp",
+		},
+		inline = { adapter = "copilot" },
+		cmd = { adapter = "copilot" },
+		background = { adapter = "copilot" },
+	},
+	opts = {
+		log_level = "DEBUG",
+	},
+})
 
 -- maps leader to space
 vim.g.mapleader = " "
 vim.api.nvim_set_keymap("n", "<space>", "<nop>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>", "<space>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", "<leader>", "<space>", { noremap = true, silent = true })
-
--- Plugins
-require("lazy").setup({
-	-- colorize values
-	"chrisbra/Colorizer",
-	-- gcov syntax highlighting
-	"hamsterjam/vim-gcovered",
-	-- diff/merge viewing
-	"sindrets/diffview.nvim",
-	-- show and navigate marks
-	{
-		"chentoast/marks.nvim",
-		config = function()
-			require("marks").setup({
-				default_mappings = true,
-				signs = true,
-			})
-		end,
-	},
-	-- nvim treesitter
-	{
-		"nvim-treesitter/nvim-treesitter",
-		branch = "main",
-		lazy = false,
-		build = ":TSUpdate",
-		config = function()
-			local ts = require("nvim-treesitter")
-			ts.setup({
-				-- keep highlighting and textobject behaviour from previous config
-				highlight = { enable = true, additional_vim_regex_highlighting = false },
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true,
-						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-						},
-					},
-					move = {
-						enable = true,
-						set_jumps = true,
-						goto_next_start = {
-							["]f"] = "@function.outer",
-							["]a"] = "@argument.outer",
-							["]m"] = "@method.outer",
-						},
-						goto_previous_start = {
-							["[f"] = "@function.outer",
-							["[a"] = "@argument.outer",
-							["[m"] = "@method.outer",
-						},
-					},
-				},
-				auto_install = true,
-				sync_install = false,
-			})
-			-- Install parsers explicitly (keeps behaviour similar to ensure_installed)
-			ts.install({
-				"c",
-				"lua",
-				"vim",
-				"query",
-				"markdown",
-				"rust",
-				"java",
-				"elixir",
-				"heex",
-				"javascript",
-				"typescript",
-				"html",
-				"yaml",
-			})
-			-- Ensure treesitter features are started per-filetype and enable nvim-treesitter indentation
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = {
-					"c",
-					"lua",
-					"vim",
-					"query",
-					"markdown",
-					"rust",
-					"java",
-					"elixir",
-					"heex",
-					"javascript",
-					"typescript",
-					"html",
-					"yaml",
-				},
-				callback = function()
-					vim.treesitter.start()
-					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-				end,
-			})
-		end,
-	},
-	-- treesitter textobjects
-	{ "nvim-treesitter/nvim-treesitter-textobjects", branch = 'main', dependencies = { "nvim-treesitter/nvim-treesitter" } },
-	-- gruvbox theme
-	"sainnhe/gruvbox-material",
-
-	-- version control
-	-- view git information
-	{
-		"lewis6991/gitsigns.nvim",
-		config = function()
-			require("gitsigns").setup()
-		end,
-	},
-
-	-- run git commands, view status
-	"tpope/vim-fugitive",
-	-- manage window splits
-	{
-		"mrjones2014/smart-splits.nvim",
-		dependencies = {
-			"pogyomo/submode.nvim",
-		},
-		config = function()
-			-- Resize submode
-			local submode = require("submode")
-			submode.create("WinResize", {
-				mode = "n",
-				enter = "<C-w>r",
-				leave = { "<Esc>", "q", "<C-c>" },
-				hook = {
-					on_enter = function()
-						vim.notify("Use { h, j, k, l } to resize the window")
-					end,
-					on_leave = function()
-						vim.notify("")
-					end,
-				},
-				default = function(register)
-					register("h", require("smart-splits").resize_left, { desc = "Resize left" })
-					register("j", require("smart-splits").resize_down, { desc = "Resize down" })
-					register("k", require("smart-splits").resize_up, { desc = "Resize up" })
-					register("l", require("smart-splits").resize_right, { desc = "Resize right" })
-				end,
-			})
-		end,
-	},
-
-	-- editing
-	-- enhanced splitting and joining lines
-	{
-		"Wansmer/treesj",
-		dependencies = { "nvim-treesitter" },
-		config = function()
-			require("treesj").setup({
-				use_default_keymaps = false,
-				dot_repeat = true,
-			})
-		end,
-	},
-	-- align blocks of text
-	"junegunn/vim-easy-align",
-	-- add/change/delete surrounding char pairs
-	{
-		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end,
-	},
-	-- reorder delimited items
-	"machakann/vim-swap",
-	-- swap text using motions
-	"tommcdo/vim-exchange",
-	-- advanced substitution
-	"tpope/vim-abolish",
-	-- repeat support for various plugins
-	"tpope/vim-repeat",
-	-- enhanced time/date editing
-	"tpope/vim-speeddating",
-
-	-- searching
-	-- hooks for fzf
-	{
-		"ibhagwan/fzf-lua",
-		config = function()
-			require("fzf-lua").setup({})
-		end,
-	},
-
-	-- other
-	-- view/edit hex data
-	"fidian/hexmode",
-	-- dap debugger
-	{
-		"rcarriga/nvim-dap-ui",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-			"nvim-neotest/nvim-nio",
-		},
-	},
-	"folke/lazydev.nvim",
-	-- bazel build integration w/ maktaba dep
-	{
-		"bazelbuild/vim-bazel",
-
-		dependencies = {
-			"google/vim-maktaba",
-		},
-	},
-	-- opens term or file manager of current file
-	"justinmk/vim-gtfo",
-	-- repeatble semicolon/colon motions
-	{
-		"mawkler/demicolon.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"nvim-treesitter/nvim-treesitter-textobjects",
-		},
-		opts = {
-			keymaps = {
-				horizontal_motions = false,
-				-- Don't create default ; and , keymaps, I'll create my own
-				repeat_motions = false,
-				-- `f` is removed from this table because we have mapped it to
-				-- `@function.outer` with nvim-treesitter-textobjects
-				disabled_keys = { "p", "I", "A", "i" },
-			},
-		},
-		config = function(_, opts)
-			require("demicolon").setup(opts)
-		end,
-	},
-	-- auto generate doxygen documentation
-	"vim-scripts/DoxygenToolkit.vim",
-	-- lsp plugins
-	"neovim/nvim-lspconfig",
-	-- markdown preview
-	{
-		"brianhuster/live-preview.nvim",
-		dependencies = {
-			-- You can choose one of the following pickers
-			"ibhagwan/fzf-lua",
-		},
-	},
-	-- markdown toc generation
-	{
-		"richardbizik/nvim-toc",
-		config = function()
-			require("nvim-toc").setup({
-				toc_header = "Table of Contents",
-			})
-		end,
-	},
-
-	-- autocompletion
-	{
-		"hrsh7th/nvim-cmp",
-	},
-	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("copilot").setup({
-				-- TODO: delete when binary server verified working
-				-- Always use system node version, as build env scripts may use old versions
-				-- copilot_node_command = "/usr/bin/node",
-				server = {
-					-- use experimental "binary" server instead of "nodejs"
-					type = "binary",
-				},
-			})
-		end,
-	},
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		branch = "main",
-		dependencies = {
-			{ "zbirenbaum/copilot.lua" },
-			{ "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-		},
-		build = "make tiktoken",
-		opts = {
-			debug = true, -- Enable debugging
-			model = "gpt-5.4",
-			sticky = { "#buffer", "#gitdiff" },
-			-- See Configuration section for rest
-			window = {
-				layout = "vertical", -- 'vertical', 'horizontal', 'float', 'replace'
-				width = 0.3, -- fractional width of parent, or absolute width in columns when > 1
-				height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
-				-- Options below only apply to floating windows
-				relative = "editor", -- 'editor', 'win', 'cursor', 'mouse'
-				border = "single", -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-				row = nil, -- row position of the window, default is centered
-				col = nil, -- column position of the window, default is centered
-				title = "Copilot Chat", -- title of chat window
-				footer = nil, -- footer of chat window
-				zindex = 1, -- determines if window is on top or below other floating windows
-			},
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
-	-- code coverage. requires grcov and llvm-cov be installed
-	{
-		"andythigpen/nvim-coverage",
-		version = "*",
-		config = function()
-			require("coverage").setup({
-				auto_reload = false,
-				lang = {
-					rust = {
-						coverage_command = '( LLVM_PROFILE_FILE="llvm_profile.profraw" cargo llvm-cov --package as-nimbus >/dev/null 2>&1 ) && grcov ${cwd} -s ${cwd} --binary-path ./target/debug/ -t coveralls --branch --ignore-not-existing --token NO_TOKEN',
-						project_files_only = true,
-						project_files = {
-							"services/app/as-nimbus/src/**",
-						},
-					},
-				},
-			})
-		end,
-	},
-	-- statusline plugin
-	"rebelot/heirline.nvim",
-	-- lsp status
-	{
-		"linrongbin16/lsp-progress.nvim",
-		config = function()
-			require("lsp-progress").setup({
-				format = function(messages)
-					local sign = " ┃ £"
-					if #messages > 0 then
-						return sign .. "*"
-					end
-					local active_clients = vim.lsp.get_clients()
-					if #active_clients > 0 then
-						return sign
-					end
-					return ""
-				end,
-			})
-		end,
-	},
-	-- enhanced search
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		---@type Flash.Config
-		opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-	},
-	-- llm support. uses copilot.lua for copilot functionality
-	{
-		"olimorris/codecompanion.nvim",
-		version = "^19.0.0",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-treesitter/nvim-treesitter",
-		},
-
-		opts = {
-			adapters = {
-				http = {
-					copilot = function()
-						return require("codecompanion.adapters").extend("copilot", {
-							schema = {
-								model = {
-									default = "claude-opus-4.6",
-								},
-								-- TODO: gpt-5.4 not working https://github.com/olimorris/codecompanion.nvim/issues/2884#issue-4058701391
-								-- top_p = {
-								-- 	default = false,
-								-- },
-							},
-						})
-					end,
-				},
-			},
-			interactions = {
-				chat = {
-					adapter = "copilot",
-					auto_scroll = false,
-					completion_provider = "cmp",
-				},
-				inline = { adapter = "copilot" },
-				cmd = { adapter = "copilot" },
-				background = { adapter = "copilot" },
-			},
-			opts = {
-				log_level = "DEBUG",
-			},
-		},
-	},
-	-- TODO: add codecompanion completion to nvim-lsp
-	-- TODO: perhaps add cli agent git copilot cli or opencode?
-})
 
 -- nvim-cmp setup
 local cmp = require("cmp")
@@ -1125,7 +959,9 @@ vim.keymap.set("n", "<leader>j", require("treesj").toggle)
 vim.keymap.set("n", "<leader>i", "<cmd>lua AutoformatCurrentFile()<cr>")
 
 -- update plugins
-vim.keymap.set("n", "<leader>vu", ":Lazy sync<cr>")
+vim.keymap.set("n", "<leader>vu", function()
+	vim.pack.update()
+end, { desc = "Update plugins" })
 
 -- map esc when in terminal mode
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
