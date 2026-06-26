@@ -17,18 +17,28 @@ compinit -d $HOME/.cache/zcompdump
 setopt prompt_subst
 
 zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}%b%f "
+zstyle ':vcs_info:git*' check-for-changes true
+zstyle ':vcs_info:git*' stagedstr '+'
+zstyle ':vcs_info:git*' unstagedstr '*'
+zstyle ':vcs_info:git*' formats "%F{197}%r %F{yellow}%b%c%u%f "
 function precmd() { vcs_info }
 
 PROMPT='%F{147}%~%f ${vcs_info_msg_0_}${ZSH_THEME_PROMPT_VIMODE}'
-RPROMPT='[$? %W %* %n@%F{153}%m%f]'
+RPROMPT='[%W %*'
+
+# Add hostname info if SSH connection detected
+if [[ -n "$SSH_CONNECTION" ]]; then
+    RPROMPT+=' %n@%F{153}%m%f]'
+else
+    RPROMPT+=']'
+fi
 
 # vi-mode handling
 function zle-line-init zle-keymap-select()
 {
   case $KEYMAP in
-    viins|main) ZSH_THEME_PROMPT_VIMODE="%% " ;;
-    vicmd) ZSH_THEME_PROMPT_VIMODE="%F{red}!%f " ;;
+    viins|main) ZSH_THEME_PROMPT_VIMODE="%(?.%%.%{%F{red}%}%%%f) " ;;
+    vicmd) ZSH_THEME_PROMPT_VIMODE="%F{green}!%f " ;;
   esac
   zle reset-prompt
 }
