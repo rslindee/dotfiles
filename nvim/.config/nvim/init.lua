@@ -39,6 +39,7 @@ vim.pack.add({
 	{ src = "https://github.com/andythigpen/nvim-coverage" },
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
+  -- TODO: reconfig binds
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "^v19.17.0" },
 })
@@ -227,7 +228,7 @@ require("codecompanion").setup({
 				return require("codecompanion.adapters").extend("copilot", {
 					schema = {
 						model = {
-							default = "claude-opus-4.6",
+							default = "gpt-5.4",
 						},
 					},
 				})
@@ -461,9 +462,6 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.opt_local.formatprg = 'black --quiet -'
   end,
 })
-
--- opt-in to new ui2
-require('vim._core.ui2').enable({})
 
 -- load local rc files
 vim.o.exrc = true
