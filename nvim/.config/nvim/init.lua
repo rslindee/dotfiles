@@ -33,8 +33,6 @@ vim.pack.add({
 	{ src = "https://github.com/neovim/nvim-lspconfig" },
 	{ src = "https://github.com/brianhuster/live-preview.nvim" },
 	{ src = "https://github.com/richardbizik/nvim-toc" },
-	{ src = "https://github.com/hrsh7th/nvim-cmp" },
-	{ src = "https://github.com/hrsh7th/cmp-nvim-lsp" },
 	{ src = "https://github.com/zbirenbaum/copilot.lua" },
 	{ src = "https://github.com/CopilotC-Nvim/CopilotChat.nvim", version = "main" },
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -42,7 +40,7 @@ vim.pack.add({
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
-	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "v19.17.0" },
+	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "^v19.17.0" },
 })
 
 -- Plugin setup
@@ -60,7 +58,7 @@ do
 			select = {
 				enable = true,
 				lookahead = true,
-				keymaps = {
+        keymaps = {
 					["af"] = "@function.outer",
 					["if"] = "@function.inner",
 				},
@@ -240,7 +238,6 @@ require("codecompanion").setup({
 		chat = {
 			adapter = "copilot",
 			auto_scroll = false,
-			completion_provider = "cmp",
 		},
 		inline = { adapter = "copilot" },
 		cmd = { adapter = "copilot" },
@@ -257,60 +254,25 @@ vim.api.nvim_set_keymap("n", "<space>", "<nop>", { noremap = true, silent = true
 vim.api.nvim_set_keymap("n", "<leader>", "<space>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", "<leader>", "<space>", { noremap = true, silent = true })
 
--- nvim-cmp setup
-local cmp = require("cmp")
-
-cmp.setup({
-	mapping = {
-		["<C-b>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		-- only use tab to select if cmp menu open
-		["<Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_next_item()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<S-Tab>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.select_prev_item()
-			else
-				fallback()
-			end
-		end, { "i", "s" }),
-		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-	},
-	sources = {
-		{ name = "nvim_lsp", group_index = 1 },
-	},
-	window = {
-		completion = cmp.config.window.bordered(),
-		documentation = cmp.config.window.bordered(),
-	},
-})
-
--- The nvim-cmp almost supports LSP's capabilities so you should advertise it to LSP servers...
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- native insert-mode completion
+vim.o.autocomplete = true
 
 local function toggle_autocomplete()
-	local cmp = require("cmp")
-	local current_setting = cmp.get_config().completion.autocomplete
-	if current_setting and #current_setting > 0 then
-		cmp.setup({ completion = { autocomplete = false } })
-		vim.notify("Autocomplete disabled")
-	else
-		cmp.setup({ completion = { autocomplete = { cmp.TriggerEvent.TextChanged } } })
-		vim.notify("Autocomplete enabled")
-	end
+	vim.o.autocomplete = not vim.o.autocomplete
+	vim.notify(vim.o.autocomplete and "Autocomplete enabled" or "Autocomplete disabled")
 end
 
-vim.api.nvim_create_user_command("NvimCmpToggle", toggle_autocomplete, {})
+vim.api.nvim_create_user_command("NvimCompletionToggle", toggle_autocomplete, {})
 
-vim.api.nvim_set_keymap("n", "<Leader>la", ":NvimCmpToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Leader>la", "<cmd>NvimCompletionToggle<CR>", {
+	noremap = true,
+	silent = true,
+	desc = "Toggle autocomplete",
+})
 
--- for responsiveness of lsp diagnostic windows
+-- improve lsp diag window performance
 vim.o.updatetime = 250
+
 -- diagnostic display settings
 vim.diagnostic.config({
 	virtual_text = false,
@@ -334,6 +296,9 @@ vim.api.nvim_create_autocmd("CursorHold", {
 		vim.diagnostic.open_float(nil, opts)
 	end,
 })
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
 -- rust lsp
 vim.lsp.config("rust_analyzer", {
 	-- Server-specific settings. See `:help lspconfig-setup`
@@ -497,13 +462,16 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+-- opt-in to new ui2
+require('vim._core.ui2').enable({})
+
 -- load local rc files
 vim.o.exrc = true
 
 -- Set undo/backup/swap files to directory in home
-vim.o.undodir = vim.fn.expand("~/.config/nvim/.undo//")
-vim.o.backupdir = vim.fn.expand("~/.config/nvim/.backup//")
-vim.o.directory = vim.fn.expand("~/.config/nvim/.swp//")
+vim.o.undodir = vim.fn.expand("$HOME/.local/state/nvim/.undo//")
+vim.o.backupdir = vim.fn.expand("$HOME/.local/state/nvim/.backup//")
+vim.o.directory = vim.fn.expand("$HOME/.local/state/nvim/.swp//")
 
 vim.o.undofile = true
 vim.o.backup = true
@@ -670,8 +638,7 @@ vim.o.mat = 2
 -- Line numbers
 vim.wo.number = true
 
--- Disable scratch window preview in omni
-vim.o.completeopt = vim.o.completeopt .. ",noselect,noinsert,popup"
+vim.o.completeopt = "menu,menuone,noselect,popup"
 
 -- Mouse setup
 vim.o.mouse = "a"
@@ -709,7 +676,6 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 })
 
 -- set external format tools based on filetype
--- TODO: move these to ftplugin dirs
 vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
 vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
 vim.api.nvim_command("autocmd FileType lua setlocal formatprg=stylua\\ -")
@@ -977,28 +943,17 @@ vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
 -- status
 vim.keymap.set("n", "<leader>gs", ":Git <cr>")
 
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer
-vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-		-- Buffer local mappings.
-		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
-		vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition)
-		vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
-	end,
-})
-
 vim.keymap.set("n", "<leader>ll", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
+
+-- Fix selected code
+vim.keymap.set(
+       "v",
+       "<leader>kf",
+       ":'<,'>CopilotChatFix <cr>",
+       { noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
+)
 
 -- Explain current text selection
 vim.keymap.set(
@@ -1016,23 +971,24 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "CopilotChat - Review visual selection" }
 )
 
--- Fix selected code
-vim.keymap.set(
-	"v",
-	"<leader>kf",
-	":'<,'>CopilotChatFix <cr>",
-	{ noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
-)
+-- Use LspAttach autocommand to only map the following keys
+-- after the language server attaches to the current buffer
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	callback = function(ev)
+		local client_id = ev.data and ev.data.client_id
+		if client_id then
+			vim.lsp.completion.enable(true, client_id, ev.buf, {
+        -- auto-show menu as you type
+				autotrigger = true,
+			})
+		end
 
--- Optimize selected code
-vim.keymap.set(
-	"v",
-	"<leader>ko",
-	":'<,'>CopilotChatOptimize <cr>",
-	{ noremap = true, silent = true, desc = "CopilotChat - Optimize visual selection" }
-)
-
--- Document selected code
+		-- See `:help vim.lsp.*` for documentation on any of the below functions
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
+		vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
+	end,
+})
 vim.keymap.set(
 	"v",
 	"<leader>kd",
