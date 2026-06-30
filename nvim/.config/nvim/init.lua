@@ -39,7 +39,6 @@ vim.pack.add({
 	{ src = "https://github.com/andythigpen/nvim-coverage" },
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
-  -- TODO: reconfig binds
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "^v19.17.0" },
 })
@@ -217,6 +216,12 @@ require("lsp-progress").setup({
 
 require("flash").setup({})
 
+vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" })
+vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" })
+vim.keymap.set("o", "r", function() require("flash").remote() end, { desc = "Remote Flash" })
+vim.keymap.set({ "o", "x" }, "R", function() require("flash").treesitter_search() end, { desc = "Treesitter Search" })
+vim.keymap.set("c", "<C-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" })
+
 require("nvim-toc").setup({
 	toc_header = "Table of Contents",
 })
@@ -266,19 +271,6 @@ vim.o.complete = "o"
 vim.keymap.set("i", "<Tab>", function()
 	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
 end, { expr = true, silent = true })
-
-local function toggle_autocomplete()
-	vim.o.autocomplete = not vim.o.autocomplete
-	vim.notify(vim.o.autocomplete and "Autocomplete enabled" or "Autocomplete disabled")
-end
-
-vim.api.nvim_create_user_command("NvimCompletionToggle", toggle_autocomplete, {})
-
-vim.keymap.set("n", "<Leader>la", "<cmd>NvimCompletionToggle<CR>", {
-	noremap = true,
-	silent = true,
-	desc = "Toggle autocomplete",
-})
 
 -- improve lsp diag window performance
 vim.o.updatetime = 250
