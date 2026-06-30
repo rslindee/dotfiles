@@ -982,8 +982,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
-		vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
+    vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
 	end,
 })
 vim.keymap.set(
