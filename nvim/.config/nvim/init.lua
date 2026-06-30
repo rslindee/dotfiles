@@ -58,7 +58,7 @@ do
 			select = {
 				enable = true,
 				lookahead = true,
-        keymaps = {
+				keymaps = {
 					["af"] = "@function.outer",
 					["if"] = "@function.inner",
 				},
@@ -216,11 +216,21 @@ require("lsp-progress").setup({
 
 require("flash").setup({})
 
-vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end, { desc = "Flash" })
-vim.keymap.set({ "n", "x", "o" }, "S", function() require("flash").treesitter() end, { desc = "Flash Treesitter" })
-vim.keymap.set("o", "r", function() require("flash").remote() end, { desc = "Remote Flash" })
-vim.keymap.set({ "o", "x" }, "R", function() require("flash").treesitter_search() end, { desc = "Treesitter Search" })
-vim.keymap.set("c", "<C-s>", function() require("flash").toggle() end, { desc = "Toggle Flash Search" })
+vim.keymap.set({ "n", "x", "o" }, "s", function()
+	require("flash").jump()
+end, { desc = "Flash" })
+vim.keymap.set({ "n", "x", "o" }, "S", function()
+	require("flash").treesitter()
+end, { desc = "Flash Treesitter" })
+vim.keymap.set("o", "r", function()
+	require("flash").remote()
+end, { desc = "Remote Flash" })
+vim.keymap.set({ "o", "x" }, "R", function()
+	require("flash").treesitter_search()
+end, { desc = "Treesitter Search" })
+vim.keymap.set("c", "<C-s>", function()
+	require("flash").toggle()
+end, { desc = "Toggle Flash Search" })
 
 require("nvim-toc").setup({
 	toc_header = "Table of Contents",
@@ -314,8 +324,8 @@ vim.lsp.config("rust_analyzer", {
 				allFeatures = true,
 				loadOutDirsFromCheck = true,
 				runBuildScripts = true,
-        -- use a separate dir so Cargo.lock isn't held. duplicates artifacts
-        targetDir = true,
+				-- use a separate dir so Cargo.lock isn't held. duplicates artifacts
+				targetDir = true,
 			},
 			diagnostics = {
 				enable = true,
@@ -434,34 +444,34 @@ dap.configurations.rust = {
 -- needed for newer versions of rustfmt(?)
 vim.g.rustfmt_emit_files = 1
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'rust',
-  callback = function(args)
-    vim.keymap.set('n', '<leader>i', '<cmd>RustFmt<cr>', {
-      buffer = args.buf,
-      noremap = true,
-      silent = true,
-      desc = 'Run rustfmt on current file',
-    })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "rust",
+	callback = function(args)
+		vim.keymap.set("n", "<leader>i", "<cmd>RustFmt<cr>", {
+			buffer = args.buf,
+			noremap = true,
+			silent = true,
+			desc = "Run rustfmt on current file",
+		})
 
-    vim.keymap.set('n', '<leader>mm', '<cmd>silent !cargo run<cr>', {
-      buffer = args.buf,
-      noremap = true,
-      silent = true,
-      desc = 'Cargo run',
-    })
+		vim.keymap.set("n", "<leader>mm", "<cmd>silent !cargo run<cr>", {
+			buffer = args.buf,
+			noremap = true,
+			silent = true,
+			desc = "Cargo run",
+		})
 
-    vim.api.nvim_buf_call(args.buf, function()
-      vim.cmd('compiler cargo')
-    end)
-  end,
+		vim.api.nvim_buf_call(args.buf, function()
+			vim.cmd("compiler cargo")
+		end)
+	end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'python',
-  callback = function()
-    vim.opt_local.formatprg = 'black --quiet -'
-  end,
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "python",
+	callback = function()
+		vim.opt_local.formatprg = "black --quiet -"
+	end,
 })
 
 -- load local rc files
@@ -923,7 +933,7 @@ vim.keymap.set("n", "<leader>i", "<cmd>lua AutoformatCurrentFile()<cr>")
 
 -- update plugins
 vim.keymap.set("n", "<leader>vu", function()
-	vim.pack.update()
+	vim.pack.update(nil, { force = true })
 end, { desc = "Update plugins" })
 
 -- map esc when in terminal mode
@@ -946,10 +956,10 @@ end, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
 -- Fix selected code
 vim.keymap.set(
-       "v",
-       "<leader>kf",
-       ":'<,'>CopilotChatFix <cr>",
-       { noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
+	"v",
+	"<leader>kf",
+	":'<,'>CopilotChatFix <cr>",
+	{ noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
 )
 
 -- Explain current text selection
@@ -976,16 +986,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client_id = ev.data and ev.data.client_id
 		if client_id then
 			vim.lsp.completion.enable(true, client_id, ev.buf, {
-        -- auto-show menu as you type
+				-- auto-show menu as you type
 				autotrigger = true,
 			})
 		end
 
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-    vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
-    vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
+		vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
 	end,
 })
 vim.keymap.set(

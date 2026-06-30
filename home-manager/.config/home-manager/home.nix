@@ -17,6 +17,7 @@
     mosquitto
     protols
     ripgrep
+    stylua
     tmux
     tree-sitter
   ];
