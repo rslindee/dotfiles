@@ -49,6 +49,10 @@ require("marks").setup({
 	signs = true,
 })
 
+require("diffview").setup({
+    use_icons = false,
+})
+
 do
 	local ts = require("nvim-treesitter")
 	ts.setup({
