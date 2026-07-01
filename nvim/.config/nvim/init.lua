@@ -273,17 +273,10 @@ vim.api.nvim_set_keymap("n", "<space>", "<nop>", { noremap = true, silent = true
 vim.api.nvim_set_keymap("n", "<leader>", "<space>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("x", "<leader>", "<space>", { noremap = true, silent = true })
 
--- trigger insert-mode completion
-vim.keymap.set("i", "<S-Tab>", vim.lsp.completion.get, { desc = "trigger autocompletion" })
-
 vim.o.completeopt = "menu,menuone,popup,preview"
 
 -- only source lsp for completions
 vim.o.complete = "o"
-
-vim.keymap.set("i", "<Tab>", function()
-	return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
-end, { expr = true, silent = true })
 
 -- improve lsp diag window performance
 vim.o.updatetime = 250
