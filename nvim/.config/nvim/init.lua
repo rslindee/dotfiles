@@ -87,6 +87,7 @@ do
 
 	ts.install({
 		"c",
+		"diff",
 		"lua",
 		"vim",
 		"query",
@@ -291,7 +292,7 @@ vim.diagnostic.config({
 })
 
 -- Setup language servers.
-vim.lsp.set_log_level("OFF")
+vim.lsp.log.set_level("OFF")
 vim.api.nvim_create_autocmd("CursorHold", {
 	callback = function()
 		local opts = {

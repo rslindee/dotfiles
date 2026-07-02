@@ -12,10 +12,15 @@
     direnv
     fd
     fzf
+    gpclient
     jdk
     jq
+    luaPackages.tiktoken_core
+    lynx
+    marksman
     mosquitto
     protols
+    pyright
     ripgrep
     stylua
     tmux
