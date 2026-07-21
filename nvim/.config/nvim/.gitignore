@@ -1,3 +1,4 @@
 plugin/
 spell/
 viminfo
+nvim-pack-lock.json
