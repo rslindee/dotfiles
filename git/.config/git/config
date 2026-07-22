@@ -64,6 +64,8 @@
   #recurse = true
 [pull]
   rebase = false
+[push]
+  autoSetupRemote = true
 [color "diff-highlight"]
   oldNormal = "red black"
   oldHighlight = "black brightred"
