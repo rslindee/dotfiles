@@ -804,6 +804,12 @@ vim.keymap.set("n", "'", "`")
 -- De-dupe and sort visual selection
 vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>")
 
+-- Open diffview
+vim.keymap.set("n", "<leader>do", ":DiffviewOpen<cr>")
+
+-- Refresh diffview
+vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<cr>")
+
 -- yank filename to clipboard
 vim.keymap.set("n", "<leader>yf", ':let @+=expand("%:t")<CR>')
 -- yank file path relative to current vim dir to clipboard
