@@ -39,7 +39,6 @@ vim.pack.add({
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
-	{ src = "https://github.com/olimorris/codecompanion.nvim", version = "^v19.17.0" },
 })
 
 -- Plugin setup
@@ -238,34 +237,6 @@ end, { desc = "Toggle Flash Search" })
 
 require("nvim-toc").setup({
 	toc_header = "Table of Contents",
-})
-
-require("codecompanion").setup({
-	adapters = {
-		http = {
-			copilot = function()
-				return require("codecompanion.adapters").extend("copilot", {
-					schema = {
-						model = {
-							default = "gpt-5.4",
-						},
-					},
-				})
-			end,
-		},
-	},
-	interactions = {
-		chat = {
-			adapter = "copilot",
-			auto_scroll = false,
-		},
-		inline = { adapter = "copilot" },
-		cmd = { adapter = "copilot" },
-		background = { adapter = "copilot" },
-	},
-	opts = {
-		log_level = "DEBUG",
-	},
 })
 
 -- maps leader to space
