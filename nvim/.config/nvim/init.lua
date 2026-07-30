@@ -778,6 +778,12 @@ vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>")
 -- Open diffview
 vim.keymap.set("n", "<leader>do", ":DiffviewOpen<cr>")
 
+-- Close diffview
+vim.keymap.set("n", "<leader>dx", ":DiffviewClose<cr>")
+
+-- Open diffview of current branch against main
+vim.keymap.set("n", "<leader>db", ":DiffviewOpen main... --imply-local --untracked-files=all<cr>")
+
 -- Refresh diffview
 vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<cr>")
 
