@@ -174,7 +174,7 @@ require("copilot").setup({
 
 require("CopilotChat").setup({
 	debug = true,
-	model = "gpt-5.4",
+	model = "gpt-5.6-luna",
 	sticky = { "#buffer", "#gitdiff" },
 	window = {
 		layout = "vertical",
@@ -241,9 +241,7 @@ require("nvim-toc").setup({
 
 -- maps leader to space
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap("n", "<space>", "<nop>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>", "<space>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("x", "<leader>", "<space>", { noremap = true, silent = true })
+vim.g.maplocalleader = " "
 
 vim.o.completeopt = "menu,menuone,popup,preview"
 
