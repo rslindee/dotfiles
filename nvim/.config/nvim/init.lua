@@ -55,7 +55,6 @@ require("diffview").setup({
 
 local treesitter_group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
 local diagnostics_group = vim.api.nvim_create_augroup("UserDiagnostics", { clear = true })
-local filetype_group = vim.api.nvim_create_augroup("UserFiletypes", { clear = true })
 local rust_group = vim.api.nvim_create_augroup("UserRust", { clear = true })
 local python_group = vim.api.nvim_create_augroup("UserPython", { clear = true })
 local quickfix_group = vim.api.nvim_create_augroup("UserQuickfix", { clear = true })
@@ -483,22 +482,16 @@ vim.g.gruvbox_material_foreground = "original"
 vim.g.gruvbox_material_background = "hard"
 vim.cmd("colorscheme gruvbox-material")
 
--- Make clang config highlight as yaml
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-	group = filetype_group,
-	pattern = { ".clang-format", ".clang-tidy" },
-	callback = function()
-		vim.bo.filetype = "yaml"
-	end,
-})
-
--- Make systemd service files highlight as gitconfig files
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-	group = filetype_group,
-	pattern = "*.service",
-	callback = function()
-		vim.bo.filetype = "gitconfig"
-	end,
+vim.filetype.add({
+	filename = {
+		SConstruct = "python",
+		SConscript = "python",
+		[".clang-format"] = "yaml",
+		[".clang-tidy"] = "yaml",
+	},
+	pattern = {
+		[".*%.service"] = "gitconfig",
+	},
 })
 
 -- heirline
@@ -900,19 +893,19 @@ vim.keymap.set("n", "<leader>af", ":FzfLua grep<cr>")
 vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<cr>")
 
 -- redraw, and disable highlighting
-vim.api.nvim_set_keymap("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>/", ':silent! grep ""<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>?", ':GrepAll ""<Left>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>f", ':silent! grep "<C-R><C-W>"<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>F", ':GrepAll "<C-R><C-W>"<CR>', { noremap = true, silent = true })
+vim.keymap.set("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { silent = true })
+vim.keymap.set("n", "<leader>/", ':silent! grep ""<Left>', { silent = true })
+vim.keymap.set("n", "<leader>?", ':GrepAll ""<Left>', { silent = true })
+vim.keymap.set("n", "<leader>f", ':silent! grep "<C-R><C-W>"<CR>', { silent = true })
+vim.keymap.set("n", "<leader>F", ':GrepAll "<C-R><C-W>"<CR>', { silent = true })
 -- Run last make command
-vim.api.nvim_set_keymap("n", "<leader>mr", ":make<Up><CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mr", ":make<Up><CR>", { silent = true })
 -- Run make
-vim.api.nvim_set_keymap("n", "<leader>mm", ":silent make!<CR>:redraw!<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mm", ":silent make!<CR>:redraw!<CR>", { silent = true })
 -- make clean
-vim.api.nvim_set_keymap("n", "<leader>mc", ":make clean<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mc", ":make clean<CR>", { silent = true })
 -- make test
-vim.api.nvim_set_keymap("n", "<leader>mt", ":make test<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>mt", ":make test<CR>", { silent = true })
 
 -- grep and include all hidden/ignored files
 vim.api.nvim_create_user_command("GrepAll", function(opts)
@@ -966,7 +959,7 @@ vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
 
 -- Use fzf for path completion
 vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
-	FzfLua.complete_path()
+	require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
 
 -- vim-fugitive
