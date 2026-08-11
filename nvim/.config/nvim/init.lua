@@ -39,7 +39,7 @@ vim.pack.add({
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
-  { src = "https://github.com/hat0uma/csvview.nvim" },
+	{ src = "https://github.com/hat0uma/csvview.nvim" },
 })
 
 -- Plugin setup
@@ -50,7 +50,7 @@ require("marks").setup({
 })
 
 require("diffview").setup({
-    use_icons = false,
+	use_icons = false,
 })
 
 local treesitter_group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
