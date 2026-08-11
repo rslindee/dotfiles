@@ -698,7 +698,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- run formatprg, retab, and trim whitespace on entire buffer
-function AutoformatCurrentFile()
+
+local function autoformat_current_file()
 	local save = vim.fn.winsaveview()
 	vim.cmd('execute "keepjumps normal! gggqG"')
 	vim.fn.winrestview(save)
@@ -769,18 +770,20 @@ vim.keymap.set("n", "<c-n>", ":cn<cr>")
 vim.keymap.set("n", "<c-p>", ":cp<cr>")
 
 -- Jump to next conflict marker
-function NextConflict()
+
+local function next_conflict()
 	vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
 end
 
 -- Jump to previous conflict marker
-function PrevConflict()
+
+local function prev_conflict()
 	vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
 end
 
 -- conflict jump mappings
-vim.keymap.set("n", "gln", NextConflict, { desc = "Next conflict marker" })
-vim.keymap.set("n", "gnN", PrevConflict, { desc = "Previous conflict marker" })
+vim.keymap.set("n", "gln", next_conflict, { desc = "Next conflict marker" })
+vim.keymap.set("n", "gnN", prev_conflict, { desc = "Previous conflict marker" })
 
 vim.keymap.set("n", "gld", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 vim.keymap.set("n", "glD", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
@@ -951,7 +954,7 @@ end, { nargs = "+" })
 vim.keymap.set("n", "<leader>j", require("treesj").toggle)
 
 -- run formatter
-vim.keymap.set("n", "<leader>i", "<cmd>lua AutoformatCurrentFile()<cr>")
+vim.keymap.set("n", "<leader>i", autoformat_current_file)
 
 -- update plugins
 vim.keymap.set("n", "<leader>vu", function()
