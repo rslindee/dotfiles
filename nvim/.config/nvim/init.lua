@@ -367,10 +367,11 @@ require("lazydev").setup({
 	library = { "nvim-dap-ui" },
 })
 
+local dap = require("dap")
 require("dapui").setup()
 
 -- run dapui on dap events
-local dap, dapui = require("dap"), require("dapui")
+local dapui = require("dapui")
 dap.listeners.before.attach.dapui_config = function()
 	dapui.open()
 end
@@ -385,8 +386,6 @@ dap.listeners.before.event_exited.dapui_config = function()
 end
 
 -- Setup nvim-dap debugger
-local dap = require("dap")
-
 dap.adapters.gdb = {
 	type = "executable",
 	command = "gdb",
@@ -572,7 +571,7 @@ local WorkingDir = {
 	end,
 }
 
-local FileNameBlock = utils.insert(
+local FileNameWithFlags = utils.insert(
 	FileNameBlock,
 	utils.insert(FileName), -- a new table where FileName is a child of FileNameModifier
 	FileFlags,
@@ -595,7 +594,7 @@ local LspProgress = {
 }
 
 local StatusLine = {
-	FileNameBlock,
+	FileNameWithFlags,
 	{ provider = " ┃ " },
 	WorkingDir,
 	Git,
