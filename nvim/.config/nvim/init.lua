@@ -39,6 +39,7 @@ vim.pack.add({
 	{ src = "https://github.com/rebelot/heirline.nvim" },
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
+  { src = "https://github.com/hat0uma/csvview.nvim" },
 })
 
 -- Plugin setup
