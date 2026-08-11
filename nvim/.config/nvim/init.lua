@@ -53,6 +53,16 @@ require("diffview").setup({
     use_icons = false,
 })
 
+local treesitter_group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
+local diagnostics_group = vim.api.nvim_create_augroup("UserDiagnostics", { clear = true })
+local filetype_group = vim.api.nvim_create_augroup("UserFiletypes", { clear = true })
+local rust_group = vim.api.nvim_create_augroup("UserRust", { clear = true })
+local python_group = vim.api.nvim_create_augroup("UserPython", { clear = true })
+local quickfix_group = vim.api.nvim_create_augroup("UserQuickfix", { clear = true })
+local selection_group = vim.api.nvim_create_augroup("UserSelection", { clear = true })
+local format_group = vim.api.nvim_create_augroup("UserFormat", { clear = true })
+local lsp_group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true })
+
 do
 	local ts = require("nvim-treesitter")
 	ts.setup({
@@ -103,6 +113,7 @@ do
 	})
 
 	vim.api.nvim_create_autocmd("FileType", {
+		group = treesitter_group,
 		pattern = {
 			"c",
 			"lua",
@@ -264,6 +275,7 @@ vim.diagnostic.config({
 -- Setup language servers.
 vim.lsp.log.set_level("OFF")
 vim.api.nvim_create_autocmd("CursorHold", {
+	group = diagnostics_group,
 	callback = function()
 		local opts = {
 			focusable = false,
@@ -412,6 +424,7 @@ dap.configurations.rust = {
 vim.g.rustfmt_emit_files = 1
 
 vim.api.nvim_create_autocmd("FileType", {
+	group = rust_group,
 	pattern = "rust",
 	callback = function(args)
 		vim.keymap.set("n", "<leader>i", "<cmd>RustFmt<cr>", {
@@ -435,14 +448,12 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+	group = python_group,
 	pattern = "python",
 	callback = function()
 		vim.opt_local.formatprg = "black --quiet -"
 	end,
 })
-
--- load local rc files
-vim.o.exrc = true
 
 -- Set undo/backup/swap files to directory in home
 vim.o.undodir = vim.fn.expand("$HOME/.local/state/nvim/.undo//")
@@ -472,14 +483,23 @@ vim.g.gruvbox_material_foreground = "original"
 vim.g.gruvbox_material_background = "hard"
 vim.cmd("colorscheme gruvbox-material")
 
--- Make Scons files highlight as python
-vim.cmd("autocmd BufNew,BufRead SConstruct,SConscript set filetype=python")
-
 -- Make clang config highlight as yaml
-vim.cmd("autocmd BufNew,BufRead .clang-format,.clang-tidy set filetype=yaml")
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	group = filetype_group,
+	pattern = { ".clang-format", ".clang-tidy" },
+	callback = function()
+		vim.bo.filetype = "yaml"
+	end,
+})
 
 -- Make systemd service files highlight as gitconfig files
-vim.cmd("autocmd BufNew,BufRead *.service set filetype=gitconfig")
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+	group = filetype_group,
+	pattern = "*.service",
+	callback = function()
+		vim.bo.filetype = "gitconfig"
+	end,
+})
 
 -- heirline
 local conditions = require("heirline.conditions")
@@ -597,7 +617,11 @@ require("heirline").setup({
 	statusline = StatusLine,
 })
 -- auto open quickfix when populated
-vim.cmd("autocmd QuickFixCmdPost * copen")
+vim.api.nvim_create_autocmd("QuickFixCmdPost", {
+	group = quickfix_group,
+	pattern = "*",
+	command = "copen",
+})
 
 -- Enable special doxygen highlighting
 vim.g.load_doxygen_syntax = 1
@@ -640,6 +664,7 @@ vim.opt.signcolumn = "auto:2"
 
 -- Mouse-selected text copies to primary selection clipboard
 vim.api.nvim_create_autocmd("CursorMoved", {
+	group = selection_group,
 	desc = "Keep * synced with selection",
 	callback = function()
 		local mode = vim.fn.mode(false)
@@ -650,9 +675,27 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 })
 
 -- set external format tools based on filetype
-vim.api.nvim_command("autocmd FileType c,cpp setlocal formatprg=clang-format\\ --assume-filename=%")
-vim.api.nvim_command("autocmd FileType sh,bash setlocal makeprg=shellcheck\\ -f\\ gcc\\ %")
-vim.api.nvim_command("autocmd FileType lua setlocal formatprg=stylua\\ -")
+vim.api.nvim_create_autocmd("FileType", {
+	group = format_group,
+	pattern = { "c", "cpp" },
+	callback = function()
+		vim.opt_local.formatprg = "clang-format --assume-filename=%"
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	group = format_group,
+	pattern = { "sh", "bash" },
+	callback = function()
+		vim.opt_local.makeprg = "shellcheck -f gcc %"
+	end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+	group = format_group,
+	pattern = "lua",
+	callback = function()
+		vim.opt_local.formatprg = "stylua -"
+	end,
+})
 
 -- run formatprg, retab, and trim whitespace on entire buffer
 function AutoformatCurrentFile()
@@ -960,7 +1003,7 @@ vim.keymap.set(
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	group = lsp_group,
 	callback = function(ev)
 		local client_id = ev.data and ev.data.client_id
 		if client_id then
