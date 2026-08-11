@@ -1006,6 +1006,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_group,
 	callback = function(ev)
 		local client_id = ev.data and ev.data.client_id
+		local client = client_id and vim.lsp.get_client_by_id(client_id) or nil
+		local opts = { buffer = ev.buf }
 		if client_id then
 			vim.lsp.completion.enable(true, client_id, ev.buf, {
 				-- auto-show menu as you type
@@ -1014,10 +1016,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
-		vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>")
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+
+		if client and client.name == "clangd" then
+			vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>", opts)
+		end
 	end,
 })
 vim.keymap.set(
