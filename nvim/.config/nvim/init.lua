@@ -40,6 +40,10 @@ vim.pack.add({
 	{ src = "https://github.com/linrongbin16/lsp-progress.nvim" },
 	{ src = "https://github.com/folke/flash.nvim" },
 	{ src = "https://github.com/hat0uma/csvview.nvim" },
+	{ src = "https://github.com/pwntester/octo.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
+	{ src = "https://github.com/barrettruth/diffs.nvim" },
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
 
 -- Plugin setup
@@ -608,6 +612,17 @@ local StatusLine = {
 require("heirline").setup({
 	statusline = StatusLine,
 })
+
+require"octo".setup {
+  picker = "fzf-lua",
+  enable_builtin = true,
+}
+vim.treesitter.language.register("markdown", "octo")
+
+require("render-markdown").setup({
+  file_types = { "markdown", "octo" },
+})
+
 -- auto open quickfix when populated
 vim.api.nvim_create_autocmd("QuickFixCmdPost", {
 	group = quickfix_group,
