@@ -620,7 +620,7 @@ require"octo".setup {
 vim.treesitter.language.register("markdown", "octo")
 
 require("render-markdown").setup({
-  file_types = { "markdown", "octo" },
+  file_types = { "octo" },
 })
 
 -- auto open quickfix when populated
