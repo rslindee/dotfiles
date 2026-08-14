@@ -12,6 +12,7 @@
     direnv
     fd
     fzf
+    gh
     gpclient
     jdk
     jq
