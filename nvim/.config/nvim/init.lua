@@ -42,7 +42,6 @@ vim.pack.add({
 	{ src = "https://github.com/hat0uma/csvview.nvim" },
 	{ src = "https://github.com/pwntester/octo.nvim" },
 	{ src = "https://github.com/nvim-tree/nvim-web-devicons" },
-	{ src = "https://github.com/barrettruth/diffs.nvim" },
 	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
 })
 
