@@ -117,7 +117,7 @@ PACKAGES_FEDORA="
 
 PACKAGES_LAPTOP="acpi \
     acpid \
-    light \
+    brightnessctl \
     powertop \
     "
 

@@ -1,12 +1,18 @@
 {
     "layer": "top",
-    "modules-left": ["river/tags"],
-    "modules-center": ["ext/workspaces", "river/window"],
+    "modules-left": ["niri/workspaces"],
+    "modules-center": ["niri/window"],
     "modules-right": ["network", "battery", "wireplumber", "clock"],
 
-    "river/window": {
+    "niri/window": {
         "format": "{}",
         "tooltip": false,
+        "icon": true
+    },
+
+    "niri/workspaces": {
+        "hide-empty": true,
+        "display-condition": "only-populated"
     },
 
     "battery": {
@@ -25,21 +31,11 @@
       "format-wifi": "[{essid} ({signalStrength}%)]",
       "format-ethernet": "[{ifname}]",
       "format-disconnected": "", //An empty format will hide the module.
-      "tooltip": false,
-    },
-
-    // currently experimental/unspupported
-    "ext/workspaces": {
-        "active-only": true, 
-        "format": "[{icon}{title}]"
-    },
-
-    "river/tags": {
-      "hide-vacant": true
+      "tooltip": false
     },
 
     "wireplumber": {
-      "format": "[♫:{volume}%]",
+      "format": "[♫:{volume}%]"
     }
 }
 

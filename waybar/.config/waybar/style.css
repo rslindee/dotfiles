@@ -1,7 +1,7 @@
 * {
   font-family: terminus, monospace;
   font-size: 14px;
-  min-height: 0;
+  min-height: 24px;
   background: black;
   color: white;
 }
@@ -10,7 +10,7 @@
     margin: 0 10px 0 0;
 }
 
-#tags button:hover {
+#workspaces button:hover {
   opacity: 1;
   background: inherit;
   box-shadow: none;
@@ -20,11 +20,11 @@
   outline: none;
 }
 
-#tags button * {
+#workspaces button * {
   background: transparent;
 }
 
-#tags button {
+#workspaces button {
     background: transparent;
     border-bottom: 3px solid transparent;
     color: #ffffff;
@@ -32,26 +32,13 @@
     transition: none;
 }
 
-/* hack to hide empty tags at start */
-#tags button:not(.occupied):not(.focused) {
-	font-size: 0;
-	min-width: 0;
-	min-height: 0;
-	margin: -17px;
-	padding: 0;
-	border: 0;
-	opacity: 0;
-	box-shadow: none;
-	background-color: transparent;
-}
-
-#tags button.focused {
+#workspaces button.focused {
     background: #64727D;
     border-bottom: 3px solid #ffffff;
     border-radius: 0;
 }
 
-#tags button.urgent {
+#workspaces button.urgent {
     background-color: #eb4d4b;
     border-radius: 0;
 }
