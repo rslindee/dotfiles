@@ -87,8 +87,8 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-at-startup "kanshi"
+spawn-at-startup "swayidle"
 spawn-sh-at-startup "foot tmux"
-spawn-sh-at-startup "swayidle -w timeout 1200 \"waylock -fork-on-lock\" timeout 1230 \"systemctl suspend\" before-sleep \"waylock -fork-on-lock\""
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
