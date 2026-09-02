@@ -1,6 +1,6 @@
 {
     "layer": "top",
-    "modules-left": ["niri/workspaces"],
+    "modules-left": ["niri/workspaces", "tray"],
     "modules-center": ["niri/window"],
     "modules-right": ["network", "battery", "wireplumber", "clock"],
 
