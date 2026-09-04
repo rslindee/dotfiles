@@ -254,8 +254,9 @@ require("nvim-toc").setup({
 })
 
 -- maps leader to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' '
+-- maps localleader to backspace
+vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 
 vim.o.completeopt = "menu,menuone,popup,preview"
 
@@ -615,6 +616,12 @@ require("heirline").setup({
 require"octo".setup {
   picker = "fzf-lua",
   enable_builtin = true,
+  mappings = {
+    runs = {
+      open_in_browser = { lhs = "<localleader>b", desc = "open workflow run in browser" },
+      rerun = { lhs = "<localleader>o", desc = "rerun workflow" },
+    }
+  }
 }
 vim.treesitter.language.register("markdown", "octo")
 
