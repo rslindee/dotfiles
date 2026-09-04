@@ -894,7 +894,7 @@ vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
 -- replace in quickfix list what word the cursor is currently on
 vim.keymap.set("n", "<leader>R", ":cdo %s/<C-r><C-w>//gc<Left><Left><Left>")
 
--- fzf.vim
+-- fzf-lua.vim
 -- open fzf for all files
 vim.keymap.set("n", "<leader>o", ":FzfLua files<cr>")
 -- open fzf for all buffers
@@ -911,6 +911,8 @@ vim.keymap.set("n", "<leader>at", ":FzfLua treesitter<cr>")
 vim.keymap.set("n", "<leader>af", ":FzfLua grep<cr>")
 -- start fzf-piped live Rg search
 vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<cr>")
+-- show all keymaps
+vim.keymap.set("n", "<leader>ak", ":FzfLua keymaps<cr>")
 
 -- redraw, and disable highlighting
 vim.keymap.set("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { silent = true })
