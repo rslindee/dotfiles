@@ -740,20 +740,21 @@ end
 
 vim.keymap.set("n", "<Leader>q", toggle_quickfix, { desc = "Toggle Quickfix Window" })
 
--- Gitsigns Navigation
-vim.keymap.set("n", "]c", function()
-	if vim.wo.diff then
-		return "]c"
-	end
-	return ":Gitsigns next_hunk<CR>"
-end, { expr = true, desc = "Next Git hunk" })
+vim.keymap.set('n', ']c', function()
+  if vim.wo.diff then
+    vim.cmd.normal({']c', bang = true})
+  else
+    require("gitsigns").nav_hunk('next')
+  end
+end, { desc = "Next Git hunk" })
 
-vim.keymap.set("n", "[c", function()
-	if vim.wo.diff then
-		return "[c"
-	end
-	return ":Gitsigns prev_hunk<CR>"
-end, { expr = true, desc = "Previous Git hunk" })
+vim.keymap.set('n', '[c', function()
+  if vim.wo.diff then
+    vim.cmd.normal({'[c', bang = true})
+  else
+    require("gitsigns").nav_hunk('prev')
+  end
+end, { desc = "Previous Git hunk" })
 
 vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Git stage hunk" })
 vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Git reset hunk" })
@@ -774,28 +775,6 @@ vim.keymap.set("n", "<leader>c", ":tabnew<cr>", { desc = "Create tab" })
 
 vim.keymap.set("n", "<c-n>", ":cn<cr>", { desc = "Next quickfix item" })
 vim.keymap.set("n", "<c-p>", ":cp<cr>", { desc = "Previous quickfix item" })
-
--- Jump to next conflict marker
-
-local function next_conflict()
-	vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
-end
-
--- Jump to previous conflict marker
-
-local function prev_conflict()
-	vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
-end
-
--- conflict jump mappings
-vim.keymap.set("n", "gln", next_conflict, { desc = "Next conflict marker" })
-vim.keymap.set("n", "gnN", prev_conflict, { desc = "Previous conflict marker" })
-
-vim.keymap.set("n", "gld", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set("n", "glD", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
-
-vim.keymap.set("n", "glc", "]c", { remap = true, desc = "Next diff change" })
-vim.keymap.set("n", "glC", "[c", { remap = true, desc = "Prev diff change" })
 
 vim.keymap.set("n", "glt", function()
 	require("coverage").jump_next("uncovered")
