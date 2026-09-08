@@ -260,8 +260,9 @@ require("nvim-toc").setup({
 })
 
 -- maps leader to space
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.mapleader = ' '
+-- maps localleader to backspace
+vim.g.maplocalleader = vim.api.nvim_replace_termcodes('<BS>', false, false, true)
 
 vim.o.completeopt = "menu,menuone,popup,preview"
 
@@ -621,6 +622,12 @@ require("heirline").setup({
 require"octo".setup {
   picker = "fzf-lua",
   enable_builtin = true,
+  mappings = {
+    runs = {
+      open_in_browser = { lhs = "<localleader>b", desc = "open workflow run in browser" },
+      rerun = { lhs = "<localleader>o", desc = "rerun workflow" },
+    }
+  }
 }
 vim.treesitter.language.register("markdown", "octo")
 
@@ -739,69 +746,41 @@ end
 
 vim.keymap.set("n", "<Leader>q", toggle_quickfix, { desc = "Toggle Quickfix Window" })
 
--- Gitsigns Navigation
-vim.keymap.set("n", "]c", function()
-	if vim.wo.diff then
-		return "]c"
-	end
-	return ":Gitsigns next_hunk<CR>"
-end, { expr = true })
+vim.keymap.set('n', ']c', function()
+  if vim.wo.diff then
+    vim.cmd.normal({']c', bang = true})
+  else
+    require("gitsigns").nav_hunk('next')
+  end
+end, { desc = "Next Git hunk" })
 
-vim.keymap.set("n", "[c", function()
-	if vim.wo.diff then
-		return "[c"
-	end
-	return ":Gitsigns prev_hunk<CR>"
-end, { expr = true })
+vim.keymap.set('n', '[c', function()
+  if vim.wo.diff then
+    vim.cmd.normal({'[c', bang = true})
+  else
+    require("gitsigns").nav_hunk('prev')
+  end
+end, { desc = "Previous Git hunk" })
 
--- Gitsigns Actions
-vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>")
-vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>")
-vim.keymap.set("n", "<leader>hS", ":Gitsigns stage_buffer<CR>")
-vim.keymap.set("n", "<leader>hu", ":Gitsigns undo_stage_hunk<CR>")
-vim.keymap.set("n", "<leader>hR", ":Gitsigns reset_buffer<CR>")
-vim.keymap.set("n", "<leader>hp", ":Gitsigns preview_hunk<CR>")
-vim.keymap.set("n", "<leader>hb", ":Gitsigns blame_line<CR>")
-vim.keymap.set("n", "<leader>hd", ":Gitsigns diffthis<CR>")
-vim.keymap.set("n", "<leader>td", ":Gitsigns toggle_deleted<CR>")
+vim.keymap.set({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", { desc = "Git stage hunk" })
+vim.keymap.set({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", { desc = "Git reset hunk" })
+vim.keymap.set("n", "<leader>hS", ":Gitsigns stage_buffer<CR>", { desc = "Git stage buffer" })
+vim.keymap.set("n", "<leader>hu", ":Gitsigns undo_stage_hunk<CR>", { desc = "Git undo stage hunk" })
+vim.keymap.set("n", "<leader>hR", ":Gitsigns reset_buffer<CR>", { desc = "Git reset buffer" })
+vim.keymap.set("n", "<leader>hp", ":Gitsigns preview_hunk<CR>", { desc = "Git preview hunk" })
+vim.keymap.set("n", "<leader>hb", ":Gitsigns blame_line<CR>", { desc = "Git blame line" })
+vim.keymap.set("n", "<leader>hd", ":Gitsigns diffthis<CR>", { desc = "Git show buffer diff" })
+vim.keymap.set("n", "<leader>td", ":Gitsigns toggle_deleted<CR>", { desc = "Git toggle deleted lines" })
+vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Git telect hunk" })
 
--- Gitsigns Text object
-vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+vim.keymap.set("n", "<leader>vv", ":source $MYVIMRC<CR>", { desc = "Reload Neovim config" })
 
--- reload vimrc
-vim.keymap.set("n", "<leader>vv", ":source $MYVIMRC<CR>")
+vim.keymap.set("n", "<leader>e", ":edit<cr>", { desc = "Reload current buffer" })
 
--- reload current buffer only if there are no edits
-vim.keymap.set("n", "<leader>e", ":edit<cr>")
+vim.keymap.set("n", "<leader>c", ":tabnew<cr>", { desc = "Create tab" })
 
--- tmux-like tab creation
-vim.keymap.set("n", "<leader>c", ":tabnew<cr>")
-
--- quickfix shortcuts
-vim.keymap.set("n", "<c-n>", ":cn<cr>")
-vim.keymap.set("n", "<c-p>", ":cp<cr>")
-
--- Jump to next conflict marker
-
-local function next_conflict()
-	vim.cmd([[silent! /<<<<<<<\|=======\|>>>>>>>/]])
-end
-
--- Jump to previous conflict marker
-
-local function prev_conflict()
-	vim.cmd([[silent! ?<<<<<<<\|=======\|>>>>>>>?]])
-end
-
--- conflict jump mappings
-vim.keymap.set("n", "gln", next_conflict, { desc = "Next conflict marker" })
-vim.keymap.set("n", "gnN", prev_conflict, { desc = "Previous conflict marker" })
-
-vim.keymap.set("n", "gld", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
-vim.keymap.set("n", "glD", vim.diagnostic.goto_prev, { desc = "Prev diagnostic" })
-
-vim.keymap.set("n", "glc", "]c", { remap = true, desc = "Next diff change" })
-vim.keymap.set("n", "glC", "[c", { remap = true, desc = "Prev diff change" })
+vim.keymap.set("n", "<c-n>", ":cn<cr>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<c-p>", ":cp<cr>", { desc = "Previous quickfix item" })
 
 vim.keymap.set("n", "glt", function()
 	require("coverage").jump_next("uncovered")
@@ -810,121 +789,79 @@ vim.keymap.set("n", "glT", function()
 	require("coverage").jump_prev("uncovered")
 end, { desc = "Prev uncovered coverage" })
 
--- wrapped movement
-vim.keymap.set("n", "j", "gj")
-vim.keymap.set("n", "k", "gk")
+vim.keymap.set("n", "j", "gj", { desc = "Move down by display line" })
+vim.keymap.set("n", "k", "gk", { desc = "Move up by display line" })
 
--- quick-map tabs
-vim.keymap.set("n", "<leader>1", "1gt")
-vim.keymap.set("n", "<leader>2", "2gt")
-vim.keymap.set("n", "<leader>3", "3gt")
-vim.keymap.set("n", "<leader>4", "4gt")
-vim.keymap.set("n", "<leader>5", "5gt")
-vim.keymap.set("n", "<leader>6", "6gt")
-vim.keymap.set("n", "<leader>7", "7gt")
-vim.keymap.set("n", "<leader>8", "8gt")
-vim.keymap.set("n", "<leader>9", "9gt")
-vim.keymap.set("n", "<leader>0", ":tablast<cr>")
+vim.keymap.set("n", "<leader>1", "1gt", { desc = "Go to tab 1" })
+vim.keymap.set("n", "<leader>2", "2gt", { desc = "Go to tab 2" })
+vim.keymap.set("n", "<leader>3", "3gt", { desc = "Go to tab 3" })
+vim.keymap.set("n", "<leader>4", "4gt", { desc = "Go to tab 4" })
+vim.keymap.set("n", "<leader>5", "5gt", { desc = "Go to tab 5" })
+vim.keymap.set("n", "<leader>6", "6gt", { desc = "Go to tab 6" })
+vim.keymap.set("n", "<leader>7", "7gt", { desc = "Go to tab 7" })
+vim.keymap.set("n", "<leader>8", "8gt", { desc = "Go to tab 8" })
+vim.keymap.set("n", "<leader>9", "9gt", { desc = "Go to tab 9" })
+vim.keymap.set("n", "<leader>0", ":tablast<cr>", { desc = "Go to last tab" })
 
--- remap ` jumping to ', since I never use the former
-vim.keymap.set("n", "'", "`")
+vim.keymap.set("n", "'", "`", { desc = "Jump to mark" })
 
--- De-dupe and sort visual selection
-vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>")
+vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>", { desc = "Sort and deduplicate selection" })
 
--- Open diffview
-vim.keymap.set("n", "<leader>do", ":DiffviewOpen<cr>")
+vim.keymap.set("n", "<leader>do", ":DiffviewOpen<cr>", { desc = "Open Diffview" })
+vim.keymap.set("n", "<leader>dx", ":DiffviewClose<cr>", { desc = "Close Diffview" })
+vim.keymap.set("n", "<leader>db", ":DiffviewOpen main... --imply-local --untracked-files=all<cr>", { desc = "Diff against main" })
+vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<cr>", { desc = "Refresh Diffview" })
 
--- Close diffview
-vim.keymap.set("n", "<leader>dx", ":DiffviewClose<cr>")
+vim.keymap.set("n", "<leader>yf", ':let @+=expand("%:t")<CR>', { desc = "Yank filename" })
+vim.keymap.set("n", "<leader>yr", ':let @+=expand("%:p:.")<CR>', { desc = "Yank relative file path" })
+vim.keymap.set("n", "<leader>ya", ':let @+=expand("%:p")<CR>', { desc = "Yank absolute file path" })
+vim.keymap.set("n", "<leader>Y", ':echo expand("%:p:.")<CR>', { desc = "Show relative file path" })
 
--- Open diffview of current branch against main
-vim.keymap.set("n", "<leader>db", ":DiffviewOpen main... --imply-local --untracked-files=all<cr>")
+vim.keymap.set("n", "<leader>gb", ":Git blame<cr>", { desc = "Show Git blame" })
+vim.keymap.set("n", "<leader>gs", ":Git <cr>", { desc = "Show Git status" })
+vim.keymap.set("n", "<leader>gp", ":Gpush<cr>", { desc = "Push Git changes" })
+vim.keymap.set("n", "<leader>gc", ":Gcommit -v<cr>", { desc = "Commit Git changes" })
+vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>", { desc = "Stage current file" })
+vim.keymap.set("n", "<leader>gd", ":Gvdiff<cr>", { desc = "Diff current file against HEAD" })
+vim.keymap.set("n", "<leader>gh", ":Gclog<cr>", { desc = "Show file commit history" })
 
--- Refresh diffview
-vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<cr>")
+vim.keymap.set("n", "<leader>H", ":Hexmode<cr>", { desc = "Toggle Hexmode" })
 
--- yank filename to clipboard
-vim.keymap.set("n", "<leader>yf", ':let @+=expand("%:t")<CR>')
--- yank file path relative to current vim dir to clipboard
-vim.keymap.set("n", "<leader>yr", ':let @+=expand("%:p:.")<CR>')
--- yank absolute file path to clipboard
-vim.keymap.set("n", "<leader>ya", ':let @+=expand("%:p")<CR>')
--- print file path relative to current vim dir
-vim.keymap.set("n", "<leader>Y", ':echo expand("%:p:.")<CR>')
+vim.keymap.set("n", "<leader>r", ":%s/<C-r><C-w>//gc<Left><Left><Left>", { silent = true, desc = "Replace current word" })
 
--- git push
-vim.keymap.set("n", "<leader>gp", ":Gpush<cr>")
--- git commit
-vim.keymap.set("n", "<leader>gc", ":Gcommit -v<cr>")
--- write (essentially a write and git add)
-vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>")
--- git diff of current file against HEAD
-vim.keymap.set("n", "<leader>gd", ":Gvdiff<cr>")
--- open git browser with all commits touching current file in new tab
-vim.keymap.set("n", "<leader>gh", ":Gclog<cr>")
+vim.keymap.set("i", "<c-d>", "<del>", { silent = true, desc = "Delete character" })
 
--- hexmode
--- toggle Hexmode
-vim.keymap.set("n", "<leader>H", ":Hexmode<cr>")
+vim.keymap.set("c", "<c-j>", "<down>", { silent = true, desc = "Next command history item" })
+vim.keymap.set("c", "<c-k>", "<up>", { silent = true, desc = "Previous command history item" })
 
--- highlight and replace current word cursor is on
-vim.keymap.set("n", "<leader>r", ":%s/<C-r><C-w>//gc<Left><Left><Left>", { silent = true })
+vim.keymap.set("n", "<leader>ww", ":tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>", { silent = true, desc = "Open wiki index" })
 
--- set <c-d> to forward-delete in insert mode
-vim.keymap.set("i", "<c-d>", "<del>", { silent = true })
+vim.keymap.set("n", "<leader>wc", ":lcd %:p:h<cr>", { silent = true, desc = "Set window directory to file" })
 
--- go up/down command history
-vim.keymap.set("c", "<c-j>", "<down>", { silent = true })
-vim.keymap.set("c", "<c-k>", "<up>", { silent = true })
+vim.keymap.set("x", "ga", "<Plug>(EasyAlign)", { desc = "EasyAlign selection" })
+vim.keymap.set("n", "ga", "<Plug>(EasyAlign)", { desc = "EasyAlign motion" })
 
--- open index in personal wiki
-vim.keymap.set("n", "<leader>ww", ":tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>", { silent = true })
+vim.keymap.set("n", "<leader>R", ":cdo %s/<C-r><C-w>//gc<Left><Left><Left>", { desc = "Replace current word in quickfix" })
 
--- change current window directory to current file
-vim.keymap.set("n", "<leader>wc", ":lcd %:p:h<cr>", { silent = true })
+vim.keymap.set("n", "<leader>o", ":FzfLua files<cr>", { desc = "Find files" })
+vim.keymap.set("n", "<leader>ao", ":FzfLua buffers<cr>", { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>as", ":FzfLua lines<cr>", { desc = "Search all buffer lines" })
+vim.keymap.set("n", "<leader>aa", ":FzfLua blines<cr>", { desc = "Search current buffer lines" })
+vim.keymap.set("n", "<leader>ag", ":FzfLua git_files<cr>", { desc = "Find Git files" })
+vim.keymap.set("n", "<leader>at", ":FzfLua treesitter<cr>", { desc = "Find Treesitter symbols" })
+vim.keymap.set("n", "<leader>af", ":FzfLua grep<cr>", { desc = "Search with grep" })
+vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<cr>", { desc = "Live grep" })
+vim.keymap.set("n", "<leader>ak", ":FzfLua keymaps<cr>", { desc = "Show keymaps" })
 
--- vim-easy-align
--- start interactive EasyAlign in visual mode (e.g. vipga)
-vim.keymap.set("x", "ga", "<Plug>(EasyAlign)")
--- start interactive EasyAlign for a motion/text object (e.g. gaip)
-vim.keymap.set("n", "ga", "<Plug>(EasyAlign)")
-
--- replace in quickfix list what word the cursor is currently on
-vim.keymap.set("n", "<leader>R", ":cdo %s/<C-r><C-w>//gc<Left><Left><Left>")
-
--- fzf.vim
--- open fzf for all files
-vim.keymap.set("n", "<leader>o", ":FzfLua files<cr>")
--- open fzf for all buffers
-vim.keymap.set("n", "<leader>ao", ":FzfLua buffers<cr>")
--- open fzf of lines in all buffers
-vim.keymap.set("n", "<leader>as", ":FzfLua lines<cr>")
--- open fzf of lines in current buffer
-vim.keymap.set("n", "<leader>aa", ":FzfLua blines<cr>")
--- open fzf of modified files tracked by git
-vim.keymap.set("n", "<leader>ag", ":FzfLua git_files<cr>")
--- open fzf of treesitter symbols of current buffer
-vim.keymap.set("n", "<leader>at", ":FzfLua treesitter<cr>")
--- start fzf-piped Rg search
-vim.keymap.set("n", "<leader>af", ":FzfLua grep<cr>")
--- start fzf-piped live Rg search
-vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<cr>")
-
--- redraw, and disable highlighting
-vim.keymap.set("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { silent = true })
-vim.keymap.set("n", "<leader>/", ':silent! grep ""<Left>', { silent = true })
-vim.keymap.set("n", "<leader>?", ':GrepAll ""<Left>', { silent = true })
-vim.keymap.set("n", "<leader>f", ':silent! grep "<C-R><C-W>"<CR>', { silent = true })
-vim.keymap.set("n", "<leader>F", ':GrepAll "<C-R><C-W>"<CR>', { silent = true })
--- Run last make command
-vim.keymap.set("n", "<leader>mr", ":make<Up><CR>", { silent = true })
--- Run make
-vim.keymap.set("n", "<leader>mm", ":silent make!<CR>:redraw!<CR>", { silent = true })
--- make clean
-vim.keymap.set("n", "<leader>mc", ":make clean<CR>", { silent = true })
--- make test
-vim.keymap.set("n", "<leader>mt", ":make test<CR>", { silent = true })
+vim.keymap.set("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { silent = true, desc = "Redraw and clear search highlight" })
+vim.keymap.set("n", "<leader>/", ':silent! grep ""<Left>', { silent = true, desc = "Search with grep" })
+vim.keymap.set("n", "<leader>?", ':GrepAll ""<Left>', { silent = true, desc = "Search all files" })
+vim.keymap.set("n", "<leader>f", ':silent! grep "<C-R><C-W>"<CR>', { silent = true, desc = "Grep current word" })
+vim.keymap.set("n", "<leader>F", ':GrepAll "<C-R><C-W>"<CR>', { silent = true, desc = "Search all files for current word" })
+vim.keymap.set("n", "<leader>mr", ":make<Up><CR>", { silent = true, desc = "Run last make command" })
+vim.keymap.set("n", "<leader>mm", ":silent make!<CR>:redraw!<CR>", { silent = true, desc = "Run make" })
+vim.keymap.set("n", "<leader>mc", ":make clean<CR>", { silent = true, desc = "Run make clean" })
+vim.keymap.set("n", "<leader>mt", ":make test<CR>", { silent = true, desc = "Run make test" })
 
 -- grep and include all hidden/ignored files
 vim.api.nvim_create_user_command("GrepAll", function(opts)
@@ -962,36 +899,24 @@ end, { nargs = "+" })
 -- 	require("dap.ui.widgets").preview()
 -- end)
 
--- split/join lines toggle
-vim.keymap.set("n", "<leader>j", require("treesj").toggle)
+vim.keymap.set("n", "<leader>j", require("treesj").toggle, { desc = "Toggle split/join lines" })
 
--- run formatter
-vim.keymap.set("n", "<leader>i", autoformat_current_file)
+vim.keymap.set("n", "<leader>i", autoformat_current_file, { desc = "Format current buffer" })
 
--- update plugins
 vim.keymap.set("n", "<leader>vu", function()
 	vim.pack.update(nil, { force = true })
 end, { desc = "Update plugins" })
 
--- map esc when in terminal mode
-vim.keymap.set("t", "<esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
--- Use fzf for path completion
 vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
 	require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
-
--- vim-fugitive
--- blame
-vim.keymap.set("n", "<leader>gb", ":Git blame<cr>")
--- status
-vim.keymap.set("n", "<leader>gs", ":Git <cr>")
 
 vim.keymap.set("n", "<leader>ll", function()
 	vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 
--- Fix selected code
 vim.keymap.set(
 	"v",
 	"<leader>kf",
@@ -999,7 +924,6 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
 )
 
--- Explain current text selection
 vim.keymap.set(
 	"v",
 	"<leader>ke",
@@ -1007,13 +931,20 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "CopilotChat - Explain visual selection" }
 )
 
--- Review selected code
 vim.keymap.set(
 	"v",
 	"<leader>kr",
 	":'<,'>CopilotChatReview <cr>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Review visual selection" }
 )
+
+vim.keymap.set(
+	"v",
+	"<leader>kd",
+	":'<,'>CopilotChatDocs <cr>",
+	{ noremap = true, silent = true, desc = "CopilotChat - Document visual selection" }
+)
+
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -1031,23 +962,16 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
+		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Show signature help" }))
 
 		if client and client.name == "clangd" then
-			vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>", opts)
+			vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>", vim.tbl_extend("force", opts, { desc = "Switch source/header" }))
 		end
 	end,
 })
-vim.keymap.set(
-	"v",
-	"<leader>kd",
-	":'<,'>CopilotChatDocs <cr>",
-	{ noremap = true, silent = true, desc = "CopilotChat - Document visual selection" }
-)
 
--- Quick chat keybinding
 vim.keymap.set("n", "<leader>kc", function()
 	local input = vim.fn.input("Quick Chat: ")
 	if input ~= "" then
@@ -1057,7 +981,6 @@ vim.keymap.set("n", "<leader>kc", function()
 	end
 end, { desc = "CopilotChat - Quick chat" })
 
--- Quick chat with Copilot about the current visual selection
 vim.keymap.set("v", "<leader>kv", function()
 	local input = vim.fn.input("Quick Chat: ")
 	if input ~= "" then
@@ -1065,7 +988,6 @@ vim.keymap.set("v", "<leader>kv", function()
 	end
 end, { noremap = true, silent = true, desc = "CopilotChat - Quick chat about visual selection" })
 
--- Toggle CopilotChat pane
 vim.keymap.set(
 	"n",
 	"<leader>kk",
@@ -1073,12 +995,9 @@ vim.keymap.set(
 	{ noremap = true, silent = true, desc = "CopilotChat - Toggle CopilotChat pane" }
 )
 
--- Generate and display code coverage
-vim.keymap.set("n", "<leader>tg", ":Coverage<CR>")
--- Toggle code coverage
-vim.keymap.set("n", "<leader>tc", ":CoverageToggle<CR>")
+vim.keymap.set("n", "<leader>tg", ":Coverage<CR>", { desc = "Show code coverage" })
+vim.keymap.set("n", "<leader>tc", ":CoverageToggle<CR>", { desc = "Toggle code coverage" })
 
--- Select previous function.outer (acts like a textobject)
 vim.keymap.set({ "x", "o" }, "aF", function()
 	vim.cmd("normal! [m")
 	require("nvim-treesitter.textobjects.select").select_textobject("@function.outer", "textobjects")
@@ -1089,9 +1008,7 @@ vim.keymap.set({ "x", "o" }, "iF", function()
 	require("nvim-treesitter.textobjects.select").select_textobject("@function.inner", "textobjects")
 end, { desc = "Select previous function.inner" })
 
--- Demicolon repeatable motions
-vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").next)
-vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").prev)
+vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").next, { desc = "Repeat jump forward" })
+vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").prev, { desc = "Repeat jump backward" })
 
--- Toggle spellcheck
-vim.keymap.set("n", "<leader>S", ":setlocal spell!<cr>")
+vim.keymap.set("n", "<leader>S", ":setlocal spell!<cr>", { desc = "Toggle spellcheck" })
