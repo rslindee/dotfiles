@@ -54,6 +54,12 @@ require("marks").setup({
 
 require("diffview").setup({
 	use_icons = false,
+  hooks = {
+    diff_buf_win_enter = function(bufnr)
+      -- open all folds by default
+      vim.opt_local.foldlevel = 99
+    end,
+  }
 })
 
 local treesitter_group = vim.api.nvim_create_augroup("UserTreesitter", { clear = true })
