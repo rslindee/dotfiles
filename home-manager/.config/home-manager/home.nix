@@ -23,6 +23,7 @@
     protols
     pyright
     ripgrep
+    skim
     stylua
     tmux
     tree-sitter
