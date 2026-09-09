@@ -150,8 +150,8 @@ do
 	local submode = require("submode")
 	submode.create("WinResize", {
 		mode = "n",
-		enter = "<C-w>r",
-		leave = { "<Esc>", "q", "<C-c>" },
+		enter = "<C-W>r",
+		leave = { "<Esc>", "q", "<C-C>" },
 		hook = {
 			on_enter = function()
 				vim.notify("Use { h, j, k, l } to resize the window")
@@ -251,7 +251,7 @@ end, { desc = "Remote Flash" })
 vim.keymap.set({ "o", "x" }, "R", function()
 	require("flash").treesitter_search()
 end, { desc = "Treesitter Search" })
-vim.keymap.set("c", "<C-s>", function()
+vim.keymap.set("c", "<C-S>", function()
 	require("flash").toggle()
 end, { desc = "Toggle Flash Search" })
 
@@ -435,14 +435,14 @@ vim.api.nvim_create_autocmd("FileType", {
 	group = rust_group,
 	pattern = "rust",
 	callback = function(args)
-		vim.keymap.set("n", "<leader>i", "<cmd>RustFmt<cr>", {
+		vim.keymap.set("n", "<leader>i", "<cmd>RustFmt<CR>", {
 			buffer = args.buf,
 			noremap = true,
 			silent = true,
 			desc = "Run rustfmt on current file",
 		})
 
-		vim.keymap.set("n", "<leader>mm", "<cmd>silent !cargo run<cr>", {
+		vim.keymap.set("n", "<leader>mm", "<cmd>silent !cargo run<CR>", {
 			buffer = args.buf,
 			noremap = true,
 			silent = true,
@@ -744,7 +744,9 @@ local function toggle_quickfix()
 	vim.cmd.copen()
 end
 
-vim.keymap.set("n", "<Leader>q", toggle_quickfix, { desc = "Toggle Quickfix Window" })
+vim.keymap.set("n", "<leader>q", toggle_quickfix, { desc = "Toggle Quickfix Window" })
+
+vim.keymap.set("n", "<leader>p", '"_ciw<C-R>"<esc>', { desc = "Replace word with clipboard, preserving clipboard" })
 
 vim.keymap.set('n', ']c', function()
   if vim.wo.diff then
@@ -775,12 +777,12 @@ vim.keymap.set({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", { desc = "G
 
 vim.keymap.set("n", "<leader>vv", ":source $MYVIMRC<CR>", { desc = "Reload Neovim config" })
 
-vim.keymap.set("n", "<leader>e", ":edit<cr>", { desc = "Reload current buffer" })
+vim.keymap.set("n", "<leader>e", ":edit<CR>", { desc = "Reload current buffer" })
 
-vim.keymap.set("n", "<leader>c", ":tabnew<cr>", { desc = "Create tab" })
+vim.keymap.set("n", "<leader>c", ":tabnew<CR>", { desc = "Create tab" })
 
-vim.keymap.set("n", "<c-n>", ":cn<cr>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "<c-p>", ":cp<cr>", { desc = "Previous quickfix item" })
+vim.keymap.set("n", "<C-N>", ":cn<CR>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<C-P>", ":cp<CR>", { desc = "Previous quickfix item" })
 
 vim.keymap.set("n", "glt", function()
 	require("coverage").jump_next("uncovered")
@@ -801,57 +803,57 @@ vim.keymap.set("n", "<leader>6", "6gt", { desc = "Go to tab 6" })
 vim.keymap.set("n", "<leader>7", "7gt", { desc = "Go to tab 7" })
 vim.keymap.set("n", "<leader>8", "8gt", { desc = "Go to tab 8" })
 vim.keymap.set("n", "<leader>9", "9gt", { desc = "Go to tab 9" })
-vim.keymap.set("n", "<leader>0", ":tablast<cr>", { desc = "Go to last tab" })
+vim.keymap.set("n", "<leader>0", ":tablast<CR>", { desc = "Go to last tab" })
 
 vim.keymap.set("n", "'", "`", { desc = "Jump to mark" })
 
-vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<cr>", { desc = "Sort and deduplicate selection" })
+vim.keymap.set("v", "<leader>ds", ":'<,'>sort u<CR>", { desc = "Sort and deduplicate selection" })
 
-vim.keymap.set("n", "<leader>do", ":DiffviewOpen<cr>", { desc = "Open Diffview" })
-vim.keymap.set("n", "<leader>dx", ":DiffviewClose<cr>", { desc = "Close Diffview" })
-vim.keymap.set("n", "<leader>db", ":DiffviewOpen main... --imply-local --untracked-files=all<cr>", { desc = "Diff against main" })
-vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<cr>", { desc = "Refresh Diffview" })
+vim.keymap.set("n", "<leader>do", ":DiffviewOpen<CR>", { desc = "Open Diffview" })
+vim.keymap.set("n", "<leader>dx", ":DiffviewClose<CR>", { desc = "Close Diffview" })
+vim.keymap.set("n", "<leader>db", ":DiffviewOpen main... --imply-local --untracked-files=all<CR>", { desc = "Diff against main" })
+vim.keymap.set("n", "<leader>dr", ":DiffviewRefresh<CR>", { desc = "Refresh Diffview" })
 
 vim.keymap.set("n", "<leader>yf", ':let @+=expand("%:t")<CR>', { desc = "Yank filename" })
 vim.keymap.set("n", "<leader>yr", ':let @+=expand("%:p:.")<CR>', { desc = "Yank relative file path" })
 vim.keymap.set("n", "<leader>ya", ':let @+=expand("%:p")<CR>', { desc = "Yank absolute file path" })
 vim.keymap.set("n", "<leader>Y", ':echo expand("%:p:.")<CR>', { desc = "Show relative file path" })
 
-vim.keymap.set("n", "<leader>gb", ":Git blame<cr>", { desc = "Show Git blame" })
-vim.keymap.set("n", "<leader>gs", ":Git <cr>", { desc = "Show Git status" })
-vim.keymap.set("n", "<leader>gp", ":Gpush<cr>", { desc = "Push Git changes" })
-vim.keymap.set("n", "<leader>gc", ":Gcommit -v<cr>", { desc = "Commit Git changes" })
-vim.keymap.set("n", "<leader>gw", ":Gwrite<cr>", { desc = "Stage current file" })
-vim.keymap.set("n", "<leader>gd", ":Gvdiff<cr>", { desc = "Diff current file against HEAD" })
-vim.keymap.set("n", "<leader>gh", ":Gclog<cr>", { desc = "Show file commit history" })
+vim.keymap.set("n", "<leader>gb", ":Git blame<CR>", { desc = "Show Git blame" })
+vim.keymap.set("n", "<leader>gs", ":Git <CR>", { desc = "Show Git status" })
+vim.keymap.set("n", "<leader>gp", ":Gpush<CR>", { desc = "Push Git changes" })
+vim.keymap.set("n", "<leader>gc", ":Gcommit -v<CR>", { desc = "Commit Git changes" })
+vim.keymap.set("n", "<leader>gw", ":Gwrite<CR>", { desc = "Stage current file" })
+vim.keymap.set("n", "<leader>gd", ":Gvdiff<CR>", { desc = "Diff current file against HEAD" })
+vim.keymap.set("n", "<leader>gh", ":Gclog<CR>", { desc = "Show file commit history" })
 
-vim.keymap.set("n", "<leader>H", ":Hexmode<cr>", { desc = "Toggle Hexmode" })
+vim.keymap.set("n", "<leader>H", ":Hexmode<CR>", { desc = "Toggle Hexmode" })
 
-vim.keymap.set("n", "<leader>r", ":%s/<C-r><C-w>//gc<Left><Left><Left>", { silent = true, desc = "Replace current word" })
+vim.keymap.set("n", "<leader>r", ":%s/<C-R><C-W>//gc<Left><Left><Left>", { silent = true, desc = "Replace current word" })
 
-vim.keymap.set("i", "<c-d>", "<del>", { silent = true, desc = "Delete character" })
+vim.keymap.set("i", "<C-D>", "<del>", { silent = true, desc = "Delete character" })
 
-vim.keymap.set("c", "<c-j>", "<down>", { silent = true, desc = "Next command history item" })
-vim.keymap.set("c", "<c-k>", "<up>", { silent = true, desc = "Previous command history item" })
+vim.keymap.set("c", "<C-J>", "<down>", { silent = true, desc = "Next command history item" })
+vim.keymap.set("c", "<C-K>", "<up>", { silent = true, desc = "Previous command history item" })
 
-vim.keymap.set("n", "<leader>ww", ":tabe ~/wiki/index.md<cr>:lcd %:p:h<cr>", { silent = true, desc = "Open wiki index" })
+vim.keymap.set("n", "<leader>ww", ":tabe ~/wiki/index.md<CR>:lcd %:p:h<CR>", { silent = true, desc = "Open wiki index" })
 
-vim.keymap.set("n", "<leader>wc", ":lcd %:p:h<cr>", { silent = true, desc = "Set window directory to file" })
+vim.keymap.set("n", "<leader>wc", ":lcd %:p:h<CR>", { silent = true, desc = "Set window directory to file" })
 
 vim.keymap.set("x", "ga", "<Plug>(EasyAlign)", { desc = "EasyAlign selection" })
 vim.keymap.set("n", "ga", "<Plug>(EasyAlign)", { desc = "EasyAlign motion" })
 
-vim.keymap.set("n", "<leader>R", ":cdo %s/<C-r><C-w>//gc<Left><Left><Left>", { desc = "Replace current word in quickfix" })
+vim.keymap.set("n", "<leader>R", ":cdo %s/<C-R><C-W>//gc<Left><Left><Left>", { desc = "Replace current word in quickfix" })
 
-vim.keymap.set("n", "<leader>o", ":FzfLua files<cr>", { desc = "Find files" })
-vim.keymap.set("n", "<leader>ao", ":FzfLua buffers<cr>", { desc = "Find buffers" })
-vim.keymap.set("n", "<leader>as", ":FzfLua lines<cr>", { desc = "Search all buffer lines" })
-vim.keymap.set("n", "<leader>aa", ":FzfLua blines<cr>", { desc = "Search current buffer lines" })
-vim.keymap.set("n", "<leader>ag", ":FzfLua git_files<cr>", { desc = "Find Git files" })
-vim.keymap.set("n", "<leader>at", ":FzfLua treesitter<cr>", { desc = "Find Treesitter symbols" })
-vim.keymap.set("n", "<leader>af", ":FzfLua grep<cr>", { desc = "Search with grep" })
-vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<cr>", { desc = "Live grep" })
-vim.keymap.set("n", "<leader>ak", ":FzfLua keymaps<cr>", { desc = "Show keymaps" })
+vim.keymap.set("n", "<leader>o", ":FzfLua files<CR>", { desc = "Find files" })
+vim.keymap.set("n", "<leader>ao", ":FzfLua buffers<CR>", { desc = "Find buffers" })
+vim.keymap.set("n", "<leader>as", ":FzfLua lines<CR>", { desc = "Search all buffer lines" })
+vim.keymap.set("n", "<leader>aa", ":FzfLua blines<CR>", { desc = "Search current buffer lines" })
+vim.keymap.set("n", "<leader>ag", ":FzfLua git_files<CR>", { desc = "Find Git files" })
+vim.keymap.set("n", "<leader>at", ":FzfLua treesitter<CR>", { desc = "Find Treesitter symbols" })
+vim.keymap.set("n", "<leader>af", ":FzfLua grep<CR>", { desc = "Search with grep" })
+vim.keymap.set("n", "<leader>al", ":FzfLua live_grep<CR>", { desc = "Live grep" })
+vim.keymap.set("n", "<leader>ak", ":FzfLua keymaps<CR>", { desc = "Show keymaps" })
 
 vim.keymap.set("n", "<leader><esc>", ":redraw!<CR>:noh<CR>", { silent = true, desc = "Redraw and clear search highlight" })
 vim.keymap.set("n", "<leader>/", ':silent! grep ""<Left>', { silent = true, desc = "Search with grep" })
@@ -907,9 +909,9 @@ vim.keymap.set("n", "<leader>vu", function()
 	vim.pack.update(nil, { force = true })
 end, { desc = "Update plugins" })
 
-vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<esc>", "<C-\\><C-N>", { desc = "Exit terminal mode" })
 
-vim.keymap.set({ "n", "v", "i" }, "<C-x><C-f>", function()
+vim.keymap.set({ "n", "v", "i" }, "<C-X><C-F>", function()
 	require("fzf-lua").complete_path()
 end, { silent = true, desc = "Fuzzy complete path" })
 
@@ -920,28 +922,28 @@ end, { noremap = true, silent = true, desc = "Toggle vim diagnostics" })
 vim.keymap.set(
 	"v",
 	"<leader>kf",
-	":'<,'>CopilotChatFix <cr>",
+	":'<,'>CopilotChatFix <CR>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Fix visual selection" }
 )
 
 vim.keymap.set(
 	"v",
 	"<leader>ke",
-	":'<,'>CopilotChatExplain <cr>",
+	":'<,'>CopilotChatExplain <CR>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Explain visual selection" }
 )
 
 vim.keymap.set(
 	"v",
 	"<leader>kr",
-	":'<,'>CopilotChatReview <cr>",
+	":'<,'>CopilotChatReview <CR>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Review visual selection" }
 )
 
 vim.keymap.set(
 	"v",
 	"<leader>kd",
-	":'<,'>CopilotChatDocs <cr>",
+	":'<,'>CopilotChatDocs <CR>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Document visual selection" }
 )
 
@@ -964,10 +966,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, vim.tbl_extend("force", opts, { desc = "Go to declaration" }))
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, vim.tbl_extend("force", opts, { desc = "Go to definition" }))
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Show signature help" }))
+		vim.keymap.set("n", "<C-K>", vim.lsp.buf.signature_help, vim.tbl_extend("force", opts, { desc = "Show signature help" }))
 
 		if client and client.name == "clangd" then
-			vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<cr>", vim.tbl_extend("force", opts, { desc = "Switch source/header" }))
+			vim.keymap.set("n", "<leader>lh", ":ClangdSwitchSourceHeader<CR>", vim.tbl_extend("force", opts, { desc = "Switch source/header" }))
 		end
 	end,
 })
@@ -991,7 +993,7 @@ end, { noremap = true, silent = true, desc = "CopilotChat - Quick chat about vis
 vim.keymap.set(
 	"n",
 	"<leader>kk",
-	":CopilotChatToggle<cr>",
+	":CopilotChatToggle<CR>",
 	{ noremap = true, silent = true, desc = "CopilotChat - Toggle CopilotChat pane" }
 )
 
@@ -1011,4 +1013,4 @@ end, { desc = "Select previous function.inner" })
 vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").next, { desc = "Repeat jump forward" })
 vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").prev, { desc = "Repeat jump backward" })
 
-vim.keymap.set("n", "<leader>S", ":setlocal spell!<cr>", { desc = "Toggle spellcheck" })
+vim.keymap.set("n", "<leader>S", ":setlocal spell!<CR>", { desc = "Toggle spellcheck" })
