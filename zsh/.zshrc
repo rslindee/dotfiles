@@ -69,7 +69,7 @@ export LESS_TERMCAP_so=$'\e[01;33m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-export SKIM_DEFAULT_COMMAND="fd -H"
+export SKIM_DEFAULT_COMMAND="fd"
 # TODO: re-add "--height 40" when bug fixed
 export SKIM_DEFAULT_OPTIONS="--multi --reverse"
 
