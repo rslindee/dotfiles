@@ -12,6 +12,7 @@
     direnv
     fd
     gh
+    gh-dash
     gpclient
     jdk
     jq
@@ -26,6 +27,7 @@
     stylua
     tmux
     tree-sitter
+    uv
   ];
 
   # opencode manually installed to use bleeding edge versions
