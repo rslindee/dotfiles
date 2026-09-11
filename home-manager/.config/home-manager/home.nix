@@ -11,7 +11,6 @@
     curl
     direnv
     fd
-    fzf
     gh
     gpclient
     jdk
@@ -70,6 +69,11 @@
     '';
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+  };
+
+  programs.skim = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.home-manager.enable = true;

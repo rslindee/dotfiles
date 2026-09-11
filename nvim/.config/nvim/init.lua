@@ -176,7 +176,9 @@ require("treesj").setup({
 
 require("nvim-surround").setup({})
 
-require("fzf-lua").setup({})
+require("fzf-lua").setup({
+  fzf_bin = 'sk',
+})
 
 require("demicolon").setup({
 	keymaps = {
