@@ -71,7 +71,7 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 export SKIM_DEFAULT_COMMAND="fd"
 # TODO: re-add "--height 40" when bug fixed
-export SKIM_DEFAULT_OPTIONS="--multi --reverse"
+export SKIM_DEFAULT_OPTIONS="--multi --reverse --no-sort"
 
 # Reduce delay in zsh when entering vi mode
 export KEYTIMEOUT=1
