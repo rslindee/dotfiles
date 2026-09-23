@@ -196,7 +196,7 @@ require("copilot").setup({
 
 require("CopilotChat").setup({
 	debug = true,
-	model = "gpt-5.6-luna",
+	model = "gpt-6-luna",
 	sticky = { "#buffer", "#gitdiff" },
 	window = {
 		layout = "vertical",
@@ -1012,7 +1012,7 @@ vim.keymap.set({ "x", "o" }, "iF", function()
 	require("nvim-treesitter.textobjects.select").select_textobject("@function.inner", "textobjects")
 end, { desc = "Select previous function.inner" })
 
-vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").next, { desc = "Repeat jump forward" })
-vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").prev, { desc = "Repeat jump backward" })
+vim.keymap.set({ "n", "x", "o" }, ",", require("demicolon.repeat_jump").next, { desc = "Repeat jump forward" })
+vim.keymap.set({ "n", "x", "o" }, ";", require("demicolon.repeat_jump").prev, { desc = "Repeat jump backward" })
 
 vim.keymap.set("n", "<leader>S", ":setlocal spell!<CR>", { desc = "Toggle spellcheck" })
