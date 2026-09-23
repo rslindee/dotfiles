@@ -13,7 +13,6 @@
     fd
     gh
     gh-dash
-    gpclient
     jdk
     jq
     luaPackages.tiktoken_core
