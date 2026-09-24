@@ -21,6 +21,9 @@ input {
         }
     }
 
+    // Hitting a workspace shortcut when you're already in said workspace goes back to the previous
+    workspace-auto-back-and-forth
+
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="0%"
@@ -139,6 +142,18 @@ window-rule {
 
     // Use this instead if you want them visible on third-party screenshot tools.
     // block-out-from "screencast"
+}
+
+workspace "comm" {
+}
+
+// Open teams on the "comm" workspace
+window-rule {
+    match app-id="^teams-for-linux$"
+    open-on-workspace "comm"
+}
+
+workspace "work" {
 }
 
 binds {
@@ -297,7 +312,10 @@ binds {
     Mod+T       { toggle-window-floating; }
     Mod+Shift+T { switch-focus-between-floating-and-tiling; }
 
-    Mod+s { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy"; }
+    Mod+S { spawn-sh "grim -g \"$(slurp -d)\" - | wl-copy"; }
+
+    Mod+P { focus-workspace "comm"; }
+    Mod+Y { focus-workspace "work"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
