@@ -962,7 +962,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		if client_id then
 			vim.lsp.completion.enable(true, client_id, ev.buf, {
 				-- auto-show menu as you type
-				autotrigger = true,
+				autotrigger = false,
 			})
 		end
 
