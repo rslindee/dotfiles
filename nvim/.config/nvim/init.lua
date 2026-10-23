@@ -1,7 +1,7 @@
 -- Plugins
 vim.pack.add({
 	{ src = "https://github.com/chrisbra/Colorizer" },
-	{ src = "https://github.com/sindrets/diffview.nvim" },
+	{ src = "https://github.com/dlyongemallo/diffview.nvim" },
 	{ src = "https://github.com/chentoast/marks.nvim" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
